@@ -3977,4 +3977,376 @@ Wire Wire Line
 	10750 2700 10850 2700
 Wire Wire Line
 	10250 2250 10250 2400
+$Comp
+L Device:C_Small C19
+U 1 1 61786C7F
+P 7750 6850
+F 0 "C19" H 7842 6896 50  0000 L CNN
+F 1 "100n" H 7842 6805 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" H 7750 6850 50  0001 C CNN
+F 3 "~" H 7750 6850 50  0001 C CNN
+	1    7750 6850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C20
+U 1 1 61787637
+P 8150 6850
+F 0 "C20" H 8242 6896 50  0000 L CNN
+F 1 "100n" H 8242 6805 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" H 8150 6850 50  0001 C CNN
+F 3 "~" H 8150 6850 50  0001 C CNN
+	1    8150 6850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C21
+U 1 1 61787641
+P 8550 6850
+F 0 "C21" H 8642 6896 50  0000 L CNN
+F 1 "100n" H 8642 6805 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" H 8550 6850 50  0001 C CNN
+F 3 "~" H 8550 6850 50  0001 C CNN
+	1    8550 6850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C22
+U 1 1 6178764B
+P 8950 6850
+F 0 "C22" H 9042 6896 50  0000 L CNN
+F 1 "100n" H 9042 6805 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" H 8950 6850 50  0001 C CNN
+F 3 "~" H 8950 6850 50  0001 C CNN
+	1    8950 6850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8950 6950 8750 6950
+Connection ~ 8550 6950
+Connection ~ 8150 6950
+Wire Wire Line
+	8150 6950 7750 6950
+Wire Wire Line
+	8950 6750 8550 6750
+Connection ~ 8150 6750
+Wire Wire Line
+	8150 6750 7750 6750
+Connection ~ 8550 6750
+$Comp
+L power:VCC #PWR014
+U 1 1 6178765D
+P 8350 6750
+F 0 "#PWR014" H 8350 6600 50  0001 C CNN
+F 1 "VCC" H 8367 6923 50  0000 C CNN
+F 2 "" H 8350 6750 50  0001 C CNN
+F 3 "" H 8350 6750 50  0001 C CNN
+	1    8350 6750
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR015
+U 1 1 61787667
+P 8750 6950
+F 0 "#PWR015" H 8750 6700 50  0001 C CNN
+F 1 "GND" H 8750 6800 50  0000 C CNN
+F 2 "" H 8750 6950 50  0001 C CNN
+F 3 "" H 8750 6950 50  0001 C CNN
+	1    8750 6950
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	8150 6950 8550 6950
+Wire Wire Line
+	8150 6750 8350 6750
+Connection ~ 8350 6750
+Wire Wire Line
+	8350 6750 8550 6750
+Connection ~ 8750 6950
+Wire Wire Line
+	8750 6950 8550 6950
+Wire Wire Line
+	4000 6300 4000 7600
+Wire Wire Line
+	4000 7600 6600 7600
+Connection ~ 4000 6300
+$Comp
+L Sofle:LED_SK6812_Mini_E SW?1
+U 1 1 61796572
+P 7000 6000
+F 0 "SW?1" H 7000 6050 50  0000 C CNN
+F 1 "LED_SK6812_Mini_E" H 7000 6203 25  0001 C CNN
+F 2 "#footprint:SK6812_Mini_E" H 7030 6200 50  0001 C CNN
+F 3 "" H 7000 6100 50  0001 C CNN
+	1    7000 6000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint H154
+U 1 1 617A5B60
+P 7200 5800
+F 0 "H154" H 7200 5750 50  0000 C CNN
+F 1 "MountingHole_Pad" V 7346 5805 50  0001 C CNN
+F 2 "#footprint:1pin_conn" H 7200 5800 50  0001 C CNN
+F 3 "~" H 7200 5800 50  0001 C CNN
+	1    7200 5800
+	0    -1   1    0   
+$EndComp
+$Comp
+L Connector:TestPoint H153
+U 1 1 617AC4EE
+P 6800 6200
+F 0 "H153" H 6800 6150 50  0000 C CNN
+F 1 "MountingHole_Pad" V 6946 6205 50  0001 C CNN
+F 2 "#footprint:1pin_conn" H 6800 6200 50  0001 C CNN
+F 3 "~" H 6800 6200 50  0001 C CNN
+	1    6800 6200
+	0    1    -1   0   
+$EndComp
+$Comp
+L Connector:TestPoint H152
+U 1 1 617AC83C
+P 6800 5900
+F 0 "H152" H 6800 5850 50  0000 C CNN
+F 1 "MountingHole_Pad" V 6946 5905 50  0001 C CNN
+F 2 "#footprint:1pin_conn" H 6800 5900 50  0001 C CNN
+F 3 "~" H 6800 5900 50  0001 C CNN
+	1    6800 5900
+	1    0    0    1   
+$EndComp
+$Comp
+L Connector:TestPoint H155
+U 1 1 617ACB7E
+P 7200 6100
+F 0 "H155" H 7200 6050 50  0000 C CNN
+F 1 "MountingHole_Pad" V 7346 6105 50  0001 C CNN
+F 2 "#footprint:1pin_conn" H 7200 6100 50  0001 C CNN
+F 3 "~" H 7200 6100 50  0001 C CNN
+	1    7200 6100
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	6800 6100 6800 6200
+Wire Wire Line
+	7200 5800 7200 5900
+Wire Wire Line
+	6600 5650 7200 5650
+Wire Wire Line
+	6600 5650 6600 7600
+$Comp
+L Sofle:LED_SK6812_Mini_E SW19
+U 1 1 61859F12
+P 7650 6000
+F 0 "SW19" H 7650 6050 50  0000 C CNN
+F 1 "LED_SK6812_Mini_E" H 7650 6203 25  0001 C CNN
+F 2 "#footprint:SK6812_Mini_E" H 7680 6200 50  0001 C CNN
+F 3 "" H 7650 6100 50  0001 C CNN
+	1    7650 6000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint H158
+U 1 1 61859F18
+P 7850 5800
+F 0 "H158" H 7850 5750 50  0000 C CNN
+F 1 "MountingHole_Pad" V 7996 5805 50  0001 C CNN
+F 2 "#footprint:1pin_conn" H 7850 5800 50  0001 C CNN
+F 3 "~" H 7850 5800 50  0001 C CNN
+	1    7850 5800
+	0    -1   1    0   
+$EndComp
+$Comp
+L Connector:TestPoint H157
+U 1 1 61859F1E
+P 7450 6200
+F 0 "H157" H 7450 6150 50  0000 C CNN
+F 1 "MountingHole_Pad" V 7596 6205 50  0001 C CNN
+F 2 "#footprint:1pin_conn" H 7450 6200 50  0001 C CNN
+F 3 "~" H 7450 6200 50  0001 C CNN
+	1    7450 6200
+	0    1    -1   0   
+$EndComp
+$Comp
+L Connector:TestPoint H156
+U 1 1 61859F24
+P 7450 5900
+F 0 "H156" H 7450 5850 50  0000 C CNN
+F 1 "MountingHole_Pad" V 7596 5905 50  0001 C CNN
+F 2 "#footprint:1pin_conn" H 7450 5900 50  0001 C CNN
+F 3 "~" H 7450 5900 50  0001 C CNN
+	1    7450 5900
+	1    0    0    1   
+$EndComp
+$Comp
+L Connector:TestPoint H159
+U 1 1 61859F2A
+P 7850 6100
+F 0 "H159" H 7850 6050 50  0000 C CNN
+F 1 "MountingHole_Pad" V 7996 6105 50  0001 C CNN
+F 2 "#footprint:1pin_conn" H 7850 6100 50  0001 C CNN
+F 3 "~" H 7850 6100 50  0001 C CNN
+	1    7850 6100
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	7450 6100 7450 6200
+Wire Wire Line
+	7850 5800 7850 5900
+$Comp
+L Sofle:LED_SK6812_Mini_E SW23
+U 1 1 6188B6CA
+P 8350 6000
+F 0 "SW23" H 8350 6050 50  0000 C CNN
+F 1 "LED_SK6812_Mini_E" H 8350 6203 25  0001 C CNN
+F 2 "#footprint:SK6812_Mini_E" H 8380 6200 50  0001 C CNN
+F 3 "" H 8350 6100 50  0001 C CNN
+	1    8350 6000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint H162
+U 1 1 6188B6D0
+P 8550 5800
+F 0 "H162" H 8550 5750 50  0000 C CNN
+F 1 "MountingHole_Pad" V 8696 5805 50  0001 C CNN
+F 2 "#footprint:1pin_conn" H 8550 5800 50  0001 C CNN
+F 3 "~" H 8550 5800 50  0001 C CNN
+	1    8550 5800
+	0    -1   1    0   
+$EndComp
+$Comp
+L Connector:TestPoint H161
+U 1 1 6188B6D6
+P 8150 6200
+F 0 "H161" H 8150 6150 50  0000 C CNN
+F 1 "MountingHole_Pad" V 8296 6205 50  0001 C CNN
+F 2 "#footprint:1pin_conn" H 8150 6200 50  0001 C CNN
+F 3 "~" H 8150 6200 50  0001 C CNN
+	1    8150 6200
+	0    1    -1   0   
+$EndComp
+$Comp
+L Connector:TestPoint H160
+U 1 1 6188B6DC
+P 8150 5900
+F 0 "H160" H 8150 5850 50  0000 C CNN
+F 1 "MountingHole_Pad" V 8296 5905 50  0001 C CNN
+F 2 "#footprint:1pin_conn" H 8150 5900 50  0001 C CNN
+F 3 "~" H 8150 5900 50  0001 C CNN
+	1    8150 5900
+	1    0    0    1   
+$EndComp
+$Comp
+L Connector:TestPoint H163
+U 1 1 6188B6E2
+P 8550 6100
+F 0 "H163" H 8550 6050 50  0000 C CNN
+F 1 "MountingHole_Pad" V 8696 6105 50  0001 C CNN
+F 2 "#footprint:1pin_conn" H 8550 6100 50  0001 C CNN
+F 3 "~" H 8550 6100 50  0001 C CNN
+	1    8550 6100
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	8150 6100 8150 6200
+Wire Wire Line
+	8550 5800 8550 5900
+$Comp
+L Sofle:LED_SK6812_Mini_E SW24
+U 1 1 6188B6EA
+P 9000 6000
+F 0 "SW24" H 9000 6050 50  0000 C CNN
+F 1 "LED_SK6812_Mini_E" H 9000 6203 25  0001 C CNN
+F 2 "#footprint:SK6812_Mini_E" H 9030 6200 50  0001 C CNN
+F 3 "" H 9000 6100 50  0001 C CNN
+	1    9000 6000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint H166
+U 1 1 6188B6F0
+P 9200 5800
+F 0 "H166" H 9200 5750 50  0000 C CNN
+F 1 "MountingHole_Pad" V 9346 5805 50  0001 C CNN
+F 2 "#footprint:1pin_conn" H 9200 5800 50  0001 C CNN
+F 3 "~" H 9200 5800 50  0001 C CNN
+	1    9200 5800
+	0    -1   1    0   
+$EndComp
+$Comp
+L Connector:TestPoint H165
+U 1 1 6188B6F6
+P 8800 6200
+F 0 "H165" H 8800 6150 50  0000 C CNN
+F 1 "MountingHole_Pad" V 8946 6205 50  0001 C CNN
+F 2 "#footprint:1pin_conn" H 8800 6200 50  0001 C CNN
+F 3 "~" H 8800 6200 50  0001 C CNN
+	1    8800 6200
+	0    1    -1   0   
+$EndComp
+$Comp
+L Connector:TestPoint H164
+U 1 1 6188B6FC
+P 8800 5900
+F 0 "H164" H 8800 5850 50  0000 C CNN
+F 1 "MountingHole_Pad" V 8946 5905 50  0001 C CNN
+F 2 "#footprint:1pin_conn" H 8800 5900 50  0001 C CNN
+F 3 "~" H 8800 5900 50  0001 C CNN
+	1    8800 5900
+	1    0    0    1   
+$EndComp
+$Comp
+L Connector:TestPoint H167
+U 1 1 6188B702
+P 9200 6100
+F 0 "H167" H 9200 6050 50  0000 C CNN
+F 1 "MountingHole_Pad" V 9346 6105 50  0001 C CNN
+F 2 "#footprint:1pin_conn" H 9200 6100 50  0001 C CNN
+F 3 "~" H 9200 6100 50  0001 C CNN
+	1    9200 6100
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	8800 6100 8800 6200
+Wire Wire Line
+	9200 5800 9200 5900
+Wire Wire Line
+	7200 5650 7200 5800
+Connection ~ 7200 5800
+Wire Wire Line
+	6800 6200 6800 6300
+Wire Wire Line
+	6800 6300 7300 6300
+Wire Wire Line
+	7300 6300 7300 5650
+Wire Wire Line
+	7300 5650 7850 5650
+Wire Wire Line
+	7850 5650 7850 5800
+Connection ~ 6800 6200
+Connection ~ 7850 5800
+Wire Wire Line
+	7450 6200 7450 6300
+Wire Wire Line
+	7450 6300 7950 6300
+Wire Wire Line
+	7950 6300 7950 5650
+Wire Wire Line
+	7950 5650 8550 5650
+Wire Wire Line
+	8550 5650 8550 5800
+Connection ~ 7450 6200
+Connection ~ 8550 5800
+Wire Wire Line
+	8150 6200 8150 6300
+Wire Wire Line
+	8150 6300 8650 6300
+Wire Wire Line
+	8650 6300 8650 5650
+Wire Wire Line
+	8650 5650 9200 5650
+Wire Wire Line
+	9200 5650 9200 5800
+Connection ~ 8150 6200
+Connection ~ 9200 5800
 $EndSCHEMATC
