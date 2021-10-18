@@ -1,4 +1,4 @@
-(module SU120_RGB_SW_Top (layer F.Cu) (tedit 616AA221)
+(module SU120_RGB_SW_Top (layer F.Cu) (tedit 616D2C8A)
   (fp_text reference SW2 (at 0 3) (layer F.Fab) hide
     (effects (font (size 1 1) (thickness 0.15)))
   )
@@ -60,5 +60,10 @@
   )
   (fp_text user VCC (at 4.0005 6.2865) (layer B.Fab)
     (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (model ${ACHERONLIB}/3d_models/mx_switch.step
+    (offset (xyz -7.35 -7.3 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz -90 0 0))
   )
 )
