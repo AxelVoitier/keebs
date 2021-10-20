@@ -1010,7 +1010,7 @@ F 3 "" H 4150 4300 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	4750 4150 4750 4300
+	4750 4150 4750 4200
 Wire Wire Line
 	4150 4150 4150 4250
 $Comp
@@ -1822,9 +1822,9 @@ Wire Wire Line
 Connection ~ 10250 5200
 Wire Wire Line
 	10250 5200 10250 5350
-Text GLabel 9500 4300 1    50   Input ~ 0
+Text GLabel 9500 4150 1    50   Input ~ 0
 GND
-Text GLabel 10550 4300 1    50   Input ~ 0
+Text GLabel 10550 4150 1    50   Input ~ 0
 GND
 Text GLabel 9200 800  1    39   Input ~ 0
 X4
@@ -1836,11 +1836,11 @@ Connection ~ 10250 1650
 Wire Wire Line
 	9200 800  9200 1650
 Connection ~ 9200 1650
-Text GLabel 10650 4300 1    50   Input ~ 0
+Text GLabel 10700 4350 2    50   Input ~ 0
 X7
 Text GLabel 10450 4300 1    50   Input ~ 0
 X8
-Text GLabel 9600 4300 1    50   Input ~ 0
+Text GLabel 9650 4350 2    50   Input ~ 0
 X9
 Text GLabel 9400 4300 1    50   Input ~ 0
 X10
@@ -1880,18 +1880,13 @@ $EndComp
 Wire Wire Line
 	9400 4300 9400 4550
 Wire Wire Line
-	9500 4300 9500 4450
-Wire Wire Line
-	9600 4300 9600 4350
+	9500 4150 9500 4250
 Wire Wire Line
 	10450 4300 10450 4550
 Wire Wire Line
-	10550 4300 10550 4450
-Wire Wire Line
-	10650 4300 10650 4350
+	10550 4150 10550 4250
 Wire Wire Line
 	9300 4350 9600 4350
-Connection ~ 9600 4350
 Wire Wire Line
 	9600 4350 9600 4600
 Wire Wire Line
@@ -1940,7 +1935,7 @@ F 3 "" H 4400 4150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4150 4250 4400 4250
+	4150 4250 4300 4250
 Wire Wire Line
 	4400 4250 4400 4150
 Connection ~ 4150 4250
@@ -4420,4 +4415,65 @@ Wire Wire Line
 	3800 4250 3700 4250
 Wire Wire Line
 	3500 4250 3400 4250
+Wire Wire Line
+	9650 4350 9600 4350
+Connection ~ 9600 4350
+Wire Wire Line
+	10700 4350 10650 4350
+$Comp
+L Connector:TestPoint H170
+U 1 1 617932EC
+P 9500 4250
+F 0 "H170" H 9400 4450 50  0000 L CNN
+F 1 "MountingHole_Pad" H 9600 4210 50  0001 L CNN
+F 2 "#footprint:1pin_conn" H 9500 4250 50  0001 C CNN
+F 3 "~" H 9500 4250 50  0001 C CNN
+	1    9500 4250
+	0    1    1    0   
+$EndComp
+Connection ~ 9500 4250
+Wire Wire Line
+	9500 4250 9500 4450
+$Comp
+L Connector:TestPoint H171
+U 1 1 617E0E69
+P 10550 4250
+F 0 "H171" H 10450 4450 50  0000 L CNN
+F 1 "MountingHole_Pad" H 10650 4210 50  0001 L CNN
+F 2 "#footprint:1pin_conn" H 10550 4250 50  0001 C CNN
+F 3 "~" H 10550 4250 50  0001 C CNN
+	1    10550 4250
+	0    1    1    0   
+$EndComp
+Connection ~ 10550 4250
+Wire Wire Line
+	10550 4250 10550 4450
+$Comp
+L Connector:TestPoint H168
+U 1 1 617E13D0
+P 4300 4250
+F 0 "H168" V 4300 4500 50  0000 C CNN
+F 1 "MountingHole_Pad" V 4446 4255 50  0001 C CNN
+F 2 "#footprint:1pin_conn" H 4300 4250 50  0001 C CNN
+F 3 "~" H 4300 4250 50  0001 C CNN
+	1    4300 4250
+	1    0    0    -1  
+$EndComp
+Connection ~ 4300 4250
+Wire Wire Line
+	4300 4250 4400 4250
+$Comp
+L Connector:TestPoint H169
+U 1 1 617E23BC
+P 4750 4200
+F 0 "H169" V 4750 4450 50  0000 C CNN
+F 1 "MountingHole_Pad" V 4896 4205 50  0001 C CNN
+F 2 "#footprint:1pin_conn" H 4750 4200 50  0001 C CNN
+F 3 "~" H 4750 4200 50  0001 C CNN
+	1    4750 4200
+	0    1    1    0   
+$EndComp
+Connection ~ 4750 4200
+Wire Wire Line
+	4750 4200 4750 4300
 $EndSCHEMATC

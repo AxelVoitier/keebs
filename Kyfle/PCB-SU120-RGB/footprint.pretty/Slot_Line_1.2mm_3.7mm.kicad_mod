@@ -1,0 +1,11 @@
+(module Slot_Line_1.2mm_3.7mm (layer F.Cu) (tedit 616EE2EC)
+  (fp_text reference REF** (at 0 0.5) (layer F.Fab) hide
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (fp_text value Slot_1.2mm_3.7.mm (at 0 -0.5) (layer F.Fab)
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (fp_arc (start 3.1 0) (end 3.1 0.6) (angle -180) (layer Edge.Cuts) (width 0.15))
+  (fp_line (start 3.1 -0.6) (end 0.6 -0.6) (layer Edge.Cuts) (width 0.15))
+  (fp_line (start 0.6 0.6) (end 3.1 0.6) (layer Edge.Cuts) (width 0.15))
+)
