@@ -924,26 +924,6 @@ Text GLabel 3450 2500 2    50   Input ~ 0
 Y6
 Text GLabel 3450 2400 2    50   Input ~ 0
 Y5
-Text GLabel 2050 1800 0    50   Input ~ 0
-X1
-Text GLabel 2050 1900 0    50   Input ~ 0
-X2
-Text GLabel 2050 2000 0    50   Input ~ 0
-X3
-Text GLabel 2050 2100 0    50   Input ~ 0
-X4
-Text GLabel 2050 2200 0    50   Input ~ 0
-X5
-Text GLabel 2050 2300 0    50   Input ~ 0
-X6
-Text GLabel 2050 2400 0    50   Input ~ 0
-X7
-Text GLabel 2050 2500 0    50   Input ~ 0
-X8
-Text GLabel 3450 1800 2    50   Input ~ 0
-X9
-Text GLabel 3450 1900 2    50   Input ~ 0
-X10
 Text GLabel 1550 2950 0    50   Input ~ 0
 X1
 Text GLabel 1550 3050 0    50   Input ~ 0
@@ -1840,10 +1820,6 @@ Text GLabel 10700 4350 2    50   Input ~ 0
 X7
 Text GLabel 10450 4300 1    50   Input ~ 0
 X8
-Text GLabel 9650 4350 2    50   Input ~ 0
-X9
-Text GLabel 9400 4300 1    50   Input ~ 0
-X10
 $Comp
 L Mechanical:MountingHole_Pad H57
 U 1 1 5E0F561B
@@ -4415,8 +4391,6 @@ Wire Wire Line
 	3800 4250 3700 4250
 Wire Wire Line
 	3500 4250 3400 4250
-Wire Wire Line
-	9650 4350 9600 4350
 Connection ~ 9600 4350
 Wire Wire Line
 	10700 4350 10650 4350
@@ -4476,4 +4450,30 @@ $EndComp
 Connection ~ 4750 4200
 Wire Wire Line
 	4750 4200 4750 4300
+Wire Wire Line
+	9650 4350 9600 4350
+Text GLabel 9650 4350 2    50   Input ~ 0
+X9
+Text GLabel 9400 4300 1    50   Input ~ 0
+X10
+Text GLabel 3450 1900 2    50   Input ~ 0
+X10
+Text GLabel 3450 1800 2    50   Input ~ 0
+X9
+Text GLabel 2050 2500 0    50   Input ~ 0
+X8
+Text GLabel 2050 2400 0    50   Input ~ 0
+X7
+Text GLabel 2050 2300 0    50   Input ~ 0
+X6
+Text GLabel 2050 2200 0    50   Input ~ 0
+X5
+Text GLabel 2050 2100 0    50   Input ~ 0
+X4
+Text GLabel 2050 2000 0    50   Input ~ 0
+X3
+Text GLabel 2050 1900 0    50   Input ~ 0
+X2
+Text GLabel 2050 1800 0    50   Input ~ 0
+X1
 $EndSCHEMATC
