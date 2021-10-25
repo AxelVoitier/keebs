@@ -1,3 +1,4 @@
 (fp_lib_table
   (lib (name SofleChocTop)(type KiCad)(uri ${KIPRJMOD}/SofleChocTop.pretty)(options "")(descr ""))
+  (lib (name "Kyfle Footprints")(type KiCad)(uri "${KIPRJMOD}/../Kyfle Footprints.pretty")(options "")(descr ""))
 )

@@ -1,4 +1,4 @@
-update=jeu. 21 oct. 2021 15:46:13 CEST
+update=lun. 25 oct. 2021 01:31:17 CEST
 version=1
 last_client=kicad
 [cvpcb]
@@ -42,7 +42,8 @@ TrackWidth4=0.25
 TrackWidth5=0.35
 TrackWidth6=0.4
 TrackWidth7=0.5
-TrackWidth8=0.9
+TrackWidth8=0.65
+TrackWidth9=0.9
 ViaDiameter1=0.8
 ViaDrill1=0.4
 ViaDiameter2=0.9
@@ -258,7 +259,7 @@ dPairGap=0.25
 dPairViaGap=0.25
 [pcbnew/Netclasses/1]
 Name=PWR
-Clearance=0.2
+Clearance=0.1524
 TrackWidth=0.25
 ViaDiameter=0.8
 ViaDrill=0.4
