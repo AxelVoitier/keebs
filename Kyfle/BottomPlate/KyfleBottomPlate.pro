@@ -1,5 +1,5 @@
 
-update=jeu. 21 oct. 2021 23:13:16
+update=mar. 26 oct. 2021 23:19:20
 version=1
 last_client=pcbnew
 [cvpcb]
@@ -74,7 +74,7 @@ CopperTextSizeH=1.5
 CopperTextThickness=0.3
 CopperTextItalic=0
 CopperTextUpright=1
-EdgeCutLineWidth=0.12
+EdgeCutLineWidth=0.15
 CourtyardLineWidth=0.05
 OthersLineWidth=0.15
 OthersTextSizeV=1

@@ -353,12 +353,12 @@ Y3
 $Comp
 L Device:D D18
 U 1 1 5CE5B1E1
-P 9600 5350
-F 0 "D18" H 9600 5450 50  0000 C CNN
-F 1 "D" H 9600 5250 50  0001 C CNN
-F 2 "#footprint:diode_TH_SMD_rev2" H 9600 5350 50  0001 C CNN
-F 3 "" H 9600 5350 50  0001 C CNN
-	1    9600 5350
+P 9200 5350
+F 0 "D18" H 9200 5450 50  0000 C CNN
+F 1 "D" H 9200 5250 50  0001 C CNN
+F 2 "#footprint:diode_TH_SMD_rev2" H 9200 5350 50  0001 C CNN
+F 3 "" H 9200 5350 50  0001 C CNN
+	1    9200 5350
 	0    -1   -1   0   
 $EndComp
 $Comp
@@ -380,18 +380,32 @@ Text GLabel 7050 800  1    39   Input ~ 0
 X2
 Text GLabel 8150 800  1    39   Input ~ 0
 X3
-Text GLabel 9200 4800 1    39   Input ~ 0
+Text GLabel 8800 4800 1    39   Input ~ 0
 X4
 Text GLabel 10250 4800 1    39   Input ~ 0
 X5
-Connection ~ 9600 5500
+Connection ~ 9200 5500
 Wire Wire Line
-	9600 5500 9800 5500
+	9200 5500 9400 5500
 $Comp
 L Connector:TestPoint H137
 U 1 1 5CE5B292
+P 9000 5500
+F 0 "H137" H 8900 5700 50  0000 L CNN
+F 1 "MountingHole_Pad" H 9100 5460 50  0001 L CNN
+F 2 "#footprint:1pad_conn" H 9000 5500 50  0001 C CNN
+F 3 "~" H 9000 5500 50  0001 C CNN
+	1    9000 5500
+	1    0    0    -1  
+$EndComp
+Connection ~ 9000 5500
+Wire Wire Line
+	9000 5500 9200 5500
+$Comp
+L Connector:TestPoint H138
+U 1 1 5CE5B29A
 P 9400 5500
-F 0 "H137" H 9300 5700 50  0000 L CNN
+F 0 "H138" H 9300 5700 50  0000 L CNN
 F 1 "MountingHole_Pad" H 9500 5460 50  0001 L CNN
 F 2 "#footprint:1pad_conn" H 9400 5500 50  0001 C CNN
 F 3 "~" H 9400 5500 50  0001 C CNN
@@ -400,21 +414,7 @@ F 3 "~" H 9400 5500 50  0001 C CNN
 $EndComp
 Connection ~ 9400 5500
 Wire Wire Line
-	9400 5500 9600 5500
-$Comp
-L Connector:TestPoint H138
-U 1 1 5CE5B29A
-P 9800 5500
-F 0 "H138" H 9700 5700 50  0000 L CNN
-F 1 "MountingHole_Pad" H 9900 5460 50  0001 L CNN
-F 2 "#footprint:1pad_conn" H 9800 5500 50  0001 C CNN
-F 3 "~" H 9800 5500 50  0001 C CNN
-	1    9800 5500
-	1    0    0    -1  
-$EndComp
-Connection ~ 9800 5500
-Wire Wire Line
-	9800 5500 10450 5500
+	9400 5500 10450 5500
 $Comp
 L Connector:TestPoint H139
 U 1 1 5CE5B2A2
@@ -426,9 +426,6 @@ F 3 "~" H 10450 5500 50  0001 C CNN
 	1    10450 5500
 	1    0    0    -1  
 $EndComp
-Connection ~ 10450 5500
-Wire Wire Line
-	10450 5500 10650 5500
 $Comp
 L Connector:TestPoint H140
 U 1 1 5CE5B2AA
@@ -443,24 +440,24 @@ $EndComp
 $Comp
 L Connector:TestPoint H133
 U 1 1 5CE5B2B0
-P 9200 5050
-F 0 "H133" V 9200 5350 50  0000 C CNN
-F 1 "MountingHole_Pad" V 9346 5055 50  0001 C CNN
-F 2 "#footprint:1pad_conn" H 9200 5050 50  0001 C CNN
-F 3 "~" H 9200 5050 50  0001 C CNN
-	1    9200 5050
+P 8800 5050
+F 0 "H133" V 8800 5350 50  0000 C CNN
+F 1 "MountingHole_Pad" V 8946 5055 50  0001 C CNN
+F 2 "#footprint:1pad_conn" H 8800 5050 50  0001 C CNN
+F 3 "~" H 8800 5050 50  0001 C CNN
+	1    8800 5050
 	0    -1   -1   0   
 $EndComp
-Connection ~ 9200 5050
+Connection ~ 8800 5050
 $Comp
 L Connector:TestPoint H135
 U 1 1 5CE5B2B8
-P 9200 5350
-F 0 "H135" V 9200 5650 50  0000 C CNN
-F 1 "MountingHole_Pad" V 9346 5355 50  0001 C CNN
-F 2 "#footprint:1pad_conn" H 9200 5350 50  0001 C CNN
-F 3 "~" H 9200 5350 50  0001 C CNN
-	1    9200 5350
+P 8800 5350
+F 0 "H135" V 8800 5650 50  0000 C CNN
+F 1 "MountingHole_Pad" V 8946 5355 50  0001 C CNN
+F 2 "#footprint:1pad_conn" H 8800 5350 50  0001 C CNN
+F 3 "~" H 8800 5350 50  0001 C CNN
+	1    8800 5350
 	0    -1   -1   0   
 $EndComp
 $Comp
@@ -554,26 +551,15 @@ F 3 "" H 8350 3700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5600 5500 9400 5500
+	5600 5500 9000 5500
 Wire Wire Line
 	10250 4800 10250 5050
 Wire Wire Line
-	9200 4800 9200 5050
+	8800 4800 8800 5050
 Wire Wire Line
-	9200 5050 9200 5200
+	8800 5050 8800 5200
 Wire Wire Line
 	10250 5050 10250 5200
-$Comp
-L Device:Rotary_Encoder_Switch SW20
-U 1 1 5D659111
-P 9500 4900
-F 0 "SW20" V 9454 4670 50  0000 R CNN
-F 1 "Rotary_Encoder_Switch" V 9545 4670 50  0001 R CNN
-F 2 "#footprint:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm_rev2" H 9350 5060 50  0001 C CNN
-F 3 "~" H 9500 5160 50  0001 C CNN
-	1    9500 4900
-	0    -1   1    0   
-$EndComp
 $Comp
 L Device:Rotary_Encoder_Switch SW21
 U 1 1 5D6595AB
@@ -586,16 +572,16 @@ F 3 "~" H 10550 5160 50  0001 C CNN
 	0    -1   1    0   
 $EndComp
 Wire Wire Line
-	9400 5200 9200 5200
-Connection ~ 9200 5200
+	9000 5200 8800 5200
+Connection ~ 8800 5200
 Wire Wire Line
-	9200 5200 9200 5350
+	8800 5200 8800 5350
 Wire Wire Line
 	10450 5200 10250 5200
 Connection ~ 10250 5200
 Wire Wire Line
 	10250 5200 10250 5350
-Text GLabel 9500 4150 1    50   Input ~ 0
+Text GLabel 9100 4150 1    50   Input ~ 0
 GND
 Text GLabel 10550 4150 1    50   Input ~ 0
 GND
@@ -618,50 +604,28 @@ F 3 "~" H 900 2150 50  0001 C CNN
 	1    900  2150
 	1    0    0    -1  
 $EndComp
-$Comp
-L Connector_Generic:Conn_02x05_Odd_Even J8
-U 1 1 5E124F08
-P 10050 4450
-F 0 "J8" H 10100 4867 50  0000 C CNN
-F 1 "Conn_02x05_Odd_Even" H 10100 4776 50  0001 C CNN
-F 2 "#footprint:IDC-Header_2x05_P2.54mm_Vertical" H 10050 4450 50  0001 C CNN
-F 3 "~" H 10050 4450 50  0001 C CNN
-	1    10050 4450
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector_Generic:Conn_02x05_Odd_Even J7
-U 1 1 5E113B23
-P 9000 4450
-F 0 "J7" H 9050 4867 50  0000 C CNN
-F 1 "Conn_02x05_Odd_Even" H 9050 4776 50  0001 C CNN
-F 2 "#footprint:IDC-Header_2x05_P2.54mm_Vertical" H 9000 4450 50  0001 C CNN
-F 3 "~" H 9000 4450 50  0001 C CNN
-	1    9000 4450
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
-	9400 4300 9400 4550
+	9000 4300 9000 4550
 Wire Wire Line
-	9500 4150 9500 4250
+	9100 4150 9100 4250
 Wire Wire Line
 	10450 4300 10450 4550
 Wire Wire Line
 	10550 4150 10550 4250
 Wire Wire Line
-	9300 4350 9600 4350
+	8900 4350 9200 4350
 Wire Wire Line
-	9600 4350 9600 4600
+	9200 4350 9200 4600
 Wire Wire Line
-	9300 4450 9500 4450
-Connection ~ 9500 4450
+	8900 4450 9100 4450
+Connection ~ 9100 4450
 Wire Wire Line
-	9500 4450 9500 4600
+	9100 4450 9100 4600
 Wire Wire Line
-	9300 4550 9400 4550
-Connection ~ 9400 4550
+	8900 4550 9000 4550
+Connection ~ 9000 4550
 Wire Wire Line
-	9400 4550 9400 4600
+	9000 4550 9000 4600
 Wire Wire Line
 	10350 4350 10650 4350
 Connection ~ 10650 4350
@@ -726,20 +690,6 @@ F 3 "" H 1900 5700 50  0001 C CNN
 	2    1900 5600
 	1    0    0    -1  
 $EndComp
-NoConn ~ 8800 4250
-NoConn ~ 8800 4350
-NoConn ~ 8800 4450
-NoConn ~ 8800 4550
-NoConn ~ 8800 4650
-NoConn ~ 9300 4650
-NoConn ~ 9300 4250
-NoConn ~ 9850 4250
-NoConn ~ 9850 4350
-NoConn ~ 9850 4450
-NoConn ~ 9850 4550
-NoConn ~ 9850 4650
-NoConn ~ 10350 4650
-NoConn ~ 10350 4250
 $Comp
 L Sofle:SW_PUSH_LED SW4
 U 2 1 61D91426
@@ -1113,7 +1063,7 @@ L Device:R_Small R101
 U 1 1 62335352
 P 2750 3350
 F 0 "R101" V 2650 3350 50  0000 C CNN
-F 1 "501R" V 2850 3350 50  0000 C CNN
+F 1 "510R" V 2850 3350 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder" H 2750 3350 50  0001 C CNN
 F 3 "~" H 2750 3350 50  0001 C CNN
 	1    2750 3350
@@ -1123,23 +1073,23 @@ Wire Wire Line
 	2950 3350 2850 3350
 Wire Wire Line
 	2650 3350 2550 3350
-Connection ~ 9600 4350
+Connection ~ 9200 4350
 Wire Wire Line
 	10700 4350 10650 4350
 $Comp
 L Connector:TestPoint H170
 U 1 1 617932EC
-P 9500 4250
-F 0 "H170" H 9400 4450 50  0000 L CNN
-F 1 "MountingHole_Pad" H 9600 4210 50  0001 L CNN
-F 2 "#footprint:1pin_conn" H 9500 4250 50  0001 C CNN
-F 3 "~" H 9500 4250 50  0001 C CNN
-	1    9500 4250
+P 9100 4250
+F 0 "H170" H 9000 4450 50  0000 L CNN
+F 1 "MountingHole_Pad" H 9200 4210 50  0001 L CNN
+F 2 "#footprint:1pin_conn" H 9100 4250 50  0001 C CNN
+F 3 "~" H 9100 4250 50  0001 C CNN
+	1    9100 4250
 	0    1    1    0   
 $EndComp
-Connection ~ 9500 4250
+Connection ~ 9100 4250
 Wire Wire Line
-	9500 4250 9500 4450
+	9100 4250 9100 4450
 $Comp
 L Connector:TestPoint H171
 U 1 1 617E0E69
@@ -1180,10 +1130,8 @@ Connection ~ 4750 4200
 Wire Wire Line
 	4750 4200 4750 4300
 Wire Wire Line
-	9650 4350 9600 4350
-Text GLabel 9650 4350 2    50   Input ~ 0
-X9
-Text GLabel 9400 4300 1    50   Input ~ 0
+	9250 4350 9200 4350
+Text GLabel 9000 4300 1    50   Input ~ 0
 X10
 Text GLabel 3450 1900 2    50   Input ~ 0
 X10
@@ -1899,4 +1847,68 @@ Text GLabel 2550 3350 0    50   Input ~ 0
 led_
 Text GLabel 3400 4250 2    50   Input ~ 0
 led
+$Comp
+L Device:Rotary_Encoder_Switch SW20
+U 1 1 5D659111
+P 9100 4900
+F 0 "SW20" V 9054 4670 50  0000 R CNN
+F 1 "Rotary_Encoder_Switch" V 9145 4670 50  0001 R CNN
+F 2 "#footprint:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm_rev2" H 8950 5060 50  0001 C CNN
+F 3 "~" H 9100 5160 50  0001 C CNN
+	1    9100 4900
+	0    -1   1    0   
+$EndComp
+Text GLabel 9250 4350 2    50   Input ~ 0
+X9
+$Comp
+L Device:Rotary_Encoder_Switch SW19
+U 1 1 617B91CB
+P 8600 4450
+F 0 "SW19" V 8554 4220 50  0000 R CNN
+F 1 "Rotary_Encoder_Switch" V 8645 4220 50  0001 R CNN
+F 2 "Kyfle Footprints:RollerEncoder_Panasonic_EVQWGD001" H 8450 4610 50  0001 C CNN
+F 3 "~" H 8600 4710 50  0001 C CNN
+	1    8600 4450
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	8300 4550 8300 5200
+Wire Wire Line
+	8300 5200 8800 5200
+Connection ~ 9200 5200
+Wire Wire Line
+	8300 4350 8300 3900
+Wire Wire Line
+	8300 3900 9450 3900
+Wire Wire Line
+	9450 3900 9450 5200
+Wire Wire Line
+	9450 5200 9200 5200
+$Comp
+L Device:Rotary_Encoder_Switch SW23
+U 1 1 617D6B8F
+P 10050 4450
+F 0 "SW23" V 10004 4220 50  0000 R CNN
+F 1 "Rotary_Encoder_Switch" V 10095 4220 50  0001 R CNN
+F 2 "Kyfle Footprints:RollerEncoder_Panasonic_EVQWGD001" H 9900 4610 50  0001 C CNN
+F 3 "~" H 10050 4710 50  0001 C CNN
+	1    10050 4450
+	-1   0    0    1   
+$EndComp
+Connection ~ 10450 5500
+Wire Wire Line
+	10450 5500 10650 5500
+Wire Wire Line
+	9750 4550 9750 5200
+Wire Wire Line
+	9750 5200 10250 5200
+Wire Wire Line
+	9750 4350 9750 3900
+Wire Wire Line
+	9750 3900 10900 3900
+Wire Wire Line
+	10900 3900 10900 5200
+Wire Wire Line
+	10900 5200 10650 5200
+Connection ~ 10650 5200
 $EndSCHEMATC
