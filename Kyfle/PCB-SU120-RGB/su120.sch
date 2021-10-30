@@ -269,7 +269,7 @@ F 3 "" H 3600 4000 50  0001 C CNN
 	1    3600 4000
 	-1   0    0    -1  
 $EndComp
-Text GLabel 2950 3350 2    50   Input ~ 0
+Text GLabel 2900 3550 2    50   Input ~ 0
 led
 Text GLabel 1250 4400 2    50   Input ~ 0
 data
@@ -1061,18 +1061,18 @@ Wire Wire Line
 $Comp
 L Device:R_Small R101
 U 1 1 62335352
-P 2750 3350
-F 0 "R101" V 2650 3350 50  0000 C CNN
-F 1 "510R" V 2850 3350 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder" H 2750 3350 50  0001 C CNN
-F 3 "~" H 2750 3350 50  0001 C CNN
-	1    2750 3350
+P 2700 3550
+F 0 "R101" V 2600 3550 50  0000 C CNN
+F 1 "510R" V 2800 3550 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder" H 2700 3550 50  0001 C CNN
+F 3 "~" H 2700 3550 50  0001 C CNN
+	1    2700 3550
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	2950 3350 2850 3350
+	2900 3550 2800 3550
 Wire Wire Line
-	2650 3350 2550 3350
+	2600 3550 2500 3550
 Connection ~ 9200 4350
 Wire Wire Line
 	10700 4350 10650 4350
@@ -1843,7 +1843,7 @@ F 3 "~" H 5800 7050 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	5750 7050 5800 7050
-Text GLabel 2550 3350 0    50   Input ~ 0
+Text GLabel 2500 3550 0    50   Input ~ 0
 led_
 Text GLabel 3400 4250 2    50   Input ~ 0
 led
@@ -1911,4 +1911,86 @@ Wire Wire Line
 Wire Wire Line
 	10900 5200 10650 5200
 Connection ~ 10650 5200
+$Comp
+L Device:R_Small R102
+U 1 1 617E22EC
+P 2300 3100
+F 0 "R102" H 2150 3050 50  0000 C CNN
+F 1 "4k7" H 2200 3150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder" H 2300 3100 50  0001 C CNN
+F 3 "~" H 2300 3100 50  0001 C CNN
+	1    2300 3100
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R_Small R103
+U 1 1 617F9D27
+P 2600 3100
+F 0 "R103" H 2450 3050 50  0000 C CNN
+F 1 "4k7" H 2500 3150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder" H 2600 3100 50  0001 C CNN
+F 3 "~" H 2600 3100 50  0001 C CNN
+	1    2600 3100
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R_Small R104
+U 1 1 617F9F3F
+P 2900 3100
+F 0 "R104" H 2750 3050 50  0000 C CNN
+F 1 "4k7" H 2800 3150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder" H 2900 3100 50  0001 C CNN
+F 3 "~" H 2900 3100 50  0001 C CNN
+	1    2900 3100
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R_Small R105
+U 1 1 617FA297
+P 3200 3100
+F 0 "R105" H 3050 3050 50  0000 C CNN
+F 1 "4k7" H 3100 3150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder" H 3200 3100 50  0001 C CNN
+F 3 "~" H 3200 3100 50  0001 C CNN
+	1    3200 3100
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:VCC #PWR0105
+U 1 1 618067A2
+P 2700 2950
+F 0 "#PWR0105" H 2700 2800 50  0001 C CNN
+F 1 "VCC" H 2717 3123 50  0000 C CNN
+F 2 "" H 2700 2950 50  0001 C CNN
+F 3 "" H 2700 2950 50  0001 C CNN
+	1    2700 2950
+	-1   0    0    -1  
+$EndComp
+Text GLabel 2300 3200 3    50   Input ~ 0
+X1
+Text GLabel 2600 3200 3    50   Input ~ 0
+X2
+Wire Wire Line
+	2300 3000 2300 2950
+Wire Wire Line
+	2300 2950 2600 2950
+Wire Wire Line
+	2700 2950 2900 2950
+Wire Wire Line
+	3200 2950 3200 3000
+Connection ~ 2700 2950
+Wire Wire Line
+	2900 3000 2900 2950
+Connection ~ 2900 2950
+Wire Wire Line
+	2900 2950 3200 2950
+Wire Wire Line
+	2600 3000 2600 2950
+Connection ~ 2600 2950
+Wire Wire Line
+	2600 2950 2700 2950
+Text GLabel 2900 3200 3    50   Input ~ 0
+X9
+Text GLabel 3200 3200 3    50   Input ~ 0
+X10
 $EndSCHEMATC
