@@ -1,12 +1,12 @@
-(module CherryMX_Kyfle_v1_BottomPlate_1u_Mount_Spacing (layer F.Cu) (tedit 617875FA)
+(module CherryMX_Kyfle_v1_BottomPlate_1u_Mount_Spacing (layer F.Cu) (tedit 617C1DE8)
   (fp_text reference SW2 (at 0 3) (layer F.Fab) hide
     (effects (font (size 1 1) (thickness 0.15)))
   )
   (fp_text value KEY_SWITCH (at 0 -3) (layer F.Fab) hide
     (effects (font (size 1 1) (thickness 0.15)))
   )
-  (fp_circle (center 0 0) (end 1.1 0) (layer Eco2.User) (width 0.12))
-  (fp_circle (center 13.8475 19.05) (end 14.9475 19.05) (layer Eco2.User) (width 0.12))
+  (fp_circle (center 13.8475 19.05) (end 14.8475 19.05) (layer Eco2.User) (width 0.12))
+  (fp_circle (center 0 0) (end 1 0) (layer Eco2.User) (width 0.12))
   (model ${ACHERONLIB}/3d_models/mx_switch.step
     (offset (xyz -7.35 -7.3 0))
     (scale (xyz 1 1 1))

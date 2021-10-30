@@ -1,5 +1,5 @@
 
-update=mar. 12 oct. 2021 23:34:26 CEST
+update=sam. 30 oct. 2021 01:20:04
 version=1
 last_client=pcbnew
 [cvpcb]
@@ -82,7 +82,7 @@ OthersTextSizeH=1
 OthersTextSizeThickness=0.15
 OthersTextItalic=0
 OthersTextUpright=1
-SolderMaskClearance=0.2
+SolderMaskClearance=0
 SolderMaskMinWidth=0
 SolderPasteClearance=0
 SolderPasteRatio=-0
