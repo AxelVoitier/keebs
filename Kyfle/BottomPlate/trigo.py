@@ -28,11 +28,12 @@ class Line:
         try:
             a = (p2.y - p1.y) / (p2.x - p1.x)
             b = -1
+            c = p1.y - (a * p1.x)
+            
         except ZeroDivisionError:
             a = 1
             b = 0
-
-        c = p1.y - (a * p1.x)
+            c = -p1.x
 
         return cls(a, b, c)
 
@@ -45,6 +46,9 @@ class Line:
             ((l1.b * l2.c) - (l2.b * l1.c)) / ((l1.a * l2.b) - (l2.a * l1.b)),
             ((l1.c * l2.a) - (l2.c * l1.a)) / ((l1.a * l2.b) - (l2.a * l1.b)),
         )
+        
+    def y_from_x(line, x):
+        return (-(line.a / line.b) * x) - (line.c / line.b)
 
 
 L = Line
@@ -102,6 +106,27 @@ class Circle:
         )
 
         return Line.from_2_points(p1, p2)
+        
+    def intersect_line(circle, line):
+        a = line.a
+        b = line.b
+        c = line.c
+        d = -circle.c.x * 2
+        g = -circle.c.y * 2
+        f = circle.c.x**2 + circle.c.y**2 - (circle.r**2)
+        print(f'{a=} ; {b=} ; {c=} ; {d=} ; {g=} ; {f=}')
+        
+        L = 1 + (a**2 / b**2)
+        M = ((2 * a * c) / b**2) - ((a * g) / b) + d
+        N = (c**2 / b**2) - ((c * g) / b) + f
+        print(f'{L=} ; {M=} ; {N=}')
+        
+        x1 = (-M + sqrt(M**2 - (4 * L * N))) / (2 * L)
+        x2 = (-M - sqrt(M**2 - (4 * L * N))) / (2 * L)
+        print(f'{x1=} ; {x2=}')
+        
+        return P(x1, line.y_from_x(x1)), P(x2, line.y_from_x(x2))
+        
 
 
 center = Point(161.760381, 199.9936)
@@ -200,3 +225,12 @@ thumb_top_corner_arc_angle = 180 - (degrees(intersecting_angle))
 print(
     f'Corner at thumb arc: {thumb_top_corner}, with arc starting at {thumb_arc_corner_tangent} over an angle of {-thumb_top_corner_arc_angle:.1f}')
 print()
+
+
+####
+
+l2 = Line.from_2_points(P(133.242068, 95.669531), P(144.002096, 126.91892))
+c = Circle(center, P(154.76, 111.12).dist(center))
+
+lx = Line(1, -1, 4)
+cx = Circle(P(-4, -1), sqrt(101))
