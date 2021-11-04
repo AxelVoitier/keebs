@@ -4,10 +4,10 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
-Title "SU120 Yakitori Keyboard"
+Title "SU120 Kyfle Variant"
 Date ""
 Rev "8"
-Comp "@e3w2q"
+Comp "@e3w2q, @AxelVoitier"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -19,7 +19,7 @@ U 1 1 5C43B29E
 P 8350 1700
 F 0 "SW9" H 8350 1850 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 8350 1894 50  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 8350 1900 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 8350 1900 50  0001 C CNN
 F 3 "" H 8350 1900 50  0001 C CNN
 	1    8350 1700
 	1    0    0    -1  
@@ -30,7 +30,7 @@ U 1 1 5C43B2EA
 P 9400 1700
 F 0 "SW13" H 9400 1850 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 9400 1894 50  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 9400 1900 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 9400 1900 50  0001 C CNN
 F 3 "" H 9400 1900 50  0001 C CNN
 	1    9400 1700
 	1    0    0    -1  
@@ -41,7 +41,7 @@ U 1 1 5C43B33A
 P 6200 2300
 F 0 "SW2" H 6200 2450 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 6200 2494 50  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 6200 2500 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 6200 2500 50  0001 C CNN
 F 3 "" H 6200 2500 50  0001 C CNN
 	1    6200 2300
 	1    0    0    -1  
@@ -52,7 +52,7 @@ U 1 1 5C43B3A2
 P 7250 2300
 F 0 "SW6" H 7250 2450 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 7250 2494 50  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 7250 2500 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 7250 2500 50  0001 C CNN
 F 3 "" H 7250 2500 50  0001 C CNN
 	1    7250 2300
 	1    0    0    -1  
@@ -63,7 +63,7 @@ U 1 1 5C43B3F4
 P 8350 2300
 F 0 "SW10" H 8350 2450 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 8350 2494 50  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 8350 2500 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 8350 2500 50  0001 C CNN
 F 3 "" H 8350 2500 50  0001 C CNN
 	1    8350 2300
 	1    0    0    -1  
@@ -74,7 +74,7 @@ U 1 1 5C43B44C
 P 9400 2300
 F 0 "SW14" H 9400 2450 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 9400 2494 50  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 9400 2500 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 9400 2500 50  0001 C CNN
 F 3 "" H 9400 2500 50  0001 C CNN
 	1    9400 2300
 	1    0    0    -1  
@@ -85,7 +85,7 @@ U 1 1 5C485058
 P 10450 1700
 F 0 "SW17" H 10450 1850 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 10450 1894 50  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 10450 1900 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module_For_Rotated" H 10450 1900 50  0001 C CNN
 F 3 "" H 10450 1900 50  0001 C CNN
 	1    10450 1700
 	1    0    0    -1  
@@ -96,7 +96,7 @@ U 1 1 5C485061
 P 6200 3500
 F 0 "SW4" H 6200 3650 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 6200 3694 50  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 6200 3700 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 6200 3700 50  0001 C CNN
 F 3 "" H 6200 3700 50  0001 C CNN
 	1    6200 3500
 	1    0    0    -1  
@@ -111,7 +111,7 @@ U 1 1 5C71DC44
 P 9400 3500
 F 0 "SW16" H 9400 3650 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 9400 3694 50  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 9400 3700 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 9400 3700 50  0001 C CNN
 F 3 "" H 9400 3700 50  0001 C CNN
 	1    9400 3500
 	1    0    0    -1  
@@ -124,7 +124,7 @@ U 1 1 5C71DCB6
 P 10850 2600
 F 0 "H46" H 10750 2800 50  0000 L CNN
 F 1 "MountingHole_Pad" H 10950 2560 50  0001 L CNN
-F 2 "#footprint:1pad_conn" H 10850 2600 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_rect_conn" H 10850 2600 50  0001 C CNN
 F 3 "~" H 10850 2600 50  0001 C CNN
 	1    10850 2600
 	1    0    0    -1  
@@ -135,7 +135,7 @@ U 1 1 5CE190C3
 P 1050 4300
 F 0 "J1" H 1080 4718 50  0000 C CNN
 F 1 "MJ-4PP-9" H 1080 4627 50  0000 C CNN
-F 2 "#footprint:MJ-4PP-9" H 1325 4475 50  0001 C CNN
+F 2 "Kyfle Footprints:MJ-4PP-9" H 1325 4475 50  0001 C CNN
 F 3 "" H 1325 4475 50  0001 C CNN
 	1    1050 4300
 	1    0    0    -1  
@@ -237,15 +237,15 @@ $EndComp
 $Comp
 L Switch:SW_Push SW22
 U 1 1 5CE3F474
-P 5500 4750
-F 0 "SW22" H 5500 5035 50  0000 C CNN
-F 1 "SW_Push" H 5500 4944 50  0000 C CNN
-F 2 "#footprint:ResetSW" H 5500 4950 50  0001 C CNN
-F 3 "" H 5500 4950 50  0001 C CNN
-	1    5500 4750
+P 5300 4850
+F 0 "SW22" H 5300 5135 50  0000 C CNN
+F 1 "SW_Push" H 5300 5044 50  0000 C CNN
+F 2 "Kyfle Footprints:ResetSW" H 5300 5050 50  0001 C CNN
+F 3 "" H 5300 5050 50  0001 C CNN
+	1    5300 4850
 	1    0    0    -1  
 $EndComp
-Text GLabel 5300 4750 0    50   Input ~ 0
+Text GLabel 5100 4850 0    50   Input ~ 0
 reset1
 $Comp
 L Connector_Generic:Conn_01x03 J2
@@ -253,7 +253,7 @@ U 1 1 5CE3FF01
 P 3200 4250
 F 0 "J2" H 3280 4292 50  0000 L CNN
 F 1 "Conn_01x03" H 3280 4201 50  0000 L CNN
-F 2 "#footprint:PinHeader_1x03_P2.54mm_Vertical" H 3200 4250 50  0001 C CNN
+F 2 "Kyfle Footprints:PinHeader_1x03_P2.54mm_Vertical" H 3200 4250 50  0001 C CNN
 F 3 "~" H 3200 4250 50  0001 C CNN
 	1    3200 4250
 	-1   0    0    -1  
@@ -310,7 +310,7 @@ U 1 1 5CE4CCDE
 P 7250 2900
 F 0 "SW7" H 7250 3050 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 7250 3094 50  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 7250 3100 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 7250 3100 50  0001 C CNN
 F 3 "" H 7250 3100 50  0001 C CNN
 	1    7250 2900
 	1    0    0    -1  
@@ -321,7 +321,7 @@ U 1 1 5CE4CCE4
 P 8350 2900
 F 0 "SW11" H 8350 3050 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 8350 3094 50  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 8350 3100 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 8350 3100 50  0001 C CNN
 F 3 "" H 8350 3100 50  0001 C CNN
 	1    8350 2900
 	1    0    0    -1  
@@ -332,7 +332,7 @@ U 1 1 5CE4CCEA
 P 9400 2900
 F 0 "SW15" H 9400 3050 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 9400 3094 50  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 9400 3100 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 9400 3100 50  0001 C CNN
 F 3 "" H 9400 3100 50  0001 C CNN
 	1    9400 2900
 	1    0    0    -1  
@@ -343,7 +343,7 @@ U 1 1 5CE4CCF6
 P 7250 3500
 F 0 "SW8" H 7250 3650 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 7250 3694 50  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 7250 3700 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 7250 3700 50  0001 C CNN
 F 3 "" H 7250 3700 50  0001 C CNN
 	1    7250 3500
 	1    0    0    -1  
@@ -356,7 +356,7 @@ U 1 1 5CE5B1E1
 P 9200 5350
 F 0 "D18" H 9200 5450 50  0000 C CNN
 F 1 "D" H 9200 5250 50  0001 C CNN
-F 2 "#footprint:diode_TH_SMD_rev2" H 9200 5350 50  0001 C CNN
+F 2 "Kyfle Footprints:diode_TH_SMD_rev3" H 9200 5350 50  0001 C CNN
 F 3 "" H 9200 5350 50  0001 C CNN
 	1    9200 5350
 	0    -1   -1   0   
@@ -367,7 +367,7 @@ U 1 1 5CE5B200
 P 10650 5350
 F 0 "D19" H 10650 5450 50  0000 C CNN
 F 1 "D" H 10650 5250 50  0001 C CNN
-F 2 "#footprint:diode_TH_SMD_rev2" H 10650 5350 50  0001 C CNN
+F 2 "Kyfle Footprints:diode_TH_SMD_rev3" H 10650 5350 50  0001 C CNN
 F 3 "" H 10650 5350 50  0001 C CNN
 	1    10650 5350
 	0    -1   -1   0   
@@ -390,40 +390,37 @@ Wire Wire Line
 $Comp
 L Connector:TestPoint H137
 U 1 1 5CE5B292
-P 9000 5500
-F 0 "H137" H 8900 5700 50  0000 L CNN
-F 1 "MountingHole_Pad" H 9100 5460 50  0001 L CNN
-F 2 "#footprint:1pad_conn" H 9000 5500 50  0001 C CNN
-F 3 "~" H 9000 5500 50  0001 C CNN
-	1    9000 5500
+P 8950 5500
+F 0 "H137" H 8850 5700 50  0000 L CNN
+F 1 "MountingHole_Pad" H 9050 5460 50  0001 L CNN
+F 2 "Kyfle Footprints:1pin_rect_conn" H 8950 5500 50  0001 C CNN
+F 3 "~" H 8950 5500 50  0001 C CNN
+	1    8950 5500
 	1    0    0    -1  
 $EndComp
-Connection ~ 9000 5500
-Wire Wire Line
-	9000 5500 9200 5500
 $Comp
 L Connector:TestPoint H138
 U 1 1 5CE5B29A
 P 9400 5500
 F 0 "H138" H 9300 5700 50  0000 L CNN
 F 1 "MountingHole_Pad" H 9500 5460 50  0001 L CNN
-F 2 "#footprint:1pad_conn" H 9400 5500 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_rect_conn" H 9400 5500 50  0001 C CNN
 F 3 "~" H 9400 5500 50  0001 C CNN
 	1    9400 5500
 	1    0    0    -1  
 $EndComp
 Connection ~ 9400 5500
 Wire Wire Line
-	9400 5500 10450 5500
+	9400 5500 10400 5500
 $Comp
 L Connector:TestPoint H139
 U 1 1 5CE5B2A2
-P 10450 5500
-F 0 "H139" H 10350 5700 50  0000 L CNN
-F 1 "MountingHole_Pad" H 10550 5460 50  0001 L CNN
-F 2 "#footprint:1pad_conn" H 10450 5500 50  0001 C CNN
-F 3 "~" H 10450 5500 50  0001 C CNN
-	1    10450 5500
+P 10400 5500
+F 0 "H139" H 10300 5700 50  0000 L CNN
+F 1 "MountingHole_Pad" H 10500 5460 50  0001 L CNN
+F 2 "Kyfle Footprints:1pin_rect_conn" H 10400 5500 50  0001 C CNN
+F 3 "~" H 10400 5500 50  0001 C CNN
+	1    10400 5500
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -432,7 +429,7 @@ U 1 1 5CE5B2AA
 P 10850 5500
 F 0 "H140" H 10750 5700 50  0000 L CNN
 F 1 "MountingHole_Pad" H 10950 5460 50  0001 L CNN
-F 2 "#footprint:1pad_conn" H 10850 5500 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_rect_conn" H 10850 5500 50  0001 C CNN
 F 3 "~" H 10850 5500 50  0001 C CNN
 	1    10850 5500
 	1    0    0    -1  
@@ -443,7 +440,7 @@ U 1 1 5CE5B2B0
 P 8800 5050
 F 0 "H133" V 8800 5350 50  0000 C CNN
 F 1 "MountingHole_Pad" V 8946 5055 50  0001 C CNN
-F 2 "#footprint:1pad_conn" H 8800 5050 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_rect_conn" H 8800 5050 50  0001 C CNN
 F 3 "~" H 8800 5050 50  0001 C CNN
 	1    8800 5050
 	0    -1   -1   0   
@@ -455,7 +452,7 @@ U 1 1 5CE5B2B8
 P 8800 5350
 F 0 "H135" V 8800 5650 50  0000 C CNN
 F 1 "MountingHole_Pad" V 8946 5355 50  0001 C CNN
-F 2 "#footprint:1pad_conn" H 8800 5350 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_rect_conn" H 8800 5350 50  0001 C CNN
 F 3 "~" H 8800 5350 50  0001 C CNN
 	1    8800 5350
 	0    -1   -1   0   
@@ -466,7 +463,7 @@ U 1 1 5CE5B2BF
 P 10250 5050
 F 0 "H134" V 10250 5350 50  0000 C CNN
 F 1 "MountingHole_Pad" V 10396 5055 50  0001 C CNN
-F 2 "#footprint:1pad_conn" H 10250 5050 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_rect_conn" H 10250 5050 50  0001 C CNN
 F 3 "~" H 10250 5050 50  0001 C CNN
 	1    10250 5050
 	0    -1   -1   0   
@@ -478,7 +475,7 @@ U 1 1 5CE5B2C7
 P 10250 5350
 F 0 "H136" V 10250 5650 50  0000 C CNN
 F 1 "MountingHole_Pad" V 10396 5355 50  0001 C CNN
-F 2 "#footprint:1pad_conn" H 10250 5350 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_rect_conn" H 10250 5350 50  0001 C CNN
 F 3 "~" H 10250 5350 50  0001 C CNN
 	1    10250 5350
 	0    -1   -1   0   
@@ -511,7 +508,7 @@ U 1 1 5CE5F218
 P 3900 3250
 F 0 "J3" H 3980 3242 50  0000 L CNN
 F 1 "Conn_01x08" H 3980 3151 50  0000 L CNN
-F 2 "#footprint:PinHeader_1x08_P2.54mm_Vertical_rev2" H 3900 3250 50  0001 C CNN
+F 2 "Kyfle Footprints:PinHeader_1x08_P2.54mm_Vertical_rev2" H 3900 3250 50  0001 C CNN
 F 3 "~" H 3900 3250 50  0001 C CNN
 	1    3900 3250
 	-1   0    0    -1  
@@ -522,7 +519,7 @@ U 1 1 5CE5F3DE
 P 1750 3250
 F 0 "J4" H 1670 3767 50  0000 C CNN
 F 1 "Conn_01x08" H 1670 3676 50  0000 C CNN
-F 2 "#footprint:PinHeader_1x08_P2.54mm_Vertical_rev2" H 1750 3250 50  0001 C CNN
+F 2 "Kyfle Footprints:PinHeader_1x08_P2.54mm_Vertical_rev2" H 1750 3250 50  0001 C CNN
 F 3 "~" H 1750 3250 50  0001 C CNN
 	1    1750 3250
 	1    0    0    -1  
@@ -533,7 +530,7 @@ U 1 1 5CF7DFCF
 P 2050 4300
 F 0 "J6" H 2080 4718 50  0000 C CNN
 F 1 "MJ-4PP-9" H 2080 4627 50  0000 C CNN
-F 2 "#footprint:MJ-4PP-9" H 2325 4475 50  0001 C CNN
+F 2 "Kyfle Footprints:MJ-4PP-9" H 2325 4475 50  0001 C CNN
 F 3 "" H 2325 4475 50  0001 C CNN
 	1    2050 4300
 	1    0    0    -1  
@@ -545,13 +542,13 @@ U 1 1 5D04CD1C
 P 8350 3500
 F 0 "SW12" H 8350 3650 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 8350 3694 50  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 8350 3700 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 8350 3700 50  0001 C CNN
 F 3 "" H 8350 3700 50  0001 C CNN
 	1    8350 3500
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5600 5500 9000 5500
+	5600 5500 8950 5500
 Wire Wire Line
 	10250 4800 10250 5050
 Wire Wire Line
@@ -566,7 +563,7 @@ U 1 1 5D6595AB
 P 10550 4900
 F 0 "SW21" V 10504 4670 50  0000 R CNN
 F 1 "Rotary_Encoder_Switch" V 10595 4670 50  0001 R CNN
-F 2 "#footprint:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm_rev2" H 10400 5060 50  0001 C CNN
+F 2 "Kyfle Footprints:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm_rev2" H 10400 5060 50  0001 C CNN
 F 3 "~" H 10550 5160 50  0001 C CNN
 	1    10550 4900
 	0    -1   1    0   
@@ -599,7 +596,7 @@ U 1 1 5E0F561B
 P 900 2150
 F 0 "H57" H 900 2350 50  0000 C CNN
 F 1 "MountingHole_Pad" V 1046 2155 50  0001 C CNN
-F 2 "#footprint:1pin_conn" H 900 2150 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_conn" H 900 2150 50  0001 C CNN
 F 3 "~" H 900 2150 50  0001 C CNN
 	1    900  2150
 	1    0    0    -1  
@@ -652,7 +649,7 @@ U 2 1 616DEF13
 P 1300 6100
 F 0 "SW2" H 1300 6100 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 1300 6303 25  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 1330 6300 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 1330 6300 50  0001 C CNN
 F 3 "" H 1300 6200 50  0001 C CNN
 	2    1300 6100
 	1    0    0    -1  
@@ -663,7 +660,7 @@ U 2 1 6174F456
 P 1300 6600
 F 0 "SW3" H 1300 6600 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 1300 6803 25  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 1330 6800 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 1330 6800 50  0001 C CNN
 F 3 "" H 1300 6700 50  0001 C CNN
 	2    1300 6600
 	1    0    0    -1  
@@ -674,7 +671,7 @@ U 2 1 617FAB8F
 P 1900 6100
 F 0 "SW6" H 1900 6100 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 1900 6303 25  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 1930 6300 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 1930 6300 50  0001 C CNN
 F 3 "" H 1900 6200 50  0001 C CNN
 	2    1900 6100
 	1    0    0    -1  
@@ -685,7 +682,7 @@ U 2 1 617EE3B8
 P 1900 5600
 F 0 "SW5" H 1900 5600 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 1900 5803 25  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 1930 5800 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 1930 5800 50  0001 C CNN
 F 3 "" H 1900 5700 50  0001 C CNN
 	2    1900 5600
 	1    0    0    -1  
@@ -696,7 +693,7 @@ U 2 1 61D91426
 P 1300 7100
 F 0 "SW4" H 1300 7100 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 1300 7303 25  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 1330 7300 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 1330 7300 50  0001 C CNN
 F 3 "" H 1300 7200 50  0001 C CNN
 	2    1300 7100
 	1    0    0    -1  
@@ -707,7 +704,7 @@ U 2 1 61D91BC6
 P 1900 7100
 F 0 "SW8" H 1900 7100 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 1900 7303 25  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 1930 7300 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 1930 7300 50  0001 C CNN
 F 3 "" H 1900 7200 50  0001 C CNN
 	2    1900 7100
 	1    0    0    -1  
@@ -718,7 +715,7 @@ U 1 1 5C71DC38
 P 10450 2300
 F 0 "SW18" H 10450 2450 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 10450 2494 50  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 10450 2500 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module_For_Rotated" H 10450 2500 50  0001 C CNN
 F 3 "" H 10450 2500 50  0001 C CNN
 	1    10450 2300
 	1    0    0    -1  
@@ -731,7 +728,7 @@ U 1 1 61796572
 P 4950 6100
 F 0 "LED1" H 4950 6150 50  0000 C CNN
 F 1 "LED_SK6812_Mini_E" H 4950 6303 25  0001 C CNN
-F 2 "#footprint:SK6812_Mini_E" H 4980 6300 50  0001 C CNN
+F 2 "Kyfle Footprints:SK6812_Mini_E" H 4980 6300 50  0001 C CNN
 F 3 "" H 4950 6200 50  0001 C CNN
 	1    4950 6100
 	1    0    0    -1  
@@ -742,7 +739,7 @@ U 1 1 61859F12
 P 5550 6100
 F 0 "LED2" H 5550 6150 50  0000 C CNN
 F 1 "LED_SK6812_Mini_E" H 5550 6303 25  0001 C CNN
-F 2 "#footprint:SK6812_Mini_E" H 5580 6300 50  0001 C CNN
+F 2 "Kyfle Footprints:SK6812_Mini_E" H 5580 6300 50  0001 C CNN
 F 3 "" H 5550 6200 50  0001 C CNN
 	1    5550 6100
 	1    0    0    -1  
@@ -753,7 +750,7 @@ U 1 1 6188B6CA
 P 4950 6950
 F 0 "LED3" H 4950 7000 50  0000 C CNN
 F 1 "LED_SK6812_Mini_E" H 4950 7153 25  0001 C CNN
-F 2 "#footprint:SK6812_Mini_E" H 4980 7150 50  0001 C CNN
+F 2 "Kyfle Footprints:SK6812_Mini_E" H 4980 7150 50  0001 C CNN
 F 3 "" H 4950 7050 50  0001 C CNN
 	1    4950 6950
 	1    0    0    -1  
@@ -764,7 +761,7 @@ U 1 1 6188B6EA
 P 5550 6950
 F 0 "LED4" H 5550 7000 50  0000 C CNN
 F 1 "LED_SK6812_Mini_E" H 5550 7153 25  0001 C CNN
-F 2 "#footprint:SK6812_Mini_E" H 5580 7150 50  0001 C CNN
+F 2 "Kyfle Footprints:SK6812_Mini_E" H 5580 7150 50  0001 C CNN
 F 3 "" H 5550 7050 50  0001 C CNN
 	1    5550 6950
 	1    0    0    -1  
@@ -775,7 +772,7 @@ U 1 1 617D511C
 P 3850 1100
 F 0 "JP105" H 3850 1213 50  0000 C CNN
 F 1 "SolderJumper_3_Open" H 3850 1214 50  0001 C CNN
-F 2 "#footprint:SolderJumper-3_P1.3mm_Open_TrianglePad1.0x1.5mm_duplex" H 3850 1100 50  0001 C CNN
+F 2 "Kyfle Footprints:SolderJumper-3_P1.3mm_Open_TrianglePad1.0x1.5mm_duplex" H 3850 1100 50  0001 C CNN
 F 3 "~" H 3850 1100 50  0001 C CNN
 	1    3850 1100
 	0    1    1    0   
@@ -789,7 +786,7 @@ U 1 1 618D09E4
 P 4350 1100
 F 0 "JP106" H 4350 1213 50  0000 C CNN
 F 1 "SolderJumper_3_Open" H 4350 1214 50  0001 C CNN
-F 2 "#footprint:SolderJumper-3_P1.3mm_Open_TrianglePad1.0x1.5mm_duplex" H 4350 1100 50  0001 C CNN
+F 2 "Kyfle Footprints:SolderJumper-3_P1.3mm_Open_TrianglePad1.0x1.5mm_duplex" H 4350 1100 50  0001 C CNN
 F 3 "~" H 4350 1100 50  0001 C CNN
 	1    4350 1100
 	0    1    1    0   
@@ -802,7 +799,7 @@ U 1 1 618D1B46
 P 4900 1100
 F 0 "JP107" H 4900 1213 50  0000 C CNN
 F 1 "SolderJumper_3_Open" H 4900 1214 50  0001 C CNN
-F 2 "#footprint:SolderJumper-3_P1.3mm_Open_TrianglePad1.0x1.5mm_duplex" H 4900 1100 50  0001 C CNN
+F 2 "Kyfle Footprints:SolderJumper-3_P1.3mm_Open_TrianglePad1.0x1.5mm_duplex" H 4900 1100 50  0001 C CNN
 F 3 "~" H 4900 1100 50  0001 C CNN
 	1    4900 1100
 	0    1    1    0   
@@ -815,7 +812,7 @@ U 1 1 618D2207
 P 5500 1100
 F 0 "JP108" H 5500 1213 50  0000 C CNN
 F 1 "SolderJumper_3_Open" H 5500 1214 50  0001 C CNN
-F 2 "#footprint:SolderJumper-3_P1.3mm_Open_TrianglePad1.0x1.5mm_duplex" H 5500 1100 50  0001 C CNN
+F 2 "Kyfle Footprints:SolderJumper-3_P1.3mm_Open_TrianglePad1.0x1.5mm_duplex" H 5500 1100 50  0001 C CNN
 F 3 "~" H 5500 1100 50  0001 C CNN
 	1    5500 1100
 	0    1    1    0   
@@ -870,7 +867,7 @@ U 1 1 61928023
 P 1800 950
 F 0 "JP104" H 1800 1063 50  0000 C CNN
 F 1 "SolderJumper_3_Open" H 1800 1064 50  0001 C CNN
-F 2 "#footprint:SolderJumper-3_P1.3mm_Open_TrianglePad1.0x1.5mm_duplex" H 1800 950 50  0001 C CNN
+F 2 "Kyfle Footprints:SolderJumper-3_P1.3mm_Open_TrianglePad1.0x1.5mm_duplex" H 1800 950 50  0001 C CNN
 F 3 "~" H 1800 950 50  0001 C CNN
 	1    1800 950 
 	0    -1   1    0   
@@ -882,7 +879,7 @@ U 1 1 619A29B2
 P 1450 950
 F 0 "JP103" H 1450 1063 50  0000 C CNN
 F 1 "SolderJumper_3_Open" H 1450 1064 50  0001 C CNN
-F 2 "#footprint:SolderJumper-3_P1.3mm_Open_TrianglePad1.0x1.5mm_duplex" H 1450 950 50  0001 C CNN
+F 2 "Kyfle Footprints:SolderJumper-3_P1.3mm_Open_TrianglePad1.0x1.5mm_duplex" H 1450 950 50  0001 C CNN
 F 3 "~" H 1450 950 50  0001 C CNN
 	1    1450 950 
 	0    -1   1    0   
@@ -906,7 +903,7 @@ U 1 1 61AE87EE
 P 1100 950
 F 0 "JP102" V 1100 1017 50  0000 L CNN
 F 1 "SolderJumper_3_Open" H 1100 1064 50  0001 C CNN
-F 2 "#footprint:SolderJumper-3_P1.3mm_Open_TrianglePad1.0x1.5mm_duplex" H 1100 950 50  0001 C CNN
+F 2 "Kyfle Footprints:SolderJumper-3_P1.3mm_Open_TrianglePad1.0x1.5mm_duplex" H 1100 950 50  0001 C CNN
 F 3 "~" H 1100 950 50  0001 C CNN
 	1    1100 950 
 	0    -1   1    0   
@@ -917,7 +914,7 @@ U 1 1 5CE18F26
 P 2750 2150
 F 0 "U1" H 2750 3187 60  0000 C CNN
 F 1 "ProMicro" H 2750 3081 60  0000 C CNN
-F 2 "#footprint:ArduinoProMicro-Rivets" H 2850 1100 60  0001 C CNN
+F 2 "Kyfle Footprints:Arduino_ProMicro_Rivets" H 2850 1100 60  0001 C CNN
 F 3 "" H 2850 1100 60  0000 C CNN
 	1    2750 2150
 	1    0    0    -1  
@@ -955,7 +952,7 @@ U 1 1 61E45C5D
 P 700 950
 F 0 "JP101" V 700 1017 50  0000 L CNN
 F 1 "SolderJumper_3_Open" H 700 1064 50  0001 C CNN
-F 2 "#footprint:SolderJumper-3_P1.3mm_Open_TrianglePad1.0x1.5mm_duplex" H 700 950 50  0001 C CNN
+F 2 "Kyfle Footprints:SolderJumper-3_P1.3mm_Open_TrianglePad1.0x1.5mm_duplex" H 700 950 50  0001 C CNN
 F 3 "~" H 700 950 50  0001 C CNN
 	1    700  950 
 	0    -1   1    0   
@@ -1003,18 +1000,18 @@ Wire Wire Line
 $Comp
 L power:GND #PWR0116
 U 1 1 620199E6
-P 5800 4850
-F 0 "#PWR0116" H 5800 4600 50  0001 C CNN
-F 1 "GND" H 5800 4700 50  0000 C CNN
-F 2 "" H 5800 4850 50  0001 C CNN
-F 3 "" H 5800 4850 50  0001 C CNN
-	1    5800 4850
+P 5600 4950
+F 0 "#PWR0116" H 5600 4700 50  0001 C CNN
+F 1 "GND" H 5600 4800 50  0000 C CNN
+F 2 "" H 5600 4950 50  0001 C CNN
+F 3 "" H 5600 4950 50  0001 C CNN
+	1    5600 4950
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5700 4750 5800 4750
+	5500 4850 5600 4850
 Wire Wire Line
-	5800 4750 5800 4850
+	5600 4850 5600 4950
 $Comp
 L power:GND #PWR0117
 U 1 1 6208C099
@@ -1080,9 +1077,9 @@ $Comp
 L Connector:TestPoint H170
 U 1 1 617932EC
 P 9100 4250
-F 0 "H170" H 9000 4450 50  0000 L CNN
+F 0 "H170" H 8950 4450 50  0000 L CNN
 F 1 "MountingHole_Pad" H 9200 4210 50  0001 L CNN
-F 2 "#footprint:1pin_conn" H 9100 4250 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_rect_conn" H 9100 4250 50  0001 C CNN
 F 3 "~" H 9100 4250 50  0001 C CNN
 	1    9100 4250
 	0    1    1    0   
@@ -1094,9 +1091,9 @@ $Comp
 L Connector:TestPoint H171
 U 1 1 617E0E69
 P 10550 4250
-F 0 "H171" H 10450 4450 50  0000 L CNN
+F 0 "H171" H 10400 4450 50  0000 L CNN
 F 1 "MountingHole_Pad" H 10650 4210 50  0001 L CNN
-F 2 "#footprint:1pin_conn" H 10550 4250 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_rect_conn" H 10550 4250 50  0001 C CNN
 F 3 "~" H 10550 4250 50  0001 C CNN
 	1    10550 4250
 	0    1    1    0   
@@ -1110,7 +1107,7 @@ U 1 1 617E13D0
 P 4300 4250
 F 0 "H168" V 4300 4500 50  0000 C CNN
 F 1 "MountingHole_Pad" V 4446 4255 50  0001 C CNN
-F 2 "#footprint:1pad_conn" H 4300 4250 50  0001 C CNN
+F 2 "Kyfle Footprints:1pad_conn" H 4300 4250 50  0001 C CNN
 F 3 "~" H 4300 4250 50  0001 C CNN
 	1    4300 4250
 	1    0    0    -1  
@@ -1119,9 +1116,9 @@ $Comp
 L Connector:TestPoint H169
 U 1 1 617E23BC
 P 4750 4200
-F 0 "H169" V 4750 4450 50  0000 C CNN
+F 0 "H169" V 4750 4500 50  0000 C CNN
 F 1 "MountingHole_Pad" V 4896 4205 50  0001 C CNN
-F 2 "#footprint:1pad_conn" H 4750 4200 50  0001 C CNN
+F 2 "Kyfle Footprints:1pad_conn" H 4750 4200 50  0001 C CNN
 F 3 "~" H 4750 4200 50  0001 C CNN
 	1    4750 4200
 	0    1    1    0   
@@ -1159,7 +1156,7 @@ U 1 1 5C43B1D6
 P 6200 1700
 F 0 "SW1" H 6200 1850 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 6200 1894 50  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 6200 1900 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 6200 1900 50  0001 C CNN
 F 3 "" H 6200 1900 50  0001 C CNN
 	1    6200 1700
 	1    0    0    -1  
@@ -1173,7 +1170,7 @@ U 1 1 5CE4CCD8
 P 6200 2900
 F 0 "SW3" H 6200 3050 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 6200 3094 50  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 6200 3100 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 6200 3100 50  0001 C CNN
 F 3 "" H 6200 3100 50  0001 C CNN
 	1    6200 2900
 	1    0    0    -1  
@@ -1194,7 +1191,7 @@ U 2 1 61623882
 P 1300 5600
 F 0 "SW1" H 1300 5600 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 1300 5803 25  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 1330 5800 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 1330 5800 50  0001 C CNN
 F 3 "" H 1300 5700 50  0001 C CNN
 	2    1300 5600
 	1    0    0    -1  
@@ -1241,7 +1238,7 @@ U 2 1 617FB0D7
 P 1900 6600
 F 0 "SW7" H 1900 6600 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 1900 6803 25  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 1930 6800 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 1930 6800 50  0001 C CNN
 F 3 "" H 1900 6700 50  0001 C CNN
 	2    1900 6600
 	1    0    0    -1  
@@ -1264,7 +1261,7 @@ U 2 1 61CA23AC
 P 2600 6100
 F 0 "SW10" H 2600 6100 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 2600 6303 25  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 2630 6300 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 2630 6300 50  0001 C CNN
 F 3 "" H 2600 6200 50  0001 C CNN
 	2    2600 6100
 	1    0    0    -1  
@@ -1275,7 +1272,7 @@ U 2 1 61CA23B2
 P 2600 6600
 F 0 "SW11" H 2600 6600 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 2600 6803 25  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 2630 6800 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 2630 6800 50  0001 C CNN
 F 3 "" H 2600 6700 50  0001 C CNN
 	2    2600 6600
 	1    0    0    -1  
@@ -1286,7 +1283,7 @@ U 2 1 61CA23B8
 P 3200 6100
 F 0 "SW14" H 3200 6100 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 3200 6303 25  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 3230 6300 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 3230 6300 50  0001 C CNN
 F 3 "" H 3200 6200 50  0001 C CNN
 	2    3200 6100
 	1    0    0    -1  
@@ -1297,7 +1294,7 @@ U 2 1 61CA23BE
 P 3200 5600
 F 0 "SW13" H 3200 5600 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 3200 5803 25  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 3230 5800 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 3230 5800 50  0001 C CNN
 F 3 "" H 3200 5700 50  0001 C CNN
 	2    3200 5600
 	1    0    0    -1  
@@ -1308,7 +1305,7 @@ U 2 1 61CA23C4
 P 2600 7100
 F 0 "SW12" H 2600 7100 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 2600 7303 25  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 2630 7300 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 2630 7300 50  0001 C CNN
 F 3 "" H 2600 7200 50  0001 C CNN
 	2    2600 7100
 	1    0    0    -1  
@@ -1319,7 +1316,7 @@ U 2 1 61CA23CA
 P 3200 7100
 F 0 "SW16" H 3200 7100 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 3200 7303 25  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 3230 7300 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 3230 7300 50  0001 C CNN
 F 3 "" H 3200 7200 50  0001 C CNN
 	2    3200 7100
 	1    0    0    -1  
@@ -1332,7 +1329,7 @@ U 2 1 61CA23D1
 P 2600 5600
 F 0 "SW9" H 2600 5600 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 2600 5803 25  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 2630 5800 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 2630 5800 50  0001 C CNN
 F 3 "" H 2600 5700 50  0001 C CNN
 	2    2600 5600
 	1    0    0    -1  
@@ -1379,7 +1376,7 @@ U 2 1 61CA23E9
 P 3200 6600
 F 0 "SW15" H 3200 6600 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 3200 6803 25  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 3230 6800 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 3230 6800 50  0001 C CNN
 F 3 "" H 3200 6700 50  0001 C CNN
 	2    3200 6600
 	1    0    0    -1  
@@ -1406,7 +1403,7 @@ U 2 1 61823C35
 P 3900 6100
 F 0 "SW18" H 3900 6100 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 3900 6303 25  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 3930 6300 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module_For_Rotated" H 3930 6300 50  0001 C CNN
 F 3 "" H 3900 6200 50  0001 C CNN
 	2    3900 6100
 	1    0    0    -1  
@@ -1417,7 +1414,7 @@ U 2 1 61D91BBA
 P 3900 5600
 F 0 "SW17" H 3900 5600 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 3900 5803 25  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 3930 5800 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module_For_Rotated" H 3930 5800 50  0001 C CNN
 F 3 "" H 3900 5700 50  0001 C CNN
 	2    3900 5600
 	1    0    0    -1  
@@ -1446,7 +1443,7 @@ U 1 1 61E74A3F
 P 4950 5850
 F 0 "C19" V 4721 5850 50  0000 C CNN
 F 1 "100n" V 4812 5850 50  0000 C CNN
-F 2 "#footprint:C_0603_0805_HandSolder" H 4950 5850 50  0001 C CNN
+F 2 "Kyfle Footprints:C_0603_0805_HandSolder" H 4950 5850 50  0001 C CNN
 F 3 "~" H 4950 5850 50  0001 C CNN
 	1    4950 5850
 	0    1    1    0   
@@ -1457,7 +1454,7 @@ U 1 1 61E7576C
 P 5550 5850
 F 0 "C20" V 5321 5850 50  0000 C CNN
 F 1 "100n" V 5412 5850 50  0000 C CNN
-F 2 "#footprint:C_0603_0805_HandSolder" H 5550 5850 50  0001 C CNN
+F 2 "Kyfle Footprints:C_0603_0805_HandSolder" H 5550 5850 50  0001 C CNN
 F 3 "~" H 5550 5850 50  0001 C CNN
 	1    5550 5850
 	0    1    1    0   
@@ -1468,7 +1465,7 @@ U 1 1 61E948CC
 P 4950 6700
 F 0 "C21" V 4721 6700 50  0000 C CNN
 F 1 "100n" V 4812 6700 50  0000 C CNN
-F 2 "#footprint:C_0603_0805_HandSolder" H 4950 6700 50  0001 C CNN
+F 2 "Kyfle Footprints:C_0603_0805_HandSolder" H 4950 6700 50  0001 C CNN
 F 3 "~" H 4950 6700 50  0001 C CNN
 	1    4950 6700
 	0    1    1    0   
@@ -1479,7 +1476,7 @@ U 1 1 61E95195
 P 5550 6700
 F 0 "C22" V 5321 6700 50  0000 C CNN
 F 1 "100n" V 5412 6700 50  0000 C CNN
-F 2 "#footprint:C_0603_0805_HandSolder" H 5550 6700 50  0001 C CNN
+F 2 "Kyfle Footprints:C_0603_0805_HandSolder" H 5550 6700 50  0001 C CNN
 F 3 "~" H 5550 6700 50  0001 C CNN
 	1    5550 6700
 	0    1    1    0   
@@ -1507,8 +1504,6 @@ Wire Wire Line
 Wire Wire Line
 	5650 5850 5750 5850
 Wire Wire Line
-	5750 5850 5750 6000
-Wire Wire Line
 	5450 5850 5350 5850
 Wire Wire Line
 	5350 5850 5350 6000
@@ -1526,7 +1521,7 @@ U 1 1 5D363A98
 P 11050 2600
 F 0 "H50" H 10950 2800 50  0000 L CNN
 F 1 "MountingHole_Pad" H 11150 2560 50  0001 L CNN
-F 2 "#footprint:1pad_conn" H 11050 2600 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_rect_conn" H 11050 2600 50  0001 C CNN
 F 3 "~" H 11050 2600 50  0001 C CNN
 	1    11050 2600
 	1    0    0    -1  
@@ -1549,7 +1544,7 @@ U 1 1 5C43B248
 P 7250 1700
 F 0 "SW5" H 7250 1850 50  0000 C CNN
 F 1 "SW_PUSH_LED" H 7250 1894 50  0001 C CNN
-F 2 "#footprint:CherryMX_MidHeight_RGB_Hotswap_v2" H 7250 1900 50  0001 C CNN
+F 2 "Kyfle Footprints:CherryMX_Kyfle_v1_Module" H 7250 1900 50  0001 C CNN
 F 3 "" H 7250 1900 50  0001 C CNN
 	1    7250 1700
 	1    0    0    -1  
@@ -1644,7 +1639,7 @@ U 1 1 6179589B
 P 4750 5850
 F 0 "H152" H 4650 6050 50  0000 L CNN
 F 1 "MountingHole_Pad" H 4850 5810 50  0001 L CNN
-F 2 "#footprint:1pin_conn" H 4750 5850 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_conn" H 4750 5850 50  0001 C CNN
 F 3 "~" H 4750 5850 50  0001 C CNN
 	1    4750 5850
 	1    0    0    -1  
@@ -1656,7 +1651,7 @@ U 1 1 617A9D73
 P 5150 5850
 F 0 "H155" H 5050 6050 50  0000 L CNN
 F 1 "MountingHole_Pad" H 5250 5810 50  0001 L CNN
-F 2 "#footprint:1pin_conn" H 5150 5850 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_conn" H 5150 5850 50  0001 C CNN
 F 3 "~" H 5150 5850 50  0001 C CNN
 	1    5150 5850
 	1    0    0    -1  
@@ -1668,7 +1663,7 @@ U 1 1 617AB121
 P 4700 6200
 F 0 "H154" H 4600 6400 50  0000 L CNN
 F 1 "MountingHole_Pad" H 4800 6160 50  0001 L CNN
-F 2 "#footprint:1pad_conn" H 4700 6200 50  0001 C CNN
+F 2 "Kyfle Footprints:1pad_conn" H 4700 6200 50  0001 C CNN
 F 3 "~" H 4700 6200 50  0001 C CNN
 	1    4700 6200
 	1    0    0    -1  
@@ -1682,7 +1677,7 @@ U 1 1 617B3661
 P 5200 6200
 F 0 "H153" H 5100 6400 50  0000 L CNN
 F 1 "MountingHole_Pad" H 5300 6160 50  0001 L CNN
-F 2 "#footprint:1pad_conn" H 5200 6200 50  0001 C CNN
+F 2 "Kyfle Footprints:1pad_conn" H 5200 6200 50  0001 C CNN
 F 3 "~" H 5200 6200 50  0001 C CNN
 	1    5200 6200
 	1    0    0    -1  
@@ -1696,7 +1691,7 @@ U 1 1 617B4237
 P 5350 5850
 F 0 "H156" H 5250 6050 50  0000 L CNN
 F 1 "MountingHole_Pad" H 5450 5810 50  0001 L CNN
-F 2 "#footprint:1pin_conn" H 5350 5850 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_conn" H 5350 5850 50  0001 C CNN
 F 3 "~" H 5350 5850 50  0001 C CNN
 	1    5350 5850
 	1    0    0    -1  
@@ -1708,19 +1703,18 @@ U 1 1 617B4BE1
 P 5750 5850
 F 0 "H159" H 5650 6050 50  0000 L CNN
 F 1 "MountingHole_Pad" H 5850 5810 50  0001 L CNN
-F 2 "#footprint:1pin_conn" H 5750 5850 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_conn" H 5750 5850 50  0001 C CNN
 F 3 "~" H 5750 5850 50  0001 C CNN
 	1    5750 5850
 	1    0    0    -1  
 $EndComp
-Connection ~ 5750 5850
 $Comp
 L Connector:TestPoint H158
 U 1 1 617B557E
 P 5300 6200
 F 0 "H158" H 5200 6400 50  0000 L CNN
 F 1 "MountingHole_Pad" H 5400 6160 50  0001 L CNN
-F 2 "#footprint:1pad_conn" H 5300 6200 50  0001 C CNN
+F 2 "Kyfle Footprints:1pad_conn" H 5300 6200 50  0001 C CNN
 F 3 "~" H 5300 6200 50  0001 C CNN
 	1    5300 6200
 	1    0    0    -1  
@@ -1734,7 +1728,7 @@ U 1 1 617B5AA9
 P 5800 6200
 F 0 "H157" H 5700 6400 50  0000 L CNN
 F 1 "MountingHole_Pad" H 5900 6160 50  0001 L CNN
-F 2 "#footprint:1pad_conn" H 5800 6200 50  0001 C CNN
+F 2 "Kyfle Footprints:1pad_conn" H 5800 6200 50  0001 C CNN
 F 3 "~" H 5800 6200 50  0001 C CNN
 	1    5800 6200
 	1    0    0    -1  
@@ -1748,7 +1742,7 @@ U 1 1 617FBA37
 P 5150 6700
 F 0 "H163" H 5050 6900 50  0000 L CNN
 F 1 "MountingHole_Pad" H 5250 6660 50  0001 L CNN
-F 2 "#footprint:1pin_conn" H 5150 6700 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_conn" H 5150 6700 50  0001 C CNN
 F 3 "~" H 5150 6700 50  0001 C CNN
 	1    5150 6700
 	1    0    0    -1  
@@ -1760,7 +1754,7 @@ U 1 1 617FCDC4
 P 4750 6700
 F 0 "H160" H 4650 6900 50  0000 L CNN
 F 1 "MountingHole_Pad" H 4850 6660 50  0001 L CNN
-F 2 "#footprint:1pin_conn" H 4750 6700 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_conn" H 4750 6700 50  0001 C CNN
 F 3 "~" H 4750 6700 50  0001 C CNN
 	1    4750 6700
 	1    0    0    -1  
@@ -1772,7 +1766,7 @@ U 1 1 617FE62E
 P 4700 7050
 F 0 "H162" H 4600 7250 50  0000 L CNN
 F 1 "MountingHole_Pad" H 4800 7010 50  0001 L CNN
-F 2 "#footprint:1pad_conn" H 4700 7050 50  0001 C CNN
+F 2 "Kyfle Footprints:1pad_conn" H 4700 7050 50  0001 C CNN
 F 3 "~" H 4700 7050 50  0001 C CNN
 	1    4700 7050
 	0    -1   -1   0   
@@ -1784,7 +1778,7 @@ U 1 1 61801014
 P 5200 7050
 F 0 "H161" H 5100 7250 50  0000 L CNN
 F 1 "MountingHole_Pad" H 5300 7010 50  0001 L CNN
-F 2 "#footprint:1pad_conn" H 5200 7050 50  0001 C CNN
+F 2 "Kyfle Footprints:1pad_conn" H 5200 7050 50  0001 C CNN
 F 3 "~" H 5200 7050 50  0001 C CNN
 	1    5200 7050
 	1    0    0    -1  
@@ -1798,7 +1792,7 @@ U 1 1 61802D8F
 P 5350 6700
 F 0 "H164" H 5250 6900 50  0000 L CNN
 F 1 "MountingHole_Pad" H 5450 6660 50  0001 L CNN
-F 2 "#footprint:1pin_conn" H 5350 6700 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_conn" H 5350 6700 50  0001 C CNN
 F 3 "~" H 5350 6700 50  0001 C CNN
 	1    5350 6700
 	1    0    0    -1  
@@ -1810,7 +1804,7 @@ U 1 1 61805FD7
 P 5750 6700
 F 0 "H167" H 5650 6900 50  0000 L CNN
 F 1 "MountingHole_Pad" H 5850 6660 50  0001 L CNN
-F 2 "#footprint:1pin_conn" H 5750 6700 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_conn" H 5750 6700 50  0001 C CNN
 F 3 "~" H 5750 6700 50  0001 C CNN
 	1    5750 6700
 	1    0    0    -1  
@@ -1822,7 +1816,7 @@ U 1 1 618073A5
 P 5300 7050
 F 0 "H166" H 5200 7250 50  0000 L CNN
 F 1 "MountingHole_Pad" H 5400 7010 50  0001 L CNN
-F 2 "#footprint:1pad_conn" H 5300 7050 50  0001 C CNN
+F 2 "Kyfle Footprints:1pad_conn" H 5300 7050 50  0001 C CNN
 F 3 "~" H 5300 7050 50  0001 C CNN
 	1    5300 7050
 	1    0    0    -1  
@@ -1836,7 +1830,7 @@ U 1 1 6180A30A
 P 5800 7050
 F 0 "H165" H 5700 7250 50  0000 L CNN
 F 1 "MountingHole_Pad" H 5900 7010 50  0001 L CNN
-F 2 "#footprint:1pad_conn" H 5800 7050 50  0001 C CNN
+F 2 "Kyfle Footprints:1pad_conn" H 5800 7050 50  0001 C CNN
 F 3 "~" H 5800 7050 50  0001 C CNN
 	1    5800 7050
 	1    0    0    -1  
@@ -1853,7 +1847,7 @@ U 1 1 5D659111
 P 9100 4900
 F 0 "SW20" V 9054 4670 50  0000 R CNN
 F 1 "Rotary_Encoder_Switch" V 9145 4670 50  0001 R CNN
-F 2 "#footprint:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm_rev2" H 8950 5060 50  0001 C CNN
+F 2 "Kyfle Footprints:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm_rev2" H 8950 5060 50  0001 C CNN
 F 3 "~" H 9100 5160 50  0001 C CNN
 	1    9100 4900
 	0    -1   1    0   
@@ -1866,7 +1860,7 @@ U 1 1 617B91CB
 P 8600 4450
 F 0 "SW19" V 8554 4220 50  0000 R CNN
 F 1 "Rotary_Encoder_Switch" V 8645 4220 50  0001 R CNN
-F 2 "Kyfle Footprints:RollerEncoder_Panasonic_EVQWGD001" H 8450 4610 50  0001 C CNN
+F 2 "Kyfle Footprints:RollerEncoder_Panasonic_EVQWGD001_No_Cutout" H 8450 4610 50  0001 C CNN
 F 3 "~" H 8600 4710 50  0001 C CNN
 	1    8600 4450
 	-1   0    0    1   
@@ -1890,14 +1884,11 @@ U 1 1 617D6B8F
 P 10050 4450
 F 0 "SW23" V 10004 4220 50  0000 R CNN
 F 1 "Rotary_Encoder_Switch" V 10095 4220 50  0001 R CNN
-F 2 "Kyfle Footprints:RollerEncoder_Panasonic_EVQWGD001" H 9900 4610 50  0001 C CNN
+F 2 "Kyfle Footprints:RollerEncoder_Panasonic_EVQWGD001_No_Cutout" H 9900 4610 50  0001 C CNN
 F 3 "~" H 10050 4710 50  0001 C CNN
 	1    10050 4450
 	-1   0    0    1   
 $EndComp
-Connection ~ 10450 5500
-Wire Wire Line
-	10450 5500 10650 5500
 Wire Wire Line
 	9750 4550 9750 5200
 Wire Wire Line
@@ -1993,4 +1984,140 @@ Text GLabel 2900 3200 3    50   Input ~ 0
 X9
 Text GLabel 3200 3200 3    50   Input ~ 0
 X10
+$Comp
+L #library:5way_switch SW24
+U 1 1 618664BD
+P 6900 4600
+F 0 "SW24" H 6900 4950 50  0000 C CNN
+F 1 "5way_switch" H 6900 4850 50  0000 C CNN
+F 2 "Kyfle Footprints:Five_Way_Switch_Panasonic_EVQQ7" H 6900 4600 50  0001 C CNN
+F 3 "" H 6900 4600 50  0001 C CNN
+	1    6900 4600
+	1    0    0    -1  
+$EndComp
+Connection ~ 5750 5850
+Wire Wire Line
+	5750 5850 5750 6000
+$Comp
+L power:GND #PWR01
+U 1 1 618C1BC5
+P 7000 5050
+F 0 "#PWR01" H 7000 4800 50  0001 C CNN
+F 1 "GND" H 7000 4900 50  0000 C CNN
+F 2 "" H 7000 5050 50  0001 C CNN
+F 3 "" H 7000 5050 50  0001 C CNN
+	1    7000 5050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:D_Small D1
+U 1 1 618FAEED
+P 6400 4500
+F 0 "D1" H 6500 4550 50  0000 C CNN
+F 1 "D_Small" H 6400 4616 50  0001 C CNN
+F 2 "Kyfle Footprints:diode_TH_SMD_rev3" V 6400 4500 50  0001 C CNN
+F 3 "~" V 6400 4500 50  0001 C CNN
+	1    6400 4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:D_Small D2
+U 1 1 61926050
+P 6400 4600
+F 0 "D2" H 6500 4650 50  0000 C CNN
+F 1 "D_Small" H 6400 4716 50  0001 C CNN
+F 2 "Kyfle Footprints:diode_TH_SMD_rev3" V 6400 4600 50  0001 C CNN
+F 3 "~" V 6400 4600 50  0001 C CNN
+	1    6400 4600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:D_Small D3
+U 1 1 619271A4
+P 6400 4700
+F 0 "D3" H 6500 4750 50  0000 C CNN
+F 1 "D_Small" H 6400 4816 50  0001 C CNN
+F 2 "Kyfle Footprints:diode_TH_SMD_rev3" V 6400 4700 50  0001 C CNN
+F 3 "~" V 6400 4700 50  0001 C CNN
+	1    6400 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:D_Small D4
+U 1 1 6192826E
+P 7400 4500
+F 0 "D4" H 7500 4550 50  0000 C CNN
+F 1 "D_Small" H 7400 4616 50  0001 C CNN
+F 2 "Kyfle Footprints:diode_TH_SMD_rev3" V 7400 4500 50  0001 C CNN
+F 3 "~" V 7400 4500 50  0001 C CNN
+	1    7400 4500
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Device:D_Small D5
+U 1 1 6192988F
+P 7400 4700
+F 0 "D5" H 7500 4750 50  0000 C CNN
+F 1 "D_Small" H 7400 4816 50  0001 C CNN
+F 2 "Kyfle Footprints:diode_TH_SMD_rev3" V 7400 4700 50  0001 C CNN
+F 3 "~" V 7400 4700 50  0001 C CNN
+	1    7400 4700
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	7200 4500 7300 4500
+Wire Wire Line
+	7200 4700 7300 4700
+Wire Wire Line
+	6600 4500 6500 4500
+Wire Wire Line
+	6600 4600 6500 4600
+Wire Wire Line
+	6600 4700 6500 4700
+Text GLabel 6850 5050 3    39   Input ~ 0
+X5
+Wire Wire Line
+	6850 5050 6850 5000
+Text GLabel 6200 4500 0    39   Input ~ 0
+Y1
+Text GLabel 6200 4700 0    39   Input ~ 0
+Y2
+Text GLabel 7600 4500 2    39   Input ~ 0
+Y3
+Text GLabel 7600 4700 2    39   Input ~ 0
+Y4
+Text GLabel 5950 4600 0    39   Input ~ 0
+Y6
+$Comp
+L Connector:TestPoint H6
+U 1 1 61AECB68
+P 6850 5000
+F 0 "H6" H 6850 5200 50  0000 C CNN
+F 1 "MountingHole_Pad" V 6996 5005 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_rect_conn" H 6850 5000 50  0001 C CNN
+F 3 "~" H 6850 5000 50  0001 C CNN
+	1    6850 5000
+	0    -1   -1   0   
+$EndComp
+Connection ~ 6850 5000
+Wire Wire Line
+	6850 5000 6850 4950
+Wire Wire Line
+	7000 5050 7000 4950
+Connection ~ 8950 5500
+Wire Wire Line
+	8950 5500 9200 5500
+Connection ~ 10400 5500
+Wire Wire Line
+	10400 5500 10650 5500
+Wire Wire Line
+	6200 4500 6300 4500
+Wire Wire Line
+	5950 4600 6300 4600
+Wire Wire Line
+	6200 4700 6300 4700
+Wire Wire Line
+	7500 4700 7600 4700
+Wire Wire Line
+	7500 4500 7600 4500
 $EndSCHEMATC

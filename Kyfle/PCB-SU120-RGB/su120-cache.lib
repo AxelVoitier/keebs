@@ -1,6 +1,40 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
+# #library_5way_switch
+#
+DEF #library_5way_switch SW 0 40 Y Y 1 F N
+F0 "SW" 50 350 50 H V C CNN
+F1 "#library_5way_switch" 0 250 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+C 0 0 20 0 1 0 N
+C -100 -100 20 1 1 0 N
+C -100 0 20 1 1 0 N
+C -100 100 20 1 1 0 N
+C 100 -100 20 1 1 0 N
+C 100 100 20 1 1 0 N
+S -200 200 200 -200 0 1 0 f
+P 2 0 1 0 -200 -100 -120 -100 N
+P 2 0 1 0 -200 0 -120 0 N
+P 2 0 1 0 -200 100 -120 100 N
+P 2 0 1 0 -50 -200 -50 -250 N
+P 2 0 1 0 0 20 -60 140 N
+P 2 0 1 0 100 -250 100 -200 N
+P 2 0 1 0 120 -100 200 -100 N
+P 2 0 1 0 120 100 200 100 N
+P 4 0 1 0 -50 -200 -50 -150 0 -150 0 -20 N
+X ~ A -300 100 100 R 50 50 0 0 P
+X ~ B -300 -100 100 R 50 50 0 0 P
+X ~ C 300 100 100 L 50 50 0 0 P
+X ~ Com -50 -350 100 U 50 50 0 0 P
+X ~ D 300 -100 100 L 50 50 0 0 P
+X ~ E -300 0 100 R 50 50 0 0 P
+X ~ GND 100 -350 100 U 50 50 0 0 W
+ENDDRAW
+ENDDEF
+#
 # #library_MJ-4PP-9
 #
 DEF #library_MJ-4PP-9 J 0 40 Y Y 1 F N
@@ -167,6 +201,28 @@ X A 2 150 0 100 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
+# Device_D_Small
+#
+DEF Device_D_Small D 0 10 N N 1 F N
+F0 "D" -50 80 50 H V L CNN
+F1 "Device_D_Small" -150 -80 50 H V L CNN
+F2 "" 0 0 50 V I C CNN
+F3 "" 0 0 50 V I C CNN
+$FPLIST
+ TO-???*
+ *_Diode_*
+ *SingleDiode*
+ D_*
+$ENDFPLIST
+DRAW
+P 2 0 1 10 -30 -40 -30 40 N
+P 2 0 1 0 -30 0 30 0 N
+P 4 0 1 10 30 -40 -30 0 30 40 30 -40 N
+X K 1 -100 0 70 R 50 50 1 1 P
+X A 2 100 0 70 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
 # Device_R_Small
 #
 DEF Device_R_Small R 0 10 N N 1 F N
@@ -292,7 +348,7 @@ F3 "" 0 100 50 H I C CNN
 DRAW
 C -100 0 20 1 1 0 N
 C 100 0 20 1 1 0 N
-T 0 0 50 16 0 0 0 100nF Normal 0 C C
+T 0 0 50 16 0 2 0 100nF Normal 0 C C
 T 0 0 -50 16 0 2 0 "SK6812 MINI-E" Normal 0 C C
 S -170 50 170 60 1 1 0 N
 S 150 -150 -150 150 2 1 0 f
