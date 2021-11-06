@@ -1,4 +1,6 @@
 (fp_lib_table
   (lib (name "#footprint")(type KiCad)(uri ${KIPRJMOD}/footprint.pretty)(options "")(descr ""))
   (lib (name "Kyfle Footprints")(type KiCad)(uri "${KIPRJMOD}/../Kyfle Footprints.pretty")(options "")(descr ""))
+  (lib (name Keebio-Parts)(type KiCad)(uri /media/nas/Homes/Axel/Electronique/Keyboard/Keebio/Keebio-Parts.pretty)(options "")(descr ""))
+  (lib (name kbd)(type KiCad)(uri /media/nas/Homes/Axel/Electronique/Keyboard/Foostan/kbd/kicad-footprints/kbd.pretty)(options "")(descr ""))
 )

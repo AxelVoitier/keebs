@@ -119,17 +119,6 @@ $EndComp
 Text GLabel 5600 3800 0    39   Input ~ 0
 Y4
 $Comp
-L Connector:TestPoint H46
-U 1 1 5C71DCB6
-P 10850 2600
-F 0 "H46" H 10750 2800 50  0000 L CNN
-F 1 "MountingHole_Pad" H 10950 2560 50  0001 L CNN
-F 2 "Kyfle Footprints:1pin_rect_conn" H 10850 2600 50  0001 C CNN
-F 3 "~" H 10850 2600 50  0001 C CNN
-	1    10850 2600
-	1    0    0    -1  
-$EndComp
-$Comp
 L #library:MJ-4PP-9 J1
 U 1 1 5CE190C3
 P 1050 4300
@@ -352,24 +341,13 @@ Text GLabel 5600 3200 0    39   Input ~ 0
 Y3
 $Comp
 L Device:D D18
-U 1 1 5CE5B1E1
-P 9200 5350
-F 0 "D18" H 9200 5450 50  0000 C CNN
-F 1 "D" H 9200 5250 50  0001 C CNN
-F 2 "Kyfle Footprints:diode_TH_SMD_rev3" H 9200 5350 50  0001 C CNN
-F 3 "" H 9200 5350 50  0001 C CNN
-	1    9200 5350
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Device:D D19
 U 1 1 5CE5B200
-P 10650 5350
-F 0 "D19" H 10650 5450 50  0000 C CNN
-F 1 "D" H 10650 5250 50  0001 C CNN
-F 2 "Kyfle Footprints:diode_TH_SMD_rev3" H 10650 5350 50  0001 C CNN
-F 3 "" H 10650 5350 50  0001 C CNN
-	1    10650 5350
+P 9600 5350
+F 0 "D18" H 9600 5450 50  0000 C CNN
+F 1 "D" H 9600 5250 50  0001 C CNN
+F 2 "Kyfle Footprints:diode_TH_SMD_rev3" H 9600 5350 50  0001 C CNN
+F 3 "" H 9600 5350 50  0001 C CNN
+	1    9600 5350
 	0    -1   -1   0   
 $EndComp
 Text GLabel 5600 5500 0    39   Input ~ 0
@@ -380,109 +358,31 @@ Text GLabel 7050 800  1    39   Input ~ 0
 X2
 Text GLabel 8150 800  1    39   Input ~ 0
 X3
-Text GLabel 8800 4800 1    39   Input ~ 0
-X4
-Text GLabel 10250 4800 1    39   Input ~ 0
-X5
-Connection ~ 9200 5500
-Wire Wire Line
-	9200 5500 9400 5500
-$Comp
-L Connector:TestPoint H137
-U 1 1 5CE5B292
-P 8950 5500
-F 0 "H137" H 8850 5700 50  0000 L CNN
-F 1 "MountingHole_Pad" H 9050 5460 50  0001 L CNN
-F 2 "Kyfle Footprints:1pin_rect_conn" H 8950 5500 50  0001 C CNN
-F 3 "~" H 8950 5500 50  0001 C CNN
-	1    8950 5500
-	1    0    0    -1  
-$EndComp
 $Comp
 L Connector:TestPoint H138
-U 1 1 5CE5B29A
-P 9400 5500
-F 0 "H138" H 9300 5700 50  0000 L CNN
-F 1 "MountingHole_Pad" H 9500 5460 50  0001 L CNN
-F 2 "Kyfle Footprints:1pin_rect_conn" H 9400 5500 50  0001 C CNN
-F 3 "~" H 9400 5500 50  0001 C CNN
-	1    9400 5500
-	1    0    0    -1  
-$EndComp
-Connection ~ 9400 5500
-Wire Wire Line
-	9400 5500 10400 5500
-$Comp
-L Connector:TestPoint H139
-U 1 1 5CE5B2A2
-P 10400 5500
-F 0 "H139" H 10300 5700 50  0000 L CNN
-F 1 "MountingHole_Pad" H 10500 5460 50  0001 L CNN
-F 2 "Kyfle Footprints:1pin_rect_conn" H 10400 5500 50  0001 C CNN
-F 3 "~" H 10400 5500 50  0001 C CNN
-	1    10400 5500
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector:TestPoint H140
 U 1 1 5CE5B2AA
-P 10850 5500
-F 0 "H140" H 10750 5700 50  0000 L CNN
-F 1 "MountingHole_Pad" H 10950 5460 50  0001 L CNN
-F 2 "Kyfle Footprints:1pin_rect_conn" H 10850 5500 50  0001 C CNN
-F 3 "~" H 10850 5500 50  0001 C CNN
-	1    10850 5500
+P 9800 5500
+F 0 "H138" H 9700 5700 50  0000 L CNN
+F 1 "MountingHole_Pad" H 9900 5460 50  0001 L CNN
+F 2 "Kyfle Footprints:1pin_rect_conn" H 9800 5500 50  0001 C CNN
+F 3 "~" H 9800 5500 50  0001 C CNN
+	1    9800 5500
 	1    0    0    -1  
 $EndComp
-$Comp
-L Connector:TestPoint H133
-U 1 1 5CE5B2B0
-P 8800 5050
-F 0 "H133" V 8800 5350 50  0000 C CNN
-F 1 "MountingHole_Pad" V 8946 5055 50  0001 C CNN
-F 2 "Kyfle Footprints:1pin_rect_conn" H 8800 5050 50  0001 C CNN
-F 3 "~" H 8800 5050 50  0001 C CNN
-	1    8800 5050
-	0    -1   -1   0   
-$EndComp
-Connection ~ 8800 5050
 $Comp
 L Connector:TestPoint H135
-U 1 1 5CE5B2B8
-P 8800 5350
-F 0 "H135" V 8800 5650 50  0000 C CNN
-F 1 "MountingHole_Pad" V 8946 5355 50  0001 C CNN
-F 2 "Kyfle Footprints:1pin_rect_conn" H 8800 5350 50  0001 C CNN
-F 3 "~" H 8800 5350 50  0001 C CNN
-	1    8800 5350
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Connector:TestPoint H134
 U 1 1 5CE5B2BF
-P 10250 5050
-F 0 "H134" V 10250 5350 50  0000 C CNN
-F 1 "MountingHole_Pad" V 10396 5055 50  0001 C CNN
-F 2 "Kyfle Footprints:1pin_rect_conn" H 10250 5050 50  0001 C CNN
-F 3 "~" H 10250 5050 50  0001 C CNN
-	1    10250 5050
+P 9200 5050
+F 0 "H135" V 9200 5350 50  0000 C CNN
+F 1 "MountingHole_Pad" V 9346 5055 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_rect_conn" H 9200 5050 50  0001 C CNN
+F 3 "~" H 9200 5050 50  0001 C CNN
+	1    9200 5050
 	0    -1   -1   0   
 $EndComp
-Connection ~ 10250 5050
-$Comp
-L Connector:TestPoint H136
-U 1 1 5CE5B2C7
-P 10250 5350
-F 0 "H136" V 10250 5650 50  0000 C CNN
-F 1 "MountingHole_Pad" V 10396 5355 50  0001 C CNN
-F 2 "Kyfle Footprints:1pin_rect_conn" H 10250 5350 50  0001 C CNN
-F 3 "~" H 10250 5350 50  0001 C CNN
-	1    10250 5350
-	0    -1   -1   0   
-$EndComp
+Connection ~ 9200 5050
 Wire Wire Line
-	10650 5500 10850 5500
-Connection ~ 10650 5500
+	9600 5500 9800 5500
 $Comp
 L power:GND #PWR0106
 U 1 1 5CE5189D
@@ -548,47 +448,32 @@ F 3 "" H 8350 3700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5600 5500 8950 5500
+	9200 4800 9200 5050
 Wire Wire Line
-	10250 4800 10250 5050
-Wire Wire Line
-	8800 4800 8800 5050
-Wire Wire Line
-	8800 5050 8800 5200
-Wire Wire Line
-	10250 5050 10250 5200
+	9200 5050 9200 5200
 $Comp
-L Device:Rotary_Encoder_Switch SW21
+L Device:Rotary_Encoder_Switch SW20
 U 1 1 5D6595AB
-P 10550 4900
-F 0 "SW21" V 10504 4670 50  0000 R CNN
-F 1 "Rotary_Encoder_Switch" V 10595 4670 50  0001 R CNN
-F 2 "Kyfle Footprints:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm_rev2" H 10400 5060 50  0001 C CNN
-F 3 "~" H 10550 5160 50  0001 C CNN
-	1    10550 4900
+P 9500 4900
+F 0 "SW20" V 9454 4670 50  0000 R CNN
+F 1 "Rotary_Encoder_Switch" V 9545 4670 50  0001 R CNN
+F 2 "Kyfle Footprints:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm_rev2" H 9350 5060 50  0001 C CNN
+F 3 "~" H 9500 5160 50  0001 C CNN
+	1    9500 4900
 	0    -1   1    0   
 $EndComp
 Wire Wire Line
-	9000 5200 8800 5200
-Connection ~ 8800 5200
-Wire Wire Line
-	8800 5200 8800 5350
-Wire Wire Line
-	10450 5200 10250 5200
-Connection ~ 10250 5200
-Wire Wire Line
-	10250 5200 10250 5350
-Text GLabel 9100 4150 1    50   Input ~ 0
-GND
-Text GLabel 10550 4150 1    50   Input ~ 0
+	9400 5200 9200 5200
+Connection ~ 9200 5200
+Text GLabel 9500 4150 1    50   Input ~ 0
 GND
 Text GLabel 9200 800  1    39   Input ~ 0
 X4
 Text GLabel 10250 800  1    39   Input ~ 0
 X5
-Text GLabel 10700 4350 2    50   Input ~ 0
+Text GLabel 9650 4350 2    50   Input ~ 0
 X7
-Text GLabel 10450 4300 1    50   Input ~ 0
+Text GLabel 9400 4100 1    50   Input ~ 0
 X8
 $Comp
 L Mechanical:MountingHole_Pad H57
@@ -602,42 +487,14 @@ F 3 "~" H 900 2150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	9000 4300 9000 4550
+	9500 4150 9500 4250
 Wire Wire Line
-	9100 4150 9100 4250
+	9600 4350 9600 4450
 Wire Wire Line
-	10450 4300 10450 4550
+	9300 4450 9500 4450
+Connection ~ 9500 4450
 Wire Wire Line
-	10550 4150 10550 4250
-Wire Wire Line
-	8900 4350 9200 4350
-Wire Wire Line
-	9200 4350 9200 4600
-Wire Wire Line
-	8900 4450 9100 4450
-Connection ~ 9100 4450
-Wire Wire Line
-	9100 4450 9100 4600
-Wire Wire Line
-	8900 4550 9000 4550
-Connection ~ 9000 4550
-Wire Wire Line
-	9000 4550 9000 4600
-Wire Wire Line
-	10350 4350 10650 4350
-Connection ~ 10650 4350
-Wire Wire Line
-	10650 4350 10650 4600
-Wire Wire Line
-	10350 4450 10550 4450
-Connection ~ 10550 4450
-Wire Wire Line
-	10550 4450 10550 4600
-Wire Wire Line
-	10350 4550 10450 4550
-Connection ~ 10450 4550
-Wire Wire Line
-	10450 4550 10450 4600
+	9500 4450 9500 4600
 Wire Wire Line
 	4150 4250 4300 4250
 Connection ~ 4150 4250
@@ -1070,37 +927,22 @@ Wire Wire Line
 	2900 3550 2800 3550
 Wire Wire Line
 	2600 3550 2500 3550
-Connection ~ 9200 4350
 Wire Wire Line
-	10700 4350 10650 4350
+	9650 4350 9600 4350
 $Comp
 L Connector:TestPoint H170
-U 1 1 617932EC
-P 9100 4250
-F 0 "H170" H 8950 4450 50  0000 L CNN
-F 1 "MountingHole_Pad" H 9200 4210 50  0001 L CNN
-F 2 "Kyfle Footprints:1pin_rect_conn" H 9100 4250 50  0001 C CNN
-F 3 "~" H 9100 4250 50  0001 C CNN
-	1    9100 4250
-	0    1    1    0   
-$EndComp
-Connection ~ 9100 4250
-Wire Wire Line
-	9100 4250 9100 4450
-$Comp
-L Connector:TestPoint H171
 U 1 1 617E0E69
-P 10550 4250
-F 0 "H171" H 10400 4450 50  0000 L CNN
-F 1 "MountingHole_Pad" H 10650 4210 50  0001 L CNN
-F 2 "Kyfle Footprints:1pin_rect_conn" H 10550 4250 50  0001 C CNN
-F 3 "~" H 10550 4250 50  0001 C CNN
-	1    10550 4250
+P 9500 4250
+F 0 "H170" H 9350 4450 50  0000 L CNN
+F 1 "MountingHole_Pad" H 9600 4210 50  0001 L CNN
+F 2 "Kyfle Footprints:1pin_rect_conn" H 9500 4250 50  0001 C CNN
+F 3 "~" H 9500 4250 50  0001 C CNN
+	1    9500 4250
 	0    1    1    0   
 $EndComp
-Connection ~ 10550 4250
+Connection ~ 9500 4250
 Wire Wire Line
-	10550 4250 10550 4450
+	9500 4250 9500 4450
 $Comp
 L Connector:TestPoint H168
 U 1 1 617E13D0
@@ -1126,10 +968,6 @@ $EndComp
 Connection ~ 4750 4200
 Wire Wire Line
 	4750 4200 4750 4300
-Wire Wire Line
-	9250 4350 9200 4350
-Text GLabel 9000 4300 1    50   Input ~ 0
-X10
 Text GLabel 3450 1900 2    50   Input ~ 0
 X10
 Text GLabel 3450 1800 2    50   Input ~ 0
@@ -1515,17 +1353,6 @@ Wire Wire Line
 	4850 5850 4750 5850
 Wire Wire Line
 	4750 5850 4750 6000
-$Comp
-L Connector:TestPoint H50
-U 1 1 5D363A98
-P 11050 2600
-F 0 "H50" H 10950 2800 50  0000 L CNN
-F 1 "MountingHole_Pad" H 11150 2560 50  0001 L CNN
-F 2 "Kyfle Footprints:1pin_rect_conn" H 11050 2600 50  0001 C CNN
-F 3 "~" H 11050 2600 50  0001 C CNN
-	1    11050 2600
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	10250 800  10250 1700
 Wire Wire Line
@@ -1613,12 +1440,6 @@ Wire Wire Line
 Connection ~ 6400 3800
 Connection ~ 7450 3800
 Connection ~ 8550 3800
-Wire Wire Line
-	10650 2600 10850 2600
-Connection ~ 10650 2600
-Connection ~ 10850 2600
-Wire Wire Line
-	10850 2600 11050 2600
 Wire Wire Line
 	5600 3800 6400 3800
 Wire Wire Line
@@ -1842,66 +1663,29 @@ led_
 Text GLabel 3400 4250 2    50   Input ~ 0
 led
 $Comp
-L Device:Rotary_Encoder_Switch SW20
-U 1 1 5D659111
-P 9100 4900
-F 0 "SW20" V 9054 4670 50  0000 R CNN
-F 1 "Rotary_Encoder_Switch" V 9145 4670 50  0001 R CNN
-F 2 "Kyfle Footprints:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm_rev2" H 8950 5060 50  0001 C CNN
-F 3 "~" H 9100 5160 50  0001 C CNN
-	1    9100 4900
-	0    -1   1    0   
-$EndComp
-Text GLabel 9250 4350 2    50   Input ~ 0
-X9
-$Comp
 L Device:Rotary_Encoder_Switch SW19
-U 1 1 617B91CB
-P 8600 4450
-F 0 "SW19" V 8554 4220 50  0000 R CNN
-F 1 "Rotary_Encoder_Switch" V 8645 4220 50  0001 R CNN
-F 2 "Kyfle Footprints:RollerEncoder_Panasonic_EVQWGD001_No_Cutout" H 8450 4610 50  0001 C CNN
-F 3 "~" H 8600 4710 50  0001 C CNN
-	1    8600 4450
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	8300 4550 8300 5200
-Wire Wire Line
-	8300 5200 8800 5200
-Connection ~ 9200 5200
-Wire Wire Line
-	8300 4350 8300 3900
-Wire Wire Line
-	8300 3900 9450 3900
-Wire Wire Line
-	9450 3900 9450 5200
-Wire Wire Line
-	9450 5200 9200 5200
-$Comp
-L Device:Rotary_Encoder_Switch SW23
 U 1 1 617D6B8F
-P 10050 4450
-F 0 "SW23" V 10004 4220 50  0000 R CNN
-F 1 "Rotary_Encoder_Switch" V 10095 4220 50  0001 R CNN
-F 2 "Kyfle Footprints:RollerEncoder_Panasonic_EVQWGD001_No_Cutout" H 9900 4610 50  0001 C CNN
-F 3 "~" H 10050 4710 50  0001 C CNN
-	1    10050 4450
+P 9000 4450
+F 0 "SW19" V 8954 4220 50  0000 R CNN
+F 1 "Rotary_Encoder_Switch" V 9045 4220 50  0001 R CNN
+F 2 "Kyfle Footprints:RollerEncoder_Panasonic_EVQWGD001_No_Cutout" H 8850 4610 50  0001 C CNN
+F 3 "~" H 9000 4710 50  0001 C CNN
+	1    9000 4450
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	9750 4550 9750 5200
+	8700 4550 8700 5200
 Wire Wire Line
-	9750 5200 10250 5200
+	8700 5200 9200 5200
 Wire Wire Line
-	9750 4350 9750 3900
+	8700 4350 8700 3900
 Wire Wire Line
-	9750 3900 10900 3900
+	8700 3900 9850 3900
 Wire Wire Line
-	10900 3900 10900 5200
+	9850 3900 9850 5200
 Wire Wire Line
-	10900 5200 10650 5200
-Connection ~ 10650 5200
+	9850 5200 9600 5200
+Connection ~ 9600 5200
 $Comp
 L Device:R_Small R102
 U 1 1 617E22EC
@@ -1987,13 +1771,13 @@ X10
 $Comp
 L #library:5way_switch SW24
 U 1 1 618664BD
-P 6900 4600
-F 0 "SW24" H 6900 4950 50  0000 C CNN
-F 1 "5way_switch" H 6900 4850 50  0000 C CNN
-F 2 "Kyfle Footprints:Five_Way_Switch_Panasonic_EVQQ7" H 6900 4600 50  0001 C CNN
-F 3 "" H 6900 4600 50  0001 C CNN
-	1    6900 4600
-	1    0    0    -1  
+P 10500 4450
+F 0 "SW24" H 10500 4800 50  0000 C CNN
+F 1 "5way_switch" H 10500 4700 50  0000 C CNN
+F 2 "Kyfle Footprints:Five_Way_Switch_Panasonic_EVQQ7" H 10500 4450 50  0001 C CNN
+F 3 "" H 10500 4450 50  0001 C CNN
+	1    10500 4450
+	0    -1   -1   0   
 $EndComp
 Connection ~ 5750 5850
 Wire Wire Line
@@ -2001,123 +1785,165 @@ Wire Wire Line
 $Comp
 L power:GND #PWR01
 U 1 1 618C1BC5
-P 7000 5050
-F 0 "#PWR01" H 7000 4800 50  0001 C CNN
-F 1 "GND" H 7000 4900 50  0000 C CNN
-F 2 "" H 7000 5050 50  0001 C CNN
-F 3 "" H 7000 5050 50  0001 C CNN
-	1    7000 5050
-	1    0    0    -1  
+P 10950 4350
+F 0 "#PWR01" H 10950 4100 50  0001 C CNN
+F 1 "GND" H 10950 4200 50  0000 C CNN
+F 2 "" H 10950 4350 50  0001 C CNN
+F 3 "" H 10950 4350 50  0001 C CNN
+	1    10950 4350
+	0    -1   -1   0   
 $EndComp
 $Comp
 L Device:D_Small D1
 U 1 1 618FAEED
-P 6400 4500
-F 0 "D1" H 6500 4550 50  0000 C CNN
-F 1 "D_Small" H 6400 4616 50  0001 C CNN
-F 2 "Kyfle Footprints:diode_TH_SMD_rev3" V 6400 4500 50  0001 C CNN
-F 3 "~" V 6400 4500 50  0001 C CNN
-	1    6400 4500
-	1    0    0    -1  
+P 10400 4950
+F 0 "D1" H 10500 5000 50  0000 C CNN
+F 1 "D_Small" H 10400 5066 50  0001 C CNN
+F 2 "Kyfle Footprints:diode_TH_SMD_rev3" V 10400 4950 50  0001 C CNN
+F 3 "~" V 10400 4950 50  0001 C CNN
+	1    10400 4950
+	0    1    1    0   
 $EndComp
 $Comp
 L Device:D_Small D2
 U 1 1 61926050
-P 6400 4600
-F 0 "D2" H 6500 4650 50  0000 C CNN
-F 1 "D_Small" H 6400 4716 50  0001 C CNN
-F 2 "Kyfle Footprints:diode_TH_SMD_rev3" V 6400 4600 50  0001 C CNN
-F 3 "~" V 6400 4600 50  0001 C CNN
-	1    6400 4600
-	1    0    0    -1  
+P 10500 4950
+F 0 "D2" H 10600 5000 50  0000 C CNN
+F 1 "D_Small" H 10500 5066 50  0001 C CNN
+F 2 "Kyfle Footprints:diode_TH_SMD_rev3" V 10500 4950 50  0001 C CNN
+F 3 "~" V 10500 4950 50  0001 C CNN
+	1    10500 4950
+	0    1    1    0   
 $EndComp
 $Comp
 L Device:D_Small D3
 U 1 1 619271A4
-P 6400 4700
-F 0 "D3" H 6500 4750 50  0000 C CNN
-F 1 "D_Small" H 6400 4816 50  0001 C CNN
-F 2 "Kyfle Footprints:diode_TH_SMD_rev3" V 6400 4700 50  0001 C CNN
-F 3 "~" V 6400 4700 50  0001 C CNN
-	1    6400 4700
-	1    0    0    -1  
+P 10600 4950
+F 0 "D3" H 10700 5000 50  0000 C CNN
+F 1 "D_Small" H 10600 5066 50  0001 C CNN
+F 2 "Kyfle Footprints:diode_TH_SMD_rev3" V 10600 4950 50  0001 C CNN
+F 3 "~" V 10600 4950 50  0001 C CNN
+	1    10600 4950
+	0    1    1    0   
 $EndComp
 $Comp
 L Device:D_Small D4
 U 1 1 6192826E
-P 7400 4500
-F 0 "D4" H 7500 4550 50  0000 C CNN
-F 1 "D_Small" H 7400 4616 50  0001 C CNN
-F 2 "Kyfle Footprints:diode_TH_SMD_rev3" V 7400 4500 50  0001 C CNN
-F 3 "~" V 7400 4500 50  0001 C CNN
-	1    7400 4500
-	-1   0    0    -1  
+P 10400 3950
+F 0 "D4" H 10500 4000 50  0000 C CNN
+F 1 "D_Small" H 10400 4066 50  0001 C CNN
+F 2 "Kyfle Footprints:diode_TH_SMD_rev3" V 10400 3950 50  0001 C CNN
+F 3 "~" V 10400 3950 50  0001 C CNN
+	1    10400 3950
+	0    1    -1   0   
 $EndComp
 $Comp
 L Device:D_Small D5
 U 1 1 6192988F
-P 7400 4700
-F 0 "D5" H 7500 4750 50  0000 C CNN
-F 1 "D_Small" H 7400 4816 50  0001 C CNN
-F 2 "Kyfle Footprints:diode_TH_SMD_rev3" V 7400 4700 50  0001 C CNN
-F 3 "~" V 7400 4700 50  0001 C CNN
-	1    7400 4700
-	-1   0    0    -1  
+P 10600 3950
+F 0 "D5" H 10700 4000 50  0000 C CNN
+F 1 "D_Small" H 10600 4066 50  0001 C CNN
+F 2 "Kyfle Footprints:diode_TH_SMD_rev3" V 10600 3950 50  0001 C CNN
+F 3 "~" V 10600 3950 50  0001 C CNN
+	1    10600 3950
+	0    1    -1   0   
 $EndComp
 Wire Wire Line
-	7200 4500 7300 4500
+	10400 4150 10400 4050
 Wire Wire Line
-	7200 4700 7300 4700
+	10600 4150 10600 4050
 Wire Wire Line
-	6600 4500 6500 4500
+	10400 4750 10400 4850
 Wire Wire Line
-	6600 4600 6500 4600
+	10500 4750 10500 4850
 Wire Wire Line
-	6600 4700 6500 4700
-Text GLabel 6850 5050 3    39   Input ~ 0
-X5
-Wire Wire Line
-	6850 5050 6850 5000
-Text GLabel 6200 4500 0    39   Input ~ 0
-Y1
-Text GLabel 6200 4700 0    39   Input ~ 0
-Y2
-Text GLabel 7600 4500 2    39   Input ~ 0
-Y3
-Text GLabel 7600 4700 2    39   Input ~ 0
-Y4
-Text GLabel 5950 4600 0    39   Input ~ 0
-Y6
+	10600 4750 10600 4850
 $Comp
 L Connector:TestPoint H6
 U 1 1 61AECB68
-P 6850 5000
-F 0 "H6" H 6850 5200 50  0000 C CNN
-F 1 "MountingHole_Pad" V 6996 5005 50  0001 C CNN
-F 2 "Kyfle Footprints:1pin_rect_conn" H 6850 5000 50  0001 C CNN
-F 3 "~" H 6850 5000 50  0001 C CNN
-	1    6850 5000
+P 10900 4500
+F 0 "H6" H 10900 4700 50  0000 C CNN
+F 1 "MountingHole_Pad" V 11046 4505 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_rect_conn" H 10900 4500 50  0001 C CNN
+F 3 "~" H 10900 4500 50  0001 C CNN
+	1    10900 4500
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	10900 4500 10850 4500
+Wire Wire Line
+	10950 4350 10850 4350
+Wire Wire Line
+	10400 5150 10400 5050
+Wire Wire Line
+	10500 5150 10500 5050
+Wire Wire Line
+	10600 5150 10600 5050
+Wire Wire Line
+	10600 3850 10600 3750
+Wire Wire Line
+	10400 3850 10400 3750
+Text GLabel 10500 5150 3    39   Input ~ 0
+X5
+Text GLabel 10400 5150 3    50   Input ~ 0
+X7
+Text GLabel 10600 5150 3    50   Input ~ 0
+X8
+Text GLabel 10400 3750 1    50   Input ~ 0
+X9
+Text GLabel 10600 3750 1    50   Input ~ 0
+X10
+Text GLabel 9200 4800 1    39   Input ~ 0
+X4
+Wire Wire Line
+	9400 4100 9400 4150
+Wire Wire Line
+	9300 4550 9600 4550
+Connection ~ 9600 4550
+Wire Wire Line
+	9600 4550 9600 4600
+Wire Wire Line
+	9300 4350 9400 4350
+Connection ~ 9400 4350
+Wire Wire Line
+	9400 4350 9400 4600
+$Comp
+L Connector:TestPoint H101
+U 1 1 6189071E
+P 9400 4150
+F 0 "H101" V 9500 4350 50  0000 C CNN
+F 1 "MountingHole_Pad" V 9546 4155 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_rect_conn" H 9400 4150 50  0001 C CNN
+F 3 "~" H 9400 4150 50  0001 C CNN
+	1    9400 4150
 	0    -1   -1   0   
 $EndComp
-Connection ~ 6850 5000
+Connection ~ 9400 4150
 Wire Wire Line
-	6850 5000 6850 4950
+	9400 4150 9400 4350
+$Comp
+L Connector:TestPoint H102
+U 1 1 61890DCE
+P 9600 4450
+F 0 "H102" V 9700 4550 50  0000 C CNN
+F 1 "MountingHole_Pad" V 9746 4455 50  0001 C CNN
+F 2 "Kyfle Footprints:1pin_rect_conn" H 9600 4450 50  0001 C CNN
+F 3 "~" H 9600 4450 50  0001 C CNN
+	1    9600 4450
+	0    1    1    0   
+$EndComp
+Connection ~ 9600 4450
 Wire Wire Line
-	7000 5050 7000 4950
-Connection ~ 8950 5500
+	9600 4450 9600 4550
 Wire Wire Line
-	8950 5500 9200 5500
-Connection ~ 10400 5500
+	5600 5500 9600 5500
+Connection ~ 9600 5500
 Wire Wire Line
-	10400 5500 10650 5500
+	9800 5500 11000 5500
 Wire Wire Line
-	6200 4500 6300 4500
+	11000 5500 11000 4500
 Wire Wire Line
-	5950 4600 6300 4600
-Wire Wire Line
-	6200 4700 6300 4700
-Wire Wire Line
-	7500 4700 7600 4700
-Wire Wire Line
-	7500 4500 7600 4500
+	11000 4500 10900 4500
+Connection ~ 9800 5500
+Connection ~ 10900 4500
 $EndSCHEMATC
