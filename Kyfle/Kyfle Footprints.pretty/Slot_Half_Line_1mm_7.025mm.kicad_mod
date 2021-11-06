@@ -1,0 +1,11 @@
+(module Slot_Half_Line_1mm_7.025mm (layer F.Cu) (tedit 6186ECFC)
+  (fp_text reference REF** (at 0 0.5) (layer F.Fab) hide
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (fp_text value Slot_Half_Line_1mm_7.025mm (at 0 -0.5) (layer F.Fab)
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (fp_line (start 0.5 0.5) (end 6.525 0.5) (layer Edge.Cuts) (width 0.15))
+  (fp_line (start 6.525 -0.5) (end 0.5 -0.5) (layer Edge.Cuts) (width 0.15))
+  (fp_arc (start 6.525 0) (end 6.525 0.5) (angle -180) (layer Edge.Cuts) (width 0.15))
+)
