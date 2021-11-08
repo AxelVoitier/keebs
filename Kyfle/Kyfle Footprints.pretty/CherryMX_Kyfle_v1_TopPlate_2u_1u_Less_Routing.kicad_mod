@@ -1,10 +1,14 @@
-(module CherryMX_Kyfle_v1_TopPlate_2u_1u_Less_Routing (layer F.Cu) (tedit 6182EA7F)
-  (fp_text reference SW2 (at 0 4) (layer F.SilkS) hide
+(module CherryMX_Kyfle_v1_TopPlate_2u_1u_Less_Routing (layer F.Cu) (tedit 6188455F)
+  (fp_text reference SW2 (at 0 20) (layer F.SilkS) hide
     (effects (font (size 1 1) (thickness 0.15)))
   )
-  (fp_text value KEY_SWITCH (at 0 -4) (layer F.Fab) hide
+  (fp_text value KEY_SWITCH (at 0 0) (layer F.Fab) hide
     (effects (font (size 1 1) (thickness 0.15)))
   )
+  (fp_line (start -11.5 -21.5) (end -11.5 21) (layer Eco2.User) (width 0.15))
+  (fp_line (start 11.5 21) (end -11.5 21) (layer Eco2.User) (width 0.15))
+  (fp_line (start 11.5 -21.5) (end 11.5 21) (layer Eco2.User) (width 0.15))
+  (fp_line (start 11.5 -21.5) (end -11.5 -21.5) (layer Eco2.User) (width 0.15))
   (fp_line (start 5.999992 9.20625) (end 1.499992 9.20625) (layer Edge.Cuts) (width 0.15))
   (fp_line (start -1.500008 8.20625) (end -6.500008 8.20625) (layer Edge.Cuts) (width 0.15))
   (fp_line (start -1.500008 8.30625) (end 1.499992 8.30625) (layer F.SilkS) (width 0.2))
@@ -168,18 +172,10 @@
   (fp_line (start -6 15.525) (end -1.5 15.525) (layer Edge.Cuts) (width 0.15))
   (fp_line (start 1.499992 16.525) (end 6.5 16.525) (layer Edge.Cuts) (width 0.15))
   (fp_line (start -1.5 16.425) (end 1.5 16.425) (layer F.SilkS) (width 0.2))
-  (fp_text user KEY_SWITCH (at 0 -13.525) (layer F.Fab) hide
-    (effects (font (size 1 1) (thickness 0.15)))
-  )
-  (fp_text user SW2 (at 0 -5.525) (layer F.SilkS) hide
-    (effects (font (size 1 1) (thickness 0.15)))
-  )
-  (fp_text user KEY_SWITCH (at 0 5.525) (layer F.Fab) hide
-    (effects (font (size 1 1) (thickness 0.15)))
-  )
-  (fp_text user SW2 (at 0 13.525) (layer F.SilkS) hide
-    (effects (font (size 1 1) (thickness 0.15)))
-  )
+  (fp_circle (center 9.525 -16.44875) (end 10.525 -16.44875) (layer B.CrtYd) (width 0.12))
+  (fp_circle (center -9.525 -16.44875) (end -8.525 -16.44875) (layer B.CrtYd) (width 0.12))
+  (fp_circle (center -9.525 16.44875) (end -10.525 16.44875) (layer B.CrtYd) (width 0.12))
+  (fp_circle (center 9.525 16.44875) (end 8.525 16.44875) (layer B.CrtYd) (width 0.12))
   (fp_arc (start 10.25 -16.025) (end 10.75 -16.025) (angle -90) (layer Eco1.User) (width 0.12))
   (fp_arc (start -6.5 -16.025) (end -6.5 -16.525) (angle -90) (layer Eco1.User) (width 0.12))
   (fp_arc (start -6.5 16.025) (end -7 16.025) (angle -90) (layer Eco1.User) (width 0.12))
@@ -292,10 +288,6 @@
   (fp_arc (start 1.5 -16.025) (end 1.5 -16.525) (angle -180) (layer Edge.Cuts) (width 0.15))
   (fp_arc (start -1.5 16.025) (end -1.5 16.525) (angle -180) (layer Edge.Cuts) (width 0.15))
   (fp_arc (start 1.499992 16.025) (end 1.499992 15.525) (angle -180) (layer Edge.Cuts) (width 0.15))
-  (fp_circle (center 9.525 -16.44875) (end 10.525 -16.44875) (layer B.CrtYd) (width 0.12))
-  (fp_circle (center -9.525 -16.44875) (end -8.525 -16.44875) (layer B.CrtYd) (width 0.12))
-  (fp_circle (center -9.525 16.44875) (end -10.525 16.44875) (layer B.CrtYd) (width 0.12))
-  (fp_circle (center 9.525 16.44875) (end 8.525 16.44875) (layer B.CrtYd) (width 0.12))
   (pad "" np_thru_hole circle (at -6.7 -16.225) (size 0.6 0.6) (drill 0.6) (layers *.Cu))
   (pad "" np_thru_hole circle (at 6.7 -16.225) (size 0.6 0.6) (drill 0.6) (layers *.Cu))
   (pad "" np_thru_hole circle (at 6.7 16.225) (size 0.6 0.6) (drill 0.6) (layers *.Cu))
@@ -309,7 +301,7 @@
   (pad "" np_thru_hole circle (at -6.7 -6.7) (size 0.6 0.6) (drill 0.6) (layers *.Cu))
   (pad "" np_thru_hole circle (at -6.7 -2.825) (size 0.6 0.6) (drill 0.6) (layers *.Cu))
   (model ${ACHERONLIB}/3d_models/mx_switch.step
-    (offset (xyz 7.35 -7.3 0))
+    (offset (xyz 7.35 -7.3 1))
     (scale (xyz 1 1 1))
     (rotate (xyz -90 0 -90))
   )
