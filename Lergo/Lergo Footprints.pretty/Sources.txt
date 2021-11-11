@@ -6,7 +6,7 @@ Original footprints (SPDX-License-Identifier: CERN-OHL-W-2.0):
 - JLCBCB_OrderNumber
 - M2_*
 - M5_*
-- Pimonori_Trackball
+- Pimoroni_Trackball
 - RollerEncoder_Panasonic_EVQWGD001_No_Cutout
 - RollerEncoder_TopPlate
 - SK6812_*
