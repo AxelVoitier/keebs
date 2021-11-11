@@ -1,0 +1,29 @@
+Original footprints (SPDX-License-Identifier: CERN-OHL-W-2.0):
+- 1pad_conn
+- Arduino_ProMicro_Lergo_*
+- CherryMX_Lergo_*
+- Five_Way_Switch_Panasonic_EVQQ7
+- JLCBCB_OrderNumber
+- M2_*
+- M5_*
+- Pimonori_Trackball
+- RollerEncoder_Panasonic_EVQWGD001_No_Cutout
+- RollerEncoder_TopPlate
+- SK6812_*
+- Slot_*
+
+
+Other reused footprints (they keep their own original licenses):
+- 1pin_*/1pad_* (modified, taken from su120, probably also taken from Foostan lib, MIT)
+- Arduino_ProMicro_Rivets (modified, taken from su120, probably also taken from Foostan lib, MIT)
+- C_0603_0805_HandSolder (modified, taken from Kicad standard library)
+- CherryMX_2U_Outline (modified, taken from su120, MIT)
+- CherryMX_MidHeight_Choc_Silk_Line (taken from su120, MIT)
+- diode_TH_SMD_rev* (modified, taken from su120, probably also taken from Foostan lib, MIT)
+- M1.4_tapping_Hole (modified, taken from su120, MIT)
+- MJ-4PP-9 (modified, taken from su120, probably also taken from Foostan lib, MIT)
+- OLED* (modified, taken from su120, probably also taken from Foostan lib, MIT)
+- PinHeader_* (modified, taken from Kicad standard library and su120 (I guess also taken from kicad?))
+- ResetSW (modified, taken from su120, probably also taken from Foostan lib, MIT)
+- RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm* (modified, taken from su120, MIT)
+- SolderJumper-3_P1.3mm_Open_TrianglePad1.0x1.5mm_duplex (modified, taken from Kicad standard library)

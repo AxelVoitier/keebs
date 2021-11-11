@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name "Lergo Footprints")(type KiCad)(uri "${KIPRJMOD}/../Lergo Footprints.pretty")(options "")(descr ""))
+)

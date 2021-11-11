@@ -1,0 +1,2 @@
+Taken mostly from Foostan library: https://github.com/foostan/kbd
+No modification made. Files retain their original MIT license. 

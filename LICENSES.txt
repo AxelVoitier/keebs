@@ -1,0 +1,8 @@
+Unless otherwise stated:
+
+- Original designs made by me use weak but not permissive licenses. Ie. if you wish to reuse them for a commercial application, your englobing design/product can use a different license, but the parts you reuse from me and any modification you make to them have to stays under the licenses I originally chose.
+  * For hardware designs, they are by default licensed under CERN-OHL-W-2.0 or later
+  * For software designs, they are by default licensed under MPL-2.0 or later
+
+- For other works not originally from me, but still imported in this repository, they usually keep their original license (unless I make drastic changes to it and their license allows me to relicense it as I want). It is up to you to check that if you reuse parts of these works you also comply to their own license terms.
+  
