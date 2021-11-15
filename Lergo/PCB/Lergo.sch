@@ -5,7 +5,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "Lergo modular PCB"
-Date "2021-11-11"
+Date "2021-11-15"
 Rev "v1.A"
 Comp "Axel Voitier"
 Comment1 "SPDX-License-Identifier: CERN-OHL-W-2.0"
