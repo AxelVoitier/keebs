@@ -1,12 +1,12 @@
 %TF.GenerationSoftware,KiCad,Pcbnew,5.1.12-84ad8e8a86~92~ubuntu20.04.1*%
-%TF.CreationDate,2021-11-17T00:51:57+01:00*%
+%TF.CreationDate,2021-11-17T01:50:02+01:00*%
 %TF.ProjectId,LergoTopPlate_FR4_Rails,4c657267-6f54-46f7-9050-6c6174655f46,v1.A*%
 %TF.SameCoordinates,Original*%
 %TF.FileFunction,Legend,Bot*%
 %TF.FilePolarity,Positive*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 5.1.12-84ad8e8a86~92~ubuntu20.04.1) date 2021-11-17 00:51:57*
+G04 Created by KiCad (PCBNEW 5.1.12-84ad8e8a86~92~ubuntu20.04.1) date 2021-11-17 01:50:02*
 %MOMM*%
 %LPD*%
 G01*
@@ -16,7 +16,6 @@ G04 APERTURE LIST*
 %ADD12C,5.300000*%
 %ADD13C,1.200000*%
 %ADD14C,2.500000*%
-%ADD15C,0.600000*%
 G04 APERTURE END LIST*
 %LPC*%
 D10*
@@ -63,6 +62,4 @@ X103756250Y-67912500D03*
 X120043750Y-67912500D03*
 X120043750Y-30157500D03*
 X103756250Y-84581250D03*
-D15*
-X194800000Y-124820000D03*
 M02*

@@ -1,9 +1,9 @@
-(module CherryMX_Kyfle_v1_TopPlate_Corner (layer F.Cu) (tedit 617E60F8)
+(module CherryMX_Lergo_v1_TopPlate_Corner (layer F.Cu) (tedit 61945176)
   (fp_text reference REF** (at 0 2.7) (layer F.Fab) hide
     (effects (font (size 1 1) (thickness 0.15)))
   )
   (fp_text value CherryMX_Kyfle_v1_TopPlate_Corner (at 0.1 -3.3) (layer F.Fab) hide
     (effects (font (size 1 1) (thickness 0.15)))
   )
-  (pad "" np_thru_hole circle (at 0 0) (size 0.6 0.6) (drill 0.6) (layers *.Cu *.Mask))
+  (pad "" np_thru_hole circle (at 6.7 6.7) (size 0.6 0.6) (drill 0.6) (layers *.Cu))
 )
