@@ -49,6 +49,12 @@ class Line:
             ((l1.c * l2.a) - (l2.c * l1.a)) / ((l1.a * l2.b) - (l2.a * l1.b)),
         )
         
+    def intersect_angle(l1, l2):
+        return atan(
+            ((l2.a * l1.b) - (l1.a * l2.b)) /
+            ((l1.a * l2.a) + (l1.b * l2.b))
+        )
+        
     def y_from_x(line, x):
         return (-(line.a / line.b) * x) - (line.c / line.b)
 
