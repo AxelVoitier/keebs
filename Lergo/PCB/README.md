@@ -1,9 +1,12 @@
-# SU120 PCB Data
+# Lergo modular PCB
 
 ## Schematic
-[Schematic PDF](https://github.com/e3w2q/su120-keyboard-doc/blob/master/pcb/su120.pdf?raw=true)
-![Schematic](https://github.com/e3w2q/su120-keyboard-doc/blob/master/pcb/schematic.png?raw=true)
+[Schematic PDF](Doc/Lergo-schematic.pdf?raw=true)
+![Schematic](images/Lergo-schematic.png)
 
 ## PCB Layout
-![PCB Layout](https://github.com/e3w2q/su120-keyboard-doc/blob/master/pcb/pcblayout.png?raw=true)
+![Top isometric view](images/Lergo-top-iso.png) ![Bottom isometric view](images/Lergo-bottom-iso.png)
 
+![Top 3D view](images/Lergo-top.png)
+
+![Bottom 3D view](images/Lergo-bottom.png) ![Bottom 3D view closeup](images/Lergo-bottom-closeup.png)
