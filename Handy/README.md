@@ -5,7 +5,7 @@
 This is a split keyboard with the following properties:
 
 - 3*5 alphas matrices
-- Splayed midle, ring and pinky columns (5-10-15 in absolute angles, or 5-5-5 in relative (ie. stacked) angles)
+- Splayed middle, ring and pinky columns (5-10-15 in absolute angles, or 5-5-5 in relative (ie. stacked) angles)
 - Angled thumb cluster, 2*3 with central/home being a 2u.
 - Thumb home is below the inner alphas column, slightly outward
 - Navigation clusters, 1-2-1 "cross", on both sides

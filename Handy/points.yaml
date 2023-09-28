@@ -113,14 +113,12 @@ matrix_inner_bottom:
                 Base: H
                 Sym1: /
                 Num: 1
-                Nav: ⇱
               mirror: &ref_9
                 layers:
                   Base: D
                   Sym1: $unset
                   Sym2: µ
                   Num: $unset
-                  Nav: $unset
                   Fun: F6
           name: index
         middle: &ref_17
@@ -164,16 +162,12 @@ matrix_inner_bottom:
                 Base: ','
                 Sym1: '?'
                 Num: 2
-                Nav:
-                  value: ⇞
-                  size: 6
               mirror: &ref_16
                 layers:
                   Base: C
                   Sym1: '&'
                   Sym2: Ω
                   Num: $unset
-                  Nav: $unset
                   Fun: F5
           name: middle
         ring: &ref_24
@@ -216,16 +210,12 @@ matrix_inner_bottom:
                 Base: .
                 Sym1: €
                 Num: 3
-                Nav:
-                  value: ⇟
-                  size: 6
               mirror: &ref_23
                 layers:
                   Base: X
                   Sym1: '@'
                   Sym2: ±
                   Num: $unset
-                  Nav: $unset
                   Fun: F4
           name: ring
         pinky: &ref_31
@@ -267,14 +257,12 @@ matrix_inner_bottom:
                 Base: ''''
                 Sym1: '"'
                 Num: '*'
-                Nav: ⇲
               mirror: &ref_30
                 layers:
                   Base: Z
                   Sym1: °
                   Sym2: ¾
                   Num: $unset
-                  Nav: $unset
           name: pinky
       rows:
         bottom: {}
@@ -1354,9 +1342,9 @@ nav_cluster_left_top:
     mirror:
       layers:
         Base:
-          value: ▶
+          value: ⇲
           size: 6
-    zone: &ref_44
+    zone: &ref_45
       key:
         padding: 1ky
         spread: 1kx
@@ -1375,25 +1363,35 @@ nav_cluster_left_top:
             mirror:
               layers:
                 Base:
-                  value: ▶
+                  value: ⇲
                   size: 6
           name: left
-        up_down: &ref_45
+        up_down: &ref_46
           key:
             stagger: 1
           rows:
             top:
-              layers: &ref_46
+              layers: &ref_47
                 Base:
                   value: ▲
                   size: 9
+              mirror: &ref_48
+                layers:
+                  Base:
+                    value: ⇞
+                    size: 9
             bottom:
               layers: &ref_43
                 Base:
                   value: ▼
                   size: 9
+              mirror: &ref_44
+                layers:
+                  Base:
+                    value: ⇟
+                    size: 9
           name: up_down
-        right: &ref_47
+        right: &ref_49
           key:
             stagger: '-ring_off + pinky_off'
             layers:
@@ -1403,7 +1401,7 @@ nav_cluster_left_top:
             mirror:
               layers:
                 Base:
-                  value: ◀
+                  value: ⇱
                   size: 6
           rows:
             bottom:
@@ -1448,8 +1446,9 @@ nav_cluster_up_down_bottom:
     tags:
       1u: true
     layers: *ref_43
-    zone: *ref_44
-    col: *ref_45
+    mirror: *ref_44
+    zone: *ref_45
+    col: *ref_46
     row: bottom
     bind:
       - 10
@@ -1483,9 +1482,10 @@ nav_cluster_up_down_top:
     name: nav_cluster_up_down_top
     tags:
       1u: true
-    layers: *ref_46
-    zone: *ref_44
-    col: *ref_45
+    layers: *ref_47
+    mirror: *ref_48
+    zone: *ref_45
+    col: *ref_46
     row: top
     bind:
       - 0
@@ -1526,10 +1526,10 @@ nav_cluster_right_top:
     mirror:
       layers:
         Base:
-          value: ◀
+          value: ⇱
           size: 6
-    zone: *ref_44
-    col: *ref_47
+    zone: *ref_45
+    col: *ref_49
     row: top
     bind:
       - 0
@@ -1661,14 +1661,12 @@ mirror_matrix_inner_bottom:
                 Base: H
                 Sym1: /
                 Num: 1
-                Nav: ⇱
               mirror:
                 layers:
                   Base: D
                   Sym1: $unset
                   Sym2: µ
                   Num: $unset
-                  Nav: $unset
                   Fun: F6
           name: index
         middle:
@@ -1712,16 +1710,12 @@ mirror_matrix_inner_bottom:
                 Base: ','
                 Sym1: '?'
                 Num: 2
-                Nav:
-                  value: ⇞
-                  size: 6
               mirror:
                 layers:
                   Base: C
                   Sym1: '&'
                   Sym2: Ω
                   Num: $unset
-                  Nav: $unset
                   Fun: F5
           name: middle
         ring:
@@ -1764,16 +1758,12 @@ mirror_matrix_inner_bottom:
                 Base: .
                 Sym1: €
                 Num: 3
-                Nav:
-                  value: ⇟
-                  size: 6
               mirror:
                 layers:
                   Base: X
                   Sym1: '@'
                   Sym2: ±
                   Num: $unset
-                  Nav: $unset
                   Fun: F4
           name: ring
         pinky:
@@ -1815,14 +1805,12 @@ mirror_matrix_inner_bottom:
                 Base: ''''
                 Sym1: '"'
                 Num: '*'
-                Nav: ⇲
               mirror:
                 layers:
                   Base: Z
                   Sym1: °
                   Sym2: ¾
                   Num: $unset
-                  Nav: $unset
           name: pinky
       rows:
         bottom: {}
@@ -2001,14 +1989,12 @@ mirror_matrix_inner_home:
                 Base: H
                 Sym1: /
                 Num: 1
-                Nav: ⇱
               mirror:
                 layers:
                   Base: D
                   Sym1: $unset
                   Sym2: µ
                   Num: $unset
-                  Nav: $unset
                   Fun: F6
           name: index
         middle:
@@ -2052,16 +2038,12 @@ mirror_matrix_inner_home:
                 Base: ','
                 Sym1: '?'
                 Num: 2
-                Nav:
-                  value: ⇞
-                  size: 6
               mirror:
                 layers:
                   Base: C
                   Sym1: '&'
                   Sym2: Ω
                   Num: $unset
-                  Nav: $unset
                   Fun: F5
           name: middle
         ring:
@@ -2104,16 +2086,12 @@ mirror_matrix_inner_home:
                 Base: .
                 Sym1: €
                 Num: 3
-                Nav:
-                  value: ⇟
-                  size: 6
               mirror:
                 layers:
                   Base: X
                   Sym1: '@'
                   Sym2: ±
                   Num: $unset
-                  Nav: $unset
                   Fun: F4
           name: ring
         pinky:
@@ -2155,14 +2133,12 @@ mirror_matrix_inner_home:
                 Base: ''''
                 Sym1: '"'
                 Num: '*'
-                Nav: ⇲
               mirror:
                 layers:
                   Base: Z
                   Sym1: °
                   Sym2: ¾
                   Num: $unset
-                  Nav: $unset
           name: pinky
       rows:
         bottom: {}
@@ -2339,14 +2315,12 @@ mirror_matrix_inner_top:
                 Base: H
                 Sym1: /
                 Num: 1
-                Nav: ⇱
               mirror:
                 layers:
                   Base: D
                   Sym1: $unset
                   Sym2: µ
                   Num: $unset
-                  Nav: $unset
                   Fun: F6
           name: index
         middle:
@@ -2390,16 +2364,12 @@ mirror_matrix_inner_top:
                 Base: ','
                 Sym1: '?'
                 Num: 2
-                Nav:
-                  value: ⇞
-                  size: 6
               mirror:
                 layers:
                   Base: C
                   Sym1: '&'
                   Sym2: Ω
                   Num: $unset
-                  Nav: $unset
                   Fun: F5
           name: middle
         ring:
@@ -2442,16 +2412,12 @@ mirror_matrix_inner_top:
                 Base: .
                 Sym1: €
                 Num: 3
-                Nav:
-                  value: ⇟
-                  size: 6
               mirror:
                 layers:
                   Base: X
                   Sym1: '@'
                   Sym2: ±
                   Num: $unset
-                  Nav: $unset
                   Fun: F4
           name: ring
         pinky:
@@ -2493,14 +2459,12 @@ mirror_matrix_inner_top:
                 Base: ''''
                 Sym1: '"'
                 Num: '*'
-                Nav: ⇲
               mirror:
                 layers:
                   Base: Z
                   Sym1: °
                   Sym2: ¾
                   Num: $unset
-                  Nav: $unset
           name: pinky
       rows:
         bottom: {}
@@ -2590,7 +2554,6 @@ mirror_matrix_index_bottom:
         Sym1: $unset
         Sym2: µ
         Num: $unset
-        Nav: $unset
         Fun: F6
     zone:
       key:
@@ -2679,14 +2642,12 @@ mirror_matrix_index_bottom:
                 Base: H
                 Sym1: /
                 Num: 1
-                Nav: ⇱
               mirror:
                 layers:
                   Base: D
                   Sym1: $unset
                   Sym2: µ
                   Num: $unset
-                  Nav: $unset
                   Fun: F6
           name: index
         middle:
@@ -2730,16 +2691,12 @@ mirror_matrix_index_bottom:
                 Base: ','
                 Sym1: '?'
                 Num: 2
-                Nav:
-                  value: ⇞
-                  size: 6
               mirror:
                 layers:
                   Base: C
                   Sym1: '&'
                   Sym2: Ω
                   Num: $unset
-                  Nav: $unset
                   Fun: F5
           name: middle
         ring:
@@ -2782,16 +2739,12 @@ mirror_matrix_index_bottom:
                 Base: .
                 Sym1: €
                 Num: 3
-                Nav:
-                  value: ⇟
-                  size: 6
               mirror:
                 layers:
                   Base: X
                   Sym1: '@'
                   Sym2: ±
                   Num: $unset
-                  Nav: $unset
                   Fun: F4
           name: ring
         pinky:
@@ -2833,14 +2786,12 @@ mirror_matrix_index_bottom:
                 Base: ''''
                 Sym1: '"'
                 Num: '*'
-                Nav: ⇲
               mirror:
                 layers:
                   Base: Z
                   Sym1: °
                   Sym2: ¾
                   Num: $unset
-                  Nav: $unset
           name: pinky
       rows:
         bottom: {}
@@ -2887,14 +2838,12 @@ mirror_matrix_index_bottom:
             Base: H
             Sym1: /
             Num: 1
-            Nav: ⇱
           mirror:
             layers:
               Base: D
               Sym1: $unset
               Sym2: µ
               Num: $unset
-              Nav: $unset
               Fun: F6
       name: index
     row: bottom
@@ -3030,14 +2979,12 @@ mirror_matrix_index_home:
                 Base: H
                 Sym1: /
                 Num: 1
-                Nav: ⇱
               mirror:
                 layers:
                   Base: D
                   Sym1: $unset
                   Sym2: µ
                   Num: $unset
-                  Nav: $unset
                   Fun: F6
           name: index
         middle:
@@ -3081,16 +3028,12 @@ mirror_matrix_index_home:
                 Base: ','
                 Sym1: '?'
                 Num: 2
-                Nav:
-                  value: ⇞
-                  size: 6
               mirror:
                 layers:
                   Base: C
                   Sym1: '&'
                   Sym2: Ω
                   Num: $unset
-                  Nav: $unset
                   Fun: F5
           name: middle
         ring:
@@ -3133,16 +3076,12 @@ mirror_matrix_index_home:
                 Base: .
                 Sym1: €
                 Num: 3
-                Nav:
-                  value: ⇟
-                  size: 6
               mirror:
                 layers:
                   Base: X
                   Sym1: '@'
                   Sym2: ±
                   Num: $unset
-                  Nav: $unset
                   Fun: F4
           name: ring
         pinky:
@@ -3184,14 +3123,12 @@ mirror_matrix_index_home:
                 Base: ''''
                 Sym1: '"'
                 Num: '*'
-                Nav: ⇲
               mirror:
                 layers:
                   Base: Z
                   Sym1: °
                   Sym2: ¾
                   Num: $unset
-                  Nav: $unset
           name: pinky
       rows:
         bottom: {}
@@ -3238,14 +3175,12 @@ mirror_matrix_index_home:
             Base: H
             Sym1: /
             Num: 1
-            Nav: ⇱
           mirror:
             layers:
               Base: D
               Sym1: $unset
               Sym2: µ
               Num: $unset
-              Nav: $unset
               Fun: F6
       name: index
     row: home
@@ -3385,14 +3320,12 @@ mirror_matrix_index_top:
                 Base: H
                 Sym1: /
                 Num: 1
-                Nav: ⇱
               mirror:
                 layers:
                   Base: D
                   Sym1: $unset
                   Sym2: µ
                   Num: $unset
-                  Nav: $unset
                   Fun: F6
           name: index
         middle:
@@ -3436,16 +3369,12 @@ mirror_matrix_index_top:
                 Base: ','
                 Sym1: '?'
                 Num: 2
-                Nav:
-                  value: ⇞
-                  size: 6
               mirror:
                 layers:
                   Base: C
                   Sym1: '&'
                   Sym2: Ω
                   Num: $unset
-                  Nav: $unset
                   Fun: F5
           name: middle
         ring:
@@ -3488,16 +3417,12 @@ mirror_matrix_index_top:
                 Base: .
                 Sym1: €
                 Num: 3
-                Nav:
-                  value: ⇟
-                  size: 6
               mirror:
                 layers:
                   Base: X
                   Sym1: '@'
                   Sym2: ±
                   Num: $unset
-                  Nav: $unset
                   Fun: F4
           name: ring
         pinky:
@@ -3539,14 +3464,12 @@ mirror_matrix_index_top:
                 Base: ''''
                 Sym1: '"'
                 Num: '*'
-                Nav: ⇲
               mirror:
                 layers:
                   Base: Z
                   Sym1: °
                   Sym2: ¾
                   Num: $unset
-                  Nav: $unset
           name: pinky
       rows:
         bottom: {}
@@ -3593,14 +3516,12 @@ mirror_matrix_index_top:
             Base: H
             Sym1: /
             Num: 1
-            Nav: ⇱
           mirror:
             layers:
               Base: D
               Sym1: $unset
               Sym2: µ
               Num: $unset
-              Nav: $unset
               Fun: F6
       name: index
     row: top
@@ -3647,7 +3568,6 @@ mirror_matrix_middle_bottom:
         Sym1: '&'
         Sym2: Ω
         Num: $unset
-        Nav: $unset
         Fun: F5
     zone:
       key:
@@ -3736,14 +3656,12 @@ mirror_matrix_middle_bottom:
                 Base: H
                 Sym1: /
                 Num: 1
-                Nav: ⇱
               mirror:
                 layers:
                   Base: D
                   Sym1: $unset
                   Sym2: µ
                   Num: $unset
-                  Nav: $unset
                   Fun: F6
           name: index
         middle:
@@ -3787,16 +3705,12 @@ mirror_matrix_middle_bottom:
                 Base: ','
                 Sym1: '?'
                 Num: 2
-                Nav:
-                  value: ⇞
-                  size: 6
               mirror:
                 layers:
                   Base: C
                   Sym1: '&'
                   Sym2: Ω
                   Num: $unset
-                  Nav: $unset
                   Fun: F5
           name: middle
         ring:
@@ -3839,16 +3753,12 @@ mirror_matrix_middle_bottom:
                 Base: .
                 Sym1: €
                 Num: 3
-                Nav:
-                  value: ⇟
-                  size: 6
               mirror:
                 layers:
                   Base: X
                   Sym1: '@'
                   Sym2: ±
                   Num: $unset
-                  Nav: $unset
                   Fun: F4
           name: ring
         pinky:
@@ -3890,14 +3800,12 @@ mirror_matrix_middle_bottom:
                 Base: ''''
                 Sym1: '"'
                 Num: '*'
-                Nav: ⇲
               mirror:
                 layers:
                   Base: Z
                   Sym1: °
                   Sym2: ¾
                   Num: $unset
-                  Nav: $unset
           name: pinky
       rows:
         bottom: {}
@@ -3945,16 +3853,12 @@ mirror_matrix_middle_bottom:
             Base: ','
             Sym1: '?'
             Num: 2
-            Nav:
-              value: ⇞
-              size: 6
           mirror:
             layers:
               Base: C
               Sym1: '&'
               Sym2: Ω
               Num: $unset
-              Nav: $unset
               Fun: F5
       name: middle
     row: bottom
@@ -4090,14 +3994,12 @@ mirror_matrix_middle_home:
                 Base: H
                 Sym1: /
                 Num: 1
-                Nav: ⇱
               mirror:
                 layers:
                   Base: D
                   Sym1: $unset
                   Sym2: µ
                   Num: $unset
-                  Nav: $unset
                   Fun: F6
           name: index
         middle:
@@ -4141,16 +4043,12 @@ mirror_matrix_middle_home:
                 Base: ','
                 Sym1: '?'
                 Num: 2
-                Nav:
-                  value: ⇞
-                  size: 6
               mirror:
                 layers:
                   Base: C
                   Sym1: '&'
                   Sym2: Ω
                   Num: $unset
-                  Nav: $unset
                   Fun: F5
           name: middle
         ring:
@@ -4193,16 +4091,12 @@ mirror_matrix_middle_home:
                 Base: .
                 Sym1: €
                 Num: 3
-                Nav:
-                  value: ⇟
-                  size: 6
               mirror:
                 layers:
                   Base: X
                   Sym1: '@'
                   Sym2: ±
                   Num: $unset
-                  Nav: $unset
                   Fun: F4
           name: ring
         pinky:
@@ -4244,14 +4138,12 @@ mirror_matrix_middle_home:
                 Base: ''''
                 Sym1: '"'
                 Num: '*'
-                Nav: ⇲
               mirror:
                 layers:
                   Base: Z
                   Sym1: °
                   Sym2: ¾
                   Num: $unset
-                  Nav: $unset
           name: pinky
       rows:
         bottom: {}
@@ -4299,16 +4191,12 @@ mirror_matrix_middle_home:
             Base: ','
             Sym1: '?'
             Num: 2
-            Nav:
-              value: ⇞
-              size: 6
           mirror:
             layers:
               Base: C
               Sym1: '&'
               Sym2: Ω
               Num: $unset
-              Nav: $unset
               Fun: F5
       name: middle
     row: home
@@ -4448,14 +4336,12 @@ mirror_matrix_middle_top:
                 Base: H
                 Sym1: /
                 Num: 1
-                Nav: ⇱
               mirror:
                 layers:
                   Base: D
                   Sym1: $unset
                   Sym2: µ
                   Num: $unset
-                  Nav: $unset
                   Fun: F6
           name: index
         middle:
@@ -4499,16 +4385,12 @@ mirror_matrix_middle_top:
                 Base: ','
                 Sym1: '?'
                 Num: 2
-                Nav:
-                  value: ⇞
-                  size: 6
               mirror:
                 layers:
                   Base: C
                   Sym1: '&'
                   Sym2: Ω
                   Num: $unset
-                  Nav: $unset
                   Fun: F5
           name: middle
         ring:
@@ -4551,16 +4433,12 @@ mirror_matrix_middle_top:
                 Base: .
                 Sym1: €
                 Num: 3
-                Nav:
-                  value: ⇟
-                  size: 6
               mirror:
                 layers:
                   Base: X
                   Sym1: '@'
                   Sym2: ±
                   Num: $unset
-                  Nav: $unset
                   Fun: F4
           name: ring
         pinky:
@@ -4602,14 +4480,12 @@ mirror_matrix_middle_top:
                 Base: ''''
                 Sym1: '"'
                 Num: '*'
-                Nav: ⇲
               mirror:
                 layers:
                   Base: Z
                   Sym1: °
                   Sym2: ¾
                   Num: $unset
-                  Nav: $unset
           name: pinky
       rows:
         bottom: {}
@@ -4657,16 +4533,12 @@ mirror_matrix_middle_top:
             Base: ','
             Sym1: '?'
             Num: 2
-            Nav:
-              value: ⇞
-              size: 6
           mirror:
             layers:
               Base: C
               Sym1: '&'
               Sym2: Ω
               Num: $unset
-              Nav: $unset
               Fun: F5
       name: middle
     row: top
@@ -4713,7 +4585,6 @@ mirror_matrix_ring_bottom:
         Sym1: '@'
         Sym2: ±
         Num: $unset
-        Nav: $unset
         Fun: F4
     zone:
       key:
@@ -4802,14 +4673,12 @@ mirror_matrix_ring_bottom:
                 Base: H
                 Sym1: /
                 Num: 1
-                Nav: ⇱
               mirror:
                 layers:
                   Base: D
                   Sym1: $unset
                   Sym2: µ
                   Num: $unset
-                  Nav: $unset
                   Fun: F6
           name: index
         middle:
@@ -4853,16 +4722,12 @@ mirror_matrix_ring_bottom:
                 Base: ','
                 Sym1: '?'
                 Num: 2
-                Nav:
-                  value: ⇞
-                  size: 6
               mirror:
                 layers:
                   Base: C
                   Sym1: '&'
                   Sym2: Ω
                   Num: $unset
-                  Nav: $unset
                   Fun: F5
           name: middle
         ring:
@@ -4905,16 +4770,12 @@ mirror_matrix_ring_bottom:
                 Base: .
                 Sym1: €
                 Num: 3
-                Nav:
-                  value: ⇟
-                  size: 6
               mirror:
                 layers:
                   Base: X
                   Sym1: '@'
                   Sym2: ±
                   Num: $unset
-                  Nav: $unset
                   Fun: F4
           name: ring
         pinky:
@@ -4956,14 +4817,12 @@ mirror_matrix_ring_bottom:
                 Base: ''''
                 Sym1: '"'
                 Num: '*'
-                Nav: ⇲
               mirror:
                 layers:
                   Base: Z
                   Sym1: °
                   Sym2: ¾
                   Num: $unset
-                  Nav: $unset
           name: pinky
       rows:
         bottom: {}
@@ -5010,16 +4869,12 @@ mirror_matrix_ring_bottom:
             Base: .
             Sym1: €
             Num: 3
-            Nav:
-              value: ⇟
-              size: 6
           mirror:
             layers:
               Base: X
               Sym1: '@'
               Sym2: ±
               Num: $unset
-              Nav: $unset
               Fun: F4
       name: ring
     row: bottom
@@ -5155,14 +5010,12 @@ mirror_matrix_ring_home:
                 Base: H
                 Sym1: /
                 Num: 1
-                Nav: ⇱
               mirror:
                 layers:
                   Base: D
                   Sym1: $unset
                   Sym2: µ
                   Num: $unset
-                  Nav: $unset
                   Fun: F6
           name: index
         middle:
@@ -5206,16 +5059,12 @@ mirror_matrix_ring_home:
                 Base: ','
                 Sym1: '?'
                 Num: 2
-                Nav:
-                  value: ⇞
-                  size: 6
               mirror:
                 layers:
                   Base: C
                   Sym1: '&'
                   Sym2: Ω
                   Num: $unset
-                  Nav: $unset
                   Fun: F5
           name: middle
         ring:
@@ -5258,16 +5107,12 @@ mirror_matrix_ring_home:
                 Base: .
                 Sym1: €
                 Num: 3
-                Nav:
-                  value: ⇟
-                  size: 6
               mirror:
                 layers:
                   Base: X
                   Sym1: '@'
                   Sym2: ±
                   Num: $unset
-                  Nav: $unset
                   Fun: F4
           name: ring
         pinky:
@@ -5309,14 +5154,12 @@ mirror_matrix_ring_home:
                 Base: ''''
                 Sym1: '"'
                 Num: '*'
-                Nav: ⇲
               mirror:
                 layers:
                   Base: Z
                   Sym1: °
                   Sym2: ¾
                   Num: $unset
-                  Nav: $unset
           name: pinky
       rows:
         bottom: {}
@@ -5363,16 +5206,12 @@ mirror_matrix_ring_home:
             Base: .
             Sym1: €
             Num: 3
-            Nav:
-              value: ⇟
-              size: 6
           mirror:
             layers:
               Base: X
               Sym1: '@'
               Sym2: ±
               Num: $unset
-              Nav: $unset
               Fun: F4
       name: ring
     row: home
@@ -5512,14 +5351,12 @@ mirror_matrix_ring_top:
                 Base: H
                 Sym1: /
                 Num: 1
-                Nav: ⇱
               mirror:
                 layers:
                   Base: D
                   Sym1: $unset
                   Sym2: µ
                   Num: $unset
-                  Nav: $unset
                   Fun: F6
           name: index
         middle:
@@ -5563,16 +5400,12 @@ mirror_matrix_ring_top:
                 Base: ','
                 Sym1: '?'
                 Num: 2
-                Nav:
-                  value: ⇞
-                  size: 6
               mirror:
                 layers:
                   Base: C
                   Sym1: '&'
                   Sym2: Ω
                   Num: $unset
-                  Nav: $unset
                   Fun: F5
           name: middle
         ring:
@@ -5615,16 +5448,12 @@ mirror_matrix_ring_top:
                 Base: .
                 Sym1: €
                 Num: 3
-                Nav:
-                  value: ⇟
-                  size: 6
               mirror:
                 layers:
                   Base: X
                   Sym1: '@'
                   Sym2: ±
                   Num: $unset
-                  Nav: $unset
                   Fun: F4
           name: ring
         pinky:
@@ -5666,14 +5495,12 @@ mirror_matrix_ring_top:
                 Base: ''''
                 Sym1: '"'
                 Num: '*'
-                Nav: ⇲
               mirror:
                 layers:
                   Base: Z
                   Sym1: °
                   Sym2: ¾
                   Num: $unset
-                  Nav: $unset
           name: pinky
       rows:
         bottom: {}
@@ -5720,16 +5547,12 @@ mirror_matrix_ring_top:
             Base: .
             Sym1: €
             Num: 3
-            Nav:
-              value: ⇟
-              size: 6
           mirror:
             layers:
               Base: X
               Sym1: '@'
               Sym2: ±
               Num: $unset
-              Nav: $unset
               Fun: F4
       name: ring
     row: top
@@ -5775,7 +5598,6 @@ mirror_matrix_pinky_bottom:
         Sym1: °
         Sym2: ¾
         Num: $unset
-        Nav: $unset
     zone:
       key:
         padding: 1ky
@@ -5863,14 +5685,12 @@ mirror_matrix_pinky_bottom:
                 Base: H
                 Sym1: /
                 Num: 1
-                Nav: ⇱
               mirror:
                 layers:
                   Base: D
                   Sym1: $unset
                   Sym2: µ
                   Num: $unset
-                  Nav: $unset
                   Fun: F6
           name: index
         middle:
@@ -5914,16 +5734,12 @@ mirror_matrix_pinky_bottom:
                 Base: ','
                 Sym1: '?'
                 Num: 2
-                Nav:
-                  value: ⇞
-                  size: 6
               mirror:
                 layers:
                   Base: C
                   Sym1: '&'
                   Sym2: Ω
                   Num: $unset
-                  Nav: $unset
                   Fun: F5
           name: middle
         ring:
@@ -5966,16 +5782,12 @@ mirror_matrix_pinky_bottom:
                 Base: .
                 Sym1: €
                 Num: 3
-                Nav:
-                  value: ⇟
-                  size: 6
               mirror:
                 layers:
                   Base: X
                   Sym1: '@'
                   Sym2: ±
                   Num: $unset
-                  Nav: $unset
                   Fun: F4
           name: ring
         pinky:
@@ -6017,14 +5829,12 @@ mirror_matrix_pinky_bottom:
                 Base: ''''
                 Sym1: '"'
                 Num: '*'
-                Nav: ⇲
               mirror:
                 layers:
                   Base: Z
                   Sym1: °
                   Sym2: ¾
                   Num: $unset
-                  Nav: $unset
           name: pinky
       rows:
         bottom: {}
@@ -6070,14 +5880,12 @@ mirror_matrix_pinky_bottom:
             Base: ''''
             Sym1: '"'
             Num: '*'
-            Nav: ⇲
           mirror:
             layers:
               Base: Z
               Sym1: °
               Sym2: ¾
               Num: $unset
-              Nav: $unset
       name: pinky
     row: bottom
     bind:
@@ -6212,14 +6020,12 @@ mirror_matrix_pinky_home:
                 Base: H
                 Sym1: /
                 Num: 1
-                Nav: ⇱
               mirror:
                 layers:
                   Base: D
                   Sym1: $unset
                   Sym2: µ
                   Num: $unset
-                  Nav: $unset
                   Fun: F6
           name: index
         middle:
@@ -6263,16 +6069,12 @@ mirror_matrix_pinky_home:
                 Base: ','
                 Sym1: '?'
                 Num: 2
-                Nav:
-                  value: ⇞
-                  size: 6
               mirror:
                 layers:
                   Base: C
                   Sym1: '&'
                   Sym2: Ω
                   Num: $unset
-                  Nav: $unset
                   Fun: F5
           name: middle
         ring:
@@ -6315,16 +6117,12 @@ mirror_matrix_pinky_home:
                 Base: .
                 Sym1: €
                 Num: 3
-                Nav:
-                  value: ⇟
-                  size: 6
               mirror:
                 layers:
                   Base: X
                   Sym1: '@'
                   Sym2: ±
                   Num: $unset
-                  Nav: $unset
                   Fun: F4
           name: ring
         pinky:
@@ -6366,14 +6164,12 @@ mirror_matrix_pinky_home:
                 Base: ''''
                 Sym1: '"'
                 Num: '*'
-                Nav: ⇲
               mirror:
                 layers:
                   Base: Z
                   Sym1: °
                   Sym2: ¾
                   Num: $unset
-                  Nav: $unset
           name: pinky
       rows:
         bottom: {}
@@ -6419,14 +6215,12 @@ mirror_matrix_pinky_home:
             Base: ''''
             Sym1: '"'
             Num: '*'
-            Nav: ⇲
           mirror:
             layers:
               Base: Z
               Sym1: °
               Sym2: ¾
               Num: $unset
-              Nav: $unset
       name: pinky
     row: home
     bind:
@@ -6564,14 +6358,12 @@ mirror_matrix_pinky_top:
                 Base: H
                 Sym1: /
                 Num: 1
-                Nav: ⇱
               mirror:
                 layers:
                   Base: D
                   Sym1: $unset
                   Sym2: µ
                   Num: $unset
-                  Nav: $unset
                   Fun: F6
           name: index
         middle:
@@ -6615,16 +6407,12 @@ mirror_matrix_pinky_top:
                 Base: ','
                 Sym1: '?'
                 Num: 2
-                Nav:
-                  value: ⇞
-                  size: 6
               mirror:
                 layers:
                   Base: C
                   Sym1: '&'
                   Sym2: Ω
                   Num: $unset
-                  Nav: $unset
                   Fun: F5
           name: middle
         ring:
@@ -6667,16 +6455,12 @@ mirror_matrix_pinky_top:
                 Base: .
                 Sym1: €
                 Num: 3
-                Nav:
-                  value: ⇟
-                  size: 6
               mirror:
                 layers:
                   Base: X
                   Sym1: '@'
                   Sym2: ±
                   Num: $unset
-                  Nav: $unset
                   Fun: F4
           name: ring
         pinky:
@@ -6718,14 +6502,12 @@ mirror_matrix_pinky_top:
                 Base: ''''
                 Sym1: '"'
                 Num: '*'
-                Nav: ⇲
               mirror:
                 layers:
                   Base: Z
                   Sym1: °
                   Sym2: ¾
                   Num: $unset
-                  Nav: $unset
           name: pinky
       rows:
         bottom: {}
@@ -6771,14 +6553,12 @@ mirror_matrix_pinky_top:
             Base: ''''
             Sym1: '"'
             Num: '*'
-            Nav: ⇲
           mirror:
             layers:
               Base: Z
               Sym1: °
               Sym2: ¾
               Num: $unset
-              Nav: $unset
       name: pinky
     row: top
     bind:
@@ -7808,12 +7588,12 @@ mirror_nav_cluster_left_top:
       1u: true
     layers:
       Base:
-        value: ▶
+        value: ⇲
         size: 6
     mirror:
       layers:
         Base:
-          value: ▶
+          value: ⇲
           size: 6
     zone:
       key:
@@ -7834,7 +7614,7 @@ mirror_nav_cluster_left_top:
             mirror:
               layers:
                 Base:
-                  value: ▶
+                  value: ⇲
                   size: 6
           name: left
         up_down:
@@ -7846,11 +7626,21 @@ mirror_nav_cluster_left_top:
                 Base:
                   value: ▲
                   size: 9
+              mirror:
+                layers:
+                  Base:
+                    value: ⇞
+                    size: 9
             bottom:
               layers:
                 Base:
                   value: ▼
                   size: 9
+              mirror:
+                layers:
+                  Base:
+                    value: ⇟
+                    size: 9
           name: up_down
         right:
           key:
@@ -7862,7 +7652,7 @@ mirror_nav_cluster_left_top:
             mirror:
               layers:
                 Base:
-                  value: ◀
+                  value: ⇱
                   size: 6
           rows:
             bottom:
@@ -7884,7 +7674,7 @@ mirror_nav_cluster_left_top:
         mirror:
           layers:
             Base:
-              value: ▶
+              value: ⇲
               size: 6
       name: left
     row: top
@@ -7922,8 +7712,13 @@ mirror_nav_cluster_up_down_bottom:
       1u: true
     layers:
       Base:
-        value: ▼
+        value: ⇟
         size: 9
+    mirror:
+      layers:
+        Base:
+          value: ⇟
+          size: 9
     zone:
       key:
         padding: 1ky
@@ -7943,7 +7738,7 @@ mirror_nav_cluster_up_down_bottom:
             mirror:
               layers:
                 Base:
-                  value: ▶
+                  value: ⇲
                   size: 6
           name: left
         up_down:
@@ -7955,11 +7750,21 @@ mirror_nav_cluster_up_down_bottom:
                 Base:
                   value: ▲
                   size: 9
+              mirror:
+                layers:
+                  Base:
+                    value: ⇞
+                    size: 9
             bottom:
               layers:
                 Base:
                   value: ▼
                   size: 9
+              mirror:
+                layers:
+                  Base:
+                    value: ⇟
+                    size: 9
           name: up_down
         right:
           key:
@@ -7971,7 +7776,7 @@ mirror_nav_cluster_up_down_bottom:
             mirror:
               layers:
                 Base:
-                  value: ◀
+                  value: ⇱
                   size: 6
           rows:
             bottom:
@@ -7990,11 +7795,21 @@ mirror_nav_cluster_up_down_bottom:
             Base:
               value: ▲
               size: 9
+          mirror:
+            layers:
+              Base:
+                value: ⇞
+                size: 9
         bottom:
           layers:
             Base:
               value: ▼
               size: 9
+          mirror:
+            layers:
+              Base:
+                value: ⇟
+                size: 9
       name: up_down
     row: bottom
     bind:
@@ -8031,8 +7846,13 @@ mirror_nav_cluster_up_down_top:
       1u: true
     layers:
       Base:
-        value: ▲
+        value: ⇞
         size: 9
+    mirror:
+      layers:
+        Base:
+          value: ⇞
+          size: 9
     zone:
       key:
         padding: 1ky
@@ -8052,7 +7872,7 @@ mirror_nav_cluster_up_down_top:
             mirror:
               layers:
                 Base:
-                  value: ▶
+                  value: ⇲
                   size: 6
           name: left
         up_down:
@@ -8064,11 +7884,21 @@ mirror_nav_cluster_up_down_top:
                 Base:
                   value: ▲
                   size: 9
+              mirror:
+                layers:
+                  Base:
+                    value: ⇞
+                    size: 9
             bottom:
               layers:
                 Base:
                   value: ▼
                   size: 9
+              mirror:
+                layers:
+                  Base:
+                    value: ⇟
+                    size: 9
           name: up_down
         right:
           key:
@@ -8080,7 +7910,7 @@ mirror_nav_cluster_up_down_top:
             mirror:
               layers:
                 Base:
-                  value: ◀
+                  value: ⇱
                   size: 6
           rows:
             bottom:
@@ -8099,11 +7929,21 @@ mirror_nav_cluster_up_down_top:
             Base:
               value: ▲
               size: 9
+          mirror:
+            layers:
+              Base:
+                value: ⇞
+                size: 9
         bottom:
           layers:
             Base:
               value: ▼
               size: 9
+          mirror:
+            layers:
+              Base:
+                value: ⇟
+                size: 9
       name: up_down
     row: top
     bind:
@@ -8140,12 +7980,12 @@ mirror_nav_cluster_right_top:
       1u: true
     layers:
       Base:
-        value: ◀
+        value: ⇱
         size: 6
     mirror:
       layers:
         Base:
-          value: ◀
+          value: ⇱
           size: 6
     zone:
       key:
@@ -8166,7 +8006,7 @@ mirror_nav_cluster_right_top:
             mirror:
               layers:
                 Base:
-                  value: ▶
+                  value: ⇲
                   size: 6
           name: left
         up_down:
@@ -8178,11 +8018,21 @@ mirror_nav_cluster_right_top:
                 Base:
                   value: ▲
                   size: 9
+              mirror:
+                layers:
+                  Base:
+                    value: ⇞
+                    size: 9
             bottom:
               layers:
                 Base:
                   value: ▼
                   size: 9
+              mirror:
+                layers:
+                  Base:
+                    value: ⇟
+                    size: 9
           name: up_down
         right:
           key:
@@ -8194,7 +8044,7 @@ mirror_nav_cluster_right_top:
             mirror:
               layers:
                 Base:
-                  value: ◀
+                  value: ⇱
                   size: 6
           rows:
             bottom:
@@ -8214,7 +8064,7 @@ mirror_nav_cluster_right_top:
         mirror:
           layers:
             Base:
-              value: ◀
+              value: ⇱
               size: 6
       rows:
         bottom:

@@ -127,9 +127,9 @@ class Keyboard:
         colors = [''] * 12
         for layer, value in layers.items():
             if layer == 'on_hold':
-                index = 4
-                legends[index] = value
-                colors[index] = self.layers[value].get('color', '')
+                index = 4 if not isinstance(value, dict) else value.get('index', 4)
+                legends[index] = value if not isinstance(value, dict) else value.get('value', 'X')
+                colors[index] = layer_meta(value, 'color', value, '')
             else:
                 index = layer_meta(layer, 'index', value, 9)
                 legends[index] = layer_meta(layer, 'value', value, value)
