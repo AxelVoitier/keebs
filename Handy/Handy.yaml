@@ -443,12 +443,16 @@ outlines:
 
   keyholes:
     - what: rectangle
-      where: 1n
+      where: meta.tags.1u ~ true
       size: [14, 14]
       operation: stack
     - what: rectangle
-      where: 2n_vert
+      where: meta.tags.2u ~ vertical
       size: [14, 33.05]
+      operation: stack
+    - what: rectangle
+      where: meta.tags.2u ~ horizontal
+      size: [33.05, 14]
       operation: stack
 
   board:
