@@ -1,48 +1,24 @@
 units:
   kx: U
   ky: U
-
-  # Columns stagger, referenced to index column
-  inner_off: -2.5  # Kyria
-  index_off: 0  # Should remain 0
-  middle_off: +6.5  # Kyria
-  ring_off: -(4/25)U  # YAEMK
-  pinky_off: -(5/7)U  # YAEMK
-  #outer_off: -(103/125)U  # YAEMK
-  #outer_off: -21.4  # Elephant42
-
-  # Columns absolute splay (degrees)
+  inner_off: -2.5
+  index_off: 0
+  middle_off: 6.5
+  ring_off: -(4/25)U
+  pinky_off: -(5/7)U
   inner_splay: 0
   index_splay: 0
   middle_splay: 5
   ring_splay: 10
   pinky_splay: 15
-  #outer_splay: 20
-
-  # Thumb cluster
-  # arc_index_home_x_offset: 11.7604  # Kyria
-  arc_index_home_x_offset: 6  # For clearence between thumb and nav clusters
-  arc_index_home_y_offset: ky + 120 + 1  # Kyria + thumb/-av clusters clearence
+  arc_index_home_x_offset: 6
+  arc_index_home_y_offset: ky + 120 + 1
   thumb_central_radius: 90.4
   thumb_middle_angle: 19
-
-  # Case
   case_padding: 4
   case_thumb_bottom_arc_radius: thumb_central_radius - 1ky - case_padding
   case_thumb_top_arc_radius: thumb_central_radius + 1ky + case_padding
-
-layers:
-  Base:
-  Sym1:
-  Sym2:
-  Num:
-  Nav:
-  Fun:
-  Media:
-
 points:
-  #rotate: 25
-  #mirror: 105
   rotate: 0
   mirror: 60
   key:
@@ -50,7 +26,10 @@ points:
     height: ky
   zones:
     matrix:
-      anchor.shift: [297/2 - 2kx, -210/2 - (-inner_off + index_off + middle_off)]
+      anchor:
+        shift:
+        - 297/2 - 2kx
+        - -210/2 - (-inner_off + index_off + middle_off)
       key:
         padding: 1ky
         spread: 1kx
@@ -58,237 +37,269 @@ points:
           1u: true
       columns:
         inner:
-          key.splay: -inner_splay
-          rows.top.layers:
-            Base: J
-            Sym1: "-"
-            Media: Ltog
-          rows.top.mirror.layers:
-            Base: B
-            Sym1: "$"
-            Sym2: ½
-            Media: $unset
-          rows.home.layers:
-            Base: M
-            Num: "-"
-          rows.home.mirror.layers:
-            Base: G
-            Sym1: "|"
-            Sym2: "̧"
-            Num: $unset
-            Fun: PrtScn
-          rows.bottom.layers:
-            Base: K
-            Sym1: +
-            Num: +
-            Nav: Ins
-          rows.bottom.mirror.layers:
-            Base: V
-            Sym1: "\\"
-            Sym2: ¼
-            Num: $unset
-            Nav: $unset
-          #rows.mod.skip: true
+          key:
+            splay: -inner_splay
+          rows:
+            top:
+              layers:
+                Base: J
+                Sym1: '-'
+                Media: Ltog
+              mirror:
+                layers:
+                  Base: B
+                  Sym1: $
+                  Sym2: "\xBD"
+                  Media: $unset
+            home:
+              layers:
+                Base: M
+                Num: '-'
+              mirror:
+                layers:
+                  Base: G
+                  Sym1: '|'
+                  Sym2: "\u0327"
+                  Num: $unset
+                  Fun: PrtScn
+            bottom:
+              layers:
+                Base: K
+                Sym1: +
+                Num: +
+                Nav: Ins
+              mirror:
+                layers:
+                  Base: V
+                  Sym1: \
+                  Sym2: "\xBC"
+                  Num: $unset
+                  Nav: $unset
         index:
-          key.stagger: -inner_off + index_off
-          key.splay: +inner_splay - index_splay
-          rows.top.layers:
-            Base: L
-            Sym1: "*"
-            Num: 7
-            Media: Lmod
-          rows.top.mirror.layers:
-            Base: P
-            Sym1: "#"
-            Sym2:
-              value: ³
-              size: 5
-            Num: $unset
-            Fun: F12
-            Media: $unset
-          rows.home.layers:
-            Base: N
-            Sym1: )
-            Num: 4
-            Media: Prev
-          rows.home.mirror.layers:
-            Base: T
-            Sym1: (
-            Sym2: "́"
-            Num: $unset
-            Fun: F9
-            Media: $unset
-          rows.bottom.layers:
-            Base: H
-            Sym1: /
-            Num: 1
-          rows.bottom.mirror.layers:
-            Base: D
-            Sym1: $unset
-            Sym2: µ
-            Num: $unset
-            Fun: F6
-          #rows.mod.skip: true
+          key:
+            stagger: -inner_off + index_off
+            splay: +inner_splay - index_splay
+          rows:
+            top:
+              layers:
+                Base: L
+                Sym1: '*'
+                Num: 7
+                Media: Lmod
+              mirror:
+                layers:
+                  Base: P
+                  Sym1: '#'
+                  Sym2:
+                    value: "\xB3"
+                    size: 5
+                  Num: $unset
+                  Fun: F12
+                  Media: $unset
+            home:
+              layers:
+                Base: N
+                Sym1: )
+                Num: 4
+                Media: Prev
+              mirror:
+                layers:
+                  Base: T
+                  Sym1: (
+                  Sym2: "\u0301"
+                  Num: $unset
+                  Fun: F9
+                  Media: $unset
+            bottom:
+              layers:
+                Base: H
+                Sym1: /
+                Num: 1
+              mirror:
+                layers:
+                  Base: D
+                  Sym1: $unset
+                  Sym2: "\xB5"
+                  Num: $unset
+                  Fun: F6
         middle:
-          key.stagger: -index_off + middle_off
-          key.splay: +index_splay - middle_splay
-          key.spread: 1kx + 1
-          rows.top.layers:
-            Base: U
-            Sym1: "!"
-            Num: 8
-            Media: Lhui
-          rows.top.mirror.layers:
-            Base: F
-            Sym1: "^"
-            Sym2:
-              value: ²
-              size: 5
-            Num: $unset
-            Media: $unset
-            Fun: F11
-          rows.home.layers:
-            Base: E
-            Sym1: "]"
-            Num: 5
-            Media: V+
-          rows.home.mirror.layers:
-            Base: S
-            Sym1: "["
-            Sym2: "̀"
-            Num: $unset
-            Media: $unset
-            Fun: F8
-          rows.bottom.layers:
-            Base: ","
-            Sym1: "?"
-            Num: 2
-          rows.bottom.mirror.layers:
-            Base: C
-            Sym1: "&"
-            Sym2: Ω
-            Num: $unset
-            Fun: F5
-          #rows.mod.skip: true
+          key:
+            stagger: -index_off + middle_off
+            splay: +index_splay - middle_splay
+            spread: 1kx + 1
+          rows:
+            top:
+              layers:
+                Base: U
+                Sym1: '!'
+                Num: 8
+                Media: Lhui
+              mirror:
+                layers:
+                  Base: F
+                  Sym1: ^
+                  Sym2:
+                    value: "\xB2"
+                    size: 5
+                  Num: $unset
+                  Media: $unset
+                  Fun: F11
+            home:
+              layers:
+                Base: E
+                Sym1: ']'
+                Num: 5
+                Media: V+
+              mirror:
+                layers:
+                  Base: S
+                  Sym1: '['
+                  Sym2: "\u0300"
+                  Num: $unset
+                  Media: $unset
+                  Fun: F8
+            bottom:
+              layers:
+                Base: ','
+                Sym1: '?'
+                Num: 2
+              mirror:
+                layers:
+                  Base: C
+                  Sym1: '&'
+                  Sym2: "\u2126"
+                  Num: $unset
+                  Fun: F5
         ring:
-          key.stagger: -middle_off + ring_off
-          key.splay: +middle_splay - ring_splay
-          rows.top.layers:
-            Base: Y
-            Sym1: "%"
-            Num: 9
-            Media: Lsai
-          rows.top.mirror.layers:
-            Base: W
-            Sym1: "~"
-            Sym2:
-              value: ¹
-              size: 5
-            Num: $unset
-            Media: $unset
-            Fun: F10
-          rows.home.layers:
-            Base: I
-            Sym1: "}"
-            Num: 6
-            Media: V-
-          rows.home.mirror.layers:
-            Base: R
-            Sym1: "{"
-            Sym2: "̂"
-            Num: $unset
-            Media: $unset
-            Fun: F7
-          rows.bottom.layers:
-            Base: .
-            Sym1: €
-            Num: 3
-          rows.bottom.mirror.layers:
-            Base: X
-            Sym1: "@"
-            Sym2: ±
-            Num: $unset
-            Fun: F4
-          #rows.mod.skip: true  # Defined by nav cluster instead
+          key:
+            stagger: -middle_off + ring_off
+            splay: +middle_splay - ring_splay
+          rows:
+            top:
+              layers:
+                Base: Y
+                Sym1: '%'
+                Num: 9
+                Media: Lsai
+              mirror:
+                layers:
+                  Base: W
+                  Sym1: '~'
+                  Sym2:
+                    value: "\xB9"
+                    size: 5
+                  Num: $unset
+                  Media: $unset
+                  Fun: F10
+            home:
+              layers:
+                Base: I
+                Sym1: '}'
+                Num: 6
+                Media: V-
+              mirror:
+                layers:
+                  Base: R
+                  Sym1: '{'
+                  Sym2: "\u0302"
+                  Num: $unset
+                  Media: $unset
+                  Fun: F7
+            bottom:
+              layers:
+                Base: .
+                Sym1: "\u20AC"
+                Num: 3
+              mirror:
+                layers:
+                  Base: X
+                  Sym1: '@'
+                  Sym2: "\xB1"
+                  Num: $unset
+                  Fun: F4
         pinky:
-          key.stagger: -ring_off + pinky_off + 1
-          key.splay: +ring_splay - pinky_splay
-          key.spread: 1kx + 1
-          rows.top.layers:
-            Base: ":"
-            Sym1: ;
-            Media: Lvai
-          rows.top.mirror.layers:
-            Base: "Q"
-            Sym1: "`"
-            Sym2:
-              value: º
-              size: 5
-            Media: $unset
-            Fun: Pause
-          rows.home.layers:
-            Base: O
-            Sym1: >
-            Num: /
-            Media: Next
-          rows.home.mirror.layers:
-            Base: A
-            Sym1: <
-            Sym2: "̈"
-            Num: $unset
-            Media: $unset
-            Fun: ScrLock
-          rows.bottom.layers:
-            Base: "'"
-            Sym1: '"'
-            Num: "*"
-          rows.bottom.mirror.layers:
-            Base: Z
-            Sym1: °
-            Sym2: ¾
-            Num: $unset
-          #rows.mod.skip: true  # Defined by nav cluster instead
-        #outer:
-        #  # $skip: true
-        #  key.stagger: -pinky_off + outer_off
-        #  key.splay: +pinky_splay - outer_splay
-        #  #rows.mod.skip: true
+          key:
+            stagger: -ring_off + pinky_off + 1
+            splay: +ring_splay - pinky_splay
+            spread: 1kx + 1
+          rows:
+            top:
+              layers:
+                Base: ':'
+                Sym1: ;
+                Media: Lvai
+              mirror:
+                layers:
+                  Base: Q
+                  Sym1: '`'
+                  Sym2:
+                    value: "\xBA"
+                    size: 5
+                  Media: $unset
+                  Fun: Pause
+            home:
+              layers:
+                Base: O
+                Sym1: ''
+                Num: /
+                Media: Next
+              mirror:
+                layers:
+                  Base: A
+                  Sym1: <
+                  Sym2: "\u0308"
+                  Num: $unset
+                  Media: $unset
+                  Fun: ScrLock
+            bottom:
+              layers:
+                Base: ''''
+                Sym1: '"'
+                Num: '*'
+              mirror:
+                layers:
+                  Base: Z
+                  Sym1: "\xB0"
+                  Sym2: "\xBE"
+                  Num: $unset
       rows:
-        #mod:
-        bottom:
-        home:
-        top:
-
+        bottom: null
+        home: null
+        top: null
     arc_center:
       anchor:
         ref: matrix_index_home
-        shift: [arc_index_home_x_offset, -arc_index_home_y_offset]
-
+        shift:
+        - arc_index_home_x_offset
+        - -arc_index_home_y_offset
     _case_thumb_bottom_arc_end:
       anchor:
         ref: arc_center
         orient: thumb_middle_angle + 15
-        shift: [0, case_thumb_bottom_arc_radius]
-
+        shift:
+        - 0
+        - case_thumb_bottom_arc_radius
     _case_thumb_bottom_corner:
       anchor:
         ref: _case_thumb_bottom_arc_end
         orient: 90
-        shift: [0, 0.5kx + case_padding]
-
+        shift:
+        - 0
+        - 0.5kx + case_padding
     _case_thumb_top_corner:
       anchor:
         ref: _case_thumb_bottom_corner
         orient: -90
-        shift: [0, 2*(ky + case_padding)]
-
+        shift:
+        - 0
+        - 2*(ky + case_padding)
     _case_thumb_top_arc_end:
       anchor:
         ref: _case_thumb_top_corner
         orient: 90
-        shift: [0, -(0.5kx + case_padding)]
-
-
+        shift:
+        - 0
+        - -(0.5kx + case_padding)
     thumb_cluster:
       anchor:
         ref: arc_center
@@ -298,84 +309,95 @@ points:
         tags:
           1u: true
       columns:
-        outer_top.key:
-          orient: thumb_middle_angle + 12
-          shift: [0, thumb_central_radius + 0.5ky + 0.5]
-          layers:
-            Base:
-              value: ⌫
-              size: 6
-            Media: Mute
-            on_hold: Fun
-          mirror.layers:
-            Base:
-              value: Esc
-              size: 4
-            Media: $unset
-            on_hold: Nav
-        outer_bottom.key:
-          orient: thumb_middle_angle + 15
-          shift: [-0.5, thumb_central_radius - 0.5ky]
-          layers:
-            Base:
-              value: ⌦
-              size: 6
-            Media:
-              value: ■
-              size: 3
-            on_hold: Sym2
-          mirror.layers:
-            Base: ⇥
-            Media: $unset
-            on_hold: Num
-        # outer2_top.key:
-        #   orient: thumb_middle_angle + 12*2
-        #   shift: [0, thumb_central_radius + 0.5ky]
-        # outer2_bottom.key:
-        #   orient: thumb_middle_angle + 15*2
-        #   shift: [0, thumb_central_radius - 0.5ky]
-        middle.key:
-          orient: thumb_middle_angle
-          shift: [0, thumb_central_radius]
-          height: 2ky
-          tags:
-            1u: $unset
-            2u: vertical
-          layers:
-            Base:
-              value: ⏎
-              size: 9
-            Media:
-              value: ▶||
-              size: 4
-            on_hold: Sym1
-          mirror.layers:
-            Base:
-              value: ␣
-              size: 9
-            Media: $unset
-            on_hold: Sym1
-        inner_top.key:
-          orient: thumb_middle_angle - 12
-          shift: [0, thumb_central_radius + 0.5ky + 0.5]
-          layers:
-            Base:
-              value: Shift
-              size: 5
-        inner_bottom.key:
-          orient: thumb_middle_angle - 15
-          shift: [0.5, thumb_central_radius - 0.5ky - 0]
-          layers:
-            Base:
-              value: Ctrl
-              size: 5
-
+        outer_top:
+          key:
+            orient: thumb_middle_angle + 12
+            shift:
+            - 0
+            - thumb_central_radius + 0.5ky + 0.5
+            layers:
+              Base:
+                value: "\u232B"
+                size: 6
+              Media: Mute
+              on_hold: Fun
+            mirror:
+              layers:
+                Base:
+                  value: Esc
+                  size: 4
+                Media: $unset
+                on_hold: Nav
+        outer_bottom:
+          key:
+            orient: thumb_middle_angle + 15
+            shift:
+            - -0.5
+            - thumb_central_radius - 0.5ky
+            layers:
+              Base:
+                value: "\u2326"
+                size: 6
+              Media:
+                value: "\u25A0"
+                size: 3
+              on_hold: Sym2
+            mirror:
+              layers:
+                Base: "\u21E5"
+                Media: $unset
+                on_hold: Num
+        middle:
+          key:
+            orient: thumb_middle_angle
+            shift:
+            - 0
+            - thumb_central_radius
+            height: 2ky
+            tags:
+              1u: $unset
+              2u: vertical
+            layers:
+              Base:
+                value: "\u23CE"
+                size: 9
+              Media:
+                value: "\u25B6||"
+                size: 4
+              on_hold: Sym1
+            mirror:
+              layers:
+                Base:
+                  value: "\u2423"
+                  size: 9
+                Media: $unset
+                on_hold: Sym1
+        inner_top:
+          key:
+            orient: thumb_middle_angle - 12
+            shift:
+            - 0
+            - thumb_central_radius + 0.5ky + 0.5
+            layers:
+              Base:
+                value: Shift
+                size: 5
+        inner_bottom:
+          key:
+            orient: thumb_middle_angle - 15
+            shift:
+            - 0.5
+            - thumb_central_radius - 0.5ky - 0
+            layers:
+              Base:
+                value: Ctrl
+                size: 5
     nav_cluster:
-      # $skip: true
       anchor:
         ref: matrix_ring_bottom
-        #orient: middle_splay - ring_splay
-        shift: [-kx, -2ky-1]
+        shift:
+        - -kx
+        - -2ky-1
       key:
         padding: 1ky
         spread: 1kx
@@ -383,267 +405,293 @@ points:
           1u: true
       columns:
         left:
-          rows.bottom.skip: true
-          key.layers:
-            Base:
-              value: ◀
-              size: 6
-          key.mirror.layers:
-            Base:
-              value: ⇲
-              size: 6
+          rows:
+            bottom:
+              skip: true
+          key:
+            layers:
+              Base:
+                value: "\u25C0"
+                size: 6
+            mirror:
+              layers:
+                Base:
+                  value: "\u21F2"
+                  size: 6
         up_down:
-          #key.stagger: +middle_off - ring_off
-          key.stagger: 1
-          rows.top.layers:
-            Base:
-              value: ▲
-              size: 9
-          rows.top.mirror.layers:
-            Base:
-              value: ⇞
-              size: 9
-          rows.bottom.layers:
-            Base:
-              value: ▼
-              size: 9
-          rows.bottom.mirror.layers:
-            Base:
-              value: ⇟
-              size: 9
+          key:
+            stagger: 1
+          rows:
+            top:
+              layers:
+                Base:
+                  value: "\u25B2"
+                  size: 9
+              mirror:
+                layers:
+                  Base:
+                    value: "\u21DE"
+                    size: 9
+            bottom:
+              layers:
+                Base:
+                  value: "\u25BC"
+                  size: 9
+              mirror:
+                layers:
+                  Base:
+                    value: "\u21DF"
+                    size: 9
         right:
-          key.stagger: -ring_off + pinky_off
-          rows.bottom.skip: true
-          key.layers:
-            Base:
-              value: ▶
-              size: 6
-          key.mirror.layers:
-            Base:
-              value: ⇱
-              size: 6
+          key:
+            stagger: -ring_off + pinky_off
+            layers:
+              Base:
+                value: "\u25B6"
+                size: 6
+            mirror:
+              layers:
+                Base:
+                  value: "\u21F1"
+                  size: 6
+          rows:
+            bottom:
+              skip: true
       rows:
-        bottom:
-        top:
-
+        bottom: null
+        top: null
 outlines:
   keys:
-    - what: rectangle
-      where: meta.tags.1u ~ true
-      size: [kx, ky]
-      operation: stack
-    - what: rectangle
-      where: meta.tags.2u ~ vertical
-      size: [kx, 2ky]
-      operation: stack
-    - what: rectangle
-      where: meta.tags.2u ~ horizontal
-      size: [2kx, ky]
-      operation: stack
-
+  - what: rectangle
+    where: meta.tags.1u ~ true
+    size:
+    - kx
+    - ky
+    operation: stack
+  - what: rectangle
+    where: meta.tags.2u ~ vertical
+    size:
+    - kx
+    - 2ky
+    operation: stack
+  - what: rectangle
+    where: meta.tags.2u ~ horizontal
+    size:
+    - 2kx
+    - ky
+    operation: stack
   keyholes:
-    - what: rectangle
-      where: meta.tags.1u ~ true
-      size: [14, 14]
-      operation: stack
-    - what: rectangle
-      where: meta.tags.2u ~ vertical
-      size: [14, 33.05]
-      operation: stack
-    - what: rectangle
-      where: meta.tags.2u ~ horizontal
-      size: [33.05, 14]
-      operation: stack
-
+  - what: rectangle
+    where: meta.tags.1u ~ true
+    size:
+    - 14
+    - 14
+    operation: stack
+  - what: rectangle
+    where: meta.tags.2u ~ vertical
+    size:
+    - 14
+    - 33.05
+    operation: stack
+  - what: rectangle
+    where: meta.tags.2u ~ horizontal
+    size:
+    - 33.05
+    - 14
+    operation: stack
   board:
-    - what: polygon
-      operation: stack
-      expand: case_padding
-      # joints: 2
-      fillet: 5
-      points:
-        - ref: matrix_inner_top
-          shift: [-0.5kx, 0.5ky]
-        - ref: matrix_middle_top
-          shift: [0, 0.5ky]
-        - ref: matrix_pinky_top
-          shift: [0.5kx, 0.5ky]
-        - ref: matrix_pinky_bottom
-          shift: [0.5kx, -0.5ky]
-        - ref: nav_cluster_up_down_bottom
-          shift: [0.5kx, -0.5ky]
-        - ref: thumb_cluster_inner_bottom
-          shift: [0, -0.5ky]
-        - ref: thumb_cluster_outer_bottom
-          shift: [-0.5kx, -0.5ky]
-        - ref: thumb_cluster_outer_top
-          shift: [-0.5kx, 0.5ky]
-        - ref: matrix_inner_bottom
-          shift: [-0.5kx, -0.5ky]
-
+  - what: polygon
+    operation: stack
+    expand: case_padding
+    fillet: 5
+    points:
+    - ref: matrix_inner_top
+      shift:
+      - -0.5kx
+      - 0.5ky
+    - ref: matrix_middle_top
+      shift:
+      - 0
+      - 0.5ky
+    - ref: matrix_pinky_top
+      shift:
+      - 0.5kx
+      - 0.5ky
+    - ref: matrix_pinky_bottom
+      shift:
+      - 0.5kx
+      - -0.5ky
+    - ref: nav_cluster_up_down_bottom
+      shift:
+      - 0.5kx
+      - -0.5ky
+    - ref: thumb_cluster_inner_bottom
+      shift:
+      - 0
+      - -0.5ky
+    - ref: thumb_cluster_outer_bottom
+      shift:
+      - -0.5kx
+      - -0.5ky
+    - ref: thumb_cluster_outer_top
+      shift:
+      - -0.5kx
+      - 0.5ky
+    - ref: matrix_inner_bottom
+      shift:
+      - -0.5kx
+      - -0.5ky
   board_keys:
-    - name: board
-    - operation: stack
-      name: keys
-
-
-  # Bottom right corner arc: need to only get a portion of it
+  - name: board
+  - operation: stack
+    name: keys
   _case_right_bottom_corner:
-    # Base circle
-    - what: circle
-      where: matrix_middle_home
-      radius: 4.5kx
-    # One large vertical rectangle on the left
-    - what: rectangle
-      where: matrix_middle_home
-      adjust.shift: [-100, 0]
-      size: [200, 300]
-      operation: add
-    # One large horizontal rectangle on the top
-    - what: rectangle
-      where: matrix_middle_home
-      adjust.shift: [0, 100]
-      size: [300, 200]
-      operation: add
-
-  # Thumb cluster top arc: need to only get a portion of it
+  - what: circle
+    where: matrix_middle_home
+    radius: 4.5kx
+  - what: rectangle
+    where: matrix_middle_home
+    adjust:
+      shift:
+      - -100
+      - 0
+    size:
+    - 200
+    - 300
+    operation: add
+  - what: rectangle
+    where: matrix_middle_home
+    adjust:
+      shift:
+      - 0
+      - 100
+    size:
+    - 300
+    - 200
+    operation: add
   _case_thumb_top_arc:
-    # Base circle
-    - what: circle
-      where: arc_center
-      radius: case_thumb_top_arc_radius
-    # Occulting what is not inside the case
-    - what: polygon
-      points:
-        # One point on the arc on the left
-        - ref: arc_center
-          orient: thumb_middle_angle + 15 + 3
-          shift: [0, case_thumb_top_arc_radius]
-        # One point well inside the thumb cluster
-        - ref: thumb_cluster_middle
-        # One point on the right (does not have to be on the arc)
-        - ref: matrix_inner_bottom
-        # One point well outside, above, clearing the arc (ie. above its tangents)
-        - ref: thumb_cluster_middle
-          shift: [0, 5ky]
-      operation: intersect
-      #operation: stack
-
+  - what: circle
+    where: arc_center
+    radius: case_thumb_top_arc_radius
+  - what: polygon
+    points:
+    - ref: arc_center
+      orient: thumb_middle_angle + 15 + 3
+      shift:
+      - 0
+      - case_thumb_top_arc_radius
+    - ref: thumb_cluster_middle
+    - ref: matrix_inner_bottom
+    - ref: thumb_cluster_middle
+      shift:
+      - 0
+      - 5ky
+    operation: intersect
   case:
-    # Top arc
-    - what: circle
-      where: matrix_middle_top
-      #adjust.shift: [0, -(arc_index_home_y_offset + middle_off)]
-      #radius: arc_index_home_y_offset + middle_off + 1.5ky + case_padding
-      adjust.shift: [0, -5.5ky]
-      radius: 4.5ky + 1.5ky + case_padding
-
-    # Thumb cluster bottom arc
-    - what: circle
-      where: arc_center
-      radius: case_thumb_bottom_arc_radius
-      operation: subtract
-
-    # General chuncky shape
-    - what: polygon
-      operation: intersect
-      #operation: stack
-      points:
-        # Top-left corner
-        - ref: matrix_inner_top
-          shift: [-30, 40]  # Very far to cover the top arc
-        # Top-right corner
-        - ref: matrix_pinky_top
-          shift: [0.5kx + case_padding, 50]  # Very far to cover the top arc
-        # Mid-right "corner"
-        - ref: matrix_pinky_bottom
-          shift: [0.5kx + case_padding, -0.5ky]  # Very far to cover the top arc
-        # Bottom right corner (far to cover the arc)
-        - ref: arc_center
-          shift:
-            # X: Reset to index home position + add 4 keys and padding
-            - -arc_index_home_x_offset + 3.1kx + case_padding
-            # Y: Radius of thumb cluster bottom arc
-            - case_thumb_bottom_arc_radius
-        # Pivot point between line and arc at the bottom
-        - ref: arc_center
-          shift: [0, case_thumb_bottom_arc_radius]
-        # Pivot point between arc and line before corner
-        - ref: _case_thumb_bottom_arc_end
-        # Thumb cluster bottom corner
-        - ref: _case_thumb_bottom_corner
-        # Thump cluster top corner
-        - ref: _case_thumb_top_corner
-        # Pivot point between line and arc at the top of thumb cluster
-        - ref: _case_thumb_top_arc_end
-        # Some point inside the thumb cluster aligned with top-left corner
-        - ref: matrix_inner_bottom
-          shift: [-30, -1.5ky]
-
-    # Bottom right corner arc
-    #- name: _case_right_bottom_corner
-    #  #operation: intersect
-    #  operation: stack
-
-    # Thumb cluster top arc
-    - name: _case_thumb_top_arc
-      operation: add
-      #operation: stack
-
+  - what: circle
+    where: matrix_middle_top
+    adjust:
+      shift:
+      - 0
+      - -5.5ky
+    radius: 4.5ky + 1.5ky + case_padding
+  - what: circle
+    where: arc_center
+    radius: case_thumb_bottom_arc_radius
+    operation: subtract
+  - what: polygon
+    operation: intersect
+    points:
+    - ref: matrix_inner_top
+      shift:
+      - -30
+      - 40
+    - ref: matrix_pinky_top
+      shift:
+      - 0.5kx + case_padding
+      - 50
+    - ref: matrix_pinky_bottom
+      shift:
+      - 0.5kx + case_padding
+      - -0.5ky
+    - ref: arc_center
+      shift:
+      - -arc_index_home_x_offset + 3.1kx + case_padding
+      - case_thumb_bottom_arc_radius
+    - ref: arc_center
+      shift:
+      - 0
+      - case_thumb_bottom_arc_radius
+    - ref: _case_thumb_bottom_arc_end
+    - ref: _case_thumb_bottom_corner
+    - ref: _case_thumb_top_corner
+    - ref: _case_thumb_top_arc_end
+    - ref: matrix_inner_bottom
+      shift:
+      - -30
+      - -1.5ky
+  - name: _case_thumb_top_arc
+    operation: add
   case_keys:
-    - name: case
-      fillet: 5
-    - operation: stack
-      name: keys
-
+  - name: case
+    fillet: 5
+  - operation: stack
+    name: keys
   keys_plate:
-    - name: case
-      fillet: 5
-    - operation: stack
-      name: keyholes
-
+  - name: case
+    fillet: 5
+  - operation: stack
+    name: keyholes
   all:
-    - name: case
-      fillet: 5
-    - operation: stack
-      name: board
-    - operation: stack
-      name: keys
-
+  - name: case
+    fillet: 5
+  - operation: stack
+    name: board
+  - operation: stack
+    name: keys
 pcbs:
   HandyLayout-5-10-15:
     outlines:
-      - outline: case_keys
-        layer: Dwgs.User
-
+    - outline: case_keys
+      layer: Dwgs.User
 kle:
-  shift: [10kx, 2.5ky]
+  shift:
+  - 10kx
+  - 2.5ky
   layers:
     Base:
       index: 9
       size: 7
-      color: "#000000"
+      color: '#000000'
     Sym1:
       index: 2
       size: 4
-      color: "#009600"
+      color: '#009600'
     Sym2:
       index: 3
       size: 4
-      color: "#940000"
+      color: '#940000'
     Num:
       index: 3
       size: 4
-      color: "#ff9900"
+      color: '#ff9900'
     Nav:
       index: 0
       size: 4
-      color: "#00c2bd"
+      color: '#00c2bd'
     Fun:
       index: 1
       size: 2
-      color: "#ff0000"
+      color: '#ff0000'
     Media:
       index: 1
       size: 2
-      color: "#ff00ff"
+      color: '#ff00ff'
+layers:
+  Base: null
+  Sym1: null
+  Sym2: null
+  Num: null
+  Nav: null
+  Fun: null
+  Media: null

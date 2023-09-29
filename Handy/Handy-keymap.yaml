@@ -1,0 +1,328 @@
+layers:
+  Base:
+  Sym1:
+  Sym2:
+  Num:
+  Nav:
+  Fun:
+  Media:
+
+points.zones:
+  matrix.columns:
+    inner:
+      rows.top.layers:
+        Base: J
+        Sym1: "-"
+        Media: Ltog
+      rows.top.mirror.layers:
+        Base: B
+        Sym1: "$"
+        Sym2: ½
+        Media: $unset
+
+      rows.home.layers:
+        Base: M
+        Num: "-"
+      rows.home.mirror.layers:
+        Base: G
+        Sym1: "|"
+        Sym2: "̧"
+        Num: $unset
+        Fun: PrtScn
+
+      rows.bottom.layers:
+        Base: K
+        Sym1: +
+        Num: +
+        Nav: Ins
+      rows.bottom.mirror.layers:
+        Base: V
+        Sym1: "\\"
+        Sym2: ¼
+        Num: $unset
+        Nav: $unset
+
+    index:
+      rows.top.layers:
+        Base: L
+        Sym1: "*"
+        Num: 7
+        Media: Lmod
+      rows.top.mirror.layers:
+        Base: P
+        Sym1: "#"
+        Sym2:
+          value: ³
+          size: 5
+        Num: $unset
+        Fun: F12
+        Media: $unset
+
+      rows.home.layers:
+        Base: N
+        Sym1: )
+        Num: 4
+        Media: Prev
+      rows.home.mirror.layers:
+        Base: T
+        Sym1: (
+        Sym2: "́"
+        Num: $unset
+        Fun: F9
+        Media: $unset
+
+      rows.bottom.layers:
+        Base: H
+        Sym1: /
+        Num: 1
+      rows.bottom.mirror.layers:
+        Base: D
+        Sym1: $unset
+        Sym2: µ
+        Num: $unset
+        Fun: F6
+
+    middle:
+      rows.top.layers:
+        Base: U
+        Sym1: "!"
+        Num: 8
+        Media: Lhui
+      rows.top.mirror.layers:
+        Base: F
+        Sym1: "^"
+        Sym2:
+          value: ²
+          size: 5
+        Num: $unset
+        Media: $unset
+        Fun: F11
+
+      rows.home.layers:
+        Base: E
+        Sym1: "]"
+        Num: 5
+        Media: V+
+      rows.home.mirror.layers:
+        Base: S
+        Sym1: "["
+        Sym2: "̀"
+        Num: $unset
+        Media: $unset
+        Fun: F8
+
+      rows.bottom.layers:
+        Base: ","
+        Sym1: "?"
+        Num: 2
+      rows.bottom.mirror.layers:
+        Base: C
+        Sym1: "&"
+        Sym2: Ω
+        Num: $unset
+        Fun: F5
+
+    ring:
+      rows.top.layers:
+        Base: Y
+        Sym1: "%"
+        Num: 9
+        Media: Lsai
+      rows.top.mirror.layers:
+        Base: W
+        Sym1: "~"
+        Sym2:
+          value: ¹
+          size: 5
+        Num: $unset
+        Media: $unset
+        Fun: F10
+
+      rows.home.layers:
+        Base: I
+        Sym1: "}"
+        Num: 6
+        Media: V-
+      rows.home.mirror.layers:
+        Base: R
+        Sym1: "{"
+        Sym2: "̂"
+        Num: $unset
+        Media: $unset
+        Fun: F7
+
+      rows.bottom.layers:
+        Base: .
+        Sym1: €
+        Num: 3
+      rows.bottom.mirror.layers:
+        Base: X
+        Sym1: "@"
+        Sym2: ±
+        Num: $unset
+        Fun: F4
+
+    pinky:
+      rows.top.layers:
+        Base: ":"
+        Sym1: ;
+        Media: Lvai
+      rows.top.mirror.layers:
+        Base: "Q"
+        Sym1: "`"
+        Sym2:
+          value: º
+          size: 5
+        Media: $unset
+        Fun: Pause
+
+      rows.home.layers:
+        Base: O
+        Sym1: >
+        Num: /
+        Media: Next
+      rows.home.mirror.layers:
+        Base: A
+        Sym1: <
+        Sym2: "̈"
+        Num: $unset
+        Media: $unset
+        Fun: ScrLock
+
+      rows.bottom.layers:
+        Base: "'"
+        Sym1: '"'
+        Num: "*"
+      rows.bottom.mirror.layers:
+        Base: Z
+        Sym1: °
+        Sym2: ¾
+        Num: $unset
+
+  thumb_cluster.columns:
+    outer_top.key:
+      layers:
+        Base:
+          value: ⌫
+          size: 6
+        Media: Mute
+        on_hold: Fun
+      mirror.layers:
+        Base:
+          value: Esc
+          size: 4
+        Media: $unset
+        on_hold: Nav
+
+    outer_bottom.key:
+      layers:
+        Base:
+          value: ⌦
+          size: 6
+        Media:
+          value: ■
+          size: 3
+        on_hold: Sym2
+      mirror.layers:
+        Base: ⇥
+        Media: $unset
+        on_hold: Num
+
+    middle.key:
+      layers:
+        Base:
+          value: ⏎
+          size: 9
+        Media:
+          value: ▶||
+          size: 4
+        on_hold: Sym1
+      mirror.layers:
+        Base:
+          value: ␣
+          size: 9
+        Media: $unset
+        on_hold: Sym1
+
+    inner_top.key:
+      layers:
+        Base:
+          value: Shift
+          size: 5
+    inner_bottom.key:
+      layers:
+        Base:
+          value: Ctrl
+          size: 5
+
+  nav_cluster.columns:
+    left:
+      key.layers:
+        Base:
+          value: ◀
+          size: 6
+      key.mirror.layers:
+        Base:
+          value: ⇲
+          size: 6
+
+    up_down:
+      rows.top.layers:
+        Base:
+          value: ▲
+          size: 9
+      rows.top.mirror.layers:
+        Base:
+          value: ⇞
+          size: 9
+
+      rows.bottom.layers:
+        Base:
+          value: ▼
+          size: 9
+      rows.bottom.mirror.layers:
+        Base:
+          value: ⇟
+          size: 9
+
+    right:
+      key.layers:
+        Base:
+          value: ▶
+          size: 6
+      key.mirror.layers:
+        Base:
+          value: ⇱
+          size: 6
+
+kle:
+  shift: [10kx, 2.5ky]
+  layers:
+    Base:
+      index: 9
+      size: 7
+      color: "#000000"
+    Sym1:
+      index: 2
+      size: 4
+      color: "#009600"
+    Sym2:
+      index: 3
+      size: 4
+      color: "#940000"
+    Num:
+      index: 3
+      size: 4
+      color: "#ff9900"
+    Nav:
+      index: 0
+      size: 4
+      color: "#00c2bd"
+    Fun:
+      index: 1
+      size: 2
+      color: "#ff0000"
+    Media:
+      index: 1
+      size: 2
+      color: "#ff00ff"

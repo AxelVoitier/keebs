@@ -1,0 +1,360 @@
+units:
+  kx: U
+  ky: U
+
+  # Columns stagger, referenced to index column
+  inner_off: -2.5  # Kyria
+  index_off: 0  # Should remain 0
+  middle_off: +6.5  # Kyria
+  ring_off: -(4/25)U  # YAEMK
+  pinky_off: -(5/7)U  # YAEMK
+  #outer_off: -(103/125)U  # YAEMK
+  #outer_off: -21.4  # Elephant42
+
+  # Columns absolute splay (degrees)
+  inner_splay: 0
+  index_splay: 0
+  middle_splay: 5
+  ring_splay: 10
+  pinky_splay: 15
+  #outer_splay: 20
+
+  # Thumb cluster
+  # arc_index_home_x_offset: 11.7604  # Kyria
+  arc_index_home_x_offset: 6  # For clearence between thumb and nav clusters
+  arc_index_home_y_offset: ky + 120 + 1  # Kyria + thumb/-av clusters clearence
+  thumb_central_radius: 90.4
+  thumb_middle_angle: 19
+
+  # Case
+  case_padding: 4
+  case_thumb_bottom_arc_radius: thumb_central_radius - 1ky - case_padding
+  case_thumb_top_arc_radius: thumb_central_radius + 1ky + case_padding
+
+points:
+  #rotate: 25
+  #mirror: 105
+  rotate: 0
+  mirror: 60
+  key:
+    width: kx
+    height: ky
+  zones:
+    matrix:
+      anchor.shift: [297/2 - 2kx, -210/2 - (-inner_off + index_off + middle_off)]
+      key:
+        padding: 1ky
+        spread: 1kx
+        tags:
+          1u: true
+      columns:
+        inner:
+          key.splay: -inner_splay
+          #rows.mod.skip: true
+        index:
+          key.stagger: -inner_off + index_off
+          key.splay: +inner_splay - index_splay
+          #rows.mod.skip: true
+        middle:
+          key.stagger: -index_off + middle_off
+          key.splay: +index_splay - middle_splay
+          key.spread: 1kx + 1
+          #rows.mod.skip: true
+        ring:
+          key.stagger: -middle_off + ring_off
+          key.splay: +middle_splay - ring_splay
+          #rows.mod.skip: true  # Defined by nav cluster instead
+        pinky:
+          key.stagger: -ring_off + pinky_off + 1
+          key.splay: +ring_splay - pinky_splay
+          key.spread: 1kx + 1
+          #rows.mod.skip: true  # Defined by nav cluster instead
+        #outer:
+        #  # $skip: true
+        #  key.stagger: -pinky_off + outer_off
+        #  key.splay: +pinky_splay - outer_splay
+        #  #rows.mod.skip: true
+      rows:
+        #mod:
+        bottom:
+        home:
+        top:
+
+    arc_center:
+      anchor:
+        ref: matrix_index_home
+        shift: [arc_index_home_x_offset, -arc_index_home_y_offset]
+
+    _case_thumb_bottom_arc_end:
+      anchor:
+        ref: arc_center
+        orient: thumb_middle_angle + 15
+        shift: [0, case_thumb_bottom_arc_radius]
+
+    _case_thumb_bottom_corner:
+      anchor:
+        ref: _case_thumb_bottom_arc_end
+        orient: 90
+        shift: [0, 0.5kx + case_padding]
+
+    _case_thumb_top_corner:
+      anchor:
+        ref: _case_thumb_bottom_corner
+        orient: -90
+        shift: [0, 2*(ky + case_padding)]
+
+    _case_thumb_top_arc_end:
+      anchor:
+        ref: _case_thumb_top_corner
+        orient: 90
+        shift: [0, -(0.5kx + case_padding)]
+
+
+    thumb_cluster:
+      anchor:
+        ref: arc_center
+      key:
+        padding: 1ky
+        spread: 0
+        tags:
+          1u: true
+      columns:
+        outer_top.key:
+          orient: thumb_middle_angle + 12
+          shift: [0, thumb_central_radius + 0.5ky + 0.5]
+        outer_bottom.key:
+          orient: thumb_middle_angle + 15
+          shift: [-0.5, thumb_central_radius - 0.5ky]
+        # outer2_top.key:
+        #   orient: thumb_middle_angle + 12*2
+        #   shift: [0, thumb_central_radius + 0.5ky]
+        # outer2_bottom.key:
+        #   orient: thumb_middle_angle + 15*2
+        #   shift: [0, thumb_central_radius - 0.5ky]
+        middle.key:
+          orient: thumb_middle_angle
+          shift: [0, thumb_central_radius]
+          height: 2ky
+          tags:
+            1u: $unset
+            2u: vertical
+        inner_top.key:
+          orient: thumb_middle_angle - 12
+          shift: [0, thumb_central_radius + 0.5ky + 0.5]
+        inner_bottom.key:
+          orient: thumb_middle_angle - 15
+          shift: [0.5, thumb_central_radius - 0.5ky - 0]
+
+    nav_cluster:
+      # $skip: true
+      anchor:
+        ref: matrix_ring_bottom
+        #orient: middle_splay - ring_splay
+        shift: [-kx, -2ky-1]
+      key:
+        padding: 1ky
+        spread: 1kx
+        tags:
+          1u: true
+      columns:
+        left:
+          rows.bottom.skip: true
+        up_down:
+          #key.stagger: +middle_off - ring_off
+          key.stagger: 1
+        right:
+          key.stagger: -ring_off + pinky_off
+          rows.bottom.skip: true
+      rows:
+        bottom:
+        top:
+
+outlines:
+  keys:
+    - what: rectangle
+      where: meta.tags.1u ~ true
+      size: [kx, ky]
+      operation: stack
+    - what: rectangle
+      where: meta.tags.2u ~ vertical
+      size: [kx, 2ky]
+      operation: stack
+    - what: rectangle
+      where: meta.tags.2u ~ horizontal
+      size: [2kx, ky]
+      operation: stack
+
+  keyholes:
+    - what: rectangle
+      where: meta.tags.1u ~ true
+      size: [14, 14]
+      operation: stack
+    - what: rectangle
+      where: meta.tags.2u ~ vertical
+      size: [14, 33.05]
+      operation: stack
+    - what: rectangle
+      where: meta.tags.2u ~ horizontal
+      size: [33.05, 14]
+      operation: stack
+
+  board:
+    - what: polygon
+      operation: stack
+      expand: case_padding
+      # joints: 2
+      fillet: 5
+      points:
+        - ref: matrix_inner_top
+          shift: [-0.5kx, 0.5ky]
+        - ref: matrix_middle_top
+          shift: [0, 0.5ky]
+        - ref: matrix_pinky_top
+          shift: [0.5kx, 0.5ky]
+        - ref: matrix_pinky_bottom
+          shift: [0.5kx, -0.5ky]
+        - ref: nav_cluster_up_down_bottom
+          shift: [0.5kx, -0.5ky]
+        - ref: thumb_cluster_inner_bottom
+          shift: [0, -0.5ky]
+        - ref: thumb_cluster_outer_bottom
+          shift: [-0.5kx, -0.5ky]
+        - ref: thumb_cluster_outer_top
+          shift: [-0.5kx, 0.5ky]
+        - ref: matrix_inner_bottom
+          shift: [-0.5kx, -0.5ky]
+
+  board_keys:
+    - name: board
+    - operation: stack
+      name: keys
+
+
+  # Bottom right corner arc: need to only get a portion of it
+  _case_right_bottom_corner:
+    # Base circle
+    - what: circle
+      where: matrix_middle_home
+      radius: 4.5kx
+    # One large vertical rectangle on the left
+    - what: rectangle
+      where: matrix_middle_home
+      adjust.shift: [-100, 0]
+      size: [200, 300]
+      operation: add
+    # One large horizontal rectangle on the top
+    - what: rectangle
+      where: matrix_middle_home
+      adjust.shift: [0, 100]
+      size: [300, 200]
+      operation: add
+
+  # Thumb cluster top arc: need to only get a portion of it
+  _case_thumb_top_arc:
+    # Base circle
+    - what: circle
+      where: arc_center
+      radius: case_thumb_top_arc_radius
+    # Occulting what is not inside the case
+    - what: polygon
+      points:
+        # One point on the arc on the left
+        - ref: arc_center
+          orient: thumb_middle_angle + 15 + 3
+          shift: [0, case_thumb_top_arc_radius]
+        # One point well inside the thumb cluster
+        - ref: thumb_cluster_middle
+        # One point on the right (does not have to be on the arc)
+        - ref: matrix_inner_bottom
+        # One point well outside, above, clearing the arc (ie. above its tangents)
+        - ref: thumb_cluster_middle
+          shift: [0, 5ky]
+      operation: intersect
+      #operation: stack
+
+  case:
+    # Top arc
+    - what: circle
+      where: matrix_middle_top
+      #adjust.shift: [0, -(arc_index_home_y_offset + middle_off)]
+      #radius: arc_index_home_y_offset + middle_off + 1.5ky + case_padding
+      adjust.shift: [0, -5.5ky]
+      radius: 4.5ky + 1.5ky + case_padding
+
+    # Thumb cluster bottom arc
+    - what: circle
+      where: arc_center
+      radius: case_thumb_bottom_arc_radius
+      operation: subtract
+
+    # General chuncky shape
+    - what: polygon
+      operation: intersect
+      #operation: stack
+      points:
+        # Top-left corner
+        - ref: matrix_inner_top
+          shift: [-30, 40]  # Very far to cover the top arc
+        # Top-right corner
+        - ref: matrix_pinky_top
+          shift: [0.5kx + case_padding, 50]  # Very far to cover the top arc
+        # Mid-right "corner"
+        - ref: matrix_pinky_bottom
+          shift: [0.5kx + case_padding, -0.5ky]  # Very far to cover the top arc
+        # Bottom right corner (far to cover the arc)
+        - ref: arc_center
+          shift:
+            # X: Reset to index home position + add 4 keys and padding
+            - -arc_index_home_x_offset + 3.1kx + case_padding
+            # Y: Radius of thumb cluster bottom arc
+            - case_thumb_bottom_arc_radius
+        # Pivot point between line and arc at the bottom
+        - ref: arc_center
+          shift: [0, case_thumb_bottom_arc_radius]
+        # Pivot point between arc and line before corner
+        - ref: _case_thumb_bottom_arc_end
+        # Thumb cluster bottom corner
+        - ref: _case_thumb_bottom_corner
+        # Thump cluster top corner
+        - ref: _case_thumb_top_corner
+        # Pivot point between line and arc at the top of thumb cluster
+        - ref: _case_thumb_top_arc_end
+        # Some point inside the thumb cluster aligned with top-left corner
+        - ref: matrix_inner_bottom
+          shift: [-30, -1.5ky]
+
+    # Bottom right corner arc
+    #- name: _case_right_bottom_corner
+    #  #operation: intersect
+    #  operation: stack
+
+    # Thumb cluster top arc
+    - name: _case_thumb_top_arc
+      operation: add
+      #operation: stack
+
+  case_keys:
+    - name: case
+      fillet: 5
+    - operation: stack
+      name: keys
+
+  keys_plate:
+    - name: case
+      fillet: 5
+    - operation: stack
+      name: keyholes
+
+  all:
+    - name: case
+      fillet: 5
+    - operation: stack
+      name: board
+    - operation: stack
+      name: keys
+
+pcbs:
+  HandyLayout-5-10-15:
+    outlines:
+      - outline: case_keys
+        layer: Dwgs.User

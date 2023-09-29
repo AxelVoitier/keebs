@@ -1,0 +1,189 @@
+outlines:
+  keys:
+    - what: rectangle
+      where: meta.tags.1u ~ true
+      size: [kx, ky]
+      operation: stack
+    - what: rectangle
+      where: meta.tags.2u ~ vertical
+      size: [kx, 2ky]
+      operation: stack
+    - what: rectangle
+      where: meta.tags.2u ~ horizontal
+      size: [2kx, ky]
+      operation: stack
+
+  keyholes:
+    - what: rectangle
+      where: meta.tags.1u ~ true
+      size: [14, 14]
+      operation: stack
+    - what: rectangle
+      where: meta.tags.2u ~ vertical
+      size: [14, 33.05]
+      operation: stack
+    - what: rectangle
+      where: meta.tags.2u ~ horizontal
+      size: [33.05, 14]
+      operation: stack
+
+  board:
+    - what: polygon
+      operation: stack
+      expand: case_padding
+      # joints: 2
+      fillet: 5
+      points:
+        - ref: matrix_inner_top
+          shift: [-0.5kx, 0.5ky]
+        - ref: matrix_middle_top
+          shift: [0, 0.5ky]
+        - ref: matrix_pinky_top
+          shift: [0.5kx, 0.5ky]
+        - ref: matrix_pinky_bottom
+          shift: [0.5kx, -0.5ky]
+        - ref: nav_cluster_up_down_bottom
+          shift: [0.5kx, -0.5ky]
+        - ref: thumb_cluster_inner_bottom
+          shift: [0, -0.5ky]
+        - ref: thumb_cluster_outer_bottom
+          shift: [-0.5kx, -0.5ky]
+        - ref: thumb_cluster_outer_top
+          shift: [-0.5kx, 0.5ky]
+        - ref: matrix_inner_bottom
+          shift: [-0.5kx, -0.5ky]
+
+  board_keys:
+    - name: board
+    - operation: stack
+      name: keys
+
+
+  # Bottom right corner arc: need to only get a portion of it
+  _case_right_bottom_corner:
+    # Base circle
+    - what: circle
+      where: matrix_middle_home
+      radius: 4.5kx
+    # One large vertical rectangle on the left
+    - what: rectangle
+      where: matrix_middle_home
+      adjust.shift: [-100, 0]
+      size: [200, 300]
+      operation: add
+    # One large horizontal rectangle on the top
+    - what: rectangle
+      where: matrix_middle_home
+      adjust.shift: [0, 100]
+      size: [300, 200]
+      operation: add
+
+  # Thumb cluster top arc: need to only get a portion of it
+  _case_thumb_top_arc:
+    # Base circle
+    - what: circle
+      where: arc_center
+      radius: case_thumb_top_arc_radius
+    # Occulting what is not inside the case
+    - what: polygon
+      points:
+        # One point on the arc on the left
+        - ref: arc_center
+          orient: thumb_middle_angle + 15 + 3
+          shift: [0, case_thumb_top_arc_radius]
+        # One point well inside the thumb cluster
+        - ref: thumb_cluster_middle
+        # One point on the right (does not have to be on the arc)
+        - ref: matrix_inner_bottom
+        # One point well outside, above, clearing the arc (ie. above its tangents)
+        - ref: thumb_cluster_middle
+          shift: [0, 5ky]
+      operation: intersect
+      #operation: stack
+
+  case:
+    # Top arc
+    - what: circle
+      where: matrix_middle_top
+      #adjust.shift: [0, -(arc_index_home_y_offset + middle_off)]
+      #radius: arc_index_home_y_offset + middle_off + 1.5ky + case_padding
+      adjust.shift: [0, -5.5ky]
+      radius: 4.5ky + 1.5ky + case_padding
+
+    # Thumb cluster bottom arc
+    - what: circle
+      where: arc_center
+      radius: case_thumb_bottom_arc_radius
+      operation: subtract
+
+    # General chuncky shape
+    - what: polygon
+      operation: intersect
+      #operation: stack
+      points:
+        # Top-left corner
+        - ref: matrix_inner_top
+          shift: [-30, 40]  # Very far to cover the top arc
+        # Top-right corner
+        - ref: matrix_pinky_top
+          shift: [0.5kx + case_padding, 50]  # Very far to cover the top arc
+        # Mid-right "corner"
+        - ref: matrix_pinky_bottom
+          shift: [0.5kx + case_padding, -0.5ky]  # Very far to cover the top arc
+        # Bottom right corner (far to cover the arc)
+        - ref: arc_center
+          shift:
+            # X: Reset to index home position + add 4 keys and padding
+            - -arc_index_home_x_offset + 3.1kx + case_padding
+            # Y: Radius of thumb cluster bottom arc
+            - case_thumb_bottom_arc_radius
+        # Pivot point between line and arc at the bottom
+        - ref: arc_center
+          shift: [0, case_thumb_bottom_arc_radius]
+        # Pivot point between arc and line before corner
+        - ref: _case_thumb_bottom_arc_end
+        # Thumb cluster bottom corner
+        - ref: _case_thumb_bottom_corner
+        # Thump cluster top corner
+        - ref: _case_thumb_top_corner
+        # Pivot point between line and arc at the top of thumb cluster
+        - ref: _case_thumb_top_arc_end
+        # Some point inside the thumb cluster aligned with top-left corner
+        - ref: matrix_inner_bottom
+          shift: [-30, -1.5ky]
+
+    # Bottom right corner arc
+    #- name: _case_right_bottom_corner
+    #  #operation: intersect
+    #  operation: stack
+
+    # Thumb cluster top arc
+    - name: _case_thumb_top_arc
+      operation: add
+      #operation: stack
+
+  case_keys:
+    - name: case
+      fillet: 5
+    - operation: stack
+      name: keys
+
+  keys_plate:
+    - name: case
+      fillet: 5
+    - operation: stack
+      name: keyholes
+
+  all:
+    - name: case
+      fillet: 5
+    - operation: stack
+      name: board
+    - operation: stack
+      name: keys
+
+pcbs:
+  HandyLayout-5-10-15:
+    outlines:
+      - outline: case_keys
+        layer: Dwgs.User
