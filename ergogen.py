@@ -9,23 +9,24 @@
 # spell-checker:ignore
 ''''''
 from __future__ import annotations
-from ast import Import
 
 # System imports
 import logging
 import re
+from collections import OrderedDict
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Annotated, Optional
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
     from typing import TypeAlias, Any
 
 # Third-party imports
+import hiyapyco
 try:
-    from clyo import ClyoTyper, Argument
+    from clyo import ClyoTyper, Argument, Option
 except ImportError:
-    from typer import Typer as ClyoTyper, Argument
+    from typer import Typer as ClyoTyper, Argument, Option
 from rich import print
 import yaml
 try:
@@ -126,27 +127,47 @@ class Keyboard:
 
         return data
 
-    def _unnest(self, data: dict[str, Keyboard.ElementData]) -> dict[str, Keyboard.ElementData]:
+    @classmethod
+    def _unnest(cls, data: dict[str, Keyboard.ElementData]) -> dict[str, Keyboard.ElementData]:
+        # print(f'> unnest: {data=} (type={type(data)})')
+        if not isinstance(data, dict):
+            return data
+
         def handle_dict_and_list(value: Keyboard.ElementData) -> Keyboard.ElementData:
             if isinstance(value, dict):
-                return self._unnest(value)
+                return cls._unnest(value)
             elif isinstance(value, list):
                 return [handle_dict_and_list(item) for item in value]
             else:
                 return value
 
-        new_data: dict[str, Keyboard.ElementData] = {}
+        def recursive_update(
+            dict1: dict[str, Keyboard.ElementData],
+            dict2: dict[str, Keyboard.ElementData],
+        ) -> dict[str, Keyboard.ElementData]:
+            for k, v in dict2.items():
+                if isinstance(v, dict):
+                    dict1[k] = recursive_update(dict1.get(k, OrderedDict()), v)
+                else:
+                    dict1[k] = v
+            return dict1
+
+        new_data: dict[str, Keyboard.ElementData] = OrderedDict()
         for k, v in data.items():
             subkeys = k.split('.', 1)
             key = subkeys.pop(0)
             if subkeys:
-                v = self._unnest({subkeys.pop(): v})
+                v = cls._unnest(OrderedDict({subkeys.pop(): v}))
             else:
                 v = handle_dict_and_list(v)
             if key in new_data:
-                new_data[key].update(v)
+                # print(f'{key=} in {new_data=}, updating with {v=}')
+                recursive_update(new_data[key], v)
+                # print(f'Now {new_data=}')
             else:
                 new_data[key] = v
+
+        # print(f'< unnest: {new_data}')
 
         return new_data
 
@@ -200,9 +221,46 @@ ergogen_cli = ClyoTyper(help='Ergogen-related commands')
 
 
 @ergogen_cli.command()
+def merge_configs(
+    yaml_files: list[str],
+    output: Path = Option(..., '--output', '-o'),
+) -> None:
+    import jinja2
+
+    class PreproccessedHiYaPyCo(hiyapyco.HiYaPyCo):
+
+        def __init__(self, *args: Any, **kwargs: Any) -> None:
+            self.__already_unnested = False
+            super().__init__(*args, **kwargs)
+
+        def _deepmerge(self, a, b):
+            if not self.__already_unnested:
+                self.__already_unnested = True
+                try:
+                    a = Keyboard._unnest(a)
+                    b = Keyboard._unnest(b)
+                    return super()._deepmerge(a, b)
+                finally:
+                    self.__already_unnested = False
+            else:
+                return super()._deepmerge(a, b)
+
+    hiyapyco.jinja2env = jinja2.Environment(undefined=jinja2.StrictUndefined)
+    merged = PreproccessedHiYaPyCo(
+        yaml_files,
+        method=hiyapyco.METHOD_MERGE,
+        interpolate=True,
+        failonmissingfiles=True,
+    ).data()
+
+    with output.open(mode='w') as f:
+        hiyapyco.dump(merged, stream=f, indent=2)
+
+
+@ergogen_cli.command()
 def gen_kle(
     ergogen_yaml: Path,
-    output: Path = Argument(None),
+    output: Annotated[Optional[Path], Argument()] = None,
 ) -> None:
     from kle import Keyboard as KLEKeyboard
     keeb = Keyboard(ergogen_yaml)
