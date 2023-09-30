@@ -43,38 +43,55 @@ points:
             top:
               layers:
                 Base: J
-                Sym1: '-'
+                Sym1: '*'
+                Num: '*'
                 Media: Ltog
               mirror:
                 layers:
                   Base: B
-                  Sym1: $
-                  Sym2: "\xBD"
+                  Fun: Pause
+                  Sym1: $unset
+                  Num: $unset
                   Media: $unset
             home:
               layers:
                 Base: M
-                Num: '-'
+                Sym1: '='
+                Num:
+                  no-mod: .
+                  shift: ','
+                Math:
+                  no-mod: "\u208C"
+                  shift: "\u207C"
               mirror:
                 layers:
                   Base: G
-                  Sym1: '|'
+                  Sym1: '@'
                   Sym2: "\u0327"
+                  Fun:
+                    value: PrtScn
+                    size: 1
                   Num: $unset
-                  Fun: PrtScn
+                  Math: $unset
             bottom:
               layers:
                 Base: K
-                Sym1: +
-                Num: +
-                Nav: Ins
+                Sym1:
+                  no-mod: /
+                  shift: '?'
+                Num: /
+                Math:
+                  value: "\u2044"
+                  size: 4
               mirror:
                 layers:
                   Base: V
                   Sym1: \
-                  Sym2: "\xBC"
+                  Fun:
+                    value: ScrLock
+                    size: 1
                   Num: $unset
-                  Nav: $unset
+                  Math: $unset
         index:
           key:
             stagger: -inner_off + index_off
@@ -83,45 +100,49 @@ points:
             top:
               layers:
                 Base: L
-                Sym1: '*'
                 Num: 7
+                Math:
+                  no-mod: "\u2087"
+                  shift: "\u2077"
                 Media: Lmod
               mirror:
                 layers:
                   Base: P
-                  Sym1: '#'
-                  Sym2:
-                    value: "\xB3"
-                    size: 5
+                  Sym1: '|'
+                  Fun: F4
                   Num: $unset
-                  Fun: F12
+                  Math: $unset
                   Media: $unset
             home:
               layers:
                 Base: N
                 Sym1: )
                 Num: 4
-                Media: Prev
+                Math:
+                  no-mod: "\u2084"
+                  shift: "\u2074"
               mirror:
                 layers:
                   Base: T
                   Sym1: (
                   Sym2: "\u0301"
+                  Fun: F8
                   Num: $unset
-                  Fun: F9
-                  Media: $unset
+                  Math: $unset
             bottom:
               layers:
                 Base: H
-                Sym1: /
                 Num: 1
+                Math:
+                  no-mod: "\u2081"
+                  shift: "\xB9"
               mirror:
                 layers:
                   Base: D
-                  Sym1: $unset
-                  Sym2: "\xB5"
+                  Sym1: '#'
+                  Fun: F12
                   Num: $unset
-                  Fun: F6
+                  Math: $unset
         middle:
           key:
             stagger: -index_off + middle_off
@@ -133,43 +154,53 @@ points:
                 Base: U
                 Sym1: '!'
                 Num: 8
+                Math:
+                  no-mod: "\u2088"
+                  shift: "\u2078"
                 Media: Lhui
               mirror:
                 layers:
                   Base: F
                   Sym1: ^
-                  Sym2:
-                    value: "\xB2"
-                    size: 5
+                  Fun: F3
                   Num: $unset
+                  Math: $unset
                   Media: $unset
-                  Fun: F11
             home:
               layers:
                 Base: E
                 Sym1: ']'
                 Num: 5
-                Media: V+
+                Math:
+                  no-mod: "\u2085"
+                  shift: "\u2075"
               mirror:
                 layers:
                   Base: S
                   Sym1: '['
                   Sym2: "\u0300"
+                  Fun: F7
                   Num: $unset
-                  Media: $unset
-                  Fun: F8
+                  Math: $unset
             bottom:
               layers:
-                Base: ','
-                Sym1: '?'
+                Base:
+                  no-mod: ','
+                  shift:
+                    value: ;
+                    size: 5
+                Sym1: ;
                 Num: 2
+                Math:
+                  no-mod: "\u2082"
+                  shift: "\xB2"
               mirror:
                 layers:
                   Base: C
                   Sym1: '&'
-                  Sym2: "\u2126"
+                  Fun: F11
                   Num: $unset
-                  Fun: F5
+                  Math: $unset
         ring:
           key:
             stagger: -middle_off + ring_off
@@ -180,43 +211,53 @@ points:
                 Base: Y
                 Sym1: '%'
                 Num: 9
+                Math:
+                  no-mod: "\u2089"
+                  shift: "\u2079"
                 Media: Lsai
               mirror:
                 layers:
                   Base: W
                   Sym1: '~'
-                  Sym2:
-                    value: "\xB9"
-                    size: 5
+                  Fun: F2
                   Num: $unset
+                  Math: $unset
                   Media: $unset
-                  Fun: F10
             home:
               layers:
                 Base: I
                 Sym1: '}'
                 Num: 6
-                Media: V-
+                Math:
+                  no-mod: "\u2086"
+                  shift: "\u2076"
               mirror:
                 layers:
                   Base: R
                   Sym1: '{'
                   Sym2: "\u0302"
+                  Fun: F6
                   Num: $unset
-                  Media: $unset
-                  Fun: F7
+                  Math: $unset
             bottom:
               layers:
-                Base: .
-                Sym1: "\u20AC"
+                Base:
+                  no-mod: .
+                  shift:
+                    value: ':'
+                    size: 5
+                Sym1: ':'
                 Num: 3
+                Math:
+                  no-mod: "\u2083"
+                  shift: "\xB3"
               mirror:
                 layers:
                   Base: X
-                  Sym1: '@'
-                  Sym2: "\xB1"
+                  Sym1: $
+                  Fun: F10
                   Num: $unset
-                  Fun: F4
+                  Math: $unset
         pinky:
           key:
             stagger: -ring_off + pinky_off + 1
@@ -225,43 +266,58 @@ points:
           rows:
             top:
               layers:
-                Base: ':'
-                Sym1: ;
+                Base:
+                  no-mod:
+                    value: '-'
+                    index: 10
+                  shift: _
+                Sym1: "\xB1"
+                Num: '-'
+                Math:
+                  no-mod: "\u208B"
+                  shift: "\u207B"
                 Media: Lvai
               mirror:
                 layers:
                   Base: Q
                   Sym1: '`'
-                  Sym2:
-                    value: "\xBA"
-                    size: 5
+                  Fun: F1
+                  Num: $unset
+                  Math: $unset
                   Media: $unset
-                  Fun: Pause
             home:
               layers:
                 Base: O
-                Sym1: ''
-                Num: /
-                Media: Next
+                Sym1: '>'
+                Num: 0
+                Math:
+                  no-mod: "\u2080"
+                  shift: "\u2070"
               mirror:
                 layers:
                   Base: A
                   Sym1: <
                   Sym2: "\u0308"
+                  Fun: F5
                   Num: $unset
-                  Media: $unset
-                  Fun: ScrLock
+                  Math: $unset
             bottom:
               layers:
-                Base: ''''
-                Sym1: '"'
-                Num: '*'
+                Base:
+                  no-mod: ''''
+                  shift: '"'
+                Sym1: "\xB1"
+                Num: +
+                Math:
+                  no-mod: "\u208A"
+                  shift: "\u207A"
               mirror:
                 layers:
                   Base: Z
                   Sym1: "\xB0"
-                  Sym2: "\xBE"
+                  Fun: F9
                   Num: $unset
+                  Math: $unset
       rows:
         bottom: null
         home: null
@@ -326,8 +382,8 @@ points:
                 Base:
                   value: Esc
                   size: 4
+                on_hold: Media
                 Media: $unset
-                on_hold: Nav
         outer_bottom:
           key:
             orient: thumb_middle_angle + 15
@@ -338,6 +394,9 @@ points:
               Base:
                 value: "\u2326"
                 size: 6
+              Sym1:
+                value: Ins
+                size: 2
               Media:
                 value: "\u25A0"
                 size: 3
@@ -345,8 +404,9 @@ points:
             mirror:
               layers:
                 Base: "\u21E5"
-                Media: $unset
                 on_hold: Num
+                Sym1: $unset
+                Media: $unset
         middle:
           key:
             orient: thumb_middle_angle
@@ -361,6 +421,7 @@ points:
               Base:
                 value: "\u23CE"
                 size: 9
+              Num: '='
               Media:
                 value: "\u25B6||"
                 size: 4
@@ -370,8 +431,9 @@ points:
                 Base:
                   value: "\u2423"
                   size: 9
-                Media: $unset
                 on_hold: Sym1
+                Num: $unset
+                Media: $unset
         inner_top:
           key:
             orient: thumb_middle_angle - 12
@@ -380,8 +442,8 @@ points:
             - thumb_central_radius + 0.5ky + 0.5
             layers:
               Base:
-                value: Shift
-                size: 5
+                value: "\u21E7"
+                size: 9
         inner_bottom:
           key:
             orient: thumb_middle_angle - 15
@@ -390,8 +452,8 @@ points:
             - thumb_central_radius - 0.5ky - 0
             layers:
               Base:
-                value: Ctrl
-                size: 5
+                value: "\u2388"
+                size: 9
     nav_cluster:
       anchor:
         ref: matrix_ring_bottom
@@ -413,11 +475,19 @@ points:
               Base:
                 value: "\u25C0"
                 size: 6
+              Sym1:
+                value: "\u21F1"
+                size: 5
+              Media: Prev
             mirror:
               layers:
                 Base:
                   value: "\u21F2"
                   size: 6
+                Sym1:
+                  value: "\u25B6"
+                  size: 3
+                Media: $unset
         up_down:
           key:
             stagger: 1
@@ -427,21 +497,33 @@ points:
                 Base:
                   value: "\u25B2"
                   size: 9
+                Sym1:
+                  value: "\u21DE"
+                  size: 6
+                Media: V+
               mirror:
                 layers:
                   Base:
                     value: "\u21DE"
                     size: 9
+                  Sym1: "\u25B2"
+                  Media: $unset
             bottom:
               layers:
                 Base:
                   value: "\u25BC"
                   size: 9
+                Sym1:
+                  value: "\u21DF"
+                  size: 6
+                Media: V-
               mirror:
                 layers:
                   Base:
                     value: "\u21DF"
                     size: 9
+                  Sym1: "\u25BC"
+                  Media: $unset
         right:
           key:
             stagger: -ring_off + pinky_off
@@ -449,11 +531,19 @@ points:
               Base:
                 value: "\u25B6"
                 size: 6
+              Sym1:
+                value: "\u21F2"
+                size: 5
+              Media: Next
             mirror:
               layers:
                 Base:
                   value: "\u21F1"
                   size: 6
+                Sym1:
+                  value: "\u25C0"
+                  size: 3
+                Media: $unset
           rows:
             bottom:
               skip: true
@@ -660,11 +750,17 @@ kle:
   - 2.5ky
   layers:
     Base:
-      index: 9
+      no-mod:
+        index: 9
+      shift:
+        index: 8
       size: 7
       color: '#000000'
     Sym1:
-      index: 2
+      no-mod:
+        index: 2
+      shift:
+        index: 7
       size: 4
       color: '#009600'
     Sym2:
@@ -672,19 +768,22 @@ kle:
       size: 4
       color: '#940000'
     Num:
-      index: 3
+      no-mod:
+        index: 1
+      shift:
+        index: 6
       size: 4
       color: '#ff9900'
-    Nav:
-      index: 0
-      size: 4
+    Math:
+      index: 3
+      size: 5
       color: '#00c2bd'
     Fun:
-      index: 1
+      index: 0
       size: 2
       color: '#ff0000'
     Media:
-      index: 1
+      index: 0
       size: 2
       color: '#ff00ff'
 layers:
@@ -692,6 +791,6 @@ layers:
   Sym1: null
   Sym2: null
   Num: null
-  Nav: null
+  Math: null
   Fun: null
   Media: null

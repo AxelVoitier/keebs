@@ -14,7 +14,7 @@ from __future__ import annotations
 import json
 import logging
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Iterable, Iterator
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -31,13 +31,14 @@ class Keyboard:
 
     if TYPE_CHECKING:
         ElementType: TypeAlias = str | int | float | list['ElementType'] | dict[str, 'ElementType']
+        LayerInfoType: TypeAlias = int | str | dict[str, 'LayerInfoType']
 
     def __init__(self, filepath: Path) -> None:
         self._filepath = filepath
         self._data: list[Keyboard.ElementType] | None = None
         self._current_y = 0
         self._offset: tuple[float, float] = (0, 0)
-        self._layers: dict[str, dict[str, int | str]] = {}
+        self._layers: dict[str, Keyboard.LayerInfoType] = {}
 
     @property
     def data(self) -> list[Keyboard.ElementType]:
@@ -81,7 +82,7 @@ class Keyboard:
         name: str,
         width: float,
         height: float,
-        layers: dict[str, str],
+        layers: dict[str, Keyboard.LayerInfoType],
         **kwargs: Any
     ) -> None:
         # y = (-y / 19.05) - self._current_y
@@ -108,33 +109,62 @@ class Keyboard:
             params['h'] = height / 19.05
             params['y'] = -params['h'] / 2
 
-        def layer_meta(
+        def get_layer_info(
             layer: str,
-            meta: str,
-            value: int | str | dict[str, int | str],
-            default: int | str | None = None
-        ) -> int | str:
-            if isinstance(value, dict):
-                if meta in value:
-                    return value[meta]
-            if default is not None:
-                return self.layers[layer].get(meta, default)
+            modifier: str,
+            key_value: Keyboard.LayerInfoType,
+            defaults: dict[str, int | str] | None = None,
+        ) -> dict[str, int | str]:
+            def filter_keys(d: dict[str, Any], not_value: bool = False) -> dict[str, Any]:
+                if not_value:
+                    valid_keys = ('index', 'size', 'color')
+                else:
+                    valid_keys = ('value', 'index', 'size', 'color')
+
+                return {k: v for k, v in d.items() if k in valid_keys}
+
+            if defaults is None:
+                info = dict(value='', index=9, size='', color='')
             else:
-                return self.layers[layer][meta]
+                info = dict(defaults)
+
+            not_value = (modifier != 'no-mod')
+
+            info.update(filter_keys(self.layers, not_value))
+            info.update(filter_keys(self.layers.get(modifier, {})))
+
+            if layer in self.layers:
+                info.update(filter_keys(self.layers[layer], not_value))
+                info.update(filter_keys(self.layers[layer].get(modifier, {})))
+
+            if isinstance(key_value, dict):
+                info.update(filter_keys(key_value, not_value))
+                if modifier in key_value:
+                    if isinstance(key_value[modifier], dict):
+                        info.update(filter_keys(key_value[modifier]))
+                    else:
+                        info['value'] = key_value[modifier]
+            elif not not_value:
+                info['value'] = key_value
+
+            return info
 
         legends = [''] * 12
         sizes = [0] * 12
         colors = [''] * 12
         for layer, value in layers.items():
             if layer == 'on_hold':
-                index = 4 if not isinstance(value, dict) else value.get('index', 4)
-                legends[index] = value if not isinstance(value, dict) else value.get('value', 'X')
-                colors[index] = layer_meta(value, 'color', value, '')
-            else:
-                index = layer_meta(layer, 'index', value, 9)
-                legends[index] = layer_meta(layer, 'value', value, value)
-                sizes[index] = layer_meta(layer, 'size', value)
-                colors[index] = layer_meta(layer, 'color', value, '')
+                value = value if isinstance(value, dict) else dict(value=value)
+                layer = value['value']
+                value.setdefault('index', 4)
+            for modifier in ('no-mod', 'shift'):
+                layer_info = get_layer_info(layer, modifier, value)
+                if layer_info['value'] == '':
+                    continue
+                index = layer_info['index']
+                legends[index] += str(layer_info['value'])
+                sizes[index] = layer_info['size']
+                colors[index] = layer_info['color']
 
         params['fa'] = sizes
         params['t'] = '\n'.join(colors).rstrip('\n')

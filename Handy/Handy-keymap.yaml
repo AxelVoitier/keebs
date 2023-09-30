@@ -1,9 +1,49 @@
+kle:
+  shift: [10kx, 2.5ky]
+  layers:
+    Base:
+      no-mod.index: 9
+      shift.index: 8
+      size: 7
+      color: "#000000"
+    Sym1:
+      no-mod.index: 2
+      shift.index: 7  # [7, 2]
+      size: 4
+      color: "#009600"
+    Sym2:
+      index: 3
+      size: 4
+      color: "#940000"
+    Num:
+      no-mod.index: 1
+      shift.index: 6
+      size: 4
+      color: "#ff9900"
+    Math:
+      index: 3
+      size: 5
+      color: "#00c2bd"
+    # Nav:
+    #   index: 0
+    #   size: 4
+    #   color: "#00c2bd"
+    Fun:
+      index: 0
+      size: 2
+      color: "#ff0000"
+    Media:
+      index: 0
+      size: 2
+      color: "#ff00ff"
+
 layers:
   Base:
   Sym1:
   Sym2:
   Num:
-  Nav:
+  Math:
+  # Nav:
   Fun:
   Media:
 
@@ -12,192 +52,248 @@ points.zones:
     inner:
       rows.top.layers:
         Base: J
-        Sym1: "-"
+        Sym1: "*"
+        Num: "*"
         Media: Ltog
       rows.top.mirror.layers:
         Base: B
-        Sym1: "$"
-        Sym2: ½
+        Fun: Pause
+        Sym1: $unset
+        Num: $unset
         Media: $unset
 
       rows.home.layers:
         Base: M
-        Num: "-"
+        Sym1: "="
+        Num:
+          no-mod: "."
+          shift: ","
+        Math:
+          no-mod: ₌  # Subscript
+          shift: ⁼  # Superscript
       rows.home.mirror.layers:
         Base: G
-        Sym1: "|"
+        Sym1: "@"
         Sym2: "̧"
+        Fun:
+          value: PrtScn
+          size: 1
         Num: $unset
-        Fun: PrtScn
+        Math: $unset
 
       rows.bottom.layers:
         Base: K
-        Sym1: +
-        Num: +
-        Nav: Ins
+        Sym1:
+          no-mod: "/"
+          shift: "?"
+        Num: "/"
+        Math:
+          value: "⁄"
+          size: 4
       rows.bottom.mirror.layers:
         Base: V
         Sym1: "\\"
-        Sym2: ¼
+        Fun:
+          value: ScrLock
+          size: 1
         Num: $unset
-        Nav: $unset
+        Math: $unset
 
     index:
       rows.top.layers:
         Base: L
-        Sym1: "*"
         Num: 7
+        Math:
+          no-mod: ₇  # Subscript
+          shift: ⁷  # Superscript
         Media: Lmod
       rows.top.mirror.layers:
         Base: P
-        Sym1: "#"
-        Sym2:
-          value: ³
-          size: 5
+        Sym1: "|"
+        Fun: F4
         Num: $unset
-        Fun: F12
+        Math: $unset
         Media: $unset
 
       rows.home.layers:
         Base: N
-        Sym1: )
+        Sym1: ")"
         Num: 4
-        Media: Prev
+        Math:
+          no-mod: ₄  # Subscript
+          shift: ⁴  # Superscript
       rows.home.mirror.layers:
         Base: T
         Sym1: (
         Sym2: "́"
+        Fun: F8
         Num: $unset
-        Fun: F9
-        Media: $unset
+        Math: $unset
 
       rows.bottom.layers:
         Base: H
-        Sym1: /
         Num: 1
+        Math:
+          no-mod: ₁  # Subscript
+          shift: ¹  # Superscript
       rows.bottom.mirror.layers:
         Base: D
-        Sym1: $unset
-        Sym2: µ
+        Sym1: "#"
+        Fun: F12
         Num: $unset
-        Fun: F6
+        Math: $unset
 
     middle:
       rows.top.layers:
         Base: U
         Sym1: "!"
         Num: 8
+        Math:
+          no-mod: ₈  # Subscript
+          shift: ⁸  # Superscript
         Media: Lhui
       rows.top.mirror.layers:
         Base: F
         Sym1: "^"
-        Sym2:
-          value: ²
-          size: 5
+        Fun: F3
         Num: $unset
+        Math: $unset
         Media: $unset
-        Fun: F11
 
       rows.home.layers:
         Base: E
         Sym1: "]"
         Num: 5
-        Media: V+
+        Math:
+          no-mod: ₅  # Subscript
+          shift: ⁵  # Superscript
       rows.home.mirror.layers:
         Base: S
         Sym1: "["
         Sym2: "̀"
+        Fun: F7
         Num: $unset
-        Media: $unset
-        Fun: F8
+        Math: $unset
 
       rows.bottom.layers:
-        Base: ","
-        Sym1: "?"
+        Base:
+          no-mod: ","
+          shift:
+            value: ";"
+            size: 5
+        Sym1: ";"
         Num: 2
+        Math:
+          no-mod: ₂  # Subscript
+          shift: ²  # Superscript
       rows.bottom.mirror.layers:
         Base: C
         Sym1: "&"
-        Sym2: Ω
+        Fun: F11
         Num: $unset
-        Fun: F5
+        Math: $unset
 
     ring:
       rows.top.layers:
         Base: Y
         Sym1: "%"
         Num: 9
+        Math:
+          no-mod: ₉  # Subscript
+          shift: ⁹  # Superscript
         Media: Lsai
       rows.top.mirror.layers:
         Base: W
         Sym1: "~"
-        Sym2:
-          value: ¹
-          size: 5
+        Fun: F2
         Num: $unset
+        Math: $unset
         Media: $unset
-        Fun: F10
 
       rows.home.layers:
         Base: I
         Sym1: "}"
         Num: 6
-        Media: V-
+        Math:
+          no-mod: ₆  # Subscript
+          shift: ⁶  # Superscript
       rows.home.mirror.layers:
         Base: R
         Sym1: "{"
         Sym2: "̂"
+        Fun: F6
         Num: $unset
-        Media: $unset
-        Fun: F7
+        Math: $unset
 
       rows.bottom.layers:
-        Base: .
-        Sym1: €
+        Base:
+          no-mod: "."
+          shift:
+            value: ":"
+            size: 5
+        Sym1: ":"
         Num: 3
+        Math:
+          no-mod: ₃  # Subscript
+          shift: ³  # Superscript
       rows.bottom.mirror.layers:
         Base: X
-        Sym1: "@"
-        Sym2: ±
+        Sym1: "$"
+        Fun: F10
         Num: $unset
-        Fun: F4
+        Math: $unset
 
     pinky:
       rows.top.layers:
-        Base: ":"
-        Sym1: ;
+        Base:
+          no-mod:
+            value: "-"
+            index: 10
+          shift: "_"
+        Sym1: ±
+        Num: "-"
+        Math:
+          no-mod: ₋  # Subscript
+          shift: ⁻  # Superscript
         Media: Lvai
       rows.top.mirror.layers:
         Base: "Q"
         Sym1: "`"
-        Sym2:
-          value: º
-          size: 5
+        Fun: F1
+        Num: $unset
+        Math: $unset
         Media: $unset
-        Fun: Pause
 
       rows.home.layers:
         Base: O
-        Sym1: >
-        Num: /
-        Media: Next
+        Sym1: ">"
+        Num: 0
+        Math:
+          no-mod: ₀  # Subscript
+          shift: ⁰  # Superscript
       rows.home.mirror.layers:
         Base: A
         Sym1: <
         Sym2: "̈"
+        Fun: F5
         Num: $unset
-        Media: $unset
-        Fun: ScrLock
+        Math: $unset
 
       rows.bottom.layers:
-        Base: "'"
-        Sym1: '"'
-        Num: "*"
+        Base:
+          no-mod: "'"
+          shift: '"'
+        Sym1: ±
+        Num: +
+        Math:
+          no-mod: ₊  # Subscript
+          shift: ⁺  # Superscript
       rows.bottom.mirror.layers:
         Base: Z
         Sym1: °
-        Sym2: ¾
+        Fun: F9
         Num: $unset
+        Math: $unset
 
   thumb_cluster.columns:
     outer_top.key:
@@ -211,28 +307,33 @@ points.zones:
         Base:
           value: Esc
           size: 4
+        on_hold: Media
         Media: $unset
-        on_hold: Nav
 
     outer_bottom.key:
       layers:
         Base:
           value: ⌦
           size: 6
+        Sym1:
+          value: Ins
+          size: 2
         Media:
           value: ■
           size: 3
         on_hold: Sym2
       mirror.layers:
         Base: ⇥
-        Media: $unset
         on_hold: Num
+        Sym1: $unset
+        Media: $unset
 
     middle.key:
       layers:
         Base:
           value: ⏎
           size: 9
+        Num: "="
         Media:
           value: ▶||
           size: 4
@@ -241,19 +342,20 @@ points.zones:
         Base:
           value: ␣
           size: 9
-        Media: $unset
         on_hold: Sym1
+        Num: $unset
+        Media: $unset
 
     inner_top.key:
       layers:
         Base:
-          value: Shift
-          size: 5
+          value: ⇧
+          size: 9
     inner_bottom.key:
       layers:
         Base:
-          value: Ctrl
-          size: 5
+          value: ⎈
+          size: 9
 
   nav_cluster.columns:
     left:
@@ -261,68 +363,64 @@ points.zones:
         Base:
           value: ◀
           size: 6
+        Sym1:
+          value: ⇱
+          size: 5
+        Media: Prev
       key.mirror.layers:
         Base:
           value: ⇲
           size: 6
+        Sym1:
+          value: ▶
+          size: 3
+        Media: $unset
 
     up_down:
       rows.top.layers:
         Base:
           value: ▲
           size: 9
+        Sym1:
+          value: ⇞
+          size: 6
+        Media: V+
       rows.top.mirror.layers:
         Base:
           value: ⇞
           size: 9
+        Sym1: ▲
+        Media: $unset
 
       rows.bottom.layers:
         Base:
           value: ▼
           size: 9
+        Sym1:
+          value: ⇟
+          size: 6
+        Media: V-
       rows.bottom.mirror.layers:
         Base:
           value: ⇟
           size: 9
+        Sym1: ▼
+        Media: $unset
 
     right:
       key.layers:
         Base:
           value: ▶
           size: 6
+        Sym1:
+          value: ⇲
+          size: 5
+        Media: Next
       key.mirror.layers:
         Base:
           value: ⇱
           size: 6
-
-kle:
-  shift: [10kx, 2.5ky]
-  layers:
-    Base:
-      index: 9
-      size: 7
-      color: "#000000"
-    Sym1:
-      index: 2
-      size: 4
-      color: "#009600"
-    Sym2:
-      index: 3
-      size: 4
-      color: "#940000"
-    Num:
-      index: 3
-      size: 4
-      color: "#ff9900"
-    Nav:
-      index: 0
-      size: 4
-      color: "#00c2bd"
-    Fun:
-      index: 1
-      size: 2
-      color: "#ff0000"
-    Media:
-      index: 1
-      size: 2
-      color: "#ff00ff"
+        Sym1:
+          value: ◀
+          size: 3
+        Media: $unset
