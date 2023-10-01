@@ -1,22 +1,51 @@
-outlines:
-  keys:
-    - what: rectangle
-      where: meta.tags.1u ~ true
-      size: [kx, ky]
-      operation: stack
-    - what: rectangle
-      where: meta.tags.2u ~ vertical
-      size: [kx, 2ky]
-      operation: stack
-    - what: rectangle
-      where: meta.tags.2u ~ horizontal
-      size: [2kx, ky]
-      operation: stack
+units:
+  # Case
+  case_padding: 4
+  case_thumb_bottom_arc_radius: thumb_central_radius - 1ky - case_padding
+  case_thumb_top_arc_radius: thumb_central_radius + 1ky + case_padding
 
+points:
+  zones:
+    matrix:
+      anchor.shift: [297/2 - 2kx, -210/2 - (-inner_off + index_off + middle_off)]
+
+    _case_thumb_bottom_arc_end:
+      anchor:
+        ref: arc_center
+        orient: thumb_middle_angle + 15
+        shift: [0, case_thumb_bottom_arc_radius]
+
+    _case_thumb_bottom_corner:
+      anchor:
+        ref: _case_thumb_bottom_arc_end
+        orient: 90
+        shift: [0, 0.5kx + case_padding]
+
+    _case_thumb_top_corner:
+      anchor:
+        ref: _case_thumb_bottom_corner
+        orient: -90
+        shift: [0, 2*(ky + case_padding)]
+
+    _case_thumb_top_arc_end:
+      anchor:
+        ref: _case_thumb_top_corner
+        orient: 90
+        shift: [0, -(0.5kx + case_padding)]
+
+outlines:
   keyholes:
     - what: rectangle
       where: meta.tags.1u ~ true
       size: [14, 14]
+      operation: stack
+    - what: rectangle
+      where: meta.tags.1-5u ~ vertical
+      size: [kx, 1.5ky]
+      operation: stack
+    - what: rectangle
+      where: meta.tags.1-5u ~ horizontal
+      size: [1.5kx, ky]
       operation: stack
     - what: rectangle
       where: meta.tags.2u ~ vertical
