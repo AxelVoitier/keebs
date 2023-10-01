@@ -62,7 +62,7 @@ class Points:
         for k, v in self.data.items():
             if not (tags := v['meta']['tags']):
                 continue
-            if ('1u' not in tags) and ('2u' not in tags):
+            if ('1u' not in tags) and ('1-5u' not in tags) and ('2u' not in tags):
                 continue
 
             yield dict(
