@@ -26,10 +26,6 @@ points:
     height: ky
   zones:
     matrix:
-      anchor:
-        shift:
-        - 297/2 - 2kx
-        - -210/2 - (-inner_off + index_off + middle_off)
       key:
         padding: 1ky
         spread: 1kx
@@ -322,40 +318,16 @@ points:
         bottom: null
         home: null
         top: null
+      anchor:
+        shift:
+        - 297/2 - 2kx
+        - -210/2 - (-inner_off + index_off + middle_off)
     arc_center:
       anchor:
         ref: matrix_index_home
         shift:
         - arc_index_home_x_offset
         - -arc_index_home_y_offset
-    _case_thumb_bottom_arc_end:
-      anchor:
-        ref: arc_center
-        orient: thumb_middle_angle + 15
-        shift:
-        - 0
-        - case_thumb_bottom_arc_radius
-    _case_thumb_bottom_corner:
-      anchor:
-        ref: _case_thumb_bottom_arc_end
-        orient: 90
-        shift:
-        - 0
-        - 0.5kx + case_padding
-    _case_thumb_top_corner:
-      anchor:
-        ref: _case_thumb_bottom_corner
-        orient: -90
-        shift:
-        - 0
-        - 2*(ky + case_padding)
-    _case_thumb_top_arc_end:
-      anchor:
-        ref: _case_thumb_top_corner
-        orient: 90
-        shift:
-        - 0
-        - -(0.5kx + case_padding)
     thumb_cluster:
       anchor:
         ref: arc_center
@@ -550,6 +522,34 @@ points:
       rows:
         bottom: null
         top: null
+    _case_thumb_bottom_arc_end:
+      anchor:
+        ref: arc_center
+        orient: thumb_middle_angle + 15
+        shift:
+        - 0
+        - case_thumb_bottom_arc_radius
+    _case_thumb_bottom_corner:
+      anchor:
+        ref: _case_thumb_bottom_arc_end
+        orient: 90
+        shift:
+        - 0
+        - 0.5kx + case_padding
+    _case_thumb_top_corner:
+      anchor:
+        ref: _case_thumb_bottom_corner
+        orient: -90
+        shift:
+        - 0
+        - 2*(ky + case_padding)
+    _case_thumb_top_arc_end:
+      anchor:
+        ref: _case_thumb_top_corner
+        orient: 90
+        shift:
+        - 0
+        - -(0.5kx + case_padding)
 outlines:
   keys:
   - what: rectangle
@@ -576,6 +576,18 @@ outlines:
     size:
     - 14
     - 14
+    operation: stack
+  - what: rectangle
+    where: meta.tags.1-5u ~ vertical
+    size:
+    - kx
+    - 1.5ky
+    operation: stack
+  - what: rectangle
+    where: meta.tags.1-5u ~ horizontal
+    size:
+    - 1.5kx
+    - ky
     operation: stack
   - what: rectangle
     where: meta.tags.2u ~ vertical

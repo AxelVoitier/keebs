@@ -1,0 +1,17 @@
+services:
+  ergogen:
+    image: keebs/ergogen
+    build:
+      pull: true
+      args:
+        - UID
+        - GID
+      dockerfile_inline: |
+        FROM node
+        WORKDIR /app
+        RUN npm install -g ergogen
+        ARG UID GID
+        RUN addgroup --gid ${GID} user && adduser --uid ${UID} --gid ${GID} user
+        USER user
+        WORKDIR /config
+        ENTRYPOINT ["ergogen"]

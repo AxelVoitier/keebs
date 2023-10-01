@@ -104,8 +104,15 @@ class Keyboard:
     if TYPE_CHECKING:
         ElementData: TypeAlias = str | float | int | list['ElementData'] | dict[str, 'ElementData']
 
-    def __init__(self, filepath: Path) -> None:
+    def __init__(
+        self,
+        filepath: Path,
+        points_filepath: Path | None,
+        units_filepath: Path | None
+    ) -> None:
         self.filepath = filepath
+        self.points_filepath = points_filepath
+        self.units_filepath = units_filepath
         self._data: dict[str, Keyboard.ElementData] | None = None
         self._points: Points | None = None
         self._units: Units | None = None
@@ -192,14 +199,18 @@ class Keyboard:
     @property
     def points(self) -> Points:
         if (points := self._points) is None:
-            points = self._points = Points(self.filepath.with_name('points.yaml'), self)
+            if (points_filepath := self.points_filepath) is None:
+                points_filepath = self.filepath.with_name('points.yaml')
+            points = self._points = Points(points_filepath, self)
 
         return points
 
     @property
     def units(self) -> Units:
         if (units := self._units) is None:
-            units = self._units = Units(self.filepath.with_name('units.yaml'))
+            if (units_filepath := self.units_filepath) is None:
+                units_filepath = self.filepath.with_name('units.yaml')
+            units = self._units = Units(units_filepath)
 
         return units
 
@@ -261,9 +272,11 @@ def merge_configs(
 def gen_kle(
     ergogen_yaml: Path,
     output: Annotated[Optional[Path], Argument()] = None,
+    points_yaml: Annotated[Optional[Path], Option()] = None,
+    units_yaml: Annotated[Optional[Path], Option()] = None,
 ) -> None:
     from kle import Keyboard as KLEKeyboard
-    keeb = Keyboard(ergogen_yaml)
+    keeb = Keyboard(ergogen_yaml, points_yaml, units_yaml)
     points = keeb.points
 
     if output is None:
