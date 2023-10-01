@@ -125,18 +125,19 @@ class Keyboard:
             layer: str,
             modifier: str,
             key_value: Keyboard.LayerInfoType,
+            layers: dict[str, Keyboard.LayerInfoType],
             defaults: dict[str, int | str] | None = None,
         ) -> dict[str, int | str]:
             def filter_keys(d: dict[str, Any], not_value: bool = False) -> dict[str, Any]:
                 if not_value:
-                    valid_keys = ('index', 'size', 'color')
+                    valid_keys = ('index', 'size', 'color', 'ghosted')
                 else:
-                    valid_keys = ('value', 'index', 'size', 'color')
+                    valid_keys = ('value', 'index', 'size', 'color', 'ghosted')
 
                 return {k: v for k, v in d.items() if k in valid_keys}
 
             if defaults is None:
-                info = dict(value='', index=9, size='', color='')
+                info = dict(value='', index=9, size='', color='', ghosted=False)
             else:
                 info = dict(defaults)
 
@@ -148,6 +149,9 @@ class Keyboard:
             if layer in self.layers:
                 info.update(filter_keys(self.layers[layer], not_value))
                 info.update(filter_keys(self.layers[layer].get(modifier, {})))
+
+            info.update(filter_keys(layers, not_value=True))
+            info.update(filter_keys(layers.get(modifier, {}), not_value=True))
 
             if isinstance(key_value, dict):
                 info.update(filter_keys(key_value, not_value))
@@ -164,22 +168,26 @@ class Keyboard:
         legends = [''] * 12
         sizes = [0] * 12
         colors = [''] * 12
+        ghosted = False
         for layer, value in layers.items():
             if layer == 'on_hold':
                 value = value if isinstance(value, dict) else dict(value=value)
                 layer = value['value']
                 value.setdefault('index', 4)
+
             for modifier in ('no-mod', 'shift'):
-                layer_info = get_layer_info(layer, modifier, value)
+                layer_info = get_layer_info(layer, modifier, value, layers)
                 if layer_info['value'] == '':
                     continue
                 index = layer_info['index']
                 legends[index] += str(layer_info['value'])
                 sizes[index] = layer_info['size']
                 colors[index] = layer_info['color']
+                ghosted = ghosted or layer_info['ghosted']
 
         params['fa'] = sizes
         params['t'] = '\n'.join(colors).rstrip('\n')
+        params['g'] = ghosted
 
         self.data.append([
             params,
