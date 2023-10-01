@@ -35,15 +35,27 @@ class Keyboard:
 
     def __init__(self, filepath: Path) -> None:
         self._filepath = filepath
+        self.name = None
         self._data: list[Keyboard.ElementType] | None = None
         self._current_y = 0
         self._offset: tuple[float, float] = (0, 0)
         self._layers: dict[str, Keyboard.LayerInfoType] = {}
 
     @property
+    def name(self) -> str:
+        return self._name
+
+    @name.setter
+    def name(self, value: str | None) -> None:
+        if value is None:
+            self._name = self._filepath.stem
+        else:
+            self._name = value
+
+    @property
     def data(self) -> list[Keyboard.ElementType]:
         if (data := self._data) is None:
-            data = self._data = [dict(name=self._filepath.stem)]
+            data = self._data = [dict(name=self.name)]
 
         return data
 

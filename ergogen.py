@@ -270,6 +270,7 @@ def gen_kle(
         output = ergogen_yaml.with_suffix('.json')
     kle = KLEKeyboard(output)
 
+    kle.name = keeb.kle.get('name', None)
     kle.offset = keeb.kle['shift']
     kle.layers = keeb.kle['layers']
     for key in points:
