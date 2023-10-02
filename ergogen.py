@@ -68,7 +68,9 @@ class Points:
             yield dict(
                 x=v['x'] - offset_x, y=v['y'] - offset_y, r=v['r'], name=k,
                 width=v['meta']['width'], height=v['meta']['height'],
-                layers=v['meta'].get('layers', {})
+                mirrored=v['meta'].get('mirrored', False),
+                layers=v['meta'].get('layers', {}),
+                qmk=v['meta'].get('qmk', {}),
             )
 
 
@@ -225,7 +227,11 @@ class Keyboard:
 
     @property
     def kle(self) -> dict[str, dict[str, dict[str, str]]]:
-        return self.data['kle']
+        return self.data.get('kle', {})
+
+    @property
+    def qmk(self) -> dict[str, dict[str, dict[str, str]]]:
+        return self.data.get('qmk', {})
 
 
 ergogen_cli = ClyoTyper(help='Ergogen-related commands')

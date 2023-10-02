@@ -16,20 +16,21 @@ import logging
 import sys
 from configparser import ConfigParser
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Annotated, Optional
 
 if TYPE_CHECKING:
     pass
 
 # Third-party imports
 try:
-    from clyo import ClyoTyper
+    from clyo import ClyoTyper, Argument, Option
 except ImportError:
-    from typer import Typer as ClyoTyper
+    from typer import Typer as ClyoTyper, Argument, Option
 
 # Local imports
 from ergogen import ergogen_cli
 # from kicad import kicad_cli
+from qmk import qmk_cli
 
 
 OURSELF = Path(__file__).resolve()
@@ -41,6 +42,37 @@ config = ConfigParser()
 cli = ClyoTyper(help='Application testing Clyo features')
 cli.add_typer(ergogen_cli, name='ergogen', rich_help_panel='Ergogen')
 # cli.add_typer(kicad_cli, name='kicad', rich_help_panel='KiCAD')
+cli.add_typer(qmk_cli, name='qmk', rich_help_panel='QMK')
+
+
+@cli.command()
+def gen_qmk_info_json(
+    ergogen_yaml: Path,
+    points_yaml: Annotated[Optional[Path], Option()] = None,
+    units_yaml: Annotated[Optional[Path], Option()] = None,
+) -> None:
+    from ergogen import Keyboard
+    from qmk import QMK_CLI, KeyboardInfo as QMKKeyboardInfo, Keymap as QMKKeymap
+
+    keeb = Keyboard(ergogen_yaml, points_yaml, units_yaml)
+    qmk_cli = QMK_CLI()
+    qmk_info = QMKKeyboardInfo(qmk_cli.root_keyboard_path / 'info.json')
+    qmk_info.set_infos(keeb.qmk)
+    qmk_info.layout_meta = keeb.qmk['_layout']
+    qmk_info.layout.clear()
+
+    keymap = QMKKeymap(qmk_cli.root_keyboard_path / 'keymap.json', qmk_info)
+    keymap.data['keyboard'] = qmk_cli.keyboard
+    keymap.data['layout'] = qmk_info.layout_meta['name']
+    keymap.layers_meta = keeb.data['layers']
+
+    for key in keeb.points:
+        qmk_info.add_key(**key)
+    for key in keeb.points:
+        keymap.add_key(**key)
+
+    qmk_info.write()
+    keymap.write()
 
 
 @cli.command(hidden=True)

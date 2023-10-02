@@ -11,7 +11,7 @@ services:
         WORKDIR /app
         RUN npm install -g ergogen
         ARG UID GID
-        RUN addgroup --gid ${GID} user && adduser --uid ${UID} --gid ${GID} user
-        USER user
+        RUN addgroup --gid ${GID} user || adduser --uid ${UID} --gid ${GID} user || true
+        USER ${UID}:${GID}
         WORKDIR /config
         ENTRYPOINT ["ergogen"]

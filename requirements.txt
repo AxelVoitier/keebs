@@ -1,3 +1,5 @@
 PyYAML
 hiyapyco
 typer[all]
+qmk
+jinja2

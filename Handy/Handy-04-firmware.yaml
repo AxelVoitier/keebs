@@ -1,0 +1,92 @@
+qmk:
+  # These are used to populate info.json QMK file.
+  # You can also have these fields in a pre-existing info.json, and not provide them here.
+  # They will be preserved. Only matrix_pins can be complemented, and the layout itself
+  # will be cleared (but not any other layouts).
+  # In here, only _layout section is required
+  keyboard_name: Handy
+  maintainer: Axel Voitier
+  manufacturer: Axel Voitier
+  url: https://github.com/AxelVoitier/keebs/tree/main/Handy
+
+  usb:
+    vid: "0xA8E1"
+    pid: "0x0002"
+    device_version: 1.0.0
+
+  development_board: promicro
+  # pin_compatible: promicro
+  # bootloader: caterina
+  # processor: atmega32u4
+  build:
+    # debounce_type:
+    # firmware_format:
+    lto: true
+  features:
+    bootmagic: false
+    extrakey: true
+    mousekey: false
+    nkro: true
+    unicode: true
+    oled: true
+    key_override: true
+    rgb_matrix: false
+  tapping:
+    term: 200
+    permissive_hold: true
+
+  # Matrix
+  debounce: 5
+  diode_direction: COL2ROW
+  # matrix_pins is generated
+  # (but you can provide it as well, even partial, either here or in the original info.json)
+  matrix_pins:
+    cols: [D4, C6, D7, E6, B4]
+    rows: [F6, F7, B1, B3, B2, B6]
+
+  split:
+    enabled: true
+    soft_serial_pin: D2
+
+  # layouts is generated (at least the one described by _layout section).
+  # You can also manually provide other layouts, here or in the original info.json file.
+  # However, if there is one with the same name than the one we generate here, it will be wiped out.
+
+  # Required
+  _layout:
+    name: LAYOUT_3x5_1x4_1x2_2u_2x1u
+    labels: "{side_abbrev}{row_i}{col_i}" # Available: side, side_abbrev, row, row_i, col, col_i
+    sides:
+      left:
+        # abbrev: ...  # If not provided, use the first letter of the side name, capitalised
+        is_main: true  # Where the USB cable will connect to
+        is_mirror: true  # Which side is generated as mirror by ergogen
+      right:
+    shift: [10.5kx, 4ky]
+
+points.zones:
+  matrix:
+    columns:
+      inner.key.qmk.col: D4
+      index.key.qmk.col: C6
+      middle.key.qmk.col: D7
+      ring.key.qmk.col: E6
+      pinky.key.qmk.col: B4
+    rows:
+      top.qmk.row: F6
+      home.qmk.row: F7
+      bottom.qmk.row: B1
+      mod.qmk.row: B3
+
+  thumb_cluster:
+    key.qmk.col: D4
+    key.qmk.row: B2
+    columns:
+      outer_bottom.key.qmk.row: B6
+      home.key.qmk.col: C6
+
+  bottom_cluster:
+    key.qmk.row: B2
+    columns:
+      left.key.qmk.col: E6
+      right.key.qmk.col: B4
