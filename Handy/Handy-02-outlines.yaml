@@ -6,8 +6,8 @@ units:
 
 points:
   zones:
-    matrix:
-      anchor.shift: [297/2 - 2kx, -210/2 - (-inner_off + index_off + middle_off)]
+    # matrix:
+    #   anchor.shift: [297/2 - 2kx, -210/2 - (-inner_off + index_off + middle_off)]
 
     _case_thumb_bottom_arc_end:
       anchor:

@@ -46,7 +46,7 @@ cli.add_typer(qmk_cli, name='qmk', rich_help_panel='QMK')
 
 
 @cli.command()
-def gen_qmk_info_json(
+def gen_qmk_json(
     ergogen_yaml: Path,
     points_yaml: Annotated[Optional[Path], Option()] = None,
     units_yaml: Annotated[Optional[Path], Option()] = None,
@@ -61,14 +61,13 @@ def gen_qmk_info_json(
     qmk_info.layout_meta = keeb.qmk['_layout']
     qmk_info.layout.clear()
 
-    keymap = QMKKeymap(qmk_cli.root_keyboard_path / 'keymap.json', qmk_info)
+    keymap = QMKKeymap(qmk_cli.keymap_path / 'keymap.json', qmk_info)
     keymap.data['keyboard'] = qmk_cli.keyboard
     keymap.data['layout'] = qmk_info.layout_meta['name']
     keymap.layers_meta = keeb.data['layers']
 
     for key in keeb.points:
         qmk_info.add_key(**key)
-    for key in keeb.points:
         keymap.add_key(**key)
 
     qmk_info.write()

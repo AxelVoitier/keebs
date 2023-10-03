@@ -15,8 +15,10 @@ import json
 import logging
 import shlex
 import subprocess
+from math import floor
+from operator import itemgetter
 from pathlib import Path
-from typing import TYPE_CHECKING, Sequence
+from typing import TYPE_CHECKING, Iterable, Sequence
 
 if TYPE_CHECKING:
     from typing import TypeAlias, Any
@@ -140,6 +142,13 @@ KEYCODES = {
     'RShift': 'KC_RIGHT_SHIFT',
     'RAlt': 'KC_RIGHT_ALT',
     'RGui': 'KC_RIGHT_GUI',
+    'Mute': 'KC_AUDIO_MUTE',
+    'V+': 'KC_AUDIO_VOL_UP',
+    'V-': 'KC_AUDIO_VOL_DOWN',
+    'Next': 'KC_MEDIA_NEXT_TRACK',
+    'Prev': 'KC_MEDIA_PREV_TRACK',
+    'Stop': 'KC_MEDIA_STOP', '■': 'KC_MEDIA_STOP',
+    'Play': 'KC_', '▶||': 'KC_MEDIA_PLAY_PAUSE',
 
     # '': 'KC_',
 }
@@ -193,11 +202,16 @@ SHORT_ALIASES = dict(
     KC_RIGHT_SHIFT='KC_RSFT',
     KC_RIGHT_ALT='KC_RALT',
     KC_RIGHT_GUI='KC_RGUI',
+    KC_AUDIO_MUTE='KC_MUTE',
+    KC_AUDIO_VOL_UP='KC_VOLU',
+    KC_AUDIO_VOL_DOWN='KC_VOLD',
+    KC_MEDIA_NEXT_TRACK='KC_MNXT',
+    KC_MEDIA_PREV_TRACK='KC_MPRV',
+    KC_MEDIA_STOP='KC_MSTP',
+    KC_MEDIA_PLAY_PAUSE='KC_MPLY',
 
     # ='',
 )
-
-qmk_cli = ClyoTyper(help='QMK-related commands')
 
 
 class QMK_CLI:
@@ -256,6 +270,9 @@ class KeyboardInfo:
                     if k not in sub_to:
                         sub_to[k] = {}
                     traverse(v, sub_to[k])
+                elif v is None:
+                    if k in sub_to:
+                        del sub_to[k]
                 else:
                     sub_to[k] = v
 
@@ -296,7 +313,15 @@ class KeyboardInfo:
 
         return layout['layout']
 
-    def get_side_info(self, mirrored: bool) -> dict[str, str | bool]:
+    def guess_layout_name(self) -> str | None:
+        if 'name' in self.layout_meta:
+            return self.layout_meta['name']
+        layouts = self.data.get('layouts', {})
+        if layouts:
+            return next(iter(layouts.keys()))
+        return None
+
+    def get_side_info(self, mirrored: bool, name: str) -> dict[str, str | bool]:
         for side_name, side in self.layout_meta['sides'].items():
             side = {} if side is None else dict(side)
             side['name'] = side_name
@@ -322,7 +347,10 @@ class KeyboardInfo:
         name: str,
         **kwargs: Any
     ) -> None:
-        side = self.get_side_info(mirrored)
+        if qmk.get('ignore', False):
+            return
+
+        side = self.get_side_info(mirrored, name)
 
         if (matrix_pins := self.data.get('matrix_pins', None)) is None:
             matrix_pins = self.data['matrix_pins'] = dict()
@@ -363,8 +391,8 @@ class KeyboardInfo:
         params = dict(
             label=label,
             matrix=[row_i, col_i],
-            x=(x / 19.05) + offset_x - 0.5,
-            y=(-y / 19.05) + offset_y - 0.5,
+            x=(x / 19.05) + offset_x,
+            y=(y / 19.05) + offset_y,
             r=-r,
         )
         params['rx'] = params['x'] + 0.5
@@ -377,6 +405,108 @@ class KeyboardInfo:
             params['y'] -= params['h'] / 4
 
         self.layout.append(params)
+
+    def max_len(self, data: Iterable[str | Any], item: Any | None = None) -> int:
+        if item is not None:
+            return max(map(len, map(itemgetter(item), data)))
+        else:
+            return max(map(len, data))
+
+    def generate_layout_structure(self) -> list[list[str]]:
+        max_len = self.max_len(self.layout, 'label')
+
+        struct = []
+        current_x = 0
+        for key in self.layout:
+            # The core of autolayout.
+            # - Adding half of height and width is to get the center of the key.
+            #   -> This is in the "hope" that keys are at least somewhat aligned on a grid
+            #      and .5 would be their middle, such that round/floor/ceil operations have
+            #      a good chance to give us their grid position.
+            # - Round at 2 digits. This handles cases of float errors (eg. .999999) that trip
+            #   floor/ceil operations afterwards. It also handles some cases of rotated keys.
+            # - Floor to get integers aligned with top-left corner.
+            # /!\ NOT battle tested.
+            height = key.get('h', 1)
+            width = key.get('w', 1)
+            x_i = floor(round(key['x'] + (width / 2), 2))
+            y_i = floor(round(key['y'] + (height / 2), 2))
+
+            # This part grows the structure progressively as needed
+            diff_y = y_i - len(struct) + 1
+            diff_x = x_i - current_x + 1
+            if diff_y > 0:
+                for _ in range(diff_y):
+                    struct.append([' ' * max_len] * current_x)
+            if diff_x > 0:
+                for row in struct:
+                    row += [' ' * max_len] * diff_x
+                current_x += diff_x
+
+            if struct[y_i][x_i] != (' ' * max_len):
+                print(f'Warning, overwriting key in ({x_i}, {y_i}). Was {struct[y_i][x_i]}, is now {key["label"]}')
+            struct[y_i][x_i] = key['label']
+            key['x_i'] = x_i
+            key['y_i'] = y_i
+
+        return struct
+
+    def strip_last(self, line: str, old: str, new: str = '') -> str:
+        return line[::-1].replace(old, new, 1)[::-1]
+
+    def layout_h(self) -> str:
+        struct = self.generate_layout_structure()
+        layout_name = self.layout_meta['name']
+        max_len = self.max_len(self.layout, 'label')
+
+        lines = []
+        lines.append(f'#define {layout_name} (\\')
+        indent = 2
+        for row in struct:
+            current_line = ' ' * indent
+            for cell in row:
+                if not cell.strip():
+                    current_line += (' ' * (max_len + 2))
+                else:
+                    current_line += f'{cell + ",":<{max_len + 1}} '
+            current_line += '\\'
+            lines.append(current_line)
+        lines[-1] = self.strip_last(lines[-1], ',', ' ')
+        lines.append(') { \\')
+
+        rows = self.data['matrix_pins']['rows']
+        cols = self.data['matrix_pins']['cols']
+        is_split = self.data.get('split', {}).get('enabled', False)
+        n_rows = len(rows) if not is_split else len(rows) * 2
+        matrix = []
+        for _ in range(n_rows):
+            matrix.append(['KC_NO'] * len(cols))
+
+        for key in self.layout:
+            row, col = key['matrix']
+            matrix[row][col] = key['label']
+
+        max_len = max(len('KC_NO'), max_len)
+        current_line = '//' + (' ' * (indent - 2)) + '  '
+        current_line += ' '.join([f'{col:<{max_len + 1}}' for col in cols])
+        lines.append(current_line)
+
+        for i, row in enumerate(matrix):
+            if is_split and (i == len(rows)):
+                lines.append(f'//{"SPLIT":-^{len(lines[-1]) - 2}}')
+
+            current_line = ' ' * indent
+            current_line += '{ '
+            current_line += ' '.join([f'{col + ",":<{max_len + 1}}' for col in row])
+            current_line = self.strip_last(current_line, ',')
+            current_line += f' }}, \\  // {rows[i % len(rows)]}'
+            lines.append(current_line)
+        lines[-1] = self.strip_last(lines[-1], ',', ' ')
+
+        lines.append('}')
+        lines.append('')
+
+        return lines
 
 
 class Keymap:
@@ -404,6 +534,8 @@ class Keymap:
 
     def write(self) -> None:
         data = self.data
+        if not self._filepath.parent.exists() and self._filepath.parent.parent.exists():
+            self._filepath.parent.mkdir()
         with self._filepath.open(mode='w') as f:
             json.dump(data, f, indent=4)
 
@@ -412,22 +544,10 @@ class Keymap:
         data = self.data
         if (layers := data.get('layers', None)) is None:
             layers = data['layers'] = []
-            rows = self._info.data['matrix_pins']['rows']
-            cols = self._info.data['matrix_pins']['cols']
-            length = len(rows) * len(cols) * 2
             for _ in self.layers_meta:
-                layers.append(['KC_NO'] * length)
+                layers.append([])
 
         return layers
-
-    def get_key_index(self, row: str, col: str, is_main: bool) -> int:
-        rows = self._info.data['matrix_pins']['rows']
-        cols = self._info.data['matrix_pins']['cols']
-        row_i = rows.index(row)
-        row_i += len(rows) if not is_main else 0
-        col_i = cols.index(col)
-
-        return (len(cols) * row_i) + col_i
 
     def add_key(
         self,
@@ -437,29 +557,101 @@ class Keymap:
         name: str,
         **kwargs: Any
     ) -> None:
-        side = self._info.get_side_info(mirrored)
+        if qmk.get('ignore', False):
+            return
+
         layer_indices = {layer_name: i for i, layer_name in enumerate(self.layers_meta.keys())}
 
-        for layer_name, value in layers.items():
-            if layer_name not in layer_indices:
-                continue
-
-            layer_index = layer_indices[layer_name]
+        for layer_index, layer_name in enumerate(self.layers_meta.keys()):
             layer = self.layers[layer_index]
-            key_index = self.get_key_index(qmk['row'], qmk['col'], side['is_main'])
+
+            if layer_name not in layers:
+                if (layer_index > 0) and layers.get('transparent', False):
+                    value = dict(keycode='KC_TRANSPARENT')
+                else:
+                    value = ''
+            else:
+                value = layers[layer_name]
+            modifier = 'no-mod'
 
             if isinstance(value, dict):
-                if 'no-mod' in value:
-                    if isinstance(value['no-mod'], dict):
-                        key_value = value['no-mod']['value']
+                if modifier in value:
+                    if isinstance(value[modifier], dict):
+                        keycode = value[modifier].get(
+                            'keycode', self.get_keycode(value[modifier].get('legend', None)))
                     else:
-                        key_value = value['no-mod']
+                        keycode = self.get_keycode(value[modifier])
                 else:
-                    key_value = value['value']
+                    keycode = value.get('keycode', self.get_keycode(value.get('legend', None)))
             else:
-                key_value = value
+                keycode = self.get_keycode(value)
 
-            try:
-                layer[key_index] = KEYCODES[key_value]
-            except KeyError:
-                print(f'Skipping {key_value} for now')
+            if keycode is None:
+                print(f'Skipping {value} on {name} key, layer {layer_name} for now')
+                keycode = 'KC_NO'
+
+            layer.append(keycode)
+
+        if 'on_hold' in layers:
+            if isinstance(layers['on_hold'], dict):
+                target_layer = layers['on_hold']['legend']
+            else:
+                target_layer = layers['on_hold']
+            print(f'on hold {name=}, {target_layer=}')
+            target_layer_index = layer_indices[target_layer]
+            key_index = len(layer) - 1
+            original_keycode = self.layers[0][key_index]
+            self.layers[0][key_index] = f'LT({target_layer_index}, {original_keycode})'
+            # The key being held should map to nothing in the target layer. Otherwise, troubles...
+            self.layers[target_layer_index][key_index] = 'KC_NO'
+            # In every other layers, if the key is set to be transparent,
+            # we put the original keycode instead
+            if layers.get('transparent', False):
+                for layer_index, layer in enumerate(self.layers):
+                    if layer_index in (0, target_layer_index):
+                        continue
+                    layer[key_index] = original_keycode
+
+    def get_keycode(self, legend: str | None) -> str:
+        if legend is None:
+            return None
+        try:
+            return KEYCODES[str(legend)]
+        except KeyError:
+            if len(legend) == 1:
+                return f'UC(0x{ord(legend):X})'
+            else:
+                return None
+
+
+qmk_cli = ClyoTyper(help='QMK-related commands')
+
+
+@qmk_cli.command()
+def gen_layout_structure(
+
+) -> None:
+    qmk_cli = QMK_CLI()
+    qmk_info = KeyboardInfo(qmk_cli.root_keyboard_path / 'info.json')
+    qmk_info.layout_meta = dict(
+        name=qmk_info.guess_layout_name(),
+    )
+
+    struct = qmk_info.generate_layout_structure()
+    for row in struct:
+        print('-', row)
+
+
+@qmk_cli.command()
+def gen_layout_h(
+
+) -> None:
+    qmk_cli = QMK_CLI()
+    qmk_info = KeyboardInfo(qmk_cli.root_keyboard_path / 'info.json')
+    qmk_info.layout_meta = dict(
+        name=qmk_info.guess_layout_name(),
+    )
+    layout_h_lines = qmk_info.layout_h()
+
+    layout_h_path = qmk_cli.keyboard_path / 'layout.h'
+    layout_h_path.write_text('\n'.join(layout_h_lines))

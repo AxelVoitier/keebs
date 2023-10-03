@@ -14,6 +14,7 @@ from __future__ import annotations
 import logging
 import re
 from collections import OrderedDict
+from math import inf, floor
 from pathlib import Path
 from typing import TYPE_CHECKING, Annotated, Optional
 
@@ -57,16 +58,38 @@ class Points:
 
         return data
 
-    def __iter__(self) -> Iterator[dict[str, int | float]]:
-        offset_x, offset_y = self._keyboard.general_offset
-        for k, v in self.data.items():
+    def top_left_offset(self) -> tuple[float, float]:
+        min_x = +inf
+        max_y = -inf
+        for point in self.data.values():
+            if not (tags := point['meta']['tags']):
+                continue
+            if ('1u' not in tags) and ('1-5u' not in tags) and ('2u' not in tags):
+                continue
+            min_x = min(point['x'], min_x)
+            max_y = max(point['y'], max_y)
+
+        return (min_x, max_y)
+
+    def __iter__(self) -> Iterator[dict[str, Points.ElementData]]:
+        # offset_x, offset_y = self._keyboard.general_offset
+        offset_x, offset_y = self.top_left_offset()
+
+        def sort_key(elem: tuple[str, dict[str, Points.ElementData]]) -> tuple[float, float]:
+            k, v = elem
+            return (
+                floor(round(-(v['y'] - offset_y) / 19.05, 2)),
+                floor(round((v['x'] - offset_x) / 19.05, 2)),
+            )
+
+        for k, v in sorted(self.data.items(), key=sort_key):
             if not (tags := v['meta']['tags']):
                 continue
             if ('1u' not in tags) and ('1-5u' not in tags) and ('2u' not in tags):
                 continue
 
             yield dict(
-                x=v['x'] - offset_x, y=v['y'] - offset_y, r=v['r'], name=k,
+                x=v['x'] - offset_x, y=-(v['y'] - offset_y), r=v['r'], name=k,
                 width=v['meta']['width'], height=v['meta']['height'],
                 mirrored=v['meta'].get('mirrored', False),
                 layers=v['meta'].get('layers', {}),
@@ -219,7 +242,7 @@ class Keyboard:
     @property
     def general_offset(self) -> tuple[float, float]:
         for zone in self.data['points']['zones'].values():
-            return zone['anchor']['shift']
+            return zone.get('anchor', {}).get('shift', [0, 0])
 
     @property
     def layers(self) -> dict[str, dict[str, dict[str, str]]]:
@@ -290,7 +313,6 @@ def gen_kle(
     kle = KLEKeyboard(output)
 
     kle.name = keeb.kle.get('name', None)
-    kle.offset = keeb.kle['shift']
     kle.layers = keeb.kle['layers']
     for key in points:
         kle.add_key(**key)

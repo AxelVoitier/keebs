@@ -1,5 +1,4 @@
 kle:
-  shift: [10kx, 2.5ky]
   layers:
     Base:
       no-mod.index: 9
@@ -76,7 +75,7 @@ points.zones:
         Sym1: "@"
         Sym2: "̧"
         Fun:
-          value: PrtScn
+          legend: PrtScn
           size: 1
         Num: $unset
         Math: $unset
@@ -88,13 +87,13 @@ points.zones:
           shift: "?"
         Num: "/"
         Math:
-          value: "⁄"
+          legend: "⁄"
           size: 4
       rows.bottom.mirror.layers:
         Base: V
         Sym1: "\\"
         Fun:
-          value: ScrLock
+          legend: ScrLock
           size: 1
         Num: $unset
         Math: $unset
@@ -179,7 +178,7 @@ points.zones:
         Base:
           no-mod: ","
           shift:
-            value: ";"
+            legend: ";"
             size: 5
         Sym1: ";"
         Num: 2
@@ -229,7 +228,7 @@ points.zones:
         Base:
           no-mod: "."
           shift:
-            value: ":"
+            legend: ":"
             size: 5
         Sym1: ":"
         Num: 3
@@ -247,7 +246,7 @@ points.zones:
       rows.top.layers:
         Base:
           no-mod:
-            value: "-"
+            legend: "-"
             index: 10
           shift: "_"
         Sym1: ±
@@ -295,17 +294,18 @@ points.zones:
         Num: $unset
         Math: $unset
 
+  thumb_cluster.key.layers.transparent: true
   thumb_cluster.columns:
     outer_top.key:
       layers:
         Base:
-          value: ⌫
+          legend: ⌫
           size: 6
         Media: Mute
         on_hold: Fun
       mirror.layers:
         Base:
-          value: Esc
+          legend: Esc
           size: 4
         on_hold: Media
         Media: $unset
@@ -313,13 +313,13 @@ points.zones:
     outer_bottom.key:
       layers:
         Base:
-          value: ⌦
+          legend: ⌦
           size: 6
         Sym1:
-          value: Ins
+          legend: Ins
           size: 2
         Media:
-          value: ■
+          legend: ■
           size: 3
         on_hold: Sym2
       mirror.layers:
@@ -331,16 +331,16 @@ points.zones:
     middle.key:
       layers:
         Base:
-          value: ⏎
+          legend: ⏎
           size: 9
         Num: "="
         Media:
-          value: ▶||
+          legend: ▶||
           size: 4
         on_hold: Sym1
       mirror.layers:
         Base:
-          value: ␣
+          legend: ␣
           size: 9
         on_hold: Sym1
         Num: $unset
@@ -349,60 +349,63 @@ points.zones:
     inner_top.key:
       layers:
         Base:
-          value: ⇧
+          legend: ⇧
           size: 9
+          keycode: KC_RIGHT_SHIFT
+      mirror.layers.Base.keycode: $unset
     inner_bottom.key:
       layers:
         Base:
-          value: ⎈
+          legend: ⎈
           size: 9
 
+  nav_cluster.key.layers.transparent: true
   nav_cluster.columns:
     left:
       key.layers:
         Base:
-          value: ◀
+          legend: ◀
           size: 6
         Sym1:
-          value: ⇱
+          legend: ⇱
           size: 5
         Media: Prev
       key.mirror.layers:
         Base:
-          value: ⇲
+          legend: ⇲
           size: 6
         Sym1:
-          value: ▶
+          legend: ▶
           size: 3
         Media: $unset
 
     up_down:
       rows.top.layers:
         Base:
-          value: ▲
+          legend: ▲
           size: 9
         Sym1:
-          value: ⇞
+          legend: ⇞
           size: 6
         Media: V+
       rows.top.mirror.layers:
         Base:
-          value: ⇞
+          legend: ⇞
           size: 9
         Sym1: ▲
         Media: $unset
 
       rows.bottom.layers:
         Base:
-          value: ▼
+          legend: ▼
           size: 9
         Sym1:
-          value: ⇟
+          legend: ⇟
           size: 6
         Media: V-
       rows.bottom.mirror.layers:
         Base:
-          value: ⇟
+          legend: ⇟
           size: 9
         Sym1: ▼
         Media: $unset
@@ -410,17 +413,17 @@ points.zones:
     right:
       key.layers:
         Base:
-          value: ▶
+          legend: ▶
           size: 6
         Sym1:
-          value: ⇲
+          legend: ⇲
           size: 5
         Media: Next
       key.mirror.layers:
         Base:
-          value: ⇱
+          legend: ⇱
           size: 6
         Sym1:
-          value: ◀
+          legend: ◀
           size: 3
         Media: $unset

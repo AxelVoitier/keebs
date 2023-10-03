@@ -30,7 +30,7 @@ points:
   #rotate: 25
   #mirror: 105
   rotate: 0
-  mirror: 60
+  mirror: -47.625  # -2.5kx
   key:
     width: kx
     height: ky

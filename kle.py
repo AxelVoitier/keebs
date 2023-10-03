@@ -109,7 +109,7 @@ class Keyboard:
         offset_x, offset_y = self.offset
         params = dict(
             rx=(x / 19.05) + offset_x + 0.5,
-            ry=(-y / 19.05) + offset_y + 0.5,
+            ry=(y / 19.05) + offset_y + 0.5,
             x=-0.5,
             y=-0.5,
             r=-r,
@@ -128,40 +128,40 @@ class Keyboard:
             layers: dict[str, Keyboard.LayerInfoType],
             defaults: dict[str, int | str] | None = None,
         ) -> dict[str, int | str]:
-            def filter_keys(d: dict[str, Any], not_value: bool = False) -> dict[str, Any]:
-                if not_value:
+            def filter_keys(d: dict[str, Any], not_legend: bool = False) -> dict[str, Any]:
+                if not_legend:
                     valid_keys = ('index', 'size', 'color', 'ghosted')
                 else:
-                    valid_keys = ('value', 'index', 'size', 'color', 'ghosted')
+                    valid_keys = ('legend', 'index', 'size', 'color', 'ghosted')
 
                 return {k: v for k, v in d.items() if k in valid_keys}
 
             if defaults is None:
-                info = dict(value='', index=9, size='', color='', ghosted=False)
+                info = dict(legend='', index=9, size='', color='', ghosted=False)
             else:
                 info = dict(defaults)
 
-            not_value = (modifier != 'no-mod')
+            not_legend = (modifier != 'no-mod')
 
-            info.update(filter_keys(self.layers, not_value))
+            info.update(filter_keys(self.layers, not_legend))
             info.update(filter_keys(self.layers.get(modifier, {})))
 
             if layer in self.layers:
-                info.update(filter_keys(self.layers[layer], not_value))
+                info.update(filter_keys(self.layers[layer], not_legend))
                 info.update(filter_keys(self.layers[layer].get(modifier, {})))
 
-            info.update(filter_keys(layers, not_value=True))
-            info.update(filter_keys(layers.get(modifier, {}), not_value=True))
+            info.update(filter_keys(layers, not_legend=True))
+            info.update(filter_keys(layers.get(modifier, {}), not_legend=True))
 
             if isinstance(key_value, dict):
-                info.update(filter_keys(key_value, not_value))
+                info.update(filter_keys(key_value, not_legend))
                 if modifier in key_value:
                     if isinstance(key_value[modifier], dict):
                         info.update(filter_keys(key_value[modifier]))
                     else:
-                        info['value'] = key_value[modifier]
-            elif not not_value:
-                info['value'] = key_value
+                        info['legend'] = key_value[modifier]
+            elif not not_legend:
+                info['legend'] = key_value
 
             return info
 
@@ -171,16 +171,19 @@ class Keyboard:
         ghosted = False
         for layer, value in layers.items():
             if layer == 'on_hold':
-                value = value if isinstance(value, dict) else dict(value=value)
-                layer = value['value']
+                value = value if isinstance(value, dict) else dict(legend=value)
+                layer = value['legend']
                 value.setdefault('index', 4)
+
+            if layer not in self.layers:
+                continue
 
             for modifier in ('no-mod', 'shift'):
                 layer_info = get_layer_info(layer, modifier, value, layers)
-                if layer_info['value'] == '':
+                if layer_info['legend'] == '':
                     continue
                 index = layer_info['index']
-                legends[index] += str(layer_info['value'])
+                legends[index] += str(layer_info['legend'])
                 sizes[index] = layer_info['size']
                 colors[index] = layer_info['color']
                 ghosted = ghosted or layer_info['ghosted']
