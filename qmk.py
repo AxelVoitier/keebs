@@ -18,7 +18,7 @@ import subprocess
 from math import floor
 from operator import itemgetter
 from pathlib import Path
-from typing import TYPE_CHECKING, Iterable, Sequence
+from typing import TYPE_CHECKING, Iterable
 
 if TYPE_CHECKING:
     from typing import TypeAlias, Any
@@ -154,6 +154,7 @@ KEYCODES = {
 }
 
 SHORT_ALIASES = dict(
+    KC_TRANSPARENT='KC_TRNS',
     KC_ENTER='KC_ENT',
     KC_ESCAPE='KC_ESC',
     KC_BACKSPACE='KC_BSPC',
@@ -212,6 +213,10 @@ SHORT_ALIASES = dict(
 
     # ='',
 )
+
+
+def strip_last(line: str, old: str, new: str = '') -> str:
+    return line[::-1].replace(old, new, 1)[::-1]
 
 
 class QMK_CLI:
@@ -365,6 +370,7 @@ class KeyboardInfo:
             print(f'Skipping {name} as it lacks row  info')
             return
         except ValueError:
+            # Self-adding row pin
             row_i = len(rows)
             rows.append(qmk['row'])
 
@@ -374,6 +380,7 @@ class KeyboardInfo:
             print(f'Skipping {name} as it lacks col info')
             return
         except ValueError:
+            # Self-adding column pin
             col_i = len(cols)
             cols.append(qmk['col'])
 
@@ -451,16 +458,15 @@ class KeyboardInfo:
 
         return struct
 
-    def strip_last(self, line: str, old: str, new: str = '') -> str:
-        return line[::-1].replace(old, new, 1)[::-1]
-
-    def layout_h(self) -> str:
+    def layout_h(self) -> list[str]:
         struct = self.generate_layout_structure()
         layout_name = self.layout_meta['name']
         max_len = self.max_len(self.layout, 'label')
 
         lines = []
-        lines.append(f'#define {layout_name} (\\')
+        lines.append('#pragma once')
+        lines.append('')
+        lines.append(f'#define {layout_name}_keebs (\\')
         indent = 2
         for row in struct:
             current_line = ' ' * indent
@@ -471,7 +477,7 @@ class KeyboardInfo:
                     current_line += f'{cell + ",":<{max_len + 1}} '
             current_line += '\\'
             lines.append(current_line)
-        lines[-1] = self.strip_last(lines[-1], ',', ' ')
+        lines[-1] = strip_last(lines[-1], ',', ' ')
         lines.append(') { \\')
 
         rows = self.data['matrix_pins']['rows']
@@ -487,25 +493,25 @@ class KeyboardInfo:
             matrix[row][col] = key['label']
 
         max_len = max(len('KC_NO'), max_len)
-        current_line = '//' + (' ' * (indent - 2)) + '  '
+        current_line = '/*' + (' ' * (indent - 2)) + '  '
         current_line += ' '.join([f'{col:<{max_len + 1}}' for col in cols])
+        current_line += '*/ \\'
         lines.append(current_line)
 
         for i, row in enumerate(matrix):
             if is_split and (i == len(rows)):
-                lines.append(f'//{"SPLIT":-^{len(lines[-1]) - 2}}')
+                lines.append(f'/*{"SPLIT":-^{len(lines[-1]) - 6}}*/ \\')
 
             current_line = ' ' * indent
             current_line += '{ '
             current_line += ' '.join([f'{col + ",":<{max_len + 1}}' for col in row])
-            current_line = self.strip_last(current_line, ',')
-            current_line += f' }}, \\  // {rows[i % len(rows)]}'
+            current_line = strip_last(current_line, ',')
+            current_line += f' }},  /* {rows[i % len(rows)]} */ \\'
             lines.append(current_line)
-        lines[-1] = self.strip_last(lines[-1], ',', ' ')
+        lines[-1] = strip_last(lines[-1], ',', ' ')
 
         lines.append('}')
         lines.append('')
-
         return lines
 
 
@@ -525,8 +531,6 @@ class Keymap:
         if (data := self._data) is None:
             if self._filepath.exists():
                 data = self._data = json.loads(self._filepath.read_text())
-                if 'layers' in data:
-                    del data['layers']
             else:
                 data = self._data = {}
 
@@ -542,7 +546,7 @@ class Keymap:
     @property
     def layers(self) -> list[list[str]]:
         data = self.data
-        if (layers := data.get('layers', None)) is None:
+        if not (layers := data.get('layers', None)):
             layers = data['layers'] = []
             for _ in self.layers_meta:
                 layers.append([])
@@ -572,8 +576,8 @@ class Keymap:
                     value = ''
             else:
                 value = layers[layer_name]
-            modifier = 'no-mod'
 
+            modifier = 'no-mod'
             if isinstance(value, dict):
                 if modifier in value:
                     if isinstance(value[modifier], dict):
@@ -597,8 +601,8 @@ class Keymap:
                 target_layer = layers['on_hold']['legend']
             else:
                 target_layer = layers['on_hold']
-            print(f'on hold {name=}, {target_layer=}')
             target_layer_index = layer_indices[target_layer]
+
             key_index = len(layer) - 1
             original_keycode = self.layers[0][key_index]
             self.layers[0][key_index] = f'LT({target_layer_index}, {original_keycode})'
@@ -622,6 +626,71 @@ class Keymap:
                 return f'UC(0x{ord(legend):X})'
             else:
                 return None
+
+    def keymap_c(self) -> list[str]:
+        struct = self._info.generate_layout_structure()
+        layout_name = self.data['layout'] + '_keebs'
+        layout = self._info.layout
+
+        lines = []
+        lines.append('#include QMK_KEYBOARD_H')
+        lines.append('')
+
+        indent = ' ' * 4
+        lines.append('enum layer_names {')
+        for layer_name in self.layers_meta:
+            lines.append(f'{indent}{layer_name.upper()},')
+        lines[-1] = strip_last(lines[-1], ',', ' ')
+        lines.append('};')
+        lines.append('')
+
+        lines.append('const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {')
+        for layer_index, layer_name in enumerate(self.layers_meta):
+            layer = self.layers[layer_index]
+            keycodes = {key['label']: layer[i] for i, key in enumerate(layout)}
+
+            col_max_len = [0] * len(struct[0])
+            struct_keycodes: list[list[str]] = []
+            for row in struct:
+                row_keycodes: list[str] = []
+                for i, cell in enumerate(row):
+                    if not cell.strip():
+                        row_keycodes.append('')
+                    else:
+                        keycode = keycodes[cell]
+                        if keycode.startswith('KC_'):
+                            keycode = SHORT_ALIASES.get(keycode, keycode)
+                        else:
+                            for orig, short in SHORT_ALIASES.items():
+                                keycode = keycode.replace(orig, short)
+                            if keycode.startswith('LT('):
+                                comma_i = keycode.index(',')
+                                for layer_i, layer_n in enumerate(self.layers_meta):
+                                    keycode = keycode[:comma_i].replace(str(layer_i), layer_n.upper()) + keycode[comma_i:]
+
+                        row_keycodes.append(keycode)
+                        col_max_len[i] = max(len(keycode), col_max_len[i])
+
+                struct_keycodes.append(row_keycodes)
+
+            lines.append(f'{indent}[{layer_name.upper()}] = {layout_name}(')
+
+            for row in struct_keycodes:
+                current_line = indent * 2
+                for i, cell in enumerate(row):
+                    if not cell.strip():
+                        current_line += (' ' * (col_max_len[i] + 2))
+                    else:
+                        current_line += f'{cell + ",":<{col_max_len[i] + 1}} '
+                lines.append(current_line)
+
+            lines[-1] = strip_last(lines[-1], ',')
+            lines.append(f'{indent}),')
+        lines[-1] = strip_last(lines[-1], ',')
+        lines.append('};')
+
+        lines.append('')
+        return lines
 
 
 qmk_cli = ClyoTyper(help='QMK-related commands')
@@ -655,3 +724,27 @@ def gen_layout_h(
 
     layout_h_path = qmk_cli.keyboard_path / 'layout.h'
     layout_h_path.write_text('\n'.join(layout_h_lines))
+
+
+@qmk_cli.command()
+def gen_keymap_c(
+    ergogen_yaml: Path,
+
+) -> None:
+    from ergogen import Keyboard
+
+    keeb = Keyboard(ergogen_yaml, None, None)
+    qmk_cli = QMK_CLI()
+    qmk_info = KeyboardInfo(qmk_cli.root_keyboard_path / 'info.json')
+    qmk_info.layout_meta = dict(
+        name=qmk_info.guess_layout_name(),
+    )
+    keymap = Keymap(qmk_cli.keymap_path / 'keymap.json', qmk_info)
+    keymap.data['keyboard'] = qmk_cli.keyboard
+    keymap.data['layout'] = qmk_info.layout_meta['name']
+    keymap.layers_meta = keeb.data['layers']
+
+    keymap_c_lines = keymap.keymap_c()
+    keymap_c_path = qmk_cli.keymap_path / 'keymap.c'
+    print(keymap_c_path)
+    keymap_c_path.write_text('\n'.join(keymap_c_lines))

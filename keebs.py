@@ -62,6 +62,7 @@ def gen_qmk_json(
     qmk_info.layout.clear()
 
     keymap = QMKKeymap(qmk_cli.keymap_path / 'keymap.json', qmk_info)
+    keymap.layers.clear()
     keymap.data['keyboard'] = qmk_cli.keyboard
     keymap.data['layout'] = qmk_info.layout_meta['name']
     keymap.layers_meta = keeb.data['layers']
