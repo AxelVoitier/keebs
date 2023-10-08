@@ -4,56 +4,52 @@ qmk:
   # They will be preserved. Only matrix_pins can be complemented, and the layout itself
   # will be cleared (but not any other layouts).
   # In here, only _layout section is required
-  keyboard_name: Handy
-  maintainer: Axel Voitier
-  manufacturer: Axel Voitier
-  url: https://github.com/AxelVoitier/keebs/tree/main/Handy
 
-  usb:
-    vid: "0xA8E1"
-    pid: "0x0002"
-    device_version: 1.0.0
+  keyboard:  # info.json
+    keyboard_name: handy
+    maintainer: Axel Voitier
+    manufacturer: Axel Voitier
+    url: https://github.com/AxelVoitier/keebs/tree/main/Handy
 
-  development_board: promicro
-  # pin_compatible: promicro
-  pin_compatible:
-  # bootloader: caterina
-  bootloader:
-  # processor: atmega32u4
-  processor:
-  build:
-    # debounce_type:
-    # firmware_format:
-    lto: true
-  features:
-    bootmagic: false
-    extrakey: true
-    mousekey: false
-    nkro: true
-    unicode: true
-    oled: true
-    key_override: true
-    rgb_matrix: false
-  tapping:
-    term: 200
-    permissive_hold: true
+    usb:
+      vid: "0xA8E1"
+      pid: "0x0002"
+      device_version: 1.0.0
 
-  # Matrix
-  debounce: 5
-  diode_direction: COL2ROW
-  # matrix_pins is generated
-  # (but you can provide it as well, even partial, either here or in the original info.json)
-  matrix_pins:
-    cols: [D4, C6, D7, E6, B4]
-    rows: [F6, F7, B1, B3, B2, B6]
+    development_board: promicro
+    # pin_compatible: promicro
+    pin_compatible:
+    # bootloader: caterina
+    bootloader:
+    # processor: atmega32u4
+    processor:
+    build:
+      # debounce_type:
+      # firmware_format:
+      lto: true
+    features:
 
-  split:
-    enabled: true
-    soft_serial_pin: D2
+    # Matrix
+    debounce: 5
+    diode_direction: COL2ROW
+    # matrix_pins is generated
+    # (but you can provide it as well, even partial, either here or in the original info.json)
+    matrix_pins:
+      cols: [D4, C6, D7, E6, B4]
+      rows: [F6, F7, B1, B3, B2, B6]
 
-  # layouts is generated (at least the one described by _layout section).
-  # You can also manually provide other layouts, here or in the original info.json file.
-  # However, if there is one with the same name than the one we generate here, it will be wiped out.
+    split:
+      enabled: true
+      soft_serial_pin: D2
+
+    # layouts is generated (at least the one described by _layout section).
+    # You can also manually provide other layouts, here or in the original info.json file.
+    # However, if there is one with the same name than the one we generate here, it will be wiped out.
+
+  keymap:  # keymap.json
+    features:
+      oled: true
+    split.main: left
 
   # Required
   _layout:

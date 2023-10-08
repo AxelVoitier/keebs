@@ -148,7 +148,20 @@ KEYCODES = {
     'Next': 'KC_MEDIA_NEXT_TRACK',
     'Prev': 'KC_MEDIA_PREV_TRACK',
     'Stop': 'KC_MEDIA_STOP', '■': 'KC_MEDIA_STOP',
-    'Play': 'KC_', '▶||': 'KC_MEDIA_PLAY_PAUSE',
+    'Play': 'KC_MEDIA_PLAY_PAUSE', '▶||': 'KC_MEDIA_PLAY_PAUSE',
+    'Reset': 'QK_BOOTLOADER', 'Boot': 'QK_BOOTLOADER',
+    'Clear': 'QK_CLEAR_EEPROM', 'EE_CLR': 'QK_CLEAR_EEPROM',
+    'Make': 'QK_MAKE',
+    'Reboot': 'QK_REBOOT',
+    'DT_PRNT': 'QK_DYNAMIC_TAPPING_TERM_PRINT',
+    'DT_UP': 'QK_DYNAMIC_TAPPING_TERM_UP',
+    'DT_DOWN': 'QK_DYNAMIC_TAPPING_TERM_DOWN',
+    'AS_DOWN': 'QK_AUTO_SHIFT_DOWN',
+    'AS_UP': 'QK_AUTO_SHIFT_UP',
+    'AS_RPT': 'QK_AUTO_SHIFT_REPORT',
+    'AS_ON': 'QK_AUTO_SHIFT_ON',
+    'AS_OFF': 'QK_AUTO_SHIFT_OFF',
+    'AS_TOGG': 'QK_AUTO_SHIFT_TOGGLE',
 
     # '': 'KC_',
 }
@@ -210,6 +223,18 @@ SHORT_ALIASES = dict(
     KC_MEDIA_PREV_TRACK='KC_MPRV',
     KC_MEDIA_STOP='KC_MSTP',
     KC_MEDIA_PLAY_PAUSE='KC_MPLY',
+    QK_BOOTLOADER='QK_BOOT',
+    QK_CLEAR_EEPROM='EE_CLR',
+    QK_REBOOT='QK_RBT',
+    QK_DYNAMIC_TAPPING_TERM_PRINT='DT_PRNT',
+    QK_DYNAMIC_TAPPING_TERM_UP='DT_UP',
+    QK_DYNAMIC_TAPPING_TERM_DOWN='DT_DOWN',
+    QK_AUTO_SHIFT_DOWN='AS_DOWN',
+    QK_AUTO_SHIFT_UP='AS_UP',
+    QK_AUTO_SHIFT_REPORT='AS_RPT',
+    QK_AUTO_SHIFT_ON='AS_ON',
+    QK_AUTO_SHIFT_OFF='AS_OFF',
+    QK_AUTO_SHIFT_TOGGLE='AS_TOGG',
 
     # ='',
 )
@@ -295,6 +320,12 @@ class KeyboardInfo:
 
     def write(self) -> None:
         data = self.data
+        if not self._filepath.parent.exists():
+            content = json.dumps(data, indent=4)
+            subprocess.run(shlex.split('qmk import-keyboard -'), text=True, input=content)
+            # We intentionnaly rewrite it the normal way as QMK importer kind-of force some settings
+            # on us (+ a bug) with its template...
+
         with self._filepath.open(mode='w') as f:
             json.dump(data, f, indent=4)
 
@@ -542,6 +573,34 @@ class Keymap:
             self._filepath.parent.mkdir()
         with self._filepath.open(mode='w') as f:
             json.dump(data, f, indent=4)
+
+    def set_config(self, from_ergogen: dict[str, KeyboardInfo.ElementType] | None) -> None:
+        def traverse(
+            sub_from: dict[str, KeyboardInfo.ElementType],
+            sub_to: dict[str, KeyboardInfo.ElementType],
+        ) -> None:
+            for k, v in sub_from.items():
+                if k.startswith('_'):
+                    continue
+
+                if isinstance(v, dict):
+                    if k not in sub_to:
+                        sub_to[k] = {}
+                    traverse(v, sub_to[k])
+                elif v is None:
+                    if k in sub_to:
+                        del sub_to[k]
+                else:
+                    sub_to[k] = v
+
+        if from_ergogen is None:
+            if 'config' in self.data:
+                del self.data['config']
+            return
+
+        if 'config' not in self.data:
+            self.data['config'] = {}
+        traverse(from_ergogen, self.data['config'])
 
     @property
     def layers(self) -> list[list[str]]:
