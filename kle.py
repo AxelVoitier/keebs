@@ -130,14 +130,14 @@ class Keyboard:
         ) -> dict[str, int | str]:
             def filter_keys(d: dict[str, Any], not_legend: bool = False) -> dict[str, Any]:
                 if not_legend:
-                    valid_keys = ('index', 'size', 'color', 'ghosted')
+                    valid_keys = ('index', 'size', 'color', 'ghosted', 'kle_ignore')
                 else:
-                    valid_keys = ('legend', 'index', 'size', 'color', 'ghosted')
+                    valid_keys = ('legend', 'index', 'size', 'color', 'ghosted', 'kle_ignore')
 
                 return {k: v for k, v in d.items() if k in valid_keys}
 
             if defaults is None:
-                info = dict(legend='', index=9, size='', color='', ghosted=False)
+                info = dict(legend='', index=9, size='', color='', ghosted=False, kle_ignore=False)
             else:
                 info = dict(defaults)
 
@@ -180,6 +180,8 @@ class Keyboard:
 
             for modifier in ('no-mod', 'shift'):
                 layer_info = get_layer_info(layer, modifier, value, layers)
+                if layer_info['kle_ignore']:
+                    continue
                 if layer_info['legend'] == '':
                     continue
                 index = layer_info['index']
