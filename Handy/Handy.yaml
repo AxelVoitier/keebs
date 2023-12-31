@@ -6,21 +6,24 @@ units:
   middle_off: 6.5
   ring_off: -(4/25)U
   pinky_off: -(5/7)U
+  outer_off: -25
   inner_splay: 0
   index_splay: 0
   middle_splay: 5
   ring_splay: 10
   pinky_splay: 15
+  outer_splay: 20
   arc_index_home_x_offset: 6
   arc_index_home_y_offset: ky + 120 + 1
   thumb_central_radius: 90.4
   thumb_middle_angle: 19
   case_padding: 4
+  pcb_padding: case_padding / 2
   case_thumb_bottom_arc_radius: thumb_central_radius - 1ky - case_padding
   case_thumb_top_arc_radius: thumb_central_radius + 1ky + case_padding
 points:
   rotate: 0
-  mirror: 60
+  mirror: -47.625
   key:
     width: kx
     height: ky
@@ -35,12 +38,17 @@ points:
         inner:
           key:
             splay: -inner_splay
+            qmk:
+              col: D4
           rows:
             top:
               layers:
                 Base: J
                 Sym1: '*'
                 Num: '*'
+                Nav:
+                  legend: V+
+                  size: 3
                 Media: Ltog
               mirror:
                 layers:
@@ -49,6 +57,7 @@ points:
                   Sym1: $unset
                   Num: $unset
                   Media: $unset
+                  Nav: $unset
             home:
               layers:
                 Base: M
@@ -59,16 +68,18 @@ points:
                 Math:
                   no-mod: "\u208C"
                   shift: "\u207C"
+                Nav: "\u21F1"
               mirror:
                 layers:
                   Base: G
                   Sym1: '@'
                   Sym2: "\u0327"
                   Fun:
-                    value: PrtScn
+                    legend: PrtScn
                     size: 1
                   Num: $unset
                   Math: $unset
+                  Nav: $unset
             bottom:
               layers:
                 Base: K
@@ -77,21 +88,27 @@ points:
                   shift: '?'
                 Num: /
                 Math:
-                  value: "\u2044"
+                  legend: "\u2044"
                   size: 4
+                Nav:
+                  legend: V-
+                  size: 3
               mirror:
                 layers:
                   Base: V
                   Sym1: \
                   Fun:
-                    value: ScrLock
+                    legend: ScrLock
                     size: 1
                   Num: $unset
                   Math: $unset
+                  Nav: $unset
         index:
           key:
             stagger: -inner_off + index_off
             splay: +inner_splay - index_splay
+            qmk:
+              col: C6
           rows:
             top:
               layers:
@@ -100,6 +117,9 @@ points:
                 Math:
                   no-mod: "\u2087"
                   shift: "\u2077"
+                Nav:
+                  legend: Prev
+                  size: 2
                 Media: Lmod
               mirror:
                 layers:
@@ -108,6 +128,7 @@ points:
                   Fun: F4
                   Num: $unset
                   Math: $unset
+                  Nav: $unset
                   Media: $unset
             home:
               layers:
@@ -117,6 +138,9 @@ points:
                 Math:
                   no-mod: "\u2084"
                   shift: "\u2074"
+                Nav:
+                  legend: "\u25C0"
+                  size: 3
               mirror:
                 layers:
                   Base: T
@@ -125,6 +149,7 @@ points:
                   Fun: F8
                   Num: $unset
                   Math: $unset
+                  Nav: $unset
             bottom:
               layers:
                 Base: H
@@ -132,6 +157,10 @@ points:
                 Math:
                   no-mod: "\u2081"
                   shift: "\xB9"
+                Nav:
+                  legend: "\u2423\u25C0"
+                  size: 2
+                  keycode: LCTL(KC_LEFT)
               mirror:
                 layers:
                   Base: D
@@ -139,11 +168,14 @@ points:
                   Fun: F12
                   Num: $unset
                   Math: $unset
+                  Nav: $unset
         middle:
           key:
             stagger: -index_off + middle_off
             splay: +index_splay - middle_splay
             spread: 1kx + 1
+            qmk:
+              col: D7
           rows:
             top:
               layers:
@@ -170,6 +202,7 @@ points:
                 Math:
                   no-mod: "\u2085"
                   shift: "\u2075"
+                Nav: "\u25B2"
               mirror:
                 layers:
                   Base: S
@@ -178,18 +211,20 @@ points:
                   Fun: F7
                   Num: $unset
                   Math: $unset
+                  Nav: $unset
             bottom:
               layers:
                 Base:
                   no-mod: ','
                   shift:
-                    value: ;
+                    legend: ;
                     size: 5
                 Sym1: ;
                 Num: 2
                 Math:
                   no-mod: "\u2082"
                   shift: "\xB2"
+                Nav: "\u25BC"
               mirror:
                 layers:
                   Base: C
@@ -197,10 +232,13 @@ points:
                   Fun: F11
                   Num: $unset
                   Math: $unset
+                  Nav: $unset
         ring:
           key:
             stagger: -middle_off + ring_off
             splay: +middle_splay - ring_splay
+            qmk:
+              col: E6
           rows:
             top:
               layers:
@@ -210,6 +248,9 @@ points:
                 Math:
                   no-mod: "\u2089"
                   shift: "\u2079"
+                Nav:
+                  legend: Next
+                  size: 2
                 Media: Lsai
               mirror:
                 layers:
@@ -218,6 +259,7 @@ points:
                   Fun: F2
                   Num: $unset
                   Math: $unset
+                  Nav: $unset
                   Media: $unset
             home:
               layers:
@@ -227,6 +269,9 @@ points:
                 Math:
                   no-mod: "\u2086"
                   shift: "\u2076"
+                Nav:
+                  legend: "\u25B6"
+                  size: 3
               mirror:
                 layers:
                   Base: R
@@ -235,18 +280,23 @@ points:
                   Fun: F6
                   Num: $unset
                   Math: $unset
+                  Nav: $unset
             bottom:
               layers:
                 Base:
                   no-mod: .
                   shift:
-                    value: ':'
+                    legend: ':'
                     size: 5
                 Sym1: ':'
                 Num: 3
                 Math:
                   no-mod: "\u2083"
                   shift: "\xB3"
+                Nav:
+                  legend: "\u25B6\u2423"
+                  size: 2
+                  keycode: LCTL(KC_RIGHT)
               mirror:
                 layers:
                   Base: X
@@ -254,17 +304,20 @@ points:
                   Fun: F10
                   Num: $unset
                   Math: $unset
+                  Nav: $unset
         pinky:
           key:
             stagger: -ring_off + pinky_off + 1
             splay: +ring_splay - pinky_splay
             spread: 1kx + 1
+            qmk:
+              col: B4
           rows:
             top:
               layers:
                 Base:
                   no-mod:
-                    value: '-'
+                    legend: '-'
                     index: 10
                   shift: _
                 Sym1: "\xB1"
@@ -272,6 +325,7 @@ points:
                 Math:
                   no-mod: "\u208B"
                   shift: "\u207B"
+                Nav: "\u21DE"
                 Media: Lvai
               mirror:
                 layers:
@@ -280,6 +334,7 @@ points:
                   Fun: F1
                   Num: $unset
                   Math: $unset
+                  Nav: $unset
                   Media: $unset
             home:
               layers:
@@ -289,6 +344,7 @@ points:
                 Math:
                   no-mod: "\u2080"
                   shift: "\u2070"
+                Nav: "\u21F2"
               mirror:
                 layers:
                   Base: A
@@ -297,6 +353,7 @@ points:
                   Fun: F5
                   Num: $unset
                   Math: $unset
+                  Nav: $unset
             bottom:
               layers:
                 Base:
@@ -307,6 +364,7 @@ points:
                 Math:
                   no-mod: "\u208A"
                   shift: "\u207A"
+                Nav: "\u21DF"
               mirror:
                 layers:
                   Base: Z
@@ -314,14 +372,51 @@ points:
                   Fun: F9
                   Num: $unset
                   Math: $unset
+                  Nav: $unset
+        outer:
+          key:
+            stagger: -pinky_off + outer_off
+            splay: +pinky_splay - outer_splay
+          rows:
+            top:
+              layers:
+                Base:
+                  no-mod: ''''
+                  shift: '"'
+              mirror:
+                layers:
+                  Base:
+                    legend: "\u2387"
+                    size: 6
+                    no-mod: $unset
+                    shift: $unset
+            home:
+              layers: null
+              mirror:
+                layers:
+                  Base:
+                    legend: "\u232B"
+                    size: 6
+            bottom:
+              layers:
+                Base:
+                  legend: "\u2756"
+                  size: 8
+              mirror:
+                layers:
+                  Base:
+                    legend: "\u2388"
+                    size: 9
       rows:
-        bottom: null
-        home: null
-        top: null
-      anchor:
-        shift:
-        - 297/2 - 2kx
-        - -210/2 - (-inner_off + index_off + middle_off)
+        bottom:
+          qmk:
+            row: B1
+        home:
+          qmk:
+            row: F7
+        top:
+          qmk:
+            row: F6
     arc_center:
       anchor:
         ref: matrix_index_home
@@ -336,6 +431,11 @@ points:
         spread: 0
         tags:
           1u: true
+        layers:
+          transparent: true
+        qmk:
+          col: D4
+          row: B2
       columns:
         outer_top:
           key:
@@ -345,17 +445,15 @@ points:
             - thumb_central_radius + 0.5ky + 0.5
             layers:
               Base:
-                value: "\u232B"
+                legend: "\u232B"
                 size: 6
-              Media: Mute
               on_hold: Fun
             mirror:
               layers:
                 Base:
-                  value: Esc
+                  legend: Esc
                   size: 4
-                on_hold: Media
-                Media: $unset
+                on_hold: Nav
         outer_bottom:
           key:
             orient: thumb_middle_angle + 15
@@ -364,21 +462,19 @@ points:
             - thumb_central_radius - 0.5ky
             layers:
               Base:
-                value: "\u2326"
+                legend: "\u2326"
                 size: 6
               Sym1:
-                value: Ins
+                legend: Ins
                 size: 2
-              Media:
-                value: "\u25A0"
-                size: 3
               on_hold: Sym2
             mirror:
               layers:
                 Base: "\u21E5"
                 on_hold: Num
                 Sym1: $unset
-                Media: $unset
+            qmk:
+              row: B6
         middle:
           key:
             orient: thumb_middle_angle
@@ -391,21 +487,21 @@ points:
               2u: vertical
             layers:
               Base:
-                value: "\u23CE"
+                legend: "\u23CE"
                 size: 9
               Num: '='
-              Media:
-                value: "\u25B6||"
+              Nav:
+                legend: "\u25B6||"
                 size: 4
               on_hold: Sym1
             mirror:
               layers:
                 Base:
-                  value: "\u2423"
+                  legend: "\u2423"
                   size: 9
                 on_hold: Sym1
                 Num: $unset
-                Media: $unset
+                Nav: $unset
         inner_top:
           key:
             orient: thumb_middle_angle - 12
@@ -414,8 +510,17 @@ points:
             - thumb_central_radius + 0.5ky + 0.5
             layers:
               Base:
-                value: "\u21E7"
+                legend: "\u21E7"
                 size: 9
+                keycode: KC_RIGHT_SHIFT
+              Nav:
+                legend: "\u25A0"
+                size: 4
+            mirror:
+              layers:
+                Base:
+                  keycode: $unset
+                Nav: $unset
         inner_bottom:
           key:
             orient: thumb_middle_angle - 15
@@ -424,9 +529,16 @@ points:
             - thumb_central_radius - 0.5ky - 0
             layers:
               Base:
-                value: "\u2388"
+                legend: "\u2388"
                 size: 9
+              Nav:
+                legend: Mute
+                size: 2
+            mirror:
+              layers:
+                Nav: $unset
     nav_cluster:
+      $skip: true
       anchor:
         ref: matrix_ring_bottom
         shift:
@@ -437,6 +549,8 @@ points:
         spread: 1kx
         tags:
           1u: true
+        layers:
+          transparent: true
       columns:
         left:
           rows:
@@ -445,19 +559,19 @@ points:
           key:
             layers:
               Base:
-                value: "\u25C0"
+                legend: "\u25C0"
                 size: 6
               Sym1:
-                value: "\u21F1"
+                legend: "\u21F1"
                 size: 5
               Media: Prev
             mirror:
               layers:
                 Base:
-                  value: "\u21F2"
+                  legend: "\u21F2"
                   size: 6
                 Sym1:
-                  value: "\u25B6"
+                  legend: "\u25B6"
                   size: 3
                 Media: $unset
         up_down:
@@ -467,32 +581,32 @@ points:
             top:
               layers:
                 Base:
-                  value: "\u25B2"
+                  legend: "\u25B2"
                   size: 9
                 Sym1:
-                  value: "\u21DE"
+                  legend: "\u21DE"
                   size: 6
                 Media: V+
               mirror:
                 layers:
                   Base:
-                    value: "\u21DE"
+                    legend: "\u21DE"
                     size: 9
                   Sym1: "\u25B2"
                   Media: $unset
             bottom:
               layers:
                 Base:
-                  value: "\u25BC"
+                  legend: "\u25BC"
                   size: 9
                 Sym1:
-                  value: "\u21DF"
+                  legend: "\u21DF"
                   size: 6
                 Media: V-
               mirror:
                 layers:
                   Base:
-                    value: "\u21DF"
+                    legend: "\u21DF"
                     size: 9
                   Sym1: "\u25BC"
                   Media: $unset
@@ -501,19 +615,19 @@ points:
             stagger: -ring_off + pinky_off
             layers:
               Base:
-                value: "\u25B6"
+                legend: "\u25B6"
                 size: 6
               Sym1:
-                value: "\u21F2"
+                legend: "\u21F2"
                 size: 5
               Media: Next
             mirror:
               layers:
                 Base:
-                  value: "\u21F1"
+                  legend: "\u21F1"
                   size: 6
                 Sym1:
-                  value: "\u25C0"
+                  legend: "\u25C0"
                   size: 3
                 Media: $unset
           rows:
@@ -604,7 +718,7 @@ outlines:
   board:
   - what: polygon
     operation: stack
-    expand: case_padding
+    expand: pcb_padding
     fillet: 5
     points:
     - ref: matrix_inner_top
@@ -613,31 +727,39 @@ outlines:
       - 0.5ky
     - ref: matrix_middle_top
       shift:
-      - 0
+      - -0.5kx
+      - 0.5ky
+    - ref: matrix_middle_top
+      shift:
+      - +0.5kx
       - 0.5ky
     - ref: matrix_pinky_top
       shift:
       - 0.5kx
       - 0.5ky
-    - ref: matrix_pinky_bottom
+    - ref: matrix_outer_top
       shift:
       - 0.5kx
-      - -0.5ky
-    - ref: nav_cluster_up_down_bottom
+      - 0.5ky
+    - ref: matrix_outer_bottom
       shift:
       - 0.5kx
-      - -0.5ky
-    - ref: thumb_cluster_inner_bottom
+      - -0.75ky
+    - ref: thumb_cluster_middle
       shift:
-      - 0
-      - -0.5ky
+      - 0.5kx
+      - -1ky
+    - ref: thumb_cluster_middle
+      shift:
+      - -0.5kx
+      - -1ky
     - ref: thumb_cluster_outer_bottom
       shift:
       - -0.5kx
       - -0.5ky
     - ref: thumb_cluster_outer_top
       shift:
-      - -0.5kx
+      - -0.75kx
       - 0.5ky
     - ref: matrix_inner_bottom
       shift:
@@ -708,17 +830,13 @@ outlines:
       shift:
       - -30
       - 40
-    - ref: matrix_pinky_top
+    - ref: matrix_outer_top
       shift:
       - 0.5kx + case_padding
       - 50
-    - ref: matrix_pinky_bottom
-      shift:
-      - 0.5kx + case_padding
-      - -0.5ky
     - ref: arc_center
       shift:
-      - -arc_index_home_x_offset + 3.1kx + case_padding
+      - -arc_index_home_x_offset + 3.9kx + case_padding
       - case_thumb_bottom_arc_radius
     - ref: arc_center
       shift:
@@ -757,9 +875,6 @@ pcbs:
     - outline: case_keys
       layer: Dwgs.User
 kle:
-  shift:
-  - 10kx
-  - 2.5ky
   layers:
     Base:
       no-mod:
@@ -789,7 +904,11 @@ kle:
     Math:
       index: 3
       size: 5
-      color: '#00c2bd'
+      color: '#0065c2'
+    Nav:
+      index: 0
+      size: 4
+      color: '#ff00ff'
     Fun:
       index: 0
       size: 2
@@ -798,11 +917,62 @@ kle:
       index: 0
       size: 2
       color: '#ff00ff'
+      kle_ignore: true
 layers:
   Base: null
   Sym1: null
   Sym2: null
   Num: null
   Math: null
+  Nav: null
   Fun: null
   Media: null
+qmk:
+  keyboard:
+    keyboard_name: handy
+    maintainer: Axel Voitier
+    manufacturer: Axel Voitier
+    url: https://github.com/AxelVoitier/keebs/tree/main/Handy
+    usb:
+      vid: '0xA8E1'
+      pid: '0x0002'
+      device_version: 1.0.0
+    development_board: promicro
+    pin_compatible: null
+    bootloader: null
+    processor: null
+    build:
+      lto: true
+    features: null
+    debounce: 5
+    diode_direction: COL2ROW
+    matrix_pins:
+      cols:
+      - D4
+      - C6
+      - D7
+      - E6
+      - B4
+      rows:
+      - F6
+      - F7
+      - B1
+      - B3
+      - B2
+      - B6
+    split:
+      enabled: true
+      soft_serial_pin: D2
+  keymap:
+    features:
+      oled: true
+    split:
+      main: left
+  _layout:
+    name: LAYOUT_3x5_1x4_1x2_2u_2x1u
+    labels: '{side_abbrev}{row_i}{col_i}'
+    sides:
+      left:
+        is_main: true
+        is_mirror: true
+      right: null

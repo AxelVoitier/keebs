@@ -27,6 +27,9 @@ endif
 
 gen-kle: $(config_name).json
 
+$(config_name).json: $(config_name).yaml $(ergogen_outputs)
+	../keebs.py ergogen gen-kle ${config_name}.yaml --points-yaml ergogen-output/points/points.yaml --units-yaml ergogen-output/points/units.yaml
+
 gen-qmk-info: $(config_name).yaml $(ergogen_outputs)
 	../keebs.py gen-qmk-info-json ${config_name}.yaml --points-yaml ergogen-output/points/points.yaml --units-yaml ergogen-output/points/units.yaml
 

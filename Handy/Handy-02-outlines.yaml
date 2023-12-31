@@ -1,6 +1,7 @@
 units:
   # Case
   case_padding: 4
+  pcb_padding: case_padding / 2
   case_thumb_bottom_arc_radius: thumb_central_radius - 1ky - case_padding
   case_thumb_top_arc_radius: thumb_central_radius + 1ky + case_padding
 
@@ -59,26 +60,38 @@ outlines:
   board:
     - what: polygon
       operation: stack
-      expand: case_padding
+      expand: pcb_padding
       # joints: 2
       fillet: 5
       points:
         - ref: matrix_inner_top
           shift: [-0.5kx, 0.5ky]
         - ref: matrix_middle_top
-          shift: [0, 0.5ky]
+          shift: [-0.5kx, 0.5ky]
+        #- ref: matrix_middle_top
+        #  shift: [0kx, 0.5ky]
+        - ref: matrix_middle_top
+          shift: [+0.5kx, 0.5ky]
         - ref: matrix_pinky_top
           shift: [0.5kx, 0.5ky]
-        - ref: matrix_pinky_bottom
-          shift: [0.5kx, -0.5ky]
-        - ref: nav_cluster_up_down_bottom
-          shift: [0.5kx, -0.5ky]
-        - ref: thumb_cluster_inner_bottom
-          shift: [0, -0.5ky]
+        - ref: matrix_outer_top
+          shift: [0.5kx, 0.5ky]
+        # - ref: matrix_pinky_bottom
+        #  shift: [0.5kx, -0.5ky]
+        - ref: matrix_outer_bottom
+          shift: [0.5kx, -0.75ky]
+        # - ref: nav_cluster_up_down_bottom
+        #   shift: [0.5kx, -0.5ky]
+        #- ref: thumb_cluster_inner_bottom
+        #  shift: [0, -0.5ky]
+        - ref: thumb_cluster_middle
+          shift: [0.5kx, -1ky]
+        - ref: thumb_cluster_middle
+          shift: [-0.5kx, -1ky]
         - ref: thumb_cluster_outer_bottom
           shift: [-0.5kx, -0.5ky]
         - ref: thumb_cluster_outer_top
-          shift: [-0.5kx, 0.5ky]
+          shift: [-0.75kx, 0.5ky]
         - ref: matrix_inner_bottom
           shift: [-0.5kx, -0.5ky]
 
@@ -154,16 +167,18 @@ outlines:
         - ref: matrix_inner_top
           shift: [-30, 40]  # Very far to cover the top arc
         # Top-right corner
-        - ref: matrix_pinky_top
+        #- ref: matrix_pinky_top
+        - ref: matrix_outer_top
           shift: [0.5kx + case_padding, 50]  # Very far to cover the top arc
-        # Mid-right "corner"
-        - ref: matrix_pinky_bottom
-          shift: [0.5kx + case_padding, -0.5ky]  # Very far to cover the top arc
+        ## Mid-right "corner"
+        #- ref: matrix_pinky_bottom
+        #  shift: [0.5kx + case_padding, -0.5ky]  # Very far to cover the top arc
         # Bottom right corner (far to cover the arc)
         - ref: arc_center
           shift:
             # X: Reset to index home position + add 4 keys and padding
-            - -arc_index_home_x_offset + 3.1kx + case_padding
+            #- -arc_index_home_x_offset + 3.1kx + case_padding
+            - -arc_index_home_x_offset + 3.9kx + case_padding
             # Y: Radius of thumb cluster bottom arc
             - case_thumb_bottom_arc_radius
         # Pivot point between line and arc at the bottom
@@ -183,8 +198,8 @@ outlines:
 
     # Bottom right corner arc
     #- name: _case_right_bottom_corner
-    #  #operation: intersect
-    #  operation: stack
+    #  operation: intersect
+    #  #operation: stack
 
     # Thumb cluster top arc
     - name: _case_thumb_top_arc

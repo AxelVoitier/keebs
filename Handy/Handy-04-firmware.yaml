@@ -82,17 +82,17 @@ points.zones:
       top.qmk.row: F6
       home.qmk.row: F7
       bottom.qmk.row: B1
-      mod.qmk.row: B3
+      # mod.qmk.row: B3
 
   thumb_cluster:
     key.qmk.col: D4
     key.qmk.row: B2
     columns:
       outer_bottom.key.qmk.row: B6
-      home.key.qmk.col: C6
+      # home.key.qmk.col: C6
 
-  bottom_cluster:
-    key.qmk.row: B2
-    columns:
-      left.key.qmk.col: E6
-      right.key.qmk.col: B4
+  # bottom_cluster:
+  #   key.qmk.row: B2
+  #   columns:
+  #     left.key.qmk.col: E6
+  #     right.key.qmk.col: B4

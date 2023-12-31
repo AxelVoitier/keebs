@@ -22,11 +22,13 @@ kle:
     Math:
       index: 3
       size: 5
-      color: "#00c2bd"
-    # Nav:
-    #   index: 0
-    #   size: 4
-    #   color: "#00c2bd"
+      # color: "#00c2bd"
+      color: "#0065c2"
+    Nav:
+      index: 0
+      size: 4
+      # color: "#00c2bd"
+      color: "#ff00ff"
     Fun:
       index: 0
       size: 2
@@ -35,6 +37,7 @@ kle:
       index: 0
       size: 2
       color: "#ff00ff"
+      kle_ignore: true
 
 layers:
   Base:
@@ -42,7 +45,7 @@ layers:
   Sym2:
   Num:
   Math:
-  # Nav:
+  Nav:
   Fun:
   Media:
 
@@ -53,6 +56,9 @@ points.zones:
         Base: J
         Sym1: "*"
         Num: "*"
+        Nav:
+          legend: V+
+          size: 3
         Media: Ltog
       rows.top.mirror.layers:
         Base: B
@@ -60,6 +66,7 @@ points.zones:
         Sym1: $unset
         Num: $unset
         Media: $unset
+        Nav: $unset
 
       rows.home.layers:
         Base: M
@@ -70,6 +77,7 @@ points.zones:
         Math:
           no-mod: ₌  # Subscript
           shift: ⁼  # Superscript
+        Nav: ⇱
       rows.home.mirror.layers:
         Base: G
         Sym1: "@"
@@ -79,6 +87,7 @@ points.zones:
           size: 1
         Num: $unset
         Math: $unset
+        Nav: $unset
 
       rows.bottom.layers:
         Base: K
@@ -89,6 +98,9 @@ points.zones:
         Math:
           legend: "⁄"
           size: 4
+        Nav:
+          legend: V-
+          size: 3
       rows.bottom.mirror.layers:
         Base: V
         Sym1: "\\"
@@ -97,6 +109,7 @@ points.zones:
           size: 1
         Num: $unset
         Math: $unset
+        Nav: $unset
 
     index:
       rows.top.layers:
@@ -105,6 +118,9 @@ points.zones:
         Math:
           no-mod: ₇  # Subscript
           shift: ⁷  # Superscript
+        Nav:
+          legend: Prev
+          size: 2
         Media: Lmod
       rows.top.mirror.layers:
         Base: P
@@ -112,6 +128,7 @@ points.zones:
         Fun: F4
         Num: $unset
         Math: $unset
+        Nav: $unset
         Media: $unset
 
       rows.home.layers:
@@ -121,6 +138,9 @@ points.zones:
         Math:
           no-mod: ₄  # Subscript
           shift: ⁴  # Superscript
+        Nav:
+          legend: ◀
+          size: 3
       rows.home.mirror.layers:
         Base: T
         Sym1: (
@@ -128,6 +148,7 @@ points.zones:
         Fun: F8
         Num: $unset
         Math: $unset
+        Nav: $unset
 
       rows.bottom.layers:
         Base: H
@@ -135,12 +156,17 @@ points.zones:
         Math:
           no-mod: ₁  # Subscript
           shift: ¹  # Superscript
+        Nav:
+          legend: ␣◀
+          size: 2
+          keycode: LCTL(KC_LEFT)
       rows.bottom.mirror.layers:
         Base: D
         Sym1: "#"
         Fun: F12
         Num: $unset
         Math: $unset
+        Nav: $unset
 
     middle:
       rows.top.layers:
@@ -166,6 +192,7 @@ points.zones:
         Math:
           no-mod: ₅  # Subscript
           shift: ⁵  # Superscript
+        Nav: ▲
       rows.home.mirror.layers:
         Base: S
         Sym1: "["
@@ -173,6 +200,7 @@ points.zones:
         Fun: F7
         Num: $unset
         Math: $unset
+        Nav: $unset
 
       rows.bottom.layers:
         Base:
@@ -185,12 +213,14 @@ points.zones:
         Math:
           no-mod: ₂  # Subscript
           shift: ²  # Superscript
+        Nav: ▼
       rows.bottom.mirror.layers:
         Base: C
         Sym1: "&"
         Fun: F11
         Num: $unset
         Math: $unset
+        Nav: $unset
 
     ring:
       rows.top.layers:
@@ -200,6 +230,9 @@ points.zones:
         Math:
           no-mod: ₉  # Subscript
           shift: ⁹  # Superscript
+        Nav:
+          legend: Next
+          size: 2
         Media: Lsai
       rows.top.mirror.layers:
         Base: W
@@ -207,6 +240,7 @@ points.zones:
         Fun: F2
         Num: $unset
         Math: $unset
+        Nav: $unset
         Media: $unset
 
       rows.home.layers:
@@ -216,6 +250,9 @@ points.zones:
         Math:
           no-mod: ₆  # Subscript
           shift: ⁶  # Superscript
+        Nav:
+          legend: ▶
+          size: 3
       rows.home.mirror.layers:
         Base: R
         Sym1: "{"
@@ -223,6 +260,7 @@ points.zones:
         Fun: F6
         Num: $unset
         Math: $unset
+        Nav: $unset
 
       rows.bottom.layers:
         Base:
@@ -235,12 +273,17 @@ points.zones:
         Math:
           no-mod: ₃  # Subscript
           shift: ³  # Superscript
+        Nav:
+          legend: ▶␣
+          size: 2
+          keycode: LCTL(KC_RIGHT)
       rows.bottom.mirror.layers:
         Base: X
         Sym1: "$"
         Fun: F10
         Num: $unset
         Math: $unset
+        Nav: $unset
 
     pinky:
       rows.top.layers:
@@ -254,6 +297,7 @@ points.zones:
         Math:
           no-mod: ₋  # Subscript
           shift: ⁻  # Superscript
+        Nav: ⇞
         Media: Lvai
       rows.top.mirror.layers:
         Base: "Q"
@@ -261,6 +305,7 @@ points.zones:
         Fun: F1
         Num: $unset
         Math: $unset
+        Nav: $unset
         Media: $unset
 
       rows.home.layers:
@@ -270,6 +315,7 @@ points.zones:
         Math:
           no-mod: ₀  # Subscript
           shift: ⁰  # Superscript
+        Nav: ⇲
       rows.home.mirror.layers:
         Base: A
         Sym1: <
@@ -277,6 +323,7 @@ points.zones:
         Fun: F5
         Num: $unset
         Math: $unset
+        Nav: $unset
 
       rows.bottom.layers:
         Base:
@@ -287,12 +334,42 @@ points.zones:
         Math:
           no-mod: ₊  # Subscript
           shift: ⁺  # Superscript
+        Nav: ⇟
       rows.bottom.mirror.layers:
         Base: Z
         Sym1: °
         Fun: F9
         Num: $unset
         Math: $unset
+        Nav: $unset
+
+    outer:
+      rows.top.layers:
+        Base:
+          no-mod: "'"
+          shift: '"'
+      rows.top.mirror.layers:
+        Base:
+          legend: ⎇
+          size: 6
+          # keycode: KC_RIGHT_ALT
+          no-mod: $unset
+          shift: $unset
+
+      rows.home.layers:
+      rows.home.mirror.layers:
+        Base:
+          legend: ⌫
+          size: 6
+
+      rows.bottom.layers:
+        Base:
+          legend: ❖
+          size: 8
+      rows.bottom.mirror.layers:
+        Base:
+          legend: ⎈
+          size: 9
 
   thumb_cluster.key.layers.transparent: true
   thumb_cluster.columns:
@@ -301,14 +378,13 @@ points.zones:
         Base:
           legend: ⌫
           size: 6
-        Media: Mute
         on_hold: Fun
       mirror.layers:
         Base:
           legend: Esc
           size: 4
-        on_hold: Media
-        Media: $unset
+        # on_hold: Media
+        on_hold: Nav
 
     outer_bottom.key:
       layers:
@@ -318,15 +394,11 @@ points.zones:
         Sym1:
           legend: Ins
           size: 2
-        Media:
-          legend: ■
-          size: 3
         on_hold: Sym2
       mirror.layers:
         Base: ⇥
         on_hold: Num
         Sym1: $unset
-        Media: $unset
 
     middle.key:
       layers:
@@ -334,7 +406,7 @@ points.zones:
           legend: ⏎
           size: 9
         Num: "="
-        Media:
+        Nav:
           legend: ▶||
           size: 4
         on_hold: Sym1
@@ -344,7 +416,7 @@ points.zones:
           size: 9
         on_hold: Sym1
         Num: $unset
-        Media: $unset
+        Nav: $unset
 
     inner_top.key:
       layers:
@@ -352,12 +424,22 @@ points.zones:
           legend: ⇧
           size: 9
           keycode: KC_RIGHT_SHIFT
-      mirror.layers.Base.keycode: $unset
+        Nav:
+          legend: ■
+          size: 4
+      mirror.layers:
+        Base.keycode: $unset
+        Nav: $unset
     inner_bottom.key:
       layers:
         Base:
           legend: ⎈
           size: 9
+        Nav:
+          legend: Mute
+          size: 2
+      mirror.layers:
+        Nav: $unset
 
   nav_cluster.key.layers.transparent: true
   nav_cluster.columns:

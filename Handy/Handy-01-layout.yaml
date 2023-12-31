@@ -10,6 +10,7 @@ units:
   pinky_off: -(5/7)U  # YAEMK
   #outer_off: -(103/125)U  # YAEMK
   #outer_off: -21.4  # Elephant42
+  outer_off: -25
 
   # Columns absolute splay (degrees)
   inner_splay: 0
@@ -17,7 +18,7 @@ units:
   middle_splay: 5
   ring_splay: 10
   pinky_splay: 15
-  #outer_splay: 20
+  outer_splay: 20
 
   # Thumb cluster
   # arc_index_home_x_offset: 11.7604  # Kyria
@@ -63,11 +64,11 @@ points:
           key.splay: +ring_splay - pinky_splay
           key.spread: 1kx + 1
           #rows.mod.skip: true  # Defined by nav cluster instead
-        #outer:
-        #  # $skip: true
-        #  key.stagger: -pinky_off + outer_off
-        #  key.splay: +pinky_splay - outer_splay
-        #  #rows.mod.skip: true
+        outer:
+          # $skip: true
+          key.stagger: -pinky_off + outer_off
+          key.splay: +pinky_splay - outer_splay
+          # rows.mod.skip: true
       rows:
         #mod:
         bottom:
@@ -115,7 +116,7 @@ points:
           shift: [0.5, thumb_central_radius - 0.5ky - 0]
 
     nav_cluster:
-      # $skip: true
+      $skip: true
       anchor:
         ref: matrix_ring_bottom
         #orient: middle_splay - ring_splay
