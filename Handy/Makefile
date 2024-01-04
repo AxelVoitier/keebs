@@ -1,5 +1,6 @@
 # Define your own either by changing your parent folder name, or call make with parameter config_name=...
 config_name = $(shell basename $(shell pwd))
+ergogen_version = latest
 
 .PHONY: merge-configs keebs/ergogen clean-ergogen-container gen-kle
 
@@ -9,7 +10,7 @@ $(config_name).yaml: $(sort $(wildcard $(config_name)-*.yaml))
 	../keebs.py ergogen merge-configs $^ -o $@
 
 keebs/ergogen: ../ergogen-compose.yaml
-ifeq ($(strip $(shell docker images -q keebs/ergogen)),)
+ifeq ($(strip $(shell docker images -q keebs/ergogen:$(ergogen_version))),)
 	UID=$(shell id -u) GID=$(shell id -g) docker compose -f ../ergogen-compose.yaml build
 endif
 
@@ -18,12 +19,12 @@ clean-ergogen-container:
 
 ergogen_outputs = ergogen-output/points/points.yaml ergogen-output/points/units.yaml
 
-ifeq ($(strip $(shell docker images -q keebs/ergogen)),)
+ifeq ($(strip $(shell docker images -q keebs/ergogen:$(ergogen_version))),)
 ergogen-output/%: keebs/ergogen $(config_name).yaml
 else
 ergogen-output/%: $(config_name).yaml
 endif
-	docker run --rm -v $(shell pwd):/config keebs/ergogen $(config_name).yaml --debug --clean --output ergogen-output
+	docker run --rm -v $(shell pwd):/config keebs/ergogen:$(ergogen_version) $(config_name).yaml --debug --clean --output ergogen-output
 
 gen-kle: $(config_name).json
 
