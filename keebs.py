@@ -8,7 +8,7 @@
 # spell-checker:enableCompoundWords
 # spell-checker:words
 # spell-checker:ignore
-''''''
+""""""
 from __future__ import annotations
 
 # System imports
@@ -23,15 +23,15 @@ if TYPE_CHECKING:
 
 # Third-party imports
 try:
-    from clyo import ClyoTyper, Argument, Option
+    from clyo import Argument, ClyoTyper, Option
 except ImportError:
-    from typer import Typer as ClyoTyper, Argument, Option
+    from typer import Argument, Option
+    from typer import Typer as ClyoTyper
 
 # Local imports
 from ergogen import ergogen_cli
-# from kicad import kicad_cli
+from kicad import kicad_cli
 from qmk import qmk_cli
-
 
 OURSELF = Path(__file__).resolve()
 BASE_PATH = OURSELF.parent
@@ -41,7 +41,7 @@ _logger = logging.getLogger(NAME)
 config = ConfigParser()
 cli = ClyoTyper(help='Application testing Clyo features')
 cli.add_typer(ergogen_cli, name='ergogen', rich_help_panel='Ergogen')
-# cli.add_typer(kicad_cli, name='kicad', rich_help_panel='KiCAD')
+cli.add_typer(kicad_cli, name='kicad', rich_help_panel='KiCAD')
 cli.add_typer(qmk_cli, name='qmk', rich_help_panel='QMK')
 
 
@@ -52,7 +52,8 @@ def gen_qmk_info_json(
     units_yaml: Annotated[Optional[Path], Option()] = None,
 ) -> None:
     from ergogen import Keyboard
-    from qmk import QMK_CLI, KeyboardInfo as QMKKeyboardInfo
+    from qmk import QMK_CLI
+    from qmk import KeyboardInfo as QMKKeyboardInfo
 
     keeb = Keyboard(ergogen_yaml, points_yaml, units_yaml)
     qmk_cli = QMK_CLI()
@@ -76,7 +77,9 @@ def gen_qmk_keymap_json(
     output: Path = Option(..., '--output', '-o'),
 ) -> None:
     from ergogen import Keyboard
-    from qmk import QMK_CLI, KeyboardInfo as QMKKeyboardInfo, Keymap as QMKKeymap
+    from qmk import QMK_CLI
+    from qmk import KeyboardInfo as QMKKeyboardInfo
+    from qmk import Keymap as QMKKeymap
 
     keeb = Keyboard(ergogen_yaml, points_yaml, units_yaml)
     qmk_cli = QMK_CLI()
@@ -120,8 +123,7 @@ def prompt() -> None:
 if __name__ == '__main__':
     if hasattr(cli, 'set_main_callback'):
         cli.set_main_callback(
-            NAME, config=config, default_command=prompt,
-            default_config_path=Path('config.cfg')
+            NAME, config=config, default_command=prompt, default_config_path=Path('config.cfg')
         )
 
     cli(prog_name=NAME)

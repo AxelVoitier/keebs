@@ -3,3 +3,5 @@ hiyapyco
 typer[all]
 qmk
 jinja2
+pyparsing
+attrs
