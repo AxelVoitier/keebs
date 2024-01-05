@@ -26,6 +26,7 @@ from numbers import Number
 from pathlib import Path
 from typing import (
     TYPE_CHECKING,
+    Annotated,
     Any,
     ClassVar,
     Iterator,
@@ -48,6 +49,8 @@ from rich import print
 
 if TYPE_CHECKING:
     from typing import TypeAlias
+
+    from ergogen import Keyboard
 
     SExpr: TypeAlias = str | Number | list['SExpr']
 
@@ -149,6 +152,7 @@ class Token:
         """Converts a class name in Camel form into a snake form corresponding to
         the way token names are made."""
 
+        # From https://stackoverflow.com/a/1176023
         return re.sub(r'(?<!^)(?=[A-Z])', '_', name).lower()
 
     @staticmethod
@@ -436,7 +440,7 @@ class Token:
         Tries to find and call converter methods on ourself, conventionally named "to_XXX",
         with XXX being the supported version. If that does not match the requested version but
         is still more recent than our own version, we first convert ourself to this
-        intermediate version before recursively invoking to_version() on it.
+        intermediate version before recursively invoking to_version() on it.
         """
 
         our_version = self._extract_version(type(self).__name__)
@@ -828,7 +832,7 @@ class Lib(Token):
 @define
 class FpLibTable(Token):
     version: Version = field(metadata=dict(newline_before=True, newline_after=True))
-    lib: Lib = field(metadata=dict(newline_after=True))
+    libs: list[Lib] = field(metadata=dict(newline_after=True))
 
 
 @define
@@ -1280,7 +1284,7 @@ class Arc(Protocol):
     Used not only to declare the various flavours and version of arc tokens.
     But also to provide some math-related methods.
 
-    Relies on the presence of some an end field, and center property to do its math.
+    Relies on the presence of an end field, and center property to do its math.
     """
 
     end: End
@@ -1520,3 +1524,86 @@ def cli_convert_pcb_to_footprint(
         footprint_path /= f'{name}.kicad_mod'
     footprint_path.parent.mkdir(exist_ok=True)
     footprint_path.write_text(footprint.to_sexpr_text())
+
+
+@kicad_cli.command('update-fabrication-files')
+def cli_update_fabrication_files(
+    ergogen_yaml: Path,
+    points_yaml: Annotated[Optional[Path], clyo.Option()] = None,  # noqa: UP007
+    units_yaml: Annotated[Optional[Path], clyo.Option()] = None,  # noqa: UP007
+    project: Annotated[Optional[str], clyo.Option()] = None,  # noqa: UP007
+) -> None:
+    from ergogen import Keyboard
+
+    keeb = Keyboard(ergogen_yaml, points_yaml, units_yaml)
+
+    if project:
+        _update_project(keeb, keeb.fabrication[project])
+    else:
+        for project_data in keeb.fabrication.values():
+            _update_project(keeb, project_data)
+
+
+def _update_project(
+    keeb: Keyboard,
+    project: dict[str, dict[str, dict[str, str]]],
+) -> None:
+    project_folder = Path(project['folder'])
+    if not project_folder.exists():
+        msg = f'KiCad project folder "{project_folder!s}" does not exist'
+        raise ValueError(msg)
+    project_file_stem = project_folder / project['project-name']
+
+    ergogen_lib = _ergogen_lib_info(project_folder)
+    ergogen_lib_path = Path(ergogen_lib.uri.replace('${KIPRJMOD}', str(project_folder)))
+
+    for obj_type, objs in project['objects'].items():
+        if obj_type == 'outlines':
+            for obj in objs:
+                source_path = Path(f'ergogen-output/pcbs/{obj}.kicad_pcb')
+                target_path = ergogen_lib_path / f'{obj}.kicad_mod'
+
+                source_pcb: KicadPcb = Token.from_sexpr(SParser.parse(source_path))
+                if target_path.exists():
+                    target_footprint: Footprint = Token.from_sexpr(SParser.parse(target_path))
+                else:
+                    target_footprint = None
+
+                target_footprint = convert_pcb_to_footprint(
+                    source_pcb,
+                    obj,
+                    generator='ergogen',
+                    existing_footprint=target_footprint,
+                )
+
+                target_path.parent.mkdir(exist_ok=True)
+                target_path.write_text(target_footprint.to_sexpr_text())
+
+
+def _ergogen_lib_info(project_folder: Path) -> Lib:
+    def make_ergogen_lib() -> Lib:
+        return Lib(
+            name='Ergogen',
+            type=Lib.LibType.KiCad,
+            uri='${KIPRJMOD}/Ergogen.pretty',
+            options='',
+            descr='',
+        )
+
+    fp_lib_table_path = project_folder / 'fp-lib-table'
+    if fp_lib_table_path.exists():
+        fp_lib_table: FpLibTable = Token.from_sexpr(SParser.parse(fp_lib_table_path))
+        for lib in fp_lib_table.libs:
+            if lib.name == 'Ergogen':
+                ergogen_lib = lib
+                break
+        else:
+            ergogen_lib = make_ergogen_lib()
+            fp_lib_table.libs.append(ergogen_lib)
+            fp_lib_table_path.write_text(fp_lib_table.to_sexpr_text())
+    else:
+        ergogen_lib = make_ergogen_lib()
+        fp_lib_table = FpLibTable(version=Version(version=7), libs=[ergogen_lib])
+        fp_lib_table_path.write_text(fp_lib_table.to_sexpr_text())
+
+    return ergogen_lib

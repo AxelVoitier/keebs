@@ -146,13 +146,15 @@ def get_base_pcb(
             'fixtures/kicad/fp-lib-table-simple',
             kicad.FpLibTable(
                 version=kicad.Version(version=7),
-                lib=kicad.Lib(
-                    name='Generated',
-                    type=kicad.Lib.LibType.KiCad,
-                    uri='${KIPRJMOD}/Generated.pretty',
-                    options='',
-                    descr='',
-                ),
+                libs=[
+                    kicad.Lib(
+                        name='Generated',
+                        type=kicad.Lib.LibType.KiCad,
+                        uri='${KIPRJMOD}/Generated.pretty',
+                        options='',
+                        descr='',
+                    )
+                ],
             ),
         ),
         (

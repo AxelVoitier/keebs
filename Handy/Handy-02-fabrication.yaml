@@ -227,7 +227,27 @@ outlines:
       name: keys
 
 pcbs:
-  HandyLayout-5-10-15:
+  Handy-PCB-outline:
     outlines:
-      - outline: case_keys
-        layer: Dwgs.User
+      - outline: board
+        layer: Edge.Cuts
+
+  Handy-keys-plate:
+    outlines:
+      - outline: keys_plate
+        layer: Edge.Cuts
+
+  Handy-bottom-plate:
+    outlines:
+      - outline: case
+        layer: Edge.Cuts
+
+fabrication:
+  main-pcb:
+    folder: PCB
+    project-name: Handy-PCB
+    objects:
+      outlines:
+        - Handy-PCB-outline
+      keys:
+        -

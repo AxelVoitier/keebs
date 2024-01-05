@@ -7,29 +7,32 @@
 # spell-checker:enableCompoundWords
 # spell-checker:words
 # spell-checker:ignore
-''''''
+""""""
 from __future__ import annotations
 
 # System imports
 import logging
 import re
 from collections import OrderedDict
-from math import inf, floor
+from math import floor, inf
 from pathlib import Path
 from typing import TYPE_CHECKING, Annotated, Optional
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
-    from typing import TypeAlias, Any
+    from typing import Any, TypeAlias
 
 # Third-party imports
 import hiyapyco
+
 try:
-    from clyo import ClyoTyper, Argument, Option
+    from clyo import Argument, ClyoTyper, Option
 except ImportError:
-    from typer import Typer as ClyoTyper, Argument, Option
-from rich import print
+    from typer import Argument, Option
+    from typer import Typer as ClyoTyper
 import yaml
+from rich import print
+
 try:
     from yaml import CLoader as Loader
 except ImportError:
@@ -41,7 +44,6 @@ _logger = logging.getLogger(__name__)
 
 
 class Points:
-
     if TYPE_CHECKING:
         ElementData: TypeAlias = Any
 
@@ -89,8 +91,12 @@ class Points:
                 continue
 
             yield dict(
-                x=v['x'] - offset_x, y=-(v['y'] - offset_y), r=v['r'], name=k,
-                width=v['meta']['width'], height=v['meta']['height'],
+                x=v['x'] - offset_x,
+                y=-(v['y'] - offset_y),
+                r=v['r'],
+                name=k,
+                width=v['meta']['width'],
+                height=v['meta']['height'],
                 mirrored=v['meta'].get('mirrored', False),
                 layers=v['meta'].get('layers', {}),
                 qmk=v['meta'].get('qmk', {}),
@@ -98,12 +104,12 @@ class Points:
 
 
 class Units:
-
     if TYPE_CHECKING:
         ElementData: TypeAlias = int | float
 
     RE_MULT = re.compile(
-        r'((?:[0-9]*\.[0-9]+)|(?:[0-9]+\.[0-9]*)|(?:[0-9]+)|(?:\(.*?\)))([a-zA-Z_][a-zA-Z0-9_]*)')
+        r'((?:[0-9]*\.[0-9]+)|(?:[0-9]+\.[0-9]*)|(?:[0-9]+)|(?:\(.*?\)))([a-zA-Z_][a-zA-Z0-9_]*)'
+    )
 
     def __init__(self, filepath: Path) -> None:
         self.filepath = filepath
@@ -125,15 +131,11 @@ class Units:
 
 
 class Keyboard:
-
     if TYPE_CHECKING:
         ElementData: TypeAlias = str | float | int | list['ElementData'] | dict[str, 'ElementData']
 
     def __init__(
-        self,
-        filepath: Path,
-        points_filepath: Path | None,
-        units_filepath: Path | None
+        self, filepath: Path, points_filepath: Path | None, units_filepath: Path | None
     ) -> None:
         self.filepath = filepath
         self.points_filepath = points_filepath
@@ -203,7 +205,9 @@ class Keyboard:
 
         return new_data
 
-    def _expand_units(self, data: dict[str, Keyboard.ElementData]) -> dict[str, Keyboard.ElementData]:
+    def _expand_units(
+        self, data: dict[str, Keyboard.ElementData]
+    ) -> dict[str, Keyboard.ElementData]:
         def handle_dict_and_list(value: Keyboard.ElementData) -> Keyboard.ElementData:
             if isinstance(value, str):
                 return self.units.eval(value)
@@ -256,6 +260,14 @@ class Keyboard:
     def qmk(self) -> dict[str, dict[str, dict[str, str]]]:
         return self.data.get('qmk', {})
 
+    @property
+    def outlines(self) -> dict[str, dict[str, dict[str, str]]]:
+        return self.data.get('outlines', {})
+
+    @property
+    def fabrication(self) -> dict[str, dict[str, dict[str, str]]]:
+        return self.data.get('fabrication', {})
+
 
 ergogen_cli = ClyoTyper(help='Ergogen-related commands')
 
@@ -268,7 +280,6 @@ def merge_configs(
     import jinja2
 
     class PreproccessedHiYaPyCo(hiyapyco.HiYaPyCo):
-
         def __init__(self, *args: Any, **kwargs: Any) -> None:
             self.__already_unnested = False
             super().__init__(*args, **kwargs)
@@ -305,6 +316,7 @@ def gen_kle(
     units_yaml: Annotated[Optional[Path], Option()] = None,
 ) -> None:
     from kle import Keyboard as KLEKeyboard
+
     keeb = Keyboard(ergogen_yaml, points_yaml, units_yaml)
     points = keeb.points
 
