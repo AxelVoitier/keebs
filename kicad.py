@@ -994,6 +994,9 @@ class KicadPcb(Token):
         default=REQUIRED, metadata=dict(newline_before=True, newline_after=True)
     )
     net_classes: list[NetClass] | None = None  # Old versions
+    footprints: list[Footprint] | None = field(
+        default=REQUIRED, metadata=dict(newline_before=True, newline_after=True)
+    )
     graphic_items: list[GraphicItem] = field(
         default=REQUIRED, metadata=dict(newline_before=True, newline_after=True)
     )
@@ -1014,13 +1017,31 @@ class KicadPcb(Token):
 class Footprint(Token):
     """Token for a .kicad_mod file."""
 
-    name: str
-    version: Version
-    generator: str = field(metadata=dict(is_named=True, newline_after=True, quoted=False))
-    layer: Layer = field(metadata=dict(newline_after=True))
-    settings: dict[str, Any] = field(metadata=dict(newline_after=True))
-    graphic_items: list[GraphicItem] = field(metadata=dict(newline_after=True))
-    data: list[Token | list] = field(metadata=dict(newline_after=True))
+    name: str  # Aka library_link when placed in a PCB
+
+    # In .kicad_mod only
+    version: Version | None = None
+    generator: str | None = field(
+        default=None, metadata=dict(is_named=True, newline_after=True, quoted=False)
+    )
+
+    # In .kicad_pcb only
+    locked: bool | None = field(default=None, metadata=dict(literal=True))
+    placed: bool | None = field(default=None, metadata=dict(literal=True))
+
+    layer: Layer = field(default=REQUIRED, metadata=dict(newline_after=True))
+
+    # In .kicad_pcb only
+    tstamp: uuid.UUID | None = field(
+        default=None, converter=to_uuid, metadata=dict(newline_after=True)
+    )
+    at: At | None = field(default=None, metadata=dict(newline_after=True))
+
+    # Covers things like attr, descr, tags, property, path, ...
+    settings: dict[str, Any] = field(default=REQUIRED, metadata=dict(newline_after=True))
+
+    graphic_items: list[GraphicItem] = field(default=REQUIRED, metadata=dict(newline_after=True))
+    data: list[Token | list] = field(default=REQUIRED, metadata=dict(newline_after=True))
 
 
 @define(order=True)
