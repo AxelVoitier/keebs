@@ -781,7 +781,7 @@ class Token:
 
 
 #
-# Converters function usable in fields declarations
+# Function usable in fields declarations
 #
 
 
@@ -804,6 +804,13 @@ def to_uuid(value: str | uuid.UUID) -> uuid.UUID:
     """Converts a string into an UUID object (if not already one)"""
 
     return uuid.UUID(value) if isinstance(value, str) else value
+
+
+def float_key(value: float | None) -> float | None:
+    if value is not None:
+        return round(value, 6)
+    else:
+        return None
 
 
 #
@@ -1033,7 +1040,7 @@ class Footprint(Token):
 
     # In .kicad_pcb only
     tstamp: uuid.UUID | None = field(
-        default=None, converter=to_uuid, metadata=dict(newline_after=True)
+        default=None, converter=to_uuid, metadata=dict(newline_after=True), eq=False
     )
     at: At | None = field(default=None, metadata=dict(newline_after=True))
 
@@ -1054,8 +1061,8 @@ class XY(Token):
     Can also be used as a vector.
     """
 
-    x: float
-    y: float
+    x: float = field(eq=float_key)
+    y: float = field(eq=float_key)
 
     def __add__(self, other: XY | float) -> Self:
         if isinstance(other, XY):
@@ -1102,7 +1109,7 @@ class XY(Token):
 
 @define
 class At(XY):
-    angle: float | None = None
+    angle: float | None = field(default=None, eq=float_key)
     unlocked: bool = field(default=False, metadata=dict(literal=True))
 
 
@@ -1173,7 +1180,7 @@ class FpText(GraphicItem):
     hide: bool = field(default=False, metadata=dict(literal=True, newline_after=True))
     effects: Effects = field(default=REQUIRED, metadata=dict(newline_after=True, indent=True))
     tstamp: uuid.UUID = field(
-        default=REQUIRED, converter=to_uuid, metadata=dict(newline_after=True)
+        default=REQUIRED, converter=to_uuid, metadata=dict(newline_after=True), eq=False
     )
 
 
@@ -1235,7 +1242,7 @@ class Line:
 
 @define
 class Line_20171130(Line):
-    angle: float
+    angle: float = field(eq=float_key)
     layer: Layer
     width: float
 
@@ -1252,10 +1259,10 @@ class Line_20171130(Line):
 
 @define
 class Line_20221018(Line):
-    angle: float | None = None
+    angle: float | None = field(default=None, eq=float_key)
     stroke: Stroke = field(default=REQUIRED, metadata=dict(newline_before=True))
     layer: Layer = REQUIRED
-    tstamp: uuid.UUID = field(default=REQUIRED, converter=to_uuid)
+    tstamp: uuid.UUID = field(default=REQUIRED, converter=to_uuid, eq=False)
 
 
 @define
@@ -1343,7 +1350,7 @@ class Arc(Protocol):
 class Arc_20171130(Arc):
     start: Start  # It is the center point actually
     end: End
-    angle: float
+    angle: float = field(eq=float_key)
     layer: Layer
     width: float
 
@@ -1376,7 +1383,7 @@ class Arc_20221018(Arc):
     end: End
     stroke: Stroke = field(metadata=dict(newline_before=True))
     layer: Layer
-    tstamp: uuid.UUID = field(converter=to_uuid)
+    tstamp: uuid.UUID = field(converter=to_uuid, eq=False)
 
     @property
     def center(self) -> XY:
@@ -1467,14 +1474,19 @@ def convert_pcb_to_footprint(
             ],
             data=[],
         )
+        old_items = []
     else:
         footprint = deepcopy(existing_footprint)
-        footprint.graphic_items = [
-            item
-            for item in footprint.graphic_items
-            if isinstance(item, FpText)
-            and (item.type in (FpText.FpTextType.reference, FpText.FpTextType.value))
-        ]
+        old_items = []
+        kept_items = []
+        for item in footprint.graphic_items:
+            if isinstance(item, FpText) and (
+                item.type in (FpText.FpTextType.reference, FpText.FpTextType.value)
+            ):
+                kept_items.append(item)
+            else:
+                old_items.append(item)
+        footprint.graphic_items = kept_items
 
     version = footprint.version.version
 
@@ -1503,9 +1515,21 @@ def convert_pcb_to_footprint(
 
         return i1, i2, i3
 
+    # Tries hard to keep original corresponding items to avoid needless tstamp change
+    old_items = list(reversed(old_items))
     for item in sorted(pcb.graphic_items, key=sorting_key):
         fp_item = item.to_version(version).to_footprint()
-        footprint.graphic_items.append(fp_item)
+        if not old_items:
+            footprint.graphic_items.append(fp_item)
+        elif old_items[-1] == fp_item:
+            footprint.graphic_items.append(old_items.pop())
+        else:
+            try:
+                index = old_items.index(fp_item)
+            except ValueError:
+                footprint.graphic_items.append(fp_item)
+            else:
+                footprint.graphic_items.append(old_items.pop(index))
 
     return footprint
 

@@ -946,3 +946,26 @@ def test_reading(fixture_path: str | Path, fixture_obj: kicad.Token) -> None:
     if (obj.version.version >= 20221018) or (obj.version.version == 7):
         assert obj.to_sexpr_list() == kicad.SParser.parse(fixture_path, unquote=False)
         assert obj.to_sexpr_text() == fixture_path.read_text()
+
+
+def test_comparison() -> None:
+    # Checks float precision and tstamp change do not affect eq comparisons
+    a = kicad.FpLine_20221018(
+        start=kicad.Start(x=-44.908044600000004, y=29.931551000000017),
+        end=kicad.End(x=-13.817924074832812, y=9.910670094558283),
+        stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid, color=None),
+        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+        tstamp='19c40b8f-917f-428d-bd15-159f66a0b605',
+    )
+    b = kicad.FpLine_20221018(
+        start=kicad.Start(x=-44.908045, y=29.931551),
+        end=kicad.End(x=-13.817924, y=9.91067),
+        stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid, color=None),
+        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+        tstamp='1712fe2c-1e66-4748-9877-807af8af5544',
+    )
+    assert a == b
+    la = [a]
+    lb = [b]
+    assert la.index(b) == 0
+    assert lb.index(a) == 0
