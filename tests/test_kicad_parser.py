@@ -939,7 +939,7 @@ def test_reading(fixture_path: str | Path, fixture_obj: kicad.Token) -> None:
     if (fixture_obj.version.version >= 20221018) or (fixture_obj.version.version == 7):
         assert fixture_obj.to_sexpr_list() == kicad.SParser.parse(fixture_path, unquote=False)
 
-    obj = kicad.Token.from_sexpr(kicad.SParser.parse(fixture_path))
+    obj = kicad.Token.from_file(fixture_path)
     # assert obj == fixture_obj
 
     # Export tests

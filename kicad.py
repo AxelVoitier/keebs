@@ -266,6 +266,14 @@ class Token:
     #
 
     @classmethod
+    def from_file(cls, path: Path) -> Self:
+        return cls.from_sexpr(SParser.parse(path))
+
+    @classmethod
+    def from_text(cls, content: str) -> Self:
+        return cls.from_sexpr(SParser.parse(content))
+
+    @classmethod
     def from_sexpr(cls, sexpr: SExpr) -> Token | str | Number:
         """Takes the output from SParser and produces object representation of it."""
 
@@ -496,6 +504,9 @@ class Token:
     #
     # Token serialising section
     #
+
+    def to_file(self, path: Path) -> None:
+        path.write_text(self.to_sexpr_text())
 
     if TYPE_CHECKING:
         # The iterator to_sexpr_elements() returns.
@@ -1539,11 +1550,11 @@ def cli_parse(
     filename: Path,
     reexport: Optional[Path] = None,
 ) -> None:
-    obj = Token.from_sexpr(SParser.parse(filename))
+    obj = Token.from_file(filename)
     print('>>>', obj)
 
     if reexport:
-        reexport.write_text(obj.to_sexpr_text())
+        obj.to_file(reexport)
 
 
 @kicad_cli.command('convert-pcb-to-footprint')
@@ -1552,23 +1563,18 @@ def cli_convert_pcb_to_footprint(
     footprint_path: Path,
 ) -> None:
     name = pcb_path.stem
-    pcb: KicadPcb = Token.from_sexpr(SParser.parse(pcb_path))
+    pcb = KicadPcb.from_file(pcb_path)
 
     footprint = None
     if (footprint_path.suffix == '.kicad_mod') and footprint_path.exists():
-        footprint = Token.from_sexpr(SParser.parse(footprint_path))
+        footprint = Footprint.from_file(footprint_path)
 
     footprint = convert_pcb_to_footprint(pcb, name, 'ergogen_keebs', footprint)
-
-    # print(footprint)
-    # print('--------')
-    # print(footprint.to_sexpr_list())
-    # print(footprint.to_sexpr_text())
 
     if footprint_path.suffix == '.pretty':
         footprint_path /= f'{name}.kicad_mod'
     footprint_path.parent.mkdir(exist_ok=True)
-    footprint_path.write_text(footprint.to_sexpr_text())
+    footprint.to_file(footprint_path)
 
 
 @kicad_cli.command('update-fabrication-files')
@@ -1637,7 +1643,7 @@ def _ergogen_lib_info(project_folder: Path) -> Lib:
 
     fp_lib_table_path = project_folder / 'fp-lib-table'
     if fp_lib_table_path.exists():
-        fp_lib_table: FpLibTable = Token.from_sexpr(SParser.parse(fp_lib_table_path))
+        fp_lib_table = FpLibTable.from_file(fp_lib_table_path)
         for lib in fp_lib_table.libs:
             if lib.name == 'Ergogen':
                 ergogen_lib = lib
@@ -1645,10 +1651,10 @@ def _ergogen_lib_info(project_folder: Path) -> Lib:
         else:
             ergogen_lib = make_ergogen_lib()
             fp_lib_table.libs.append(ergogen_lib)
-            fp_lib_table_path.write_text(fp_lib_table.to_sexpr_text())
+            fp_lib_table.to_file(fp_lib_table_path)
     else:
         ergogen_lib = make_ergogen_lib()
         fp_lib_table = FpLibTable(version=Version(version=7), libs=[ergogen_lib])
-        fp_lib_table_path.write_text(fp_lib_table.to_sexpr_text())
+        fp_lib_table.to_file(fp_lib_table_path)
 
     return ergogen_lib

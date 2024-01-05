@@ -141,12 +141,8 @@ def test_basic_arc_math(
     ],
 )
 def test_arc_conversion(arc_20171130_str: str, arc_20221018_str: str) -> None:
-    arc_20171130: kicad.GrArc_20171130 = kicad.Token.from_sexpr(
-        kicad.SParser.parse(arc_20171130_str)
-    )
-    arc_20221018: kicad.GrArc_20221018 = kicad.Token.from_sexpr(
-        kicad.SParser.parse(arc_20221018_str)
-    )
+    arc_20171130 = kicad.GrArc_20171130.from_text(arc_20171130_str)
+    arc_20221018 = kicad.GrArc_20221018.from_text(arc_20221018_str)
 
     print(arc_20171130)
     print(arc_20221018)
