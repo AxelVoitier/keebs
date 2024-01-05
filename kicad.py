@@ -790,6 +790,13 @@ class Token:
 
                 continue
 
+    #
+    # Manipulation methods
+    #
+
+    def match(self, **kwargs: Any) -> bool:
+        return all(getattr(self, field_name) == value for field_name, value in kwargs.items())
+
 
 #
 # Function usable in fields declarations
@@ -1030,6 +1037,17 @@ class KicadPcb(Token):
 
         return super().from_sexpr_data(args)
 
+    def find_ref[T: Token](self, ref: str, type_: type[T] = Token) -> T | None:
+        if issubclass(type_, Footprint) or (type_ is Token):
+            for footprint in self.footprints:
+                ref_field = footprint.find_item(FpText, type=FpText.FpTextType.reference)
+                if ref_field is None:
+                    continue
+                if ref_field.text == ref:
+                    return footprint
+
+        return None
+
 
 @define
 class Footprint(Token):
@@ -1060,6 +1078,78 @@ class Footprint(Token):
 
     graphic_items: list[GraphicItem] = field(default=REQUIRED, metadata=dict(newline_after=True))
     data: list[Token | list] = field(default=REQUIRED, metadata=dict(newline_after=True))
+
+    def find_item[T: Token](self, type_: type[T] = Token, **fields: Any) -> T | None:
+        for graphic_item in self.graphic_items:
+            if not isinstance(graphic_item, type_):
+                continue
+            if graphic_item.match(**fields):
+                return graphic_item
+        return None
+
+    def add_on_pcb(self, pcb: KicadPcb, lib: str, ref: str | None, at: At) -> None:
+        footprint = deepcopy(self)
+        footprint.name = f'{lib}:{footprint.name}'
+        footprint.version = None
+        footprint.generator = None
+        footprint.tstamp = uuid.uuid4()
+        footprint.at = at
+        if ref:
+            ref_text = footprint.find_item(FpText, type=FpText.FpTextType.reference)
+            if ref_text:
+                ref_text.text = ref
+
+        for item in footprint.graphic_items:
+            if hasattr(item, 'tstamp'):
+                item.tstamp = uuid.uuid4()
+
+        pcb.footprints.append(footprint)
+
+    def update_from(
+        self,
+        model: Footprint,
+        *,
+        settings: bool = True,
+        texts: bool = True,
+    ) -> None:
+        ref = None
+        if texts:
+            ref_text = self.find_item(FpText, type=FpText.FpTextType.reference)
+            if ref_text:
+                ref = ref_text.text
+
+        if settings:
+            self.settings = deepcopy(model.settings)
+
+        old_items = list(reversed(self.graphic_items))
+        self.graphic_items = []
+
+        if not texts and old_items:
+            for item in old_items:
+                if isinstance(item, FpText):
+                    self.graphic_items.append(item)
+
+        for item in model.graphic_items:
+            if isinstance(item, FpText) and not texts:
+                continue
+
+            new_item = deepcopy(item)
+            if hasattr(new_item, 'tstamp'):
+                item.tstamp = uuid.uuid4()
+            if (ref is not None) and isinstance(new_item, FpText) and new_item.is_ref():
+                new_item.text = ref
+
+            if not old_items:
+                self.graphic_items.append(new_item)
+            elif old_items[-1] == new_item:
+                self.graphic_items.append(old_items.pop())
+            else:
+                try:
+                    index = old_items.index(new_item)
+                except ValueError:
+                    self.graphic_items.append(new_item)
+                else:
+                    self.graphic_items.append(old_items.pop(index))
 
 
 @define(order=True)
@@ -1193,6 +1283,15 @@ class FpText(GraphicItem):
     tstamp: uuid.UUID = field(
         default=REQUIRED, converter=to_uuid, metadata=dict(newline_after=True), eq=False
     )
+
+    def is_ref(self) -> bool:
+        return self.type == FpText.FpTextType.reference
+
+    def is_value(self) -> bool:
+        return self.type == FpText.FpTextType.value
+
+    def is_user(self) -> bool:
+        return self.type == FpText.FpTextType.user
 
 
 @define
@@ -1603,40 +1702,61 @@ def _update_project(
     if not project_folder.exists():
         msg = f'KiCad project folder "{project_folder!s}" does not exist'
         raise ValueError(msg)
-    project_file_stem = project_folder / project['project-name']
+    project_name: str = project['project-name']
+    project_file_stem = project_folder / project_name
+    pcb_path = project_file_stem.with_suffix('.kicad_pcb')
+    pcb: KicadPcb | None = None
 
-    ergogen_lib = _ergogen_lib_info(project_folder)
+    ergogen_lib = _ergogen_lib_info(project_folder, project.get('ergogen-lib-name', 'Ergogen'))
     ergogen_lib_path = Path(ergogen_lib.uri.replace('${KIPRJMOD}', str(project_folder)))
 
-    for obj_type, objs in project['objects'].items():
-        if obj_type == 'outlines':
-            for obj in objs:
-                source_path = Path(f'ergogen-output/pcbs/{obj}.kicad_pcb')
-                target_path = ergogen_lib_path / f'{obj}.kicad_mod'
+    for obj in project['objects']:
+        if 'outline' in obj:
+            # First, convert the outline as footprint
+            source_path = Path(f'ergogen-output/pcbs/{obj["outline"]}.kicad_pcb')
+            target_path = ergogen_lib_path / f'{obj["outline"]}.kicad_mod'
 
-                source_pcb: KicadPcb = Token.from_sexpr(SParser.parse(source_path))
-                if target_path.exists():
-                    target_footprint: Footprint = Token.from_sexpr(SParser.parse(target_path))
-                else:
-                    target_footprint = None
+            source_pcb = KicadPcb.from_file(source_path)
+            target_footprint = Footprint.from_file(target_path) if target_path.exists() else None
 
-                target_footprint = convert_pcb_to_footprint(
-                    source_pcb,
-                    obj,
-                    generator='ergogen',
-                    existing_footprint=target_footprint,
+            target_footprint = convert_pcb_to_footprint(
+                source_pcb,
+                obj['outline'],
+                generator='ergogen',
+                existing_footprint=target_footprint,
+            )
+
+            target_path.parent.mkdir(exist_ok=True)
+            target_footprint.to_file(target_path)
+
+            # Second, add/update on the PCB
+            if pcb is None:
+                pcb = KicadPcb.from_file(pcb_path)
+
+            position = At(0, 0)
+            if 'offset' in project:
+                position += At(*project['offset'])
+            if 'offset' in obj:
+                position += At(*obj['offset'])
+
+            outline_fp = pcb.find_ref(obj['ref'], Footprint) if 'ref' in obj else None
+            if outline_fp is None:
+                target_footprint.add_on_pcb(
+                    pcb, lib=ergogen_lib.name, ref=obj.get('ref', None), at=position
                 )
+                pcb.to_file(pcb_path)
+            else:
+                outline_fp.update_from(target_footprint)
+                outline_fp.at = position
+                pcb.to_file(pcb_path)
 
-                target_path.parent.mkdir(exist_ok=True)
-                target_path.write_text(target_footprint.to_sexpr_text())
 
-
-def _ergogen_lib_info(project_folder: Path) -> Lib:
+def _ergogen_lib_info(project_folder: Path, name: str = 'Ergogen') -> Lib:
     def make_ergogen_lib() -> Lib:
         return Lib(
-            name='Ergogen',
+            name=name,
             type=Lib.LibType.KiCad,
-            uri='${KIPRJMOD}/Ergogen.pretty',
+            uri='${KIPRJMOD}/' + f'{name}.pretty',
             options='',
             descr='',
         )
@@ -1645,7 +1765,7 @@ def _ergogen_lib_info(project_folder: Path) -> Lib:
     if fp_lib_table_path.exists():
         fp_lib_table = FpLibTable.from_file(fp_lib_table_path)
         for lib in fp_lib_table.libs:
-            if lib.name == 'Ergogen':
+            if lib.name == name:
                 ergogen_lib = lib
                 break
         else:
