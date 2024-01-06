@@ -28,54 +28,54 @@ _logger = logging.getLogger(__name__)
     ('center', 'end', 'angle', 'f_start', 'f_middle'),
     [
         (
-            kicad.XY(x=-43.825214200000005, y=31.61306180000002),
-            kicad.XY(x=-44.908044600000004, y=29.931551100000018),
+            kicad.Xy(x=-43.825214200000005, y=31.61306180000002),
+            kicad.Xy(x=-44.908044600000004, y=29.931551100000018),
             -89.01176935063654,
-            kicad.XY(x=-45.525151, y=32.666731),
-            kicad.XY(x=-45.776176, y=31.17289),
+            kicad.Xy(x=-45.525151, y=32.666731),
+            kicad.Xy(x=-45.776176, y=31.17289),
         ),
         (
-            kicad.XY(x=-16.525, y=5.706893210765013),
-            kicad.XY(x=-13.817924099999999, y=9.910670110765015),
+            kicad.Xy(x=-16.525, y=5.706893210765013),
+            kicad.Xy(x=-13.817924099999999, y=9.910670110765015),
             -57.21997143350279,
-            kicad.XY(x=-11.525, y=5.706893),
-            kicad.XY(x=-12.135502, y=8.101117),
+            kicad.Xy(x=-11.525, y=5.706893),
+            kicad.Xy(x=-12.135502, y=8.101117),
         ),
         (
-            kicad.XY(x=-4.029071675259355, y=60.454836573845206),
-            kicad.XY(x=-5.656912575259355, y=55.7272437738452),
+            kicad.Xy(x=-4.029071675259355, y=60.454836573845206),
+            kicad.Xy(x=-5.656912575259355, y=55.7272437738452),
             -15.101154660289524,
-            kicad.XY(x=-6.832351, y=56.314592),
-            kicad.XY(x=-6.264011, y=55.982136),
+            kicad.Xy(x=-6.832351, y=56.314592),
+            kicad.Xy(x=-6.264011, y=55.982136),
         ),
     ],
 )
 def test_basic_arc_math(
     # Given
-    center: kicad.XY,
-    end: kicad.XY,
+    center: kicad.Xy,
+    end: kicad.Xy,
     angle: float,
     # Fixture
-    f_start: kicad.XY,
-    f_middle: kicad.XY,
+    f_start: kicad.Xy,
+    f_middle: kicad.Xy,
 ) -> None:
     radius = end.dist(center)
     angle_rad = math.radians(angle)
 
     relative_end = (end - center) / radius
     end_angle = math.atan2(relative_end.y, relative_end.x)
-    start = kicad.XY(
+    start = kicad.Xy(
         x=center.x + (radius * math.cos(end_angle + angle_rad)),
         y=center.y + (radius * math.sin(end_angle + angle_rad)),
     )
-    middle = kicad.XY(
+    middle = kicad.Xy(
         x=center.x + (radius * math.cos(end_angle + (angle_rad / 2))),
         y=center.y + (radius * math.sin(end_angle + (angle_rad / 2))),
     )
 
     print(f'{relative_end=}, {angle_rad=}, {radius=}')
     esp = 1e-5
-    eps_xy = kicad.XY(x=esp, y=esp)
+    eps_xy = kicad.Xy(x=esp, y=esp)
     assert abs(start - f_start) <= eps_xy
     assert abs(middle - f_middle) <= eps_xy
 
@@ -162,10 +162,10 @@ def test_arc_conversion(arc_20171130_str: str, arc_20221018_str: str) -> None:
     assert isinstance(converted.tstamp, uuid.UUID)
 
     # Reverse convertion
-    assert (arc_20171130.center - converted.center) <= kicad.XY(x=eps, y=eps)
+    assert (arc_20171130.center - converted.center) <= kicad.Xy(x=eps, y=eps)
     eps = 1e-4  # arc_20221018 already has rounded data to start from. So, it gets less precise
-    assert (arc_20171130.center - arc_20221018.center) <= kicad.XY(x=eps, y=eps)
-    assert (arc_20221018.center - converted.center) <= kicad.XY(x=eps, y=eps)
+    assert (arc_20171130.center - arc_20221018.center) <= kicad.Xy(x=eps, y=eps)
+    assert (arc_20221018.center - converted.center) <= kicad.Xy(x=eps, y=eps)
 
 
 # Commented blocks below:

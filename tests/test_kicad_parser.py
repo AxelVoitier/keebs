@@ -43,7 +43,7 @@ def get_base_pcb(
         generator=generator,
         general=kicad.General(thickness=thickness),
         paper=kicad.Paper(paper_size=paper_size),
-        layers=kicad.Layers(layers=[]),
+        layers=kicad.Layers(layers_def=[], layers_use=[]),
         setup=kicad.Setup(
             other_settings=dict(pad_to_mask_clearance=0),
             plot_settings=kicad.Pcbplotparams(
@@ -85,7 +85,7 @@ def get_base_pcb(
         ),
     )
 
-    data['layers'].layers = [
+    data['layers'].layers_def = [
         kicad._LayerDef(ordinal=0, canonical_name='F.Cu', type='signal'),
         kicad._LayerDef(ordinal=31, canonical_name='B.Cu', type='signal'),
         kicad._LayerDef(ordinal=32, canonical_name='B.Adhes', type='user', user_name='B.Adhesive'),
@@ -116,7 +116,7 @@ def get_base_pcb(
         kicad._LayerDef(ordinal=49, canonical_name='F.Fab', type='user'),
     ]
     if layers_include_users:
-        data['layers'].layers.extend(
+        data['layers'].layers_def.extend(
             [
                 kicad._LayerDef(ordinal=50, canonical_name='User.1', type='user'),
                 kicad._LayerDef(ordinal=51, canonical_name='User.2', type='user'),
@@ -130,13 +130,22 @@ def get_base_pcb(
             ],
         )
     if layers_no_user_name:
-        for layer in data['layers'].layers:
+        for layer in data['layers'].layers_def:
             layer.user_name = None
     # spell-checker: enable
 
     data.update(kwargs)
 
     return data
+
+
+def load_py_fixture(path: Path, name: str) -> kicad.Token:
+    locs = {}
+    exec(path.read_text(), {}, locs)  # noqa: S102
+    return locs[name]
+
+
+tests_dir = Path(__file__).resolve().parent
 
 
 @pytest.mark.parametrize(
@@ -288,154 +297,154 @@ def get_base_pcb(
                             start=kicad.Start(x=-11.525, y=5.706893210765013),
                             end=kicad.End(x=-11.525, y=-47.625),
                             angle=90,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrArc_20171130(
                             start=kicad.Start(x=-9.525, y=-47.625),
                             end=kicad.End(x=-9.9601324, y=-49.5770911),
                             angle=-77.43387547993375,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrLine_20171130(
                             start=kicad.Start(x=-9.9601324, y=-49.5770911),
                             end=kicad.End(x=33.3269054, y=-59.226022),
                             angle=90,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrArc_20171130(
                             start=kicad.Start(x=33.7620378, y=-57.273930899999996),
                             end=kicad.End(x=33.9363493, y=-59.2663203),
                             angle=-17.56612459349526,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrLine_20171130(
                             start=kicad.Start(x=33.9363493, y=-59.266320300000004),
                             end=kicad.End(x=52.9138582, y=-57.606003400000006),
                             angle=90,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrArc_20171130(
                             start=kicad.Start(x=52.739546700000005, y=-55.613614000000005),
                             end=kicad.End(x=53.7875925, y=-57.317022400000006),
                             angle=-26.602487822601248,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrLine_20171130(
                             start=kicad.Start(x=53.787592499999995, y=-57.3170224),
                             end=kicad.End(x=97.90556000000001, y=-30.172826599999997),
                             angle=90,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrArc_20171130(
                             start=kicad.Start(x=96.8575142, y=-28.4694182),
                             end=kicad.End(x=98.2258025, y=-29.9281119),
                             angle=-11.565847112680771,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrLine_20171130(
                             start=kicad.Start(x=98.2258025, y=-29.9281119),
                             end=kicad.End(x=117.39058209999999, y=-11.9511073),
                             angle=90,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrArc_20171130(
                             start=kicad.Start(x=116.0222938, y=-10.492413599999999),
                             end=kicad.End(x=117.901679, y=-9.8083733),
                             angle=-66.83166584992264,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrLine_20171130(
                             start=kicad.Start(x=117.901679, y=-9.8083733),
                             end=kicad.End(x=96.7263569, y=48.370346),
                             angle=90,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrArc_20171130(
                             start=kicad.Start(x=94.8469717, y=47.6863057),
                             end=kicad.End(x=94.8529204, y=49.686296899999995),
                             angle=-69.8295820447666,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrLine_20171130(
                             start=kicad.Start(x=94.8529204, y=49.6862969),
                             end=kicad.End(x=11.993419129403046, y=49.93275186499069),
                             angle=90,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrLine_20171130(
                             start=kicad.Start(x=10.380450181085843, y=50.20513691536339),
                             end=kicad.End(x=-5.656912623277353, y=55.7272437248119),
                             angle=90,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrLine_20171130(
                             start=kicad.Start(x=-6.8323502531178795, y=56.31459145885365),
                             end=kicad.End(x=-22.038204, y=66.61017610000002),
                             angle=90,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrArc_20171130(
                             start=kicad.Start(x=-23.1595154, y=64.9540781),
                             end=kicad.End(x=-24.8594516, y=66.0077464),
                             angle=-92.30935691513776,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrLine_20171130(
                             start=kicad.Start(x=-24.8594516, y=66.00774640000002),
                             end=kicad.End(x=-45.5251504, y=32.66673010000002),
                             angle=90,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrArc_20171130(
                             start=kicad.Start(x=-43.825214200000005, y=31.61306180000002),
                             end=kicad.End(x=-44.908044600000004, y=29.931551100000018),
                             angle=-89.01176935063654,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrLine_20171130(
                             start=kicad.Start(x=-44.908044600000004, y=29.931551000000017),
                             end=kicad.End(x=-13.817924074832812, y=9.910670094558283),
                             angle=90,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrArc_20171130(
                             start=kicad.Start(x=12.008291129103835, y=54.932729764396704),
                             end=kicad.End(x=11.993419129103835, y=49.93275186439671),
                             angle=-18.829581198225384,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrArc_20171130(
                             start=kicad.Start(x=-4.029071675259355, y=60.454836573845206),
                             end=kicad.End(x=-5.656912575259355, y=55.7272437738452),
                             angle=-15.101154660289524,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                         kicad.GrArc_20171130(
                             start=kicad.Start(x=-16.525, y=5.706893210765013),
                             end=kicad.End(x=-13.817924099999999, y=9.910670110765015),
                             angle=-57.21997143350279,
-                            layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                            layer='Edge.Cuts',
                             width=0.15,
                         ),
                     ],
@@ -449,30 +458,34 @@ def get_base_pcb(
                 name='Handy-pcb-outline',
                 version=kicad.Version(version=20221018),
                 generator='pcbnew',
-                layer=kicad.Layer(canonical_name='F.Cu'),
+                layer='F.Cu',
                 settings={},
                 graphic_items=[
                     kicad.FpText(
                         type=kicad.FpText.FpTextType.reference,
                         text='REF**',
                         at=kicad.At(x=0, y=-0.5, unlocked=True),
-                        layer=kicad.Layer(canonical_name='F.SilkS'),
+                        layer='F.SilkS',
                         hide=True,
-                        effects=kicad.Effects(data=dict(font=[['size', 1, 1], ['thickness', 0.1]])),
+                        effects=kicad.Effects(
+                            font=kicad.Font(size=kicad.Size(x=1, y=1), thickness=0.1),
+                        ),
                         tstamp='138e5e0e-e546-4625-9053-eae9e71e2188',
                     ),
                     kicad.FpText(
                         type=kicad.FpText.FpTextType.value,
                         text='Handy-pcb-outline',
                         at=kicad.At(x=0, y=1, unlocked=True),
-                        layer=kicad.Layer(canonical_name='F.Fab'),
+                        layer='F.Fab',
                         hide=True,
                         effects=kicad.Effects(
-                            data=dict(font=[['size', 1, 1], ['thickness', 0.15]])
+                            font=kicad.Font(size=kicad.Size(x=1, y=1), thickness=0.15),
                         ),
                         tstamp='ffaac02c-30ab-4fbd-8b90-f33ac13bdccb',
                     ),
                 ],
+                pads=[],
+                models=[],
                 data=[],
             ),
         ),
@@ -482,26 +495,28 @@ def get_base_pcb(
                 name='Handy-pcb-outline',
                 version=kicad.Version(version=20221018),
                 generator='pcbnew',
-                layer=kicad.Layer(canonical_name='F.Cu'),
+                layer='F.Cu',
                 settings=dict(attr=['board_only', 'exclude_from_pos_files', 'exclude_from_bom']),
                 graphic_items=[
                     kicad.FpText(
                         type=kicad.FpText.FpTextType.reference,
                         text='REF**',
                         at=kicad.At(x=0, y=-0.5, unlocked=True),
-                        layer=kicad.Layer(canonical_name='F.SilkS'),
+                        layer='F.SilkS',
                         hide=True,
-                        effects=kicad.Effects(data=dict(font=[['size', 1, 1], ['thickness', 0.1]])),
+                        effects=kicad.Effects(
+                            font=kicad.Font(size=kicad.Size(x=1, y=1), thickness=0.1),
+                        ),
                         tstamp='138e5e0e-e546-4625-9053-eae9e71e2188',
                     ),
                     kicad.FpText(
                         type=kicad.FpText.FpTextType.value,
                         text='Handy-pcb-outline',
                         at=kicad.At(x=0, y=1, unlocked=True),
-                        layer=kicad.Layer(canonical_name='F.Fab'),
+                        layer='F.Fab',
                         hide=True,
                         effects=kicad.Effects(
-                            data=dict(font=[['size', 1, 1], ['thickness', 0.15]])
+                            font=kicad.Font(size=kicad.Size(x=1, y=1), thickness=0.15),
                         ),
                         tstamp='ffaac02c-30ab-4fbd-8b90-f33ac13bdccb',
                     ),
@@ -509,77 +524,77 @@ def get_base_pcb(
                         start=kicad.Start(x=-44.908045, y=29.931551),
                         end=kicad.End(x=-13.817924, y=9.91067),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='1872a1ad-a23a-4ce3-b962-d2d183b93a86',
                     ),
                     kicad.FpLine_20221018(
                         start=kicad.Start(x=-24.859452, y=66.007746),
                         end=kicad.End(x=-45.52515, y=32.66673),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='c3048e69-918a-4bf0-879d-176fb9221322',
                     ),
                     kicad.FpLine_20221018(
                         start=kicad.Start(x=-11.525, y=5.706893),
                         end=kicad.End(x=-11.525, y=-47.625),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='8db27359-b9a2-4e47-9efe-0dcd3efeb7c8',
                     ),
                     kicad.FpLine_20221018(
                         start=kicad.Start(x=-9.960132, y=-49.577091),
                         end=kicad.End(x=33.326905, y=-59.226022),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='50bda205-31c7-4ad5-bef3-623c77b9430c',
                     ),
                     kicad.FpLine_20221018(
                         start=kicad.Start(x=-6.83235, y=56.314591),
                         end=kicad.End(x=-22.038204, y=66.610176),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='8023cfb7-6bee-46ef-a2b7-eff945705a46',
                     ),
                     kicad.FpLine_20221018(
                         start=kicad.Start(x=10.38045, y=50.205137),
                         end=kicad.End(x=-5.656913, y=55.727244),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='12df48ec-ba83-4249-a12e-6d452967375d',
                     ),
                     kicad.FpLine_20221018(
                         start=kicad.Start(x=33.936349, y=-59.26632),
                         end=kicad.End(x=52.913858, y=-57.606003),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='20699255-07be-4145-b4dd-294c6c3ce0ac',
                     ),
                     kicad.FpLine_20221018(
                         start=kicad.Start(x=53.787592, y=-57.317022),
                         end=kicad.End(x=97.90556, y=-30.172827),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='7b9d98f6-76e8-4b74-9f62-5ac6a503645f',
                     ),
                     kicad.FpLine_20221018(
                         start=kicad.Start(x=94.85292, y=49.686297),
                         end=kicad.End(x=11.993419, y=49.932752),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='4d0c484b-8319-4bea-bc3d-de1f71c61a26',
                     ),
                     kicad.FpLine_20221018(
                         start=kicad.Start(x=98.225803, y=-29.928112),
                         end=kicad.End(x=117.390582, y=-11.951107),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='0b29ef99-a2e5-4e69-a655-f4488b42630f',
                     ),
                     kicad.FpLine_20221018(
                         start=kicad.Start(x=117.901679, y=-9.808373),
                         end=kicad.End(x=96.726357, y=48.370346),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='ad563035-e765-49bb-a567-7d90b44f4f12',
                     ),
                     kicad.FpArc_20221018(
@@ -587,7 +602,7 @@ def get_base_pcb(
                         mid=kicad.Mid(x=-45.776176, y=31.17289),
                         end=kicad.End(x=-44.908045, y=29.931551),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='752fdc33-1d06-4788-9d79-eb9d772fec97',
                     ),
                     kicad.FpArc_20221018(
@@ -595,7 +610,7 @@ def get_base_pcb(
                         mid=kicad.Mid(x=-23.577167, y=66.909984),
                         end=kicad.End(x=-24.859452, y=66.007746),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='74282040-00f1-475d-8ffd-af63c26f40c7',
                     ),
                     kicad.FpArc_20221018(
@@ -603,7 +618,7 @@ def get_base_pcb(
                         mid=kicad.Mid(x=-11.085491, y=-48.875947),
                         end=kicad.End(x=-9.960132, y=-49.577091),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='0a9fd97c-a2fc-45d5-af7b-67875cc49cfb',
                     ),
                     kicad.FpArc_20221018(
@@ -611,7 +626,7 @@ def get_base_pcb(
                         mid=kicad.Mid(x=-12.135502, y=8.101117),
                         end=kicad.End(x=-13.817924, y=9.91067),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='7fa413eb-b91c-4338-93af-00caeb8335fb',
                     ),
                     kicad.FpArc_20221018(
@@ -619,7 +634,7 @@ def get_base_pcb(
                         mid=kicad.Mid(x=-6.26401, y=55.982137),
                         end=kicad.End(x=-5.656913, y=55.727244),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='278dcf86-09c2-4baa-ac45-061e831421e0',
                     ),
                     kicad.FpArc_20221018(
@@ -627,7 +642,7 @@ def get_base_pcb(
                         mid=kicad.Mid(x=11.17572, y=50.002536),
                         end=kicad.End(x=11.993419, y=49.932752),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='ac37b641-a53b-41f8-85a7-63fbfb317e04',
                     ),
                     kicad.FpArc_20221018(
@@ -635,7 +650,7 @@ def get_base_pcb(
                         mid=kicad.Mid(x=33.63008, y=-59.269567),
                         end=kicad.End(x=33.936349, y=-59.26632),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='b8581df6-40b0-4f2d-84a7-ad5d687aeb89',
                     ),
                     kicad.FpArc_20221018(
@@ -643,7 +658,7 @@ def get_base_pcb(
                         mid=kicad.Mid(x=53.367569, y=-57.512442),
                         end=kicad.End(x=53.787593, y=-57.317022),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='feffadc9-10f2-496a-a542-c02bacc2fa4a',
                     ),
                     kicad.FpArc_20221018(
@@ -651,7 +666,7 @@ def get_base_pcb(
                         mid=kicad.Mid(x=95.996556, y=49.322889),
                         end=kicad.End(x=94.85292, y=49.686297),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='8af9c5f1-a746-4fa1-acd9-d119af6c0371',
                     ),
                     kicad.FpArc_20221018(
@@ -659,7 +674,7 @@ def get_base_pcb(
                         mid=kicad.Mid(x=98.071858, y=-30.058553),
                         end=kicad.End(x=98.225803, y=-29.928112),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='82423db4-83ec-44a7-b9a2-eeb97916b6cb',
                     ),
                     kicad.FpArc_20221018(
@@ -667,10 +682,12 @@ def get_base_pcb(
                         mid=kicad.Mid(x=117.967727, y=-10.956446),
                         end=kicad.End(x=117.901679, y=-9.808373),
                         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid),
-                        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                        layer='Edge.Cuts',
                         tstamp='c4bd332e-bc23-4f17-a344-2310155291f1',
                     ),
                 ],
+                pads=[],
+                models=[],
                 data=[],
             ),
         ),
@@ -683,7 +700,7 @@ def get_base_pcb(
                     footprints=[
                         kicad.Footprint(
                             name='Generated:Handy-pcb-outline',
-                            layer=kicad.Layer(canonical_name='F.Cu'),
+                            layer='F.Cu',
                             tstamp='5f775835-9456-4241-a7d6-0427a488fb39',
                             at=kicad.At(x=120, y=90),
                             settings=dict(
@@ -694,10 +711,10 @@ def get_base_pcb(
                                     type=kicad.FpText.FpTextType.reference,
                                     text='REF**',
                                     at=kicad.At(x=0, y=-0.5, unlocked=True),
-                                    layer=kicad.Layer(canonical_name='F.SilkS'),
+                                    layer='F.SilkS',
                                     hide=True,
                                     effects=kicad.Effects(
-                                        data=dict(font=[['size', 1, 1], ['thickness', 0.1]])
+                                        font=kicad.Font(size=kicad.Size(x=1, y=1), thickness=0.1),
                                     ),
                                     tstamp='de80e918-248b-4575-afac-b9c5f8077a09',
                                 ),
@@ -705,10 +722,10 @@ def get_base_pcb(
                                     type=kicad.FpText.FpTextType.value,
                                     text='Handy-pcb-outline',
                                     at=kicad.At(x=0, y=1, unlocked=True),
-                                    layer=kicad.Layer(canonical_name='F.Fab'),
+                                    layer='F.Fab',
                                     hide=True,
                                     effects=kicad.Effects(
-                                        data=dict(font=[['size', 1, 1], ['thickness', 0.15]])
+                                        font=kicad.Font(size=kicad.Size(x=1, y=1), thickness=0.15),
                                     ),
                                     tstamp='1210b214-c196-4310-8ff1-33d3fa1b32ad',
                                 ),
@@ -718,7 +735,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='c8c38af2-b3b5-4d7c-93ec-a5e2f4a869a3',
                                 ),
                                 kicad.FpLine_20221018(
@@ -727,7 +744,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='23cc41ef-0352-463e-a3d7-07308738c2bf',
                                 ),
                                 kicad.FpLine_20221018(
@@ -736,7 +753,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='9387f797-526f-4356-912b-742fe78b0927',
                                 ),
                                 kicad.FpLine_20221018(
@@ -745,7 +762,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='14bd3c1e-47d9-47db-94e8-17e743689085',
                                 ),
                                 kicad.FpLine_20221018(
@@ -754,7 +771,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='f63ce344-a03f-4b4c-8b5b-44339fc3e1ef',
                                 ),
                                 kicad.FpLine_20221018(
@@ -763,7 +780,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='2e7b09e8-d71b-40cd-a088-07f5c2f32fa4',
                                 ),
                                 kicad.FpLine_20221018(
@@ -772,7 +789,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='b5a60b61-cab6-4170-82df-f5c805787524',
                                 ),
                                 kicad.FpLine_20221018(
@@ -781,7 +798,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='ed8ff277-9ac3-4838-b12b-e39c4e5c95bf',
                                 ),
                                 kicad.FpLine_20221018(
@@ -790,7 +807,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='24eb9978-7a29-49be-8c4e-e2af96e51a11',
                                 ),
                                 kicad.FpLine_20221018(
@@ -799,7 +816,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='ce879225-5563-46a4-b3d5-cc0e0e314685',
                                 ),
                                 kicad.FpLine_20221018(
@@ -808,7 +825,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='4c6a05ac-6c1b-4963-80f8-b80b258165a3',
                                 ),
                                 kicad.FpArc_20221018(
@@ -818,7 +835,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='f7661d67-b8c8-4bdc-a685-b177359171e1',
                                 ),
                                 kicad.FpArc_20221018(
@@ -828,7 +845,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='bd7176eb-a723-4091-b188-1ae40134d839',
                                 ),
                                 kicad.FpArc_20221018(
@@ -838,7 +855,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='29311326-2c36-4575-a758-11397fc184a7',
                                 ),
                                 kicad.FpArc_20221018(
@@ -848,7 +865,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='1538c7cc-00eb-4138-9d6d-cc37f3aafb0c',
                                 ),
                                 kicad.FpArc_20221018(
@@ -858,7 +875,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='05ab0a78-2842-476f-9502-138f68319be7',
                                 ),
                                 kicad.FpArc_20221018(
@@ -868,7 +885,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='fd2b2d79-7154-449f-b1c5-e5fef70d3edc',
                                 ),
                                 kicad.FpArc_20221018(
@@ -878,7 +895,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='abcfe813-a61f-4666-b1e7-cf8782e83e47',
                                 ),
                                 kicad.FpArc_20221018(
@@ -888,7 +905,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='8e959389-a3e6-495f-9fb2-eea68b01fc1d',
                                 ),
                                 kicad.FpArc_20221018(
@@ -898,7 +915,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='0e6d0553-1ad9-4b29-a50c-67840bf982fa',
                                 ),
                                 kicad.FpArc_20221018(
@@ -908,7 +925,7 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='3878c5d0-ea77-45fd-b30a-c5280edad192',
                                 ),
                                 kicad.FpArc_20221018(
@@ -918,10 +935,12 @@ def get_base_pcb(
                                     stroke=kicad.Stroke(
                                         width=0.15, type=kicad.Stroke.StrokeType.solid
                                     ),
-                                    layer=kicad.Layer(canonical_name='Edge.Cuts'),
+                                    layer='Edge.Cuts',
                                     tstamp='18d2aca2-6a5d-4a06-b749-49e6a89cdf64',
                                 ),
                             ],
+                            pads=[],
+                            models=[],
                             data=[],
                         ),
                     ],
@@ -930,17 +949,21 @@ def get_base_pcb(
                 ),
             ),
         ),
+        (
+            'fixtures/kicad/medium-footprint.kicad_mod',
+            load_py_fixture(tests_dir / 'fixtures/kicad/medium-footprint.py', 'medium_footprint'),
+        ),
     ],
 )
 def test_reading(fixture_path: str | Path, fixture_obj: kicad.Token) -> None:
-    fixture_path = Path(__file__).resolve().parent / Path(fixture_path)
+    fixture_path = tests_dir / fixture_path
 
     # Sanity checks
     if (fixture_obj.version.version >= 20221018) or (fixture_obj.version.version == 7):
         assert fixture_obj.to_sexpr_list() == kicad.SParser.parse(fixture_path, unquote=False)
 
     obj = kicad.Token.from_file(fixture_path)
-    # assert obj == fixture_obj
+    assert obj == fixture_obj
 
     # Export tests
     if (obj.version.version >= 20221018) or (obj.version.version == 7):
@@ -954,14 +977,14 @@ def test_comparison() -> None:
         start=kicad.Start(x=-44.908044600000004, y=29.931551000000017),
         end=kicad.End(x=-13.817924074832812, y=9.910670094558283),
         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid, color=None),
-        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+        layer='Edge.Cuts',
         tstamp='19c40b8f-917f-428d-bd15-159f66a0b605',
     )
     b = kicad.FpLine_20221018(
         start=kicad.Start(x=-44.908045, y=29.931551),
         end=kicad.End(x=-13.817924, y=9.91067),
         stroke=kicad.Stroke(width=0.15, type=kicad.Stroke.StrokeType.solid, color=None),
-        layer=kicad.Layer(canonical_name='Edge.Cuts'),
+        layer='Edge.Cuts',
         tstamp='1712fe2c-1e66-4748-9877-807af8af5544',
     )
     assert a == b

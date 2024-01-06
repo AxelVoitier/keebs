@@ -232,7 +232,11 @@ class Token:
     def _is_literal_field(field: attrs.Attribute[Any], field_type: type[Any]) -> bool:
         """Recognises a boolean field to be matched with a literal"""
 
-        return issubclass(field_type, bool) and field.metadata.get('literal', False)
+        return (
+            not isinstance(field_type, tuple)
+            and issubclass(field_type, bool)
+            and field.metadata.get('literal', False)
+        )
 
     @staticmethod
     def _match_literal_field(field: attrs.Attribute[Any], arg: Any) -> bool:
@@ -520,6 +524,17 @@ class Token:
     def to_sexpr_list(self) -> SExpr:
         """Deeply converts this token to SExpr list-form"""
 
+        def list_walker(value: list[SExpr]) -> Iterator[SExpr]:
+            for item in value:
+                if isinstance(item, Iterator):
+                    yield list(walker(item))
+                elif isinstance(item, list):
+                    yield list(list_walker(item))
+                elif item in ('', '\n'):
+                    continue
+                else:
+                    yield item
+
         def walker(it: Token._ToSExprIterator) -> Iterator[SExpr]:
             """Walk-down a token-sexpr iterator as returned by to_sexpr_elements().
 
@@ -529,6 +544,8 @@ class Token:
             for _, value in it:
                 if isinstance(value, Iterator):
                     yield list(walker(value))
+                elif isinstance(value, list):
+                    yield list(list_walker(value))
                 elif value in ('', '\n'):
                     continue
                 else:
@@ -569,6 +586,8 @@ class Token:
                     yield f'({joiner(list_walker(field, item))})'
                 elif isinstance(item, float):
                     yield float_to_str(item, field)
+                elif isinstance(item, Iterator):
+                    yield f'({joiner(walker(item))})'
                 else:
                     yield str(item)
 
@@ -750,26 +769,33 @@ class Token:
                 continue
 
             elif issubclass(field_type, Token):
-                yield field, value.to_sexpr_elements()
+                if field.metadata.get('is_named', False):
+                    yield field, [field.name, value.to_sexpr_elements()]
+                else:
+                    yield field, value.to_sexpr_elements()
                 continue
 
             elif issubclass(field_type, list):
-                if field.metadata.get('newline_before_first', False):
+                if value and field.metadata.get('newline_before_first', False):
                     yield None, '\n'
 
                 for item in value:
                     if isinstance(item, Token):
                         yield field, item.to_sexpr_elements()
+                    elif isinstance(item, str):
+                        if field.metadata.get('quoted', True):
+                            item = f'"{item}"'
+                        yield field, item
                     else:
                         yield field, item
 
-                if field.metadata.get('newline_after_last', False):
+                if value and field.metadata.get('newline_after_last', False):
                     yield None, '\n'
 
                 continue
 
             elif issubclass(field_type, dict):
-                if field.metadata.get('newline_before_first', False):
+                if value and field.metadata.get('newline_before_first', False):
                     yield None, '\n'
 
                 for key, item in value.items():
@@ -785,10 +811,13 @@ class Token:
                             item = '""'
                         yield field, [key, item]
 
-                if field.metadata.get('newline_after_last', False):
+                if value and field.metadata.get('newline_after_last', False):
                     yield None, '\n'
 
                 continue
+
+        if getattr(type(self), 'NEWLINE_AT_END', False):
+            yield None, '\n'
 
     #
     # Manipulation methods
@@ -945,13 +974,22 @@ class _LayerDef(Token):
 
 @define
 class Layers(Token):
-    layers: list[_LayerDef] = field(metadata=dict(newline_before_first=True, newline_after=True))
+    layers_def: list[_LayerDef] = field(
+        metadata=dict(newline_before_first=True, newline_after=True)
+    )
+    layers_use: list[str] = field(metadata=dict(quoted=True))
 
     @classmethod
     def from_sexpr_data(cls, args: list[Self | str | Number]) -> Self:
         """Overloads to manually instantiate _LayerDef objects."""
 
-        new_args = [_LayerDef(*layer) for layer in args]
+        new_args = []
+        for arg in args:
+            if isinstance(arg, list):
+                new_args.append(_LayerDef(*arg))
+            else:
+                new_args.append(arg)
+
         return super().from_sexpr_data(new_args)
 
 
@@ -968,6 +1006,11 @@ class Setup(Token):
         metadata=dict(newline_before_first=True, newline_after=True)
     )
     plot_settings: Pcbplotparams = field(metadata=dict(newline_after=True))
+
+
+@define
+class Property(Token):
+    props = dict[str, Any]
 
 
 @define
@@ -1030,6 +1073,8 @@ class KicadPcb(Token):
         metadata=dict(newline_before=True, newline_after=True, newline_after_last=True),
     )
 
+    NEWLINE_AT_END: ClassVar[bool] = True
+
     @classmethod
     def from_sexpr_data(cls, args: list[Self | str | Number]) -> Self:
         if args[1][0] == 'host':  # Older host variant of generator
@@ -1065,7 +1110,7 @@ class Footprint(Token):
     locked: bool | None = field(default=None, metadata=dict(literal=True))
     placed: bool | None = field(default=None, metadata=dict(literal=True))
 
-    layer: Layer = field(default=REQUIRED, metadata=dict(newline_after=True))
+    layer: str = field(default=REQUIRED, metadata=dict(is_named=True, newline_after=True))
 
     # In .kicad_pcb only
     tstamp: uuid.UUID | None = field(
@@ -1077,6 +1122,8 @@ class Footprint(Token):
     settings: dict[str, Any] = field(default=REQUIRED, metadata=dict(newline_after=True))
 
     graphic_items: list[GraphicItem] = field(default=REQUIRED, metadata=dict(newline_after=True))
+    pads: list[Pad] = field(default=REQUIRED, metadata=dict(newline_after=True))
+    models: list[Model] = field(default=REQUIRED, metadata=dict(newline_after=True))
     data: list[Token | list] = field(default=REQUIRED, metadata=dict(newline_after=True))
 
     def find_item[T: Token](self, type_: type[T] = Token, **fields: Any) -> T | None:
@@ -1153,7 +1200,7 @@ class Footprint(Token):
 
 
 @define(order=True)
-class XY(Token):
+class Xy(Token):
     """XY token that we also use as a base class for any token behaving like a point.
 
     We take the opportunity to define some common operators and methods on it that will
@@ -1162,17 +1209,17 @@ class XY(Token):
     Can also be used as a vector.
     """
 
-    x: float = field(eq=float_key)
-    y: float = field(eq=float_key)
+    x: float | int = field(eq=float_key)
+    y: float | int = field(eq=float_key)
 
-    def __add__(self, other: XY | float) -> Self:
-        if isinstance(other, XY):
+    def __add__(self, other: Xy | float) -> Self:
+        if isinstance(other, Xy):
             return type(self)(x=self.x + other.x, y=self.y + other.y)
         else:
             return type(self)(x=self.x + other, y=self.y + other)
 
-    def __sub__(self, other: XY | float) -> Self:
-        if isinstance(other, XY):
+    def __sub__(self, other: Xy | float) -> Self:
+        if isinstance(other, Xy):
             return type(self)(x=self.x - other.x, y=self.y - other.y)
         else:
             return type(self)(x=self.x - other, y=self.y - other)
@@ -1193,7 +1240,7 @@ class XY(Token):
     def mag(self) -> float:
         return math.sqrt((self.x * self.x) + (self.y * self.y))
 
-    def dist(self, other: XY) -> float:
+    def dist(self, other: Xy) -> float:
         return (self - other).mag
 
     def cast_to[T: 'XY'](self, cls: type[T]) -> T:
@@ -1209,24 +1256,45 @@ class XY(Token):
 
 
 @define
-class At(XY):
-    angle: float | None = field(default=None, eq=float_key)
+class Xyz(Xy):
+    z: float | int = field(eq=float_key)
+
+
+@define
+class At(Xy):
+    angle: float | int | None = field(default=None, eq=float_key)
     unlocked: bool = field(default=False, metadata=dict(literal=True))
 
 
 @define
-class Start(XY):
+class Start(Xy):
     pass
 
 
 @define
-class Mid(XY):
+class Mid(Xy):
     pass
 
 
 @define
-class End(XY):
+class Center(Xy):
     pass
+
+
+@define
+class End(Xy):
+    pass
+
+
+@define
+class Size(Xy):
+    pass
+
+
+# Interferes with Model.offset who is just a named XYZ
+# @define
+# class Offset(XY):
+#     pass
 
 
 @define
@@ -1252,9 +1320,9 @@ class Stroke(Token):
     color: Color | None = None
 
 
-@define
-class Layer(Token):
-    canonical_name: str
+# @define
+# class Layer(Token):
+#     canonical_name: str
 
 
 @define
@@ -1263,8 +1331,30 @@ class GraphicItem(Token):
 
 
 @define
+class Font(Token):
+    face: str | None = field(default=None, metadata=dict(is_named=True))
+    size: Size = REQUIRED
+    thickness: float | None = field(default=None, metadata=dict(is_named=True))
+    bold: bool = field(default=False, metadata=dict(literal=True))
+    italic: bool = field(default=False, metadata=dict(literal=True))
+    line_spacing: float | None = field(default=None, metadata=dict(is_named=True))
+
+
+@define
+class Justify(Token):
+    # TODO: Redo by supporting Literal[this, that]
+    left: bool = field(default=False, metadata=dict(literal=True))
+    right: bool = field(default=False, metadata=dict(literal=True))
+    top: bool = field(default=False, metadata=dict(literal=True))
+    bottom: bool = field(default=False, metadata=dict(literal=True))
+    mirror: bool = field(default=False, metadata=dict(literal=True))
+
+
+@define
 class Effects(Token):
-    data: dict[str, Any]
+    font: Font
+    justify: Justify | None = None
+    hide: bool = field(default=False, metadata=dict(literal=True))
 
 
 @define
@@ -1277,9 +1367,11 @@ class FpText(GraphicItem):
     type: FpTextType = field(converter=FpTextType)  # noqa: A003
     text: str
     at: At
-    layer: Layer
-    hide: bool = field(default=False, metadata=dict(literal=True, newline_after=True))
-    effects: Effects = field(default=REQUIRED, metadata=dict(newline_after=True, indent=True))
+    layer: str = field(metadata=dict(is_named=True))
+    hide: bool = field(default=False, metadata=dict(literal=True))
+    effects: Effects = field(
+        default=REQUIRED, metadata=dict(newline_before=True, newline_after=True, indent=True)
+    )
     tstamp: uuid.UUID = field(
         default=REQUIRED, converter=to_uuid, metadata=dict(newline_after=True), eq=False
     )
@@ -1307,16 +1399,16 @@ class Line:
     But also to provide some math-related methods.
     """
 
-    start: XY
-    end: XY
+    start: Xy
+    end: Xy
 
     @property
-    def center(self) -> XY:
+    def center(self) -> Xy:
         """Returns the center point of the line."""
 
         return (self.start + self.end) / 2
 
-    def translate(self, vector: XY) -> Self:
+    def translate(self, vector: Xy) -> Self:
         """Returns a new line being this line translated by the provided vector."""
 
         return type(self)(
@@ -1328,11 +1420,11 @@ class Line:
         """Returns a new line rotated by 90 degrees around 0."""
 
         return type(self)(
-            start=XY(x=-self.start.y, y=self.start.x),
-            end=XY(x=-self.end.y, y=self.end.x),
+            start=Xy(x=-self.start.y, y=self.start.x),
+            end=Xy(x=-self.end.y, y=self.end.x),
         )
 
-    def intersect(self, other: Line) -> XY:
+    def intersect(self, other: Line) -> Xy:
         """Returns the intersection point between two lines (even if the point is virtually
         not on the lines, ie. not on the line segments limited by the start and end points)."""
 
@@ -1344,7 +1436,7 @@ class Line:
         x1y2_y1x2 = (x1 * y2) - (y1 * x2)
         x3y4_y3x4 = (x3 * y4) - (y3 * x4)
         denominator = ((x1 - x2) * (y3 - y4)) - ((y1 - y2) * (x3 - x4))
-        return XY(
+        return Xy(
             x=((x1y2_y1x2 * (x3 - x4)) - ((x1 - x2) * x3y4_y3x4)) / denominator,
             y=((x1y2_y1x2 * (y3 - y4)) - ((y1 - y2) * x3y4_y3x4)) / denominator,
         )
@@ -1353,7 +1445,7 @@ class Line:
 @define
 class Line_20171130(Line):
     angle: float = field(eq=float_key)
-    layer: Layer
+    layer: str = field(metadata=dict(is_named=True))
     width: float
 
     def to_20221018(self, target_cls: type[Line_20221018]) -> Line_20221018:
@@ -1371,7 +1463,7 @@ class Line_20171130(Line):
 class Line_20221018(Line):
     angle: float | None = field(default=None, eq=float_key)
     stroke: Stroke = field(default=REQUIRED, metadata=dict(newline_before=True))
-    layer: Layer = REQUIRED
+    layer: str = field(default=REQUIRED, metadata=dict(is_named=True))
     tstamp: uuid.UUID = field(default=REQUIRED, converter=to_uuid, eq=False)
 
 
@@ -1412,7 +1504,17 @@ class FpRect(GraphicItem):
 
 @define
 class FpCircle(GraphicItem):
-    data: dict[str, Any]
+    class FillType(Enum):
+        none = 'none'
+        solid = 'solid'
+
+    center: Center
+    end: End
+    stroke: Stroke = field(metadata=dict(newline_before=True))
+    fill: FillType | None = field(default=None, converter=FillType, metadata=dict(is_named=True))
+    locked: bool = field(default=False, metadata=dict(literal=True))
+    layer: str = field(default=REQUIRED, metadata=dict(is_named=True))
+    tstamp: uuid.UUID = field(default=REQUIRED, converter=to_uuid, eq=False)
 
 
 @runtime_checkable
@@ -1429,7 +1531,7 @@ class Arc(Protocol):
 
     @property
     @abstractmethod
-    def center(self) -> XY:
+    def center(self) -> Xy:
         """Center of the arc circle."""
 
         raise NotImplementedError
@@ -1447,10 +1549,10 @@ class Arc(Protocol):
         relative_end = (self.end - self.center) / self.radius
         return math.atan2(relative_end.y, relative_end.x)
 
-    def point_at(self, angle: float) -> XY:
+    def point_at(self, angle: float) -> Xy:
         """Returns the point on the arc circle at the given angle from the virtual zero point."""
 
-        return XY(
+        return Xy(
             x=self.center.x + (self.radius * math.cos(angle)),
             y=self.center.y + (self.radius * math.sin(angle)),
         )
@@ -1461,12 +1563,12 @@ class Arc_20171130(Arc):
     start: Start  # It is the center point actually
     end: End
     angle: float = field(eq=float_key)
-    layer: Layer
+    layer: str = field(metadata=dict(is_named=True))
     width: float
 
     @property
-    def center(self) -> XY:
-        return self.start.cast_to(XY)
+    def center(self) -> Xy:
+        return self.start.cast_to(Xy)
 
     def to_20221018(self, target_cls: type[Arc_20221018]) -> Arc_20221018:
         """Converts to a 20221018 arc by recalculating the real arc start, and mid points."""
@@ -1492,11 +1594,11 @@ class Arc_20221018(Arc):
     mid: Mid
     end: End
     stroke: Stroke = field(metadata=dict(newline_before=True))
-    layer: Layer
+    layer: str = field(metadata=dict(is_named=True))
     tstamp: uuid.UUID = field(converter=to_uuid, eq=False)
 
     @property
-    def center(self) -> XY:
+    def center(self) -> Xy:
         """Center of the arc circle.
 
         This version of arc does not hold the center point information.
@@ -1509,7 +1611,7 @@ class Arc_20221018(Arc):
         me = Line(start=self.mid, end=self.end)
         me_chord = me.translate(-me.center).rotate_90deg().translate(me.center)
 
-        return sm_chord.intersect(me_chord).cast_to(XY)
+        return sm_chord.intersect(me_chord).cast_to(Xy)
 
 
 @define
@@ -1542,6 +1644,97 @@ class GrArc_20221018(GrArc, Arc_20221018):
     pass
 
 
+@define
+class Pts(Token):
+    list_: list[Xy] = field(metadata=dict(newline_before_first=True, newline_after=True))
+
+
+@define
+class FpPoly(GraphicItem):
+    class FillType(Enum):
+        none = 'none'
+        solid = 'solid'
+
+    points: Pts = field(metadata=dict(newline_before=True, newline_after=True))
+    stroke: Stroke = field(metadata=dict(newline_before=True))
+    fill: FillType | None = field(default=None, converter=FillType, metadata=dict(is_named=True))
+    locked: bool = field(default=False, metadata=dict(literal=True))
+    layer: str = field(default=REQUIRED, metadata=dict(is_named=True))
+    tstamp: uuid.UUID = field(default=REQUIRED, converter=to_uuid, eq=False)
+
+
+@define
+class Drill(Token):
+    oval: bool = field(default=False, metadata=dict(literal=True))
+    diameter: float = REQUIRED
+    width: float | None = None
+    # offset: Offset | None = None  # Interferes with Model.offset...
+
+
+@define
+class Chamfer(Token):
+    top_left: bool = field(default=False, metadata=dict(literal=True))
+    top_right: bool = field(default=False, metadata=dict(literal=True))
+    bottom_left: bool = field(default=False, metadata=dict(literal=True))
+    bottom_right: bool = field(default=False, metadata=dict(literal=True))
+
+
+@define
+class Pad(Token):
+    class Type(Enum):
+        thru_hole = 'thru_hole'
+        smd = 'smd'
+        connect = 'connect'
+        np_thru_hole = 'np_thru_hole'
+
+    class Shape(Enum):
+        circle = 'circle'
+        rect = 'rect'
+        oval = 'oval'
+        trapezoid = 'trapezoid'
+        roundrect = 'roundrect'
+        custom = 'custom'
+
+    number: str
+    type: Type = field(converter=Type)
+    shape: Shape = field(converter=Shape)
+    at: At
+    locked: bool = field(default=False, metadata=dict(literal=True))
+    size: Size = REQUIRED
+    drill: Drill | None = None
+    layers: Layers = REQUIRED
+    properties: Property | None = None
+    remove_unused_layer: bool = field(default=False, metadata=dict(literal=True))
+    keep_end_layers: bool = field(default=False, metadata=dict(literal=True))
+    roundrect_rratio: float | None = field(default=None, metadata=dict(is_named=True))
+    chamfer_ratio: float | None = field(default=None, metadata=dict(is_named=True))
+    chamfer: Chamfer | None = field(default=None, metadata=dict(is_named=True))
+    pinfunction: str | None = field(default=None, metadata=dict(is_named=True))
+    pintype: str | None = field(default=None, metadata=dict(is_named=True))
+    die_length: float | None = field(default=None, metadata=dict(is_named=True))
+    solder_mask_margin: float | None = field(default=None, metadata=dict(is_named=True))
+    solder_paste_margin: float | None = field(default=None, metadata=dict(is_named=True))
+    solder_paste_margin_ratio: float | None = field(default=None, metadata=dict(is_named=True))
+    clearance: float | None = field(default=None, metadata=dict(is_named=True, newline_before=True))
+    zone_connect: int | None = field(
+        default=None, metadata=dict(is_named=True, newline_before=True)
+    )
+    thermal_bridge_width: float | int | None = field(
+        default=None, metadata=dict(is_named=True, newline_before=True)
+    )
+    thermal_gap: float | None = field(default=None, metadata=dict(is_named=True))
+    tstamp: uuid.UUID = field(default=REQUIRED, converter=to_uuid, eq=False)
+    # TODO: Custom options and primitives
+
+
+@define
+class Model(Token):
+    file: str = field(metadata=dict(newline_after=True))
+    offset: Xyz = field(metadata=dict(is_named=True, newline_after=True))
+    scale: Xyz = field(metadata=dict(is_named=True, newline_after=True))
+    rotate: Xyz = field(metadata=dict(is_named=True, newline_after=True))
+
+
 def convert_pcb_to_footprint(
     pcb: KicadPcb,
     name: str,
@@ -1560,25 +1753,29 @@ def convert_pcb_to_footprint(
             name=name,
             version=Version(20221018),
             generator=generator,
-            layer=Layer(canonical_name='F.Cu'),
+            layer='F.Cu',
             settings=dict(attr=['board_only', 'exclude_from_pos_files', 'exclude_from_bom']),
             graphic_items=[
                 FpText(
                     type=FpText.FpTextType.reference,
                     text='REF**',
                     at=At(x=0, y=-0.5, unlocked=True),
-                    layer=Layer(canonical_name='F.SilkS'),
+                    layer='F.SilkS',
                     hide=True,
-                    effects=Effects(data=dict(font=[['size', 1, 1], ['thickness', 0.1]])),
+                    effects=Effects(
+                        font=Font(size=Size(x=1, y=1), thickness=0.1),
+                    ),
                     tstamp=uuid.uuid4(),
                 ),
                 FpText(
                     type=FpText.FpTextType.value,
                     text=name,
                     at=At(x=0, y=1, unlocked=True),
-                    layer=Layer(canonical_name='F.Fab'),
+                    layer='F.Fab',
                     hide=True,
-                    effects=Effects(data=dict(font=[['size', 1, 1], ['thickness', 0.15]])),
+                    effects=Effects(
+                        font=Font(size=Size(x=1, y=1), thickness=0.15),
+                    ),
                     tstamp=uuid.uuid4(),
                 ),
             ],
@@ -1648,9 +1845,16 @@ def convert_pcb_to_footprint(
 def cli_parse(
     filename: Path,
     reexport: Optional[Path] = None,
+    as_list: bool = False,
+    as_text: bool = False,
 ) -> None:
     obj = Token.from_file(filename)
+
     print('>>>', obj)
+    if as_list:
+        print('>>>', obj.to_sexpr_list())
+    if as_text:
+        print('>>>', obj.to_sexpr_text())
 
     if reexport:
         obj.to_file(reexport)
