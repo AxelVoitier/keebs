@@ -762,7 +762,7 @@ class Token:
                 value = str(value)
                 if field.metadata.get('quoted', False):
                     value = f'"{value}"'
-                if field.metadata.get('is_named', True):
+                if field.metadata.get('is_named', False):
                     value = [field.name, value]
 
                 yield field, value
@@ -860,6 +860,113 @@ def float_key(value: float | None) -> float | None:
         return None
 
 
+def token_field(
+    *,
+    is_named: bool | None = None,
+    quoted: bool | None = None,
+    literal: bool | str | None = None,
+    strip_0: bool | None = None,
+    skip_space: bool | None = None,
+    indent: bool | None = None,
+    newlines: str | None = None,
+    newline_before: bool | None = None,
+    newline_after: bool | None = None,
+    newline_before_first: bool | None = None,
+    newline_after_last: bool | None = None,
+    **kwargs: Any,
+) -> Any:
+    if newlines:
+        try:
+            f_index = newlines.index('()')
+        except ValueError as ex:
+            msg = "newlines parameter must contain '()' to signify the field position"
+            raise ValueError(msg) from ex
+
+        lb_index = None
+        rb_index = None
+        with suppress(ValueError):
+            lb_index = newlines.index('[')
+
+        if lb_index is not None:
+            if lb_index >= f_index:
+                msg = "'[' in newlines parameter must come before '()'"
+                raise ValueError(msg)
+            try:
+                rb_index = newlines.index(']')
+            except ValueError as ex:
+                msg = "'[' in newlines parameter must be complemented with a closing ']'"
+                raise ValueError(msg) from ex
+            if rb_index <= (f_index + 1):
+                msg = "']' in newlines parameter must come after '()'"
+                raise ValueError(msg)
+
+        i = 0
+        try:
+            while i <= len(newlines):
+                pos = newlines.index('\n', i)
+                if (lb_index is not None) and (pos < lb_index):
+                    newline_before_first = True
+                elif pos < f_index:
+                    newline_before = True
+                elif (rb_index is not None) and (pos > rb_index):
+                    newline_after_last = True
+                elif pos > (f_index + 1):
+                    newline_after = True
+                else:
+                    msg = "No '\\n' within '()' in newlines parameter"
+                    raise ValueError(msg)
+
+                i += pos + 1
+
+        except ValueError:
+            pass
+
+    def _add(value: Any, name: str) -> None:
+        if value is not None:
+            metadata[name] = value
+
+    metadata = {}
+    _add(is_named, 'is_named')
+    _add(quoted, 'quoted')
+    _add(literal, 'literal')
+    _add(strip_0, 'strip_0')
+    _add(skip_space, 'skip_space')
+    _add(indent, 'indent')
+    _add(newline_before, 'newline_before')
+    _add(newline_after, 'newline_after')
+    _add(newline_before_first, 'newline_before_first')
+    _add(newline_after_last, 'newline_after_last')
+
+    if not metadata:
+        metadata = None
+
+    if 'default' not in kwargs:
+        kwargs['default'] = REQUIRED
+
+    return field(metadata=metadata, **kwargs)
+
+
+def uuid_field(**kwargs: Any) -> Any:
+    kwargs.setdefault('converter', to_uuid)
+    kwargs.setdefault('eq', False)
+    kwargs.setdefault('is_named', True)
+
+    return token_field(**kwargs)
+
+
+def literal_field(**kwargs: Any) -> Any:
+    kwargs.setdefault('default', False)
+    kwargs.setdefault('literal', True)
+
+    return token_field(**kwargs)
+
+
+def named_field(**kwargs: Any) -> Any:
+    kwargs.setdefault('is_named', True)
+
+    return token_field(**kwargs)
+
+
 #
 # Token classes declarations
 #
@@ -874,24 +981,22 @@ class Lib(Token):
         Eagle = 'Eagle'
         GEDA_Pcb = 'GEDA/Pcb'
 
-    name: str = field(metadata=dict(is_named=True))
-    type: LibType = field(  # noqa: A003
-        converter=LibType, metadata=dict(is_named=True, quoted=True, skip_space=True)
-    )
-    uri: str = field(metadata=dict(is_named=True, skip_space=True))
-    options: str = field(metadata=dict(is_named=True, skip_space=True))
-    descr: str = field(metadata=dict(is_named=True, skip_space=True))
+    name: str = named_field()
+    type: LibType = named_field(converter=LibType, quoted=True, skip_space=True)  # noqa: A003
+    uri: str = named_field(skip_space=True)
+    options: str = named_field(skip_space=True)
+    descr: str = named_field(skip_space=True)
 
 
 @define
 class FpLibTable(Token):
-    version: Version = field(metadata=dict(newline_before=True, newline_after=True))
-    libs: list[Lib] = field(metadata=dict(newline_after=True))
+    version: Version = token_field(newlines='\n()\n')
+    libs: list[Lib] = token_field(newlines='()\n')
 
 
 @define
 class General(Token):
-    thickness: float = field(metadata=dict(is_named=True, newline_before=True, newline_after=True))
+    thickness: float | int = named_field(newlines='\n()\n')
 
 
 @define
@@ -913,10 +1018,10 @@ class Paper(Token):
         USLedger = 'USLedger'
         User = 'User'
 
-    paper_size: PaperSize = field(converter=PaperSize, metadata=dict(quoted=True))
-    width: float | None = None
-    height: float | None = None
-    portrait: bool = field(default=False, metadata=dict(literal=True))
+    paper_size: PaperSize = token_field(converter=PaperSize, quoted=True)
+    width: float | int | None = None
+    height: float | int | None = None
+    portrait: bool = literal_field()
 
 
 @define
@@ -968,16 +1073,14 @@ class _LayerDef(Token):
 
     ordinal: int
     canonical_name: str
-    type: LayerType = field(converter=LayerType)  # noqa: A003
+    type: LayerType = token_field(converter=LayerType)  # noqa: A003
     user_name: str | None = None
 
 
 @define
 class Layers(Token):
-    layers_def: list[_LayerDef] = field(
-        metadata=dict(newline_before_first=True, newline_after=True)
-    )
-    layers_use: list[str] = field(metadata=dict(quoted=True))
+    layers_def: list[_LayerDef] = token_field(newlines='\n[()\n]')
+    layers_use: list[str] = token_field(quoted=True)
 
     @classmethod
     def from_sexpr_data(cls, args: list[Self | str | Number]) -> Self:
@@ -995,17 +1098,13 @@ class Layers(Token):
 
 @define
 class Pcbplotparams(Token):
-    params: dict[str, Any] = field(
-        metadata=dict(newline_before_first=True, newline_after=True, strip_0=False)
-    )
+    params: dict[str, Any] = token_field(newlines='\n[()\n]', strip_0=False)
 
 
 @define(kw_only=True)
 class Setup(Token):
-    other_settings: dict[str, Any] = field(
-        metadata=dict(newline_before_first=True, newline_after=True)
-    )
-    plot_settings: Pcbplotparams = field(metadata=dict(newline_after=True))
+    other_settings: dict[str, Any] = token_field(newlines='\n[()\n]')
+    plot_settings: Pcbplotparams = token_field(newlines='()\n')
 
 
 @define
@@ -1023,12 +1122,12 @@ class Net(Token):
 class NetClass(Token):
     name: str
     description: str
-    clearance: float
-    trace_width: float
-    via_dia: float
-    via_drill: float
-    uvia_dia: float
-    uvia_drill: float
+    clearance: float | int
+    trace_width: float | int
+    via_dia: float | int
+    via_drill: float | int
+    uvia_dia: float | int
+    uvia_drill: float | int
     add_net: str
 
 
@@ -1051,27 +1150,18 @@ class KicadPcb(Token):
     """Token for a .kicad_pcb file."""
 
     version: Version
-    generator: str = field(metadata=dict(is_named=True, newline_after=True, quoted=False))
-    general: General = field(metadata=dict(newline_before=True, newline_after=True))
-    paper: Paper | Page = field(metadata=dict(newline_before=True, newline_after=True))
+    generator: str = named_field(newlines='()\n', quoted=False)
+    general: General = token_field(newlines='\n()\n')
+    paper: Paper | Page = token_field(newlines='\n()\n')
     title_block: TitleBlock | None = None
-    layers: Layers = field(default=REQUIRED, metadata=dict(newline_after=True))
-    setup: Setup = field(default=REQUIRED, metadata=dict(newline_before=True, newline_after=True))
+    layers: Layers = token_field(newlines='()\n')
+    setup: Setup = token_field(newlines='\n()\n')
     # properties
-    nets: list[Net] = field(
-        default=REQUIRED, metadata=dict(newline_before=True, newline_after=True)
-    )
+    nets: list[Net] = token_field(newlines='\n()\n')
     net_classes: list[NetClass] | None = None  # Old versions
-    footprints: list[Footprint] | None = field(
-        default=REQUIRED, metadata=dict(newline_before=True, newline_after=True)
-    )
-    graphic_items: list[GraphicItem] = field(
-        default=REQUIRED, metadata=dict(newline_before=True, newline_after=True)
-    )
-    data: list[Token | list] = field(
-        default=REQUIRED,
-        metadata=dict(newline_before=True, newline_after=True, newline_after_last=True),
-    )
+    footprints: list[Footprint] | None = token_field(newlines='\n()\n')
+    graphic_items: list[GraphicItem] = token_field(newlines='\n()\n')
+    data: list[Token | list] = token_field(newlines='[\n()\n]\n')
 
     NEWLINE_AT_END: ClassVar[bool] = True
 
@@ -1102,29 +1192,25 @@ class Footprint(Token):
 
     # In .kicad_mod only
     version: Version | None = None
-    generator: str | None = field(
-        default=None, metadata=dict(is_named=True, newline_after=True, quoted=False)
-    )
+    generator: str | None = named_field(default=None, quoted=False, newlines='()\n')
 
     # In .kicad_pcb only
-    locked: bool | None = field(default=None, metadata=dict(literal=True))
-    placed: bool | None = field(default=None, metadata=dict(literal=True))
+    locked: bool | None = literal_field(default=None)
+    placed: bool | None = literal_field(default=None)
 
-    layer: str = field(default=REQUIRED, metadata=dict(is_named=True, newline_after=True))
+    layer: str = named_field(newlines='()\n')
 
     # In .kicad_pcb only
-    tstamp: uuid.UUID | None = field(
-        default=None, converter=to_uuid, metadata=dict(newline_after=True), eq=False
-    )
-    at: At | None = field(default=None, metadata=dict(newline_after=True))
+    tstamp: uuid.UUID | None = uuid_field(default=None, newlines='()\n')
+    at: At | None = token_field(default=None, newlines='()\n')
 
     # Covers things like attr, descr, tags, property, path, ...
-    settings: dict[str, Any] = field(default=REQUIRED, metadata=dict(newline_after=True))
+    settings: dict[str, Any] = token_field(newlines='()\n')
 
-    graphic_items: list[GraphicItem] = field(default=REQUIRED, metadata=dict(newline_after=True))
-    pads: list[Pad] = field(default=REQUIRED, metadata=dict(newline_after=True))
-    models: list[Model] = field(default=REQUIRED, metadata=dict(newline_after=True))
-    data: list[Token | list] = field(default=REQUIRED, metadata=dict(newline_after=True))
+    graphic_items: list[GraphicItem] = token_field(newlines='()\n')
+    pads: list[Pad] = token_field(newlines='()\n')
+    models: list[Model] = token_field(newlines='()\n')
+    data: list[Token | list] = token_field(newlines='()\n')
 
     def find_item[T: Token](self, type_: type[T] = Token, **fields: Any) -> T | None:
         for graphic_item in self.graphic_items:
@@ -1209,8 +1295,8 @@ class Xy(Token):
     Can also be used as a vector.
     """
 
-    x: float | int = field(eq=float_key)
-    y: float | int = field(eq=float_key)
+    x: float | int = token_field(eq=float_key)
+    y: float | int = token_field(eq=float_key)
 
     def __add__(self, other: Xy | float) -> Self:
         if isinstance(other, Xy):
@@ -1243,7 +1329,7 @@ class Xy(Token):
     def dist(self, other: Xy) -> float:
         return (self - other).mag
 
-    def cast_to[T: 'XY'](self, cls: type[T]) -> T:
+    def cast_to[T: 'Xy'](self, cls: type[T]) -> T:
         """Casts a point-like token into another point-like token.
 
         Needed just to have correct token names when serialising.
@@ -1257,13 +1343,13 @@ class Xy(Token):
 
 @define
 class Xyz(Xy):
-    z: float | int = field(eq=float_key)
+    z: float | int = token_field(eq=float_key)
 
 
 @define
 class At(Xy):
-    angle: float | int | None = field(default=None, eq=float_key)
-    unlocked: bool = field(default=False, metadata=dict(literal=True))
+    angle: float | int | None = token_field(default=None, eq=float_key)
+    unlocked: bool = literal_field()
 
 
 @define
@@ -1299,10 +1385,10 @@ class Size(Xy):
 
 @define
 class Color(Token):
-    r: float
-    g: float
-    b: float
-    a: float
+    r: float | int
+    g: float | int
+    b: float | int
+    a: float | int
 
 
 @define
@@ -1315,14 +1401,9 @@ class Stroke(Token):
         default = 'default'
         solid = 'solid'
 
-    width: float = field(metadata=dict(is_named=True))
-    type: StrokeType = field(converter=StrokeType, metadata=dict(is_named=True))
+    width: float | int = named_field()
+    type: StrokeType = named_field(converter=StrokeType)
     color: Color | None = None
-
-
-# @define
-# class Layer(Token):
-#     canonical_name: str
 
 
 @define
@@ -1332,29 +1413,29 @@ class GraphicItem(Token):
 
 @define
 class Font(Token):
-    face: str | None = field(default=None, metadata=dict(is_named=True))
+    face: str | None = named_field(default=None)
     size: Size = REQUIRED
-    thickness: float | None = field(default=None, metadata=dict(is_named=True))
-    bold: bool = field(default=False, metadata=dict(literal=True))
-    italic: bool = field(default=False, metadata=dict(literal=True))
-    line_spacing: float | None = field(default=None, metadata=dict(is_named=True))
+    thickness: float | int | None = named_field(default=None)
+    bold: bool = literal_field()
+    italic: bool = literal_field()
+    line_spacing: float | int | None = named_field(default=None)
 
 
 @define
 class Justify(Token):
     # TODO: Redo by supporting Literal[this, that]
-    left: bool = field(default=False, metadata=dict(literal=True))
-    right: bool = field(default=False, metadata=dict(literal=True))
-    top: bool = field(default=False, metadata=dict(literal=True))
-    bottom: bool = field(default=False, metadata=dict(literal=True))
-    mirror: bool = field(default=False, metadata=dict(literal=True))
+    left: bool = literal_field()
+    right: bool = literal_field()
+    top: bool = literal_field()
+    bottom: bool = literal_field()
+    mirror: bool = literal_field()
 
 
 @define
 class Effects(Token):
     font: Font
     justify: Justify | None = None
-    hide: bool = field(default=False, metadata=dict(literal=True))
+    hide: bool = literal_field()
 
 
 @define
@@ -1364,17 +1445,13 @@ class FpText(GraphicItem):
         value = 'value'
         user = 'user'
 
-    type: FpTextType = field(converter=FpTextType)  # noqa: A003
-    text: str
-    at: At
-    layer: str = field(metadata=dict(is_named=True))
-    hide: bool = field(default=False, metadata=dict(literal=True))
-    effects: Effects = field(
-        default=REQUIRED, metadata=dict(newline_before=True, newline_after=True, indent=True)
-    )
-    tstamp: uuid.UUID = field(
-        default=REQUIRED, converter=to_uuid, metadata=dict(newline_after=True), eq=False
-    )
+    type: FpTextType = token_field(converter=FpTextType)  # noqa: A003
+    text: str = REQUIRED
+    at: At = REQUIRED
+    layer: str = named_field()
+    hide: bool = literal_field()
+    effects: Effects = token_field(newlines='\n()\n', indent=True)
+    tstamp: uuid.UUID = uuid_field(newlines='()\n')
 
     def is_ref(self) -> bool:
         return self.type == FpText.FpTextType.reference
@@ -1444,9 +1521,9 @@ class Line:
 
 @define
 class Line_20171130(Line):
-    angle: float = field(eq=float_key)
-    layer: str = field(metadata=dict(is_named=True))
-    width: float
+    angle: float | int = token_field(eq=float_key)
+    layer: str = named_field()
+    width: float | int = REQUIRED
 
     def to_20221018(self, target_cls: type[Line_20221018]) -> Line_20221018:
         return target_cls(
@@ -1461,10 +1538,10 @@ class Line_20171130(Line):
 
 @define
 class Line_20221018(Line):
-    angle: float | None = field(default=None, eq=float_key)
-    stroke: Stroke = field(default=REQUIRED, metadata=dict(newline_before=True))
-    layer: str = field(default=REQUIRED, metadata=dict(is_named=True))
-    tstamp: uuid.UUID = field(default=REQUIRED, converter=to_uuid, eq=False)
+    angle: float | int | None = token_field(default=None, eq=float_key)
+    stroke: Stroke = token_field(newlines='\n()')
+    layer: str = named_field()
+    tstamp: uuid.UUID = uuid_field()
 
 
 @define
@@ -1510,11 +1587,11 @@ class FpCircle(GraphicItem):
 
     center: Center
     end: End
-    stroke: Stroke = field(metadata=dict(newline_before=True))
-    fill: FillType | None = field(default=None, converter=FillType, metadata=dict(is_named=True))
-    locked: bool = field(default=False, metadata=dict(literal=True))
-    layer: str = field(default=REQUIRED, metadata=dict(is_named=True))
-    tstamp: uuid.UUID = field(default=REQUIRED, converter=to_uuid, eq=False)
+    stroke: Stroke = token_field(newlines='\n()')
+    fill: FillType | None = named_field(default=None, converter=FillType)
+    locked: bool = literal_field()
+    layer: str = named_field()
+    tstamp: uuid.UUID = uuid_field()
 
 
 @runtime_checkable
@@ -1562,9 +1639,9 @@ class Arc(Protocol):
 class Arc_20171130(Arc):
     start: Start  # It is the center point actually
     end: End
-    angle: float = field(eq=float_key)
-    layer: str = field(metadata=dict(is_named=True))
-    width: float
+    angle: float | int = token_field(eq=float_key)
+    layer: str = named_field()
+    width: float | int = REQUIRED
 
     @property
     def center(self) -> Xy:
@@ -1593,9 +1670,9 @@ class Arc_20221018(Arc):
     start: Start
     mid: Mid
     end: End
-    stroke: Stroke = field(metadata=dict(newline_before=True))
-    layer: str = field(metadata=dict(is_named=True))
-    tstamp: uuid.UUID = field(converter=to_uuid, eq=False)
+    stroke: Stroke = token_field(newlines='\n()')
+    layer: str = named_field()
+    tstamp: uuid.UUID = uuid_field()
 
     @property
     def center(self) -> Xy:
@@ -1646,7 +1723,7 @@ class GrArc_20221018(GrArc, Arc_20221018):
 
 @define
 class Pts(Token):
-    list_: list[Xy] = field(metadata=dict(newline_before_first=True, newline_after=True))
+    list_: list[Xy] = token_field(newlines='\n[()\n]')
 
 
 @define
@@ -1655,28 +1732,28 @@ class FpPoly(GraphicItem):
         none = 'none'
         solid = 'solid'
 
-    points: Pts = field(metadata=dict(newline_before=True, newline_after=True))
-    stroke: Stroke = field(metadata=dict(newline_before=True))
-    fill: FillType | None = field(default=None, converter=FillType, metadata=dict(is_named=True))
-    locked: bool = field(default=False, metadata=dict(literal=True))
-    layer: str = field(default=REQUIRED, metadata=dict(is_named=True))
-    tstamp: uuid.UUID = field(default=REQUIRED, converter=to_uuid, eq=False)
+    points: Pts = token_field(newlines='\n()\n')
+    stroke: Stroke = token_field(newlines='\n()')
+    fill: FillType | None = named_field(default=None, converter=FillType)
+    locked: bool = literal_field()
+    layer: str = named_field()
+    tstamp: uuid.UUID = uuid_field()
 
 
 @define
 class Drill(Token):
-    oval: bool = field(default=False, metadata=dict(literal=True))
-    diameter: float = REQUIRED
-    width: float | None = None
+    oval: bool = literal_field()
+    diameter: float | int = REQUIRED
+    width: float | int | None = None
     # offset: Offset | None = None  # Interferes with Model.offset...
 
 
 @define
 class Chamfer(Token):
-    top_left: bool = field(default=False, metadata=dict(literal=True))
-    top_right: bool = field(default=False, metadata=dict(literal=True))
-    bottom_left: bool = field(default=False, metadata=dict(literal=True))
-    bottom_right: bool = field(default=False, metadata=dict(literal=True))
+    top_left: bool = literal_field()
+    top_right: bool = literal_field()
+    bottom_left: bool = literal_field()
+    bottom_right: bool = literal_field()
 
 
 @define
@@ -1696,43 +1773,39 @@ class Pad(Token):
         custom = 'custom'
 
     number: str
-    type: Type = field(converter=Type)
-    shape: Shape = field(converter=Shape)
-    at: At
-    locked: bool = field(default=False, metadata=dict(literal=True))
+    type: Type = token_field(converter=Type)
+    shape: Shape = token_field(converter=Shape)
+    at: At = REQUIRED
+    locked: bool = literal_field()
     size: Size = REQUIRED
     drill: Drill | None = None
     layers: Layers = REQUIRED
     properties: Property | None = None
-    remove_unused_layer: bool = field(default=False, metadata=dict(literal=True))
-    keep_end_layers: bool = field(default=False, metadata=dict(literal=True))
-    roundrect_rratio: float | None = field(default=None, metadata=dict(is_named=True))
-    chamfer_ratio: float | None = field(default=None, metadata=dict(is_named=True))
-    chamfer: Chamfer | None = field(default=None, metadata=dict(is_named=True))
-    pinfunction: str | None = field(default=None, metadata=dict(is_named=True))
-    pintype: str | None = field(default=None, metadata=dict(is_named=True))
-    die_length: float | None = field(default=None, metadata=dict(is_named=True))
-    solder_mask_margin: float | None = field(default=None, metadata=dict(is_named=True))
-    solder_paste_margin: float | None = field(default=None, metadata=dict(is_named=True))
-    solder_paste_margin_ratio: float | None = field(default=None, metadata=dict(is_named=True))
-    clearance: float | None = field(default=None, metadata=dict(is_named=True, newline_before=True))
-    zone_connect: int | None = field(
-        default=None, metadata=dict(is_named=True, newline_before=True)
-    )
-    thermal_bridge_width: float | int | None = field(
-        default=None, metadata=dict(is_named=True, newline_before=True)
-    )
-    thermal_gap: float | None = field(default=None, metadata=dict(is_named=True))
-    tstamp: uuid.UUID = field(default=REQUIRED, converter=to_uuid, eq=False)
+    remove_unused_layer: bool = literal_field()
+    keep_end_layers: bool = literal_field()
+    roundrect_rratio: float | int | None = named_field(default=None)
+    chamfer_ratio: float | int | None = named_field(default=None)
+    chamfer: Chamfer | None = named_field(default=None)
+    pinfunction: str | None = named_field(default=None)
+    pintype: str | None = named_field(default=None)
+    die_length: float | int | None = named_field(default=None)
+    solder_mask_margin: float | int | None = named_field(default=None)
+    solder_paste_margin: float | int | None = named_field(default=None)
+    solder_paste_margin_ratio: float | int | None = named_field(default=None)
+    clearance: float | int | None = named_field(default=None, newlines='\n()')
+    zone_connect: int | None = named_field(default=None, newlines='\n()')
+    thermal_bridge_width: float | int | None = named_field(default=None, newlines='\n()')
+    thermal_gap: float | int | None = named_field(default=None)
+    tstamp: uuid.UUID = uuid_field()
     # TODO: Custom options and primitives
 
 
 @define
 class Model(Token):
-    file: str = field(metadata=dict(newline_after=True))
-    offset: Xyz = field(metadata=dict(is_named=True, newline_after=True))
-    scale: Xyz = field(metadata=dict(is_named=True, newline_after=True))
-    rotate: Xyz = field(metadata=dict(is_named=True, newline_after=True))
+    file: str = token_field(newlines='()\n')
+    offset: Xyz = named_field(newlines='()\n')
+    scale: Xyz = named_field(newlines='()\n')
+    rotate: Xyz = named_field(newlines='()\n')
 
 
 def convert_pcb_to_footprint(
