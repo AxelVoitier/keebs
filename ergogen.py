@@ -100,6 +100,7 @@ class Points:
                 mirrored=v['meta'].get('mirrored', False),
                 layers=v['meta'].get('layers', {}),
                 qmk=v['meta'].get('qmk', {}),
+                original=v,
             )
 
 

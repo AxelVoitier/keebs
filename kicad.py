@@ -22,6 +22,7 @@ from abc import abstractmethod
 from contextlib import suppress
 from copy import deepcopy
 from enum import Enum
+from itertools import chain
 from numbers import Number
 from pathlib import Path
 from typing import (
@@ -50,7 +51,7 @@ from rich import print
 if TYPE_CHECKING:
     from typing import TypeAlias
 
-    from ergogen import Keyboard
+    from ergogen import Keyboard, Points
 
     SExpr: TypeAlias = str | Number | list['SExpr']
 
@@ -1232,15 +1233,20 @@ class Footprint(Token):
             if ref_text:
                 ref_text.text = ref
 
-        for item in footprint.graphic_items:
+        for item in chain(footprint.graphic_items, footprint.pads, footprint.models):
             if hasattr(item, 'tstamp'):
                 item.tstamp = uuid.uuid4()
+            if at.angle and hasattr(item, 'at'):
+                if item.at.angle is None:
+                    item.at.angle = 0
+                item.at.angle += at.angle
 
         pcb.footprints.append(footprint)
 
     def update_from(
         self,
         model: Footprint,
+        new_angle: float,
         *,
         settings: bool = True,
         texts: bool = True,
@@ -1254,35 +1260,57 @@ class Footprint(Token):
         if settings:
             self.settings = deepcopy(model.settings)
 
-        old_items = list(reversed(self.graphic_items))
-        self.graphic_items = []
+        old_angle = self.at.angle or 0
 
-        if not texts and old_items:
-            for item in old_items:
-                if isinstance(item, FpText):
-                    self.graphic_items.append(item)
+        def update_angle(item: GraphicItem) -> GraphicItem:
+            if (new_angle != old_angle) and hasattr(item, 'at'):
+                if item.at.angle is None:
+                    item.at.angle = 0
+                item.at.angle -= old_angle
+                item.at.angle += new_angle
+                if not item.at.angle:
+                    item.at.angle = None
+            return item
 
-        for item in model.graphic_items:
-            if isinstance(item, FpText) and not texts:
-                continue
+        def update_items(collection_name: str) -> None:
+            old_items: list[Token] = getattr(self, collection_name)
+            new_items: list[Token] = []
+            setattr(self, collection_name, new_items)
 
-            new_item = deepcopy(item)
-            if hasattr(new_item, 'tstamp'):
-                item.tstamp = uuid.uuid4()
-            if (ref is not None) and isinstance(new_item, FpText) and new_item.is_ref():
-                new_item.text = ref
+            if not texts and old_items:
+                for item in old_items:
+                    if isinstance(item, FpText):
+                        new_items.append(update_angle(item))
 
-            if not old_items:
-                self.graphic_items.append(new_item)
-            elif old_items[-1] == new_item:
-                self.graphic_items.append(old_items.pop())
-            else:
-                try:
-                    index = old_items.index(new_item)
-                except ValueError:
-                    self.graphic_items.append(new_item)
+            for item in getattr(model, collection_name):
+                if isinstance(item, FpText) and not texts:
+                    continue
+
+                new_item = deepcopy(item)
+                if hasattr(new_item, 'tstamp'):
+                    item.tstamp = uuid.uuid4()
+                if (ref is not None) and isinstance(new_item, FpText) and new_item.is_ref():
+                    new_item.text = ref
+                if old_angle and hasattr(new_item, 'at'):
+                    if new_item.at.angle is None:
+                        new_item.at.angle = 0
+                    new_item.at.angle += old_angle
+
+                if not old_items:
+                    new_items.append(update_angle(new_item))
+                elif old_items[-1] == new_item:
+                    new_items.append(update_angle(old_items.pop()))
                 else:
-                    self.graphic_items.append(old_items.pop(index))
+                    try:
+                        index = old_items.index(new_item)
+                    except ValueError:
+                        new_items.append(update_angle(new_item))
+                    else:
+                        new_items.append(update_angle(old_items.pop(index)))
+
+        update_items('graphic_items')
+        update_items('pads')
+        update_items('models')
 
 
 @define(order=True)
@@ -1348,7 +1376,11 @@ class Xyz(Xy):
 
 @define
 class At(Xy):
-    angle: float | int | None = token_field(default=None, eq=float_key)
+    angle: float | int | None = token_field(
+        default=None,
+        eq=float_key,
+        converter=lambda a: a if (a is None) or (-180 < a <= 180) else a - 360,
+    )
     unlocked: bool = literal_field()
 
 
@@ -1576,7 +1608,16 @@ class GrLine_20221018(GrLine, Line_20221018):
 
 @define
 class FpRect(GraphicItem):
-    data: dict[str, Any]
+    class FillType(Enum):
+        none = 'none'
+        solid = 'solid'
+
+    start: Start
+    end: End
+    stroke: Stroke = token_field(newlines='\n()')
+    fill: FillType | None = named_field(default=None, converter=FillType)
+    layer: str = named_field()
+    tstamp: uuid.UUID = uuid_field()
 
 
 @define
@@ -1984,7 +2025,13 @@ def _update_project(
     pcb_path = project_file_stem.with_suffix('.kicad_pcb')
     pcb: KicadPcb | None = None
 
-    ergogen_lib = _ergogen_lib_info(project_folder, project.get('ergogen-lib-name', 'Ergogen'))
+    # TODO: Load paths from user config (~/.config/kicad/<version?>/kicad_common.json)
+    #       and find a way to get system paths
+    paths = dict(KIPRJMOD=str(project_folder))
+
+    fp_lib_table, ergogen_lib = _ergogen_lib_info(
+        project_folder, project.get('ergogen-lib-name', 'Ergogen')
+    )
     ergogen_lib_path = Path(ergogen_lib.uri.replace('${KIPRJMOD}', str(project_folder)))
 
     for obj in project['objects']:
@@ -2023,12 +2070,122 @@ def _update_project(
                 )
                 pcb.to_file(pcb_path)
             else:
-                outline_fp.update_from(target_footprint)
+                outline_fp.update_from(target_footprint, 0)
                 outline_fp.at = position
                 pcb.to_file(pcb_path)
 
+        elif 'keys' in obj:
+            if pcb is None:
+                pcb = KicadPcb.from_file(pcb_path)
 
-def _ergogen_lib_info(project_folder: Path, name: str = 'Ergogen') -> Lib:
+            for spec in obj['keys']:
+                do_keys(keeb, project, fp_lib_table, paths, pcb, spec)
+
+            pcb.to_file(pcb_path)
+
+
+def footprint_from_lib(
+    fp_lib_table: FpLibTable, paths: dict[str, str], name: str
+) -> Footprint | None:
+    # TODO: Also lookup in user config (~/.config/kicad/<version?>/fp-lib-table)
+    lib_name, footprint_name = name.split(':', maxsplit=1)
+
+    for lib in fp_lib_table.libs:
+        if lib.name == lib_name:
+            break
+    else:
+        msg = f'Library {lib_name} not found in fp-lib-table!'
+        raise ValueError(msg)
+
+    lib_path = Path(re.sub(r'\$\{([a-zA-Z0-9_]+)\}', r'{\1}', lib.uri).format(**paths))
+    footprint_path = lib_path / f'{footprint_name}.kicad_mod'
+
+    return Footprint.from_file(footprint_path) if footprint_path.exists() else None
+
+
+class AttrDict(dict[str, Any]):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+
+        for key, value in self.items():
+            if isinstance(value, dict):
+                self[key] = type(self)(value)
+
+    def __getattr__(self, key: str) -> Any:
+        try:
+            return self[key]
+        except KeyError as ex:
+            raise AttributeError(key) from ex
+
+
+def do_keys(
+    keeb: Keyboard,
+    project: dict[str, dict[str, dict[str, str]]],
+    fp_lib_table: FpLibTable,
+    paths: dict[str, str],
+    pcb: KicadPcb,
+    spec: dict[str, Any],
+) -> None:
+    wheres = spec.get('where', None)
+    if wheres:
+        if not isinstance(wheres, list):
+            wheres = [wheres]
+        wheres = [
+            re.sub(r'([a-zA-Z0-9_.-]+)', r'{\1}', where.replace('~', '==')) for where in wheres
+        ]
+
+    def match_wheres(point: dict[str, Points.ElementData]) -> tuple[bool, AttrDict | None]:
+        if not wheres:
+            return True, None
+
+        attribs = AttrDict(point['original'])
+        for where in wheres:
+            try:
+                locs = dict(
+                    true=True,
+                    false=False,
+                    horizontal='horizontal',
+                    vertical='vertical',
+                )
+                point_where = where.format(**locs, **attribs)
+            except AttributeError:
+                return False, attribs
+            if not eval(point_where, None, locs):
+                return False, attribs
+
+        return True, attribs
+
+    footprint = footprint_from_lib(fp_lib_table, paths, spec['footprint'])
+    lib_name, _ = spec['footprint'].split(':', maxsplit=1)
+
+    for point in keeb.points:
+        match, attribs = match_wheres(point)
+        if not match:
+            continue
+        if attribs is None:
+            attribs = AttrDict(point['original'])
+
+        position = At(attribs.x, -attribs.y)
+        if 'offset' in project:
+            position += At(*project['offset'])
+        if 'offset' in spec:
+            position += At(*spec['offset'])
+        angle = attribs.r + spec.get('angle', 0)
+        position.angle = angle if angle else None
+
+        ref = spec['ref'].format(**attribs)
+
+        pcb_footprint = pcb.find_ref(ref, Footprint)
+        if pcb_footprint is None:
+            print(f'Adding {point['name']} at pos={position} with {ref=}')
+            footprint.add_on_pcb(pcb, lib=lib_name, ref=ref, at=position)
+        else:
+            print(f'Updating {point['name']} at pos={position} with {ref=}')
+            pcb_footprint.update_from(footprint, angle)
+            pcb_footprint.at = position
+
+
+def _ergogen_lib_info(project_folder: Path, name: str = 'Ergogen') -> tuple[FpLibTable, Lib]:
     def make_ergogen_lib() -> Lib:
         return Lib(
             name=name,
@@ -2054,4 +2211,4 @@ def _ergogen_lib_info(project_folder: Path, name: str = 'Ergogen') -> Lib:
         fp_lib_table = FpLibTable(version=Version(version=7), libs=[ergogen_lib])
         fp_lib_table.to_file(fp_lib_table_path)
 
-    return ergogen_lib
+    return fp_lib_table, ergogen_lib

@@ -246,8 +246,22 @@ fabrication:
   main-pcb:
     folder: PCB
     project-name: Handy-PCB
+    offset: [120, 90]
     objects:
-      outlines:
-        - Handy-PCB-outline
-      keys:
-        -
+      - outline: Handy-PCB-outline
+        ref: ECoutline
+        # offset: [0, 0]
+      - keys:
+          - where:
+              - meta.tags.1u ~ true
+              - meta.mirrored ~ false
+            footprint: 'Keebs:CherryMX_1u_with_smd_diode'
+            # offset: [0, 0]
+            ref: SW_{meta.name}
+          - where:
+              - meta.tags.2u ~ vertical
+              - meta.mirrored ~ false
+            footprint: 'Keebs:CherryMX_2u_with_smd_diode'
+            # offset: [0, 0]
+            angle: -90
+            ref: SW_{meta.name}
