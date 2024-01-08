@@ -24,8 +24,12 @@ units:
   # arc_index_home_x_offset: 11.7604  # Kyria
   arc_index_home_x_offset: 6  # For clearence between thumb and nav clusters
   arc_index_home_y_offset: ky + 120 + 1  # Kyria + thumb/-av clusters clearence
-  thumb_central_radius: 90.4
+  thumb_central_radius: 90.6
   thumb_middle_angle: 19
+  thumb_sides_top_angle_offset: 12 - 0.047
+  thumb_sides_bottom_angle_offset: 15 - 0.23
+  thumb_sides_top_radius: thumb_central_radius + 0.5ky + 0.4025
+  thumb_sides_bottom_radius: thumb_central_radius - 0.5ky + 0.065
 
 points:
   #rotate: 25
@@ -53,21 +57,23 @@ points:
         middle:
           key.stagger: -index_off + middle_off
           key.splay: +index_splay - middle_splay
-          key.spread: 1kx + 1
+          key.spread: 1kx + 0.8
           #rows.mod.skip: true
         ring:
           key.stagger: -middle_off + ring_off
           key.splay: +middle_splay - ring_splay
+          key.spread: 1kx + 0.04
           #rows.mod.skip: true  # Defined by nav cluster instead
         pinky:
           key.stagger: -ring_off + pinky_off + 1
           key.splay: +ring_splay - pinky_splay
-          key.spread: 1kx + 1
+          key.spread: 1kx + 0.035
           #rows.mod.skip: true  # Defined by nav cluster instead
         outer:
           # $skip: true
           key.stagger: -pinky_off + outer_off
           key.splay: +pinky_splay - outer_splay
+          key.spread: 1kx - 0.12
           # rows.mod.skip: true
       rows:
         #mod:
@@ -90,11 +96,11 @@ points:
           1u: true
       columns:
         outer_top.key:
-          orient: thumb_middle_angle + 12
-          shift: [0, thumb_central_radius + 0.5ky + 0.5]
+          orient: thumb_middle_angle + thumb_sides_top_angle_offset
+          shift: [0, thumb_sides_top_radius]
         outer_bottom.key:
-          orient: thumb_middle_angle + 15
-          shift: [-0.5, thumb_central_radius - 0.5ky]
+          orient: thumb_middle_angle + thumb_sides_bottom_angle_offset
+          shift: [-0.5, thumb_sides_bottom_radius]
         # outer2_top.key:
         #   orient: thumb_middle_angle + 12*2
         #   shift: [0, thumb_central_radius + 0.5ky]
@@ -109,11 +115,11 @@ points:
             1u: $unset
             2u: vertical
         inner_top.key:
-          orient: thumb_middle_angle - 12
-          shift: [0, thumb_central_radius + 0.5ky + 0.5]
+          orient: thumb_middle_angle - thumb_sides_top_angle_offset
+          shift: [0, thumb_sides_top_radius]
         inner_bottom.key:
-          orient: thumb_middle_angle - 15
-          shift: [0.5, thumb_central_radius - 0.5ky - 0]
+          orient: thumb_middle_angle - thumb_sides_bottom_angle_offset
+          shift: [0.5, thumb_sides_bottom_radius]
 
     nav_cluster:
       $skip: true

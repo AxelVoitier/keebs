@@ -15,8 +15,12 @@ units:
   outer_splay: 20
   arc_index_home_x_offset: 6
   arc_index_home_y_offset: ky + 120 + 1
-  thumb_central_radius: 90.4
+  thumb_central_radius: 90.6
   thumb_middle_angle: 19
+  thumb_sides_top_angle_offset: 12 - 0.047
+  thumb_sides_bottom_angle_offset: 15 - 0.23
+  thumb_sides_top_radius: thumb_central_radius + 0.5ky + 0.4025
+  thumb_sides_bottom_radius: thumb_central_radius - 0.5ky + 0.065
   case_padding: 4
   pcb_padding: case_padding / 2
   case_thumb_bottom_arc_radius: thumb_central_radius - 1ky - case_padding
@@ -173,7 +177,7 @@ points:
           key:
             stagger: -index_off + middle_off
             splay: +index_splay - middle_splay
-            spread: 1kx + 1
+            spread: 1kx + 0.8
             qmk:
               col: D7
           rows:
@@ -237,6 +241,7 @@ points:
           key:
             stagger: -middle_off + ring_off
             splay: +middle_splay - ring_splay
+            spread: 1kx + 0.04
             qmk:
               col: E6
           rows:
@@ -309,7 +314,7 @@ points:
           key:
             stagger: -ring_off + pinky_off + 1
             splay: +ring_splay - pinky_splay
-            spread: 1kx + 1
+            spread: 1kx + 0.035
             qmk:
               col: B4
           rows:
@@ -377,6 +382,7 @@ points:
           key:
             stagger: -pinky_off + outer_off
             splay: +pinky_splay - outer_splay
+            spread: 1kx - 0.12
           rows:
             top:
               layers:
@@ -439,10 +445,10 @@ points:
       columns:
         outer_top:
           key:
-            orient: thumb_middle_angle + 12
+            orient: thumb_middle_angle + thumb_sides_top_angle_offset
             shift:
             - 0
-            - thumb_central_radius + 0.5ky + 0.5
+            - thumb_sides_top_radius
             layers:
               Base:
                 legend: "\u232B"
@@ -456,10 +462,10 @@ points:
                 on_hold: Nav
         outer_bottom:
           key:
-            orient: thumb_middle_angle + 15
+            orient: thumb_middle_angle + thumb_sides_bottom_angle_offset
             shift:
             - -0.5
-            - thumb_central_radius - 0.5ky
+            - thumb_sides_bottom_radius
             layers:
               Base:
                 legend: "\u2326"
@@ -504,10 +510,10 @@ points:
                 Nav: $unset
         inner_top:
           key:
-            orient: thumb_middle_angle - 12
+            orient: thumb_middle_angle - thumb_sides_top_angle_offset
             shift:
             - 0
-            - thumb_central_radius + 0.5ky + 0.5
+            - thumb_sides_top_radius
             layers:
               Base:
                 legend: "\u21E7"
@@ -523,10 +529,10 @@ points:
                 Nav: $unset
         inner_bottom:
           key:
-            orient: thumb_middle_angle - 15
+            orient: thumb_middle_angle - thumb_sides_bottom_angle_offset
             shift:
             - 0.5
-            - thumb_central_radius - 0.5ky - 0
+            - thumb_sides_bottom_radius
             layers:
               Base:
                 legend: "\u2388"
@@ -667,50 +673,50 @@ points:
 outlines:
   keys:
   - what: rectangle
-    where: meta.tags.1u ~ true
+    where:
+    - - meta.tags.1u ~ true
+      - meta.mirrored ~ false
     size:
     - kx
     - ky
     operation: stack
   - what: rectangle
-    where: meta.tags.2u ~ vertical
+    where:
+    - - meta.tags.2u ~ vertical
+      - meta.mirrored ~ false
     size:
     - kx
     - 2ky
     operation: stack
   - what: rectangle
-    where: meta.tags.2u ~ horizontal
+    where:
+    - - meta.tags.2u ~ horizontal
+      - meta.mirrored ~ false
     size:
     - 2kx
     - ky
     operation: stack
   keyholes:
   - what: rectangle
-    where: meta.tags.1u ~ true
+    where:
+    - - meta.tags.1u ~ true
+      - meta.mirrored ~ false
     size:
     - 14
     - 14
     operation: stack
   - what: rectangle
-    where: meta.tags.1-5u ~ vertical
-    size:
-    - kx
-    - 1.5ky
-    operation: stack
-  - what: rectangle
-    where: meta.tags.1-5u ~ horizontal
-    size:
-    - 1.5kx
-    - ky
-    operation: stack
-  - what: rectangle
-    where: meta.tags.2u ~ vertical
+    where:
+    - - meta.tags.2u ~ vertical
+      - meta.mirrored ~ false
     size:
     - 14
     - 33.05
     operation: stack
   - what: rectangle
-    where: meta.tags.2u ~ horizontal
+    where:
+    - - meta.tags.2u ~ horizontal
+      - meta.mirrored ~ false
     size:
     - 33.05
     - 14
