@@ -142,14 +142,20 @@ points:
 outlines:
   keys:
     - what: rectangle
-      where: meta.tags.1u ~ true
+      where:
+        - - meta.tags.1u ~ true
+          - meta.mirrored ~ false
       size: [kx, ky]
       operation: stack
     - what: rectangle
-      where: meta.tags.2u ~ vertical
+      where:
+        - - meta.tags.2u ~ vertical
+          - meta.mirrored ~ false
       size: [kx, 2ky]
       operation: stack
     - what: rectangle
-      where: meta.tags.2u ~ horizontal
+      where:
+        - - meta.tags.2u ~ horizontal
+          - meta.mirrored ~ false
       size: [2kx, ky]
       operation: stack

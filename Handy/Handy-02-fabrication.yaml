@@ -37,23 +37,21 @@ points:
 outlines:
   keyholes:
     - what: rectangle
-      where: meta.tags.1u ~ true
+      where:
+        - - meta.tags.1u ~ true
+          - meta.mirrored ~ false
       size: [14, 14]
       operation: stack
     - what: rectangle
-      where: meta.tags.1-5u ~ vertical
-      size: [kx, 1.5ky]
-      operation: stack
-    - what: rectangle
-      where: meta.tags.1-5u ~ horizontal
-      size: [1.5kx, ky]
-      operation: stack
-    - what: rectangle
-      where: meta.tags.2u ~ vertical
+      where:
+        - - meta.tags.2u ~ vertical
+          - meta.mirrored ~ false
       size: [14, 33.05]
       operation: stack
     - what: rectangle
-      where: meta.tags.2u ~ horizontal
+      where:
+        - - meta.tags.2u ~ horizontal
+          - meta.mirrored ~ false
       size: [33.05, 14]
       operation: stack
 
