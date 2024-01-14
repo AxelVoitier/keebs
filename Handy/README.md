@@ -2,6 +2,8 @@
 
 ![Handy layout](Handy%20layout.png)
 
+![Handy design](Handy%20design.png)
+
 This is a split keyboard with the following properties:
 
 - 3*6 alphas matrices
