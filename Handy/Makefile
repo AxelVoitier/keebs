@@ -39,3 +39,6 @@ gen-qmk-keymap: $(config_name).yaml $(ergogen_outputs)
 
 update-fabrication-files: $(config_name).yaml $(ergogen_outputs)
 	../keebs.py kicad update-fabrication-files ${config_name}.yaml --points-yaml ergogen-output/points/points.yaml --units-yaml ergogen-output/points/units.yaml
+
+preprocess: $(config_name).yaml $(ergogen_outputs)
+	../keebs.py ergogen preprocess ${config_name}.yaml ergogen-output/points/points.yaml ergogen-output/points/units.yaml ${config_name}-05-preprocessed.yaml

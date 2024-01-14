@@ -23,8 +23,36 @@ units:
   thumb_sides_bottom_radius: thumb_central_radius - 0.5ky + 0.065
   case_padding: 4
   pcb_padding: case_padding / 2
-  case_thumb_bottom_arc_radius: thumb_central_radius - 1ky - case_padding
+  case_fillet: 5
+  case_top_arc_x_offset: -0.3kx
+  case_top_arc_y_offset: -5.45ky
+  case_top_arc_radius: 4.5ky + 1.5ky + case_padding
+  case_thumb_bottom_arc_radius: thumb_sides_bottom_radius - 0.5ky - case_padding
   case_thumb_top_arc_radius: thumb_central_radius + 1ky + case_padding
+  tenting_hole_size: 5.3
+  tenting_hole_clearance: case_fillet - (tenting_hole_size / 2)
+  arc_center_to_outer_bottom: 108.863
+  preprocessed_r__case_corner_bottom_left: 0
+  preprocessed_r__case_corner_bottom_right: 0
+  preprocessed_r__case_tenting_hole_bottom_right: 0
+  preprocessed_r__case_tenting_hole_top_left: 0
+  preprocessed_r__case_tenting_hole_top_middle: 0
+  preprocessed_r__case_tenting_hole_top_right: 0
+  preprocessed_r__case_thumb_top_corner: 0
+  preprocessed_x__case_corner_bottom_left: -48.91760310696899
+  preprocessed_x__case_corner_bottom_right: 96.64202444242285
+  preprocessed_x__case_tenting_hole_bottom_right: 93.14098674753308
+  preprocessed_x__case_tenting_hole_top_left: -30.7131866
+  preprocessed_x__case_tenting_hole_top_middle: 14.800699900712917
+  preprocessed_x__case_tenting_hole_top_right: 115.45426785780013
+  preprocessed_x__case_thumb_top_corner: -48.91760310696899
+  preprocessed_y__case_corner_bottom_left: -32.214913278076224
+  preprocessed_y__case_corner_bottom_right: -50.88500000000003
+  preprocessed_y__case_tenting_hole_bottom_right: -45.88500000000004
+  preprocessed_y__case_tenting_hole_top_left: 41.23988391507002
+  preprocessed_y__case_tenting_hole_top_middle: 56.61414083232918
+  preprocessed_y__case_tenting_hole_top_right: 15.420236201064029
+  preprocessed_y__case_thumb_top_corner: -32.214913278076224
 points:
   rotate: 0
   mirror: -47.625
@@ -642,10 +670,44 @@ points:
       rows:
         bottom: null
         top: null
+    pro_micro:
+      key:
+        tags:
+          pro_micro: true
+      anchor:
+        ref: matrix_inner_top
+        shift:
+        - -1kx + 0.4
+        - 0.5ky - 39/2 + 0.498
+    _case_corner_bottom_right:
+      key:
+        preprocess:
+          method: intersect
+          lines:
+          - - ref: matrix_outer_top
+              shift:
+              - 0.5kx + case_padding
+              - 0
+            - ref: matrix_outer_bottom
+              shift:
+              - 0.5kx + case_padding
+              - 0
+          - - ref: arc_center
+              shift:
+              - 0
+              - case_thumb_bottom_arc_radius
+            - ref: arc_center
+              shift:
+              - 10
+              - case_thumb_bottom_arc_radius
+      anchor:
+        shift:
+        - preprocessed_x__case_corner_bottom_right
+        - preprocessed_y__case_corner_bottom_right
     _case_thumb_bottom_arc_end:
       anchor:
         ref: arc_center
-        orient: thumb_middle_angle + 15
+        orient: thumb_middle_angle + thumb_sides_bottom_angle_offset
         shift:
         - 0
         - case_thumb_bottom_arc_radius
@@ -657,45 +719,223 @@ points:
         - 0
         - 0.5kx + case_padding
     _case_thumb_top_corner:
+      key:
+        preprocess:
+          method: intersect
+          circle:
+            center:
+              ref: arc_center
+            radius: case_thumb_top_arc_radius
+          line:
+            start:
+              ref: _case_thumb_bottom_corner
+            end:
+            - ref: _case_thumb_bottom_corner
+              orient: -90
+              shift:
+              - 0
+              - 10
+          determinant-sign: minus
+      anchor:
+        shift:
+        - preprocessed_x__case_corner_bottom_left
+        - preprocessed_y__case_corner_bottom_left
+    _case_tenting_hole_bottom_left:
+      key:
+        tags:
+          tenting_hole: true
       anchor:
         ref: _case_thumb_bottom_corner
-        orient: -90
         shift:
-        - 0
-        - 2*(ky + case_padding)
-    _case_thumb_top_arc_end:
+        - case_fillet
+        - case_fillet
+    _case_tenting_hole_top_left:
+      key:
+        tags:
+          tenting_hole: true
+        preprocess:
+          method: circle-on-line-tangent-to-other-circle
+          circle:
+            center:
+              ref: matrix_middle_top
+              shift:
+              - case_top_arc_x_offset
+              - case_top_arc_y_offset
+            radius: case_top_arc_radius
+          line:
+            start:
+              ref: _case_tenting_hole_bottom_left
+            end:
+            - affect: r
+            - ref: _case_tenting_hole_bottom_left
+              affect:
+              - x
+              - y
+            - shift:
+              - 0
+              - 10
+          radius: case_fillet
+          internal: true
+          determinant-sign: plus
       anchor:
-        ref: _case_thumb_top_corner
-        orient: 90
         shift:
-        - 0
-        - -(0.5kx + case_padding)
+        - preprocessed_x__case_tenting_hole_top_left
+        - preprocessed_y__case_tenting_hole_top_left
+    _case_tenting_hole_bottom_right:
+      key:
+        tags:
+          tenting_hole: true
+        preprocess:
+          method: intersect
+          lines:
+          - - ref: matrix_outer_top
+              shift:
+              - 0.5kx + case_padding - case_fillet
+              - 0
+            - ref: matrix_outer_bottom
+              shift:
+              - 0.5kx + case_padding - case_fillet
+              - 0
+          - - ref: arc_center
+              shift:
+              - 0
+              - case_thumb_bottom_arc_radius + case_fillet
+            - ref: arc_center
+              shift:
+              - 10
+              - case_thumb_bottom_arc_radius + case_fillet
+      anchor:
+        shift:
+        - preprocessed_x__case_tenting_hole_bottom_right
+        - preprocessed_y__case_tenting_hole_bottom_right
+    _case_tenting_hole_top_right:
+      key:
+        tags:
+          tenting_hole: true
+        preprocess:
+          method: circle-on-line-tangent-to-other-circle
+          circle:
+            center:
+              ref: matrix_middle_top
+              shift:
+              - case_top_arc_x_offset
+              - case_top_arc_y_offset
+            radius: case_top_arc_radius
+          line:
+            start:
+              ref: matrix_outer_bottom
+              shift:
+              - 0.5kx + case_padding - case_fillet
+              - 0
+            end:
+              ref: matrix_outer_top
+              shift:
+              - 0.5kx + case_padding - case_fillet
+              - 0
+          radius: case_fillet
+          internal: true
+          determinant-sign: plus
+      anchor:
+        shift:
+        - preprocessed_x__case_tenting_hole_top_right
+        - preprocessed_y__case_tenting_hole_top_right
+    _case_tenting_hole_top_middle:
+      key:
+        tags:
+          tenting_hole: true
+        preprocess:
+          method: circle-on-line-tangent-to-other-circle
+          circle:
+            center:
+              ref: matrix_middle_top
+              shift:
+              - case_top_arc_x_offset
+              - case_top_arc_y_offset
+            radius: case_top_arc_radius
+          line:
+            start:
+              ref: _case_tenting_hole_bottom_left
+            end:
+            - ref: _case_tenting_hole_bottom_left
+            - ref: matrix_outer_bottom
+              affect: r
+            - shift:
+              - 0
+              - 10
+          radius: case_fillet
+          internal: true
+          determinant-sign: plus
+      anchor:
+        shift:
+        - preprocessed_x__case_tenting_hole_top_middle
+        - preprocessed_y__case_tenting_hole_top_middle
 outlines:
   keys:
-  - what: rectangle
-    where:
-    - - meta.tags.1u ~ true
-      - meta.mirrored ~ false
-    size:
-    - kx
-    - ky
-    operation: stack
-  - what: rectangle
-    where:
-    - - meta.tags.2u ~ vertical
-      - meta.mirrored ~ false
-    size:
-    - kx
-    - 2ky
-    operation: stack
-  - what: rectangle
-    where:
-    - - meta.tags.2u ~ horizontal
-      - meta.mirrored ~ false
-    size:
-    - 2kx
-    - ky
-    operation: stack
+    1u:
+      what: rectangle
+      where:
+      - - meta.tags.1u ~ true
+        - meta.mirrored ~ false
+      size:
+      - kx
+      - ky
+      operation: stack
+    2u_vertical:
+      what: rectangle
+      where:
+      - - meta.tags.2u ~ vertical
+        - meta.mirrored ~ false
+      size:
+      - kx
+      - 2ky
+      operation: stack
+    top_plate_clearence:
+      what: rectangle
+      where:
+      - - - meta.tags.1u ~ true
+          - meta.tags.2u ~ vertical
+        - meta.mirrored ~ false
+      size:
+      - 15.6
+      - 15.6
+      operation: stack
+  components:
+    pro_micro:
+      what: rectangle
+      where:
+      - - meta.tags.pro_micro ~ true
+        - meta.mirrored ~ false
+      size:
+      - 18.3
+      - 33
+      operation: stack
+    oled_screen:
+      what: rectangle
+      where:
+      - - meta.tags.pro_micro ~ true
+        - meta.mirrored ~ false
+      size:
+      - 13
+      - 39
+      adjust:
+        shift:
+        - 0
+        - -0.498
+      operation: stack
+    tenting_hole_drill:
+      what: circle
+      where:
+      - - meta.tags.tenting_hole ~ true
+        - meta.mirrored ~ false
+      radius: tenting_hole_size / 2
+      operation: stack
+    tenting_hole_clearance:
+      what: circle
+      where:
+      - - meta.tags.tenting_hole ~ true
+        - meta.mirrored ~ false
+      radius: case_fillet
+      operation: stack
   keyholes:
   - what: rectangle
     where:
@@ -713,14 +953,48 @@ outlines:
     - 14
     - 33.05
     operation: stack
-  - what: rectangle
-    where:
-    - - meta.tags.2u ~ horizontal
-      - meta.mirrored ~ false
-    size:
-    - 33.05
-    - 14
-    operation: stack
+  debug:
+    unit_circle:
+      what: circle
+      where:
+      - - meta.tags.unit_circle ~ true
+        - meta.mirrored ~ false
+      radius: kx
+      operation: stack
+    constr_point:
+      what: rectangle
+      where:
+      - - meta.tags.constr_point ~ true
+        - meta.mirrored ~ false
+      size:
+      - 4
+      - 4
+      operation: stack
+    constr_point_orient:
+      what: circle
+      where:
+      - - meta.tags.constr_point ~ true
+        - meta.mirrored ~ false
+      radius: 1
+      adjust:
+        shift:
+        - 0
+        - 2
+      operation: stack
+    tenting_hole_orient:
+      what: circle
+      where:
+      - - meta.tags.tenting_hole ~ true
+        - meta.mirrored ~ false
+      radius: 1
+      adjust:
+        shift:
+        - 0
+        - tenting_hole_size / 2
+      operation: stack
+  all_components:
+  - ^keys
+  - ^components
   board:
   - what: polygon
     operation: stack
@@ -772,44 +1046,15 @@ outlines:
       - -0.5kx
       - -0.5ky
   board_keys:
-  - name: board
-  - operation: stack
-    name: keys
-  _case_right_bottom_corner:
-  - what: circle
-    where: matrix_middle_home
-    radius: 4.5kx
-  - what: rectangle
-    where: matrix_middle_home
-    adjust:
-      shift:
-      - -100
-      - 0
-    size:
-    - 200
-    - 300
-    operation: add
-  - what: rectangle
-    where: matrix_middle_home
-    adjust:
-      shift:
-      - 0
-      - 100
-    size:
-    - 300
-    - 200
-    operation: add
-  _case_thumb_top_arc:
+  - ^board
+  - ^keys
+  case_thumb_top_arc:
   - what: circle
     where: arc_center
     radius: case_thumb_top_arc_radius
   - what: polygon
     points:
-    - ref: arc_center
-      orient: thumb_middle_angle + 15 + 3
-      shift:
-      - 0
-      - case_thumb_top_arc_radius
+    - ref: _case_thumb_top_corner
     - ref: thumb_cluster_middle
     - ref: matrix_inner_bottom
     - ref: thumb_cluster_middle
@@ -822,9 +1067,9 @@ outlines:
     where: matrix_middle_top
     adjust:
       shift:
-      - 0
-      - -5.5ky
-    radius: 4.5ky + 1.5ky + case_padding
+      - case_top_arc_x_offset
+      - case_top_arc_y_offset
+    radius: case_top_arc_radius
   - what: circle
     where: arc_center
     radius: case_thumb_bottom_arc_radius
@@ -834,51 +1079,77 @@ outlines:
     points:
     - ref: matrix_inner_top
       shift:
-      - -30
+      - -50
       - 40
     - ref: matrix_outer_top
       shift:
       - 0.5kx + case_padding
       - 50
-    - ref: arc_center
-      shift:
-      - -arc_index_home_x_offset + 3.9kx + case_padding
-      - case_thumb_bottom_arc_radius
+    - ref: _case_corner_bottom_right
     - ref: arc_center
       shift:
       - 0
       - case_thumb_bottom_arc_radius
     - ref: _case_thumb_bottom_arc_end
-    - ref: _case_thumb_bottom_corner
-    - ref: _case_thumb_top_corner
-    - ref: _case_thumb_top_arc_end
-    - ref: matrix_inner_bottom
+    - ref: _case_tenting_hole_bottom_left
       shift:
-      - -30
-      - -1.5ky
-  - name: _case_thumb_top_arc
+      - -case_fillet
+      - case_fillet
+    - ref: _case_tenting_hole_bottom_left
+      shift:
+      - case_fillet
+      - case_fillet
+    - ref: _case_tenting_hole_bottom_left
+      shift:
+      - case_fillet+0.00000014
+      - -case_fillet
+    - ref: _case_thumb_top_corner
+    - ref: _case_tenting_hole_top_left
+      shift:
+      - tenting_hole_size / 2
+      - -3.5ky
+    - ref: _case_tenting_hole_top_left
+      shift:
+      - tenting_hole_size / 2
+      - -case_fillet
+    - ref: _case_tenting_hole_top_left
+      shift:
+      - -5.0e-08
+      - -case_fillet
+    - ref: _case_tenting_hole_top_left
+      shift:
+      - 0
+      - 0
+  - what: circle
+    where: _case_tenting_hole_top_left
+    radius: case_fillet
     operation: add
-  case_keys:
+  - +case_thumb_top_arc
+  _case_main_fillet:
   - name: case
-    fillet: 5
-  - operation: stack
-    name: keys
+    fillet: case_fillet
+  case_filleted:
+  - name: _case_main_fillet
+    fillet: tenting_hole_size / 2
+  case_components:
+  - ^case_filleted
+  - ^all_components
   keys_plate:
-  - name: case
-    fillet: 5
-  - operation: stack
-    name: keyholes
+  - ^case_filleted
+  - ^keyholes
   all:
-  - name: case
-    fillet: 5
-  - operation: stack
-    name: board
-  - operation: stack
-    name: keys
+  - ^case_filleted
+  - ^board
+  - ^all_components
+  - ^keyholes
 pcbs:
   Handy-PCB-outline:
     outlines:
     - outline: board
+      layer: Edge.Cuts
+  Handy-case:
+    outlines:
+    - outline: case_filleted
       layer: Edge.Cuts
   Handy-keys-plate:
     outlines:
@@ -896,7 +1167,7 @@ fabrication:
     - 120
     - 90
     objects:
-    - outline: Handy-PCB-outline
+    - outline: Handy-case
       ref: ECoutline
     - keys:
       - where:

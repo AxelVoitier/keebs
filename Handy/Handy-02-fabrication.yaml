@@ -2,18 +2,45 @@ units:
   # Case
   case_padding: 4
   pcb_padding: case_padding / 2
-  case_thumb_bottom_arc_radius: thumb_central_radius - 1ky - case_padding
+  case_fillet: 5
+  case_top_arc_x_offset: -0.3kx
+  case_top_arc_y_offset:  -5.45ky
+  case_top_arc_radius: 4.5ky + 1.5ky + case_padding
+  case_thumb_bottom_arc_radius: thumb_sides_bottom_radius - 0.5ky - case_padding
   case_thumb_top_arc_radius: thumb_central_radius + 1ky + case_padding
+  tenting_hole_size: 5.3
+  tenting_hole_clearance: case_fillet - (tenting_hole_size / 2)
+  arc_center_to_outer_bottom: 108.863
 
 points:
   zones:
-    # matrix:
-    #   anchor.shift: [297/2 - 2kx, -210/2 - (-inner_off + index_off + middle_off)]
+    pro_micro:
+      key.tags.pro_micro: true
+      anchor:
+        ref: matrix_inner_top
+        shift: [-1kx + 0.4, 0.5ky - 39/2 + 0.498]
+
+    _case_corner_bottom_right:
+      key.preprocess:
+        method: intersect
+        lines:
+          - - ref: matrix_outer_top
+              shift: [0.5kx + case_padding, 0]
+            - ref: matrix_outer_bottom
+              shift: [0.5kx + case_padding, 0]
+          - - ref: arc_center
+              shift: [0, case_thumb_bottom_arc_radius]
+            - ref: arc_center
+              shift: [10, case_thumb_bottom_arc_radius]
+      anchor:
+        shift:
+          - preprocessed_x__case_corner_bottom_right
+          - preprocessed_y__case_corner_bottom_right
 
     _case_thumb_bottom_arc_end:
       anchor:
         ref: arc_center
-        orient: thumb_middle_angle + 15
+        orient: thumb_middle_angle + thumb_sides_bottom_angle_offset
         shift: [0, case_thumb_bottom_arc_radius]
 
     _case_thumb_bottom_corner:
@@ -23,18 +50,166 @@ points:
         shift: [0, 0.5kx + case_padding]
 
     _case_thumb_top_corner:
+      key.preprocess:
+        method: intersect
+        circle:  # Circle the target circle has to be tangent to
+          # Top arc
+          center:
+            ref: arc_center
+          radius: case_thumb_top_arc_radius
+        line:  # Line on which the target circle center can ride on
+          # Parallel to right edge
+          start:
+            ref: _case_thumb_bottom_corner
+          end:
+            - ref: _case_thumb_bottom_corner
+              orient: -90
+              shift: [0, 10]
+        determinant-sign: minus  # In polynomial solution, pick the determinant sign
+      anchor:
+        shift:
+          - preprocessed_x__case_corner_bottom_left
+          - preprocessed_y__case_corner_bottom_left
+
+    _case_tenting_hole_bottom_left:
+      key.tags.tenting_hole: true
       anchor:
         ref: _case_thumb_bottom_corner
-        orient: -90
-        shift: [0, 2*(ky + case_padding)]
+        shift: [case_fillet, case_fillet]
 
-    _case_thumb_top_arc_end:
+    _case_tenting_hole_top_left:
+      key.tags.tenting_hole: true
+      key.preprocess:
+        method: circle-on-line-tangent-to-other-circle
+        circle:  # Circle the target circle has to be tangent to
+          # Top arc
+          center:
+            ref: matrix_middle_top
+            shift: [case_top_arc_x_offset, case_top_arc_y_offset]
+          radius: case_top_arc_radius
+        line:  # Line on which the target circle center can ride on
+          # Parallel to right edge
+          start:
+            ref: _case_tenting_hole_bottom_left
+          end:
+            - affect: r
+            - ref: _case_tenting_hole_bottom_left
+              affect: [x, y]
+              # orient: -90 - (thumb_middle_angle + thumb_sides_bottom_angle_offset)
+            - shift: [0, 10]
+        radius: case_fillet  # Radius of target circle
+        internal: true  # Target circle needs to be inside the bigger one
+        determinant-sign: plus  # In polynomial solution, pick the determinant sign
       anchor:
-        ref: _case_thumb_top_corner
-        orient: 90
-        shift: [0, -(0.5kx + case_padding)]
+        shift:
+          - preprocessed_x__case_tenting_hole_top_left
+          - preprocessed_y__case_tenting_hole_top_left
+
+    _case_tenting_hole_bottom_right:
+      key.tags.tenting_hole: true
+      key.preprocess:
+        method: intersect
+        lines:
+          - - ref: matrix_outer_top
+              shift: [0.5kx + case_padding - case_fillet, 0]
+            - ref: matrix_outer_bottom
+              shift: [0.5kx + case_padding - case_fillet, 0]
+          - - ref: arc_center
+              shift: [0, case_thumb_bottom_arc_radius + case_fillet]
+            - ref: arc_center
+              shift: [10, case_thumb_bottom_arc_radius + case_fillet]
+      anchor:
+        shift:
+          - preprocessed_x__case_tenting_hole_bottom_right
+          - preprocessed_y__case_tenting_hole_bottom_right
+
+    _case_tenting_hole_top_right:
+      key.tags.tenting_hole: true
+      key.preprocess:
+        method: circle-on-line-tangent-to-other-circle
+        circle:  # Circle the target circle has to be tangent to
+          # Top arc
+          center:
+            ref: matrix_middle_top
+            shift: [case_top_arc_x_offset, case_top_arc_y_offset]
+          radius: case_top_arc_radius
+        line:  # Line on which the target circle center can ride on
+          # Parallel to right edge
+          start:
+            ref: matrix_outer_bottom
+            shift: [0.5kx + case_padding - case_fillet, 0]
+          end:
+            ref: matrix_outer_top
+            shift: [0.5kx + case_padding - case_fillet, 0]
+        radius: case_fillet  # Radius of target circle
+        internal: true  # Target circle needs to be inside the bigger one
+        determinant-sign: plus  # In polynomial solution, pick the determinant sign
+      anchor:
+        shift:
+          - preprocessed_x__case_tenting_hole_top_right
+          - preprocessed_y__case_tenting_hole_top_right
+
+    _case_tenting_hole_top_middle:
+      key.tags.tenting_hole: true
+      key.preprocess:
+        method: circle-on-line-tangent-to-other-circle
+        circle:  # Circle the target circle has to be tangent to
+          # Top arc
+          center:
+            ref: matrix_middle_top
+            shift: [case_top_arc_x_offset, case_top_arc_y_offset]
+          radius: case_top_arc_radius
+        line:  # Line on which the target circle center can ride on
+          # Parallel to right edge
+          start:
+            ref: _case_tenting_hole_bottom_left
+          end:
+            - ref: _case_tenting_hole_bottom_left
+            - ref: matrix_outer_bottom
+              affect: r
+            - shift: [0, 10]
+        radius: case_fillet  # Radius of target circle
+        internal: true  # Target circle needs to be inside the bigger one
+        determinant-sign: plus  # In polynomial solution, pick the determinant sign
+      anchor:
+        shift:
+          - preprocessed_x__case_tenting_hole_top_middle
+          - preprocessed_y__case_tenting_hole_top_middle
 
 outlines:
+  components:
+    pro_micro:
+      what: rectangle
+      where:
+        - - meta.tags.pro_micro ~ true
+          - meta.mirrored ~ false
+      size: [18.3, 33]
+      operation: stack
+
+    oled_screen:
+      what: rectangle
+      where:
+        - - meta.tags.pro_micro ~ true
+          - meta.mirrored ~ false
+      size: [13, 39]
+      adjust.shift: [0, -0.498]
+      operation: stack
+
+    tenting_hole_drill:
+      what: circle
+      where:
+        - - meta.tags.tenting_hole ~ true
+          - meta.mirrored ~ false
+      radius: tenting_hole_size / 2
+      operation: stack
+    tenting_hole_clearance:
+      what: circle
+      where:
+        - - meta.tags.tenting_hole ~ true
+          - meta.mirrored ~ false
+      radius: case_fillet
+      operation: stack
+
   keyholes:
     - what: rectangle
       where:
@@ -48,12 +223,43 @@ outlines:
           - meta.mirrored ~ false
       size: [14, 33.05]
       operation: stack
-    - what: rectangle
+
+  debug:
+    unit_circle:
+      what: circle
       where:
-        - - meta.tags.2u ~ horizontal
+        - - meta.tags.unit_circle ~ true
           - meta.mirrored ~ false
-      size: [33.05, 14]
+      radius: kx
       operation: stack
+    constr_point:
+      what: rectangle
+      where:
+        - - meta.tags.constr_point ~ true
+          - meta.mirrored ~ false
+      size: [4, 4]
+      operation: stack
+    constr_point_orient:
+      what: circle
+      where:
+        - - meta.tags.constr_point ~ true
+          - meta.mirrored ~ false
+      radius: 1
+      adjust.shift: [0, 2]
+      operation: stack
+    tenting_hole_orient:
+      what: circle
+      where:
+        - - meta.tags.tenting_hole ~ true
+          - meta.mirrored ~ false
+      radius: 1
+      adjust.shift: [0, tenting_hole_size / 2]
+      operation: stack
+
+  all_components:
+    - ^keys
+    - ^components
+    #- ^debug
 
   board:
     - what: polygon
@@ -94,32 +300,11 @@ outlines:
           shift: [-0.5kx, -0.5ky]
 
   board_keys:
-    - name: board
-    - operation: stack
-      name: keys
-
-
-  # Bottom right corner arc: need to only get a portion of it
-  _case_right_bottom_corner:
-    # Base circle
-    - what: circle
-      where: matrix_middle_home
-      radius: 4.5kx
-    # One large vertical rectangle on the left
-    - what: rectangle
-      where: matrix_middle_home
-      adjust.shift: [-100, 0]
-      size: [200, 300]
-      operation: add
-    # One large horizontal rectangle on the top
-    - what: rectangle
-      where: matrix_middle_home
-      adjust.shift: [0, 100]
-      size: [300, 200]
-      operation: add
+    - ^board
+    - ^keys
 
   # Thumb cluster top arc: need to only get a portion of it
-  _case_thumb_top_arc:
+  case_thumb_top_arc:
     # Base circle
     - what: circle
       where: arc_center
@@ -128,9 +313,7 @@ outlines:
     - what: polygon
       points:
         # One point on the arc on the left
-        - ref: arc_center
-          orient: thumb_middle_angle + 15 + 3
-          shift: [0, case_thumb_top_arc_radius]
+        - ref: _case_thumb_top_corner
         # One point well inside the thumb cluster
         - ref: thumb_cluster_middle
         # One point on the right (does not have to be on the arc)
@@ -139,7 +322,6 @@ outlines:
         - ref: thumb_cluster_middle
           shift: [0, 5ky]
       operation: intersect
-      #operation: stack
 
   case:
     # Top arc
@@ -147,8 +329,8 @@ outlines:
       where: matrix_middle_top
       #adjust.shift: [0, -(arc_index_home_y_offset + middle_off)]
       #radius: arc_index_home_y_offset + middle_off + 1.5ky + case_padding
-      adjust.shift: [0, -5.5ky]
-      radius: 4.5ky + 1.5ky + case_padding
+      adjust.shift: [case_top_arc_x_offset, case_top_arc_y_offset]
+      radius: case_top_arc_radius
 
     # Thumb cluster bottom arc
     - what: circle
@@ -159,75 +341,85 @@ outlines:
     # General chuncky shape
     - what: polygon
       operation: intersect
-      #operation: stack
       points:
         # Top-left corner
         - ref: matrix_inner_top
-          shift: [-30, 40]  # Very far to cover the top arc
+          shift: [-50, 40]  # Very far to cover the top arc
         # Top-right corner
-        #- ref: matrix_pinky_top
         - ref: matrix_outer_top
           shift: [0.5kx + case_padding, 50]  # Very far to cover the top arc
-        ## Mid-right "corner"
-        #- ref: matrix_pinky_bottom
-        #  shift: [0.5kx + case_padding, -0.5ky]  # Very far to cover the top arc
-        # Bottom right corner (far to cover the arc)
-        - ref: arc_center
-          shift:
-            # X: Reset to index home position + add 4 keys and padding
-            #- -arc_index_home_x_offset + 3.1kx + case_padding
-            - -arc_index_home_x_offset + 3.9kx + case_padding
-            # Y: Radius of thumb cluster bottom arc
-            - case_thumb_bottom_arc_radius
+        # Bottom right corner
+        - ref: _case_corner_bottom_right
         # Pivot point between line and arc at the bottom
         - ref: arc_center
           shift: [0, case_thumb_bottom_arc_radius]
         # Pivot point between arc and line before corner
         - ref: _case_thumb_bottom_arc_end
         # Thumb cluster bottom corner
-        - ref: _case_thumb_bottom_corner
+        - ref: _case_tenting_hole_bottom_left
+          shift: [-case_fillet, case_fillet]
+        # Clearance box around tenting hole
+        - ref: _case_tenting_hole_bottom_left
+          shift: [case_fillet, case_fillet]
+        # Return of clearance box
+        - ref: _case_tenting_hole_bottom_left
+          shift: [case_fillet+0.00000014, -case_fillet]
         # Thump cluster top corner
         - ref: _case_thumb_top_corner
-        # Pivot point between line and arc at the top of thumb cluster
-        - ref: _case_thumb_top_arc_end
         # Some point inside the thumb cluster aligned with top-left corner
-        - ref: matrix_inner_bottom
-          shift: [-30, -1.5ky]
+        - ref: _case_tenting_hole_top_left
+          shift: [tenting_hole_size / 2, -3.5ky]
+        # Debut of clearance box around tenting hole
+        - ref: _case_tenting_hole_top_left
+          shift: [tenting_hole_size / 2, -case_fillet]
+        # Clearance box around tenting hole (only need half of the box, we have a circle later for the rest)
+        - ref: _case_tenting_hole_top_left
+          shift: [-0.00000005, -case_fillet]
+        # Terminal point
+        - ref: _case_tenting_hole_top_left
+          shift: [0, 0]
 
-    # Bottom right corner arc
-    #- name: _case_right_bottom_corner
-    #  operation: intersect
-    #  #operation: stack
+    # A circle to do the clearance around top left tenting hole
+    - what: circle
+      where: _case_tenting_hole_top_left
+      radius: case_fillet
+      operation: add
 
     # Thumb cluster top arc
-    - name: _case_thumb_top_arc
-      operation: add
-      #operation: stack
+    - +case_thumb_top_arc
 
-  case_keys:
+  _case_main_fillet:
     - name: case
-      fillet: 5
-    - operation: stack
-      name: keys
+      fillet: case_fillet
+
+  case_filleted:
+    - name: _case_main_fillet
+      fillet: tenting_hole_size / 2
+
+  case_components:
+    - ^case_filleted
+    #- ^case
+    - ^all_components
 
   keys_plate:
-    - name: case
-      fillet: 5
-    - operation: stack
-      name: keyholes
+    - ^case_filleted
+    - ^keyholes
 
   all:
-    - name: case
-      fillet: 5
-    - operation: stack
-      name: board
-    - operation: stack
-      name: keys
+    - ^case_filleted
+    - ^board
+    - ^all_components
+    - ^keyholes
 
 pcbs:
   Handy-PCB-outline:
     outlines:
       - outline: board
+        layer: Edge.Cuts
+
+  Handy-case:
+    outlines:
+      - outline: case_filleted
         layer: Edge.Cuts
 
   Handy-keys-plate:
@@ -246,7 +438,8 @@ fabrication:
     project-name: Handy-PCB
     offset: [120, 90]
     objects:
-      - outline: Handy-PCB-outline
+      # - outline: Handy-PCB-outline
+      - outline: Handy-case
         ref: ECoutline
         # offset: [0, 0]
       - keys:
@@ -263,3 +456,8 @@ fabrication:
             # offset: [0, 0]
             angle: -90
             ref: SW_{meta.name}
+          # - where:
+          #     - meta.tags.tenting_hole ~ true
+          #     - meta.mirrored ~ false
+          #   footprint: 'Keebs:M5_with_washer'
+          #   ref: HW_{meta.name}

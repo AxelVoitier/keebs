@@ -1,0 +1,22 @@
+units:
+  preprocessed_r__case_corner_bottom_left: 0
+  preprocessed_r__case_corner_bottom_right: 0
+  preprocessed_r__case_tenting_hole_bottom_right: 0
+  preprocessed_r__case_tenting_hole_top_left: 0
+  preprocessed_r__case_tenting_hole_top_middle: 0
+  preprocessed_r__case_tenting_hole_top_right: 0
+  preprocessed_r__case_thumb_top_corner: 0
+  preprocessed_x__case_corner_bottom_left: -48.91760310696899
+  preprocessed_x__case_corner_bottom_right: 96.64202444242285
+  preprocessed_x__case_tenting_hole_bottom_right: 93.14098674753308
+  preprocessed_x__case_tenting_hole_top_left: -30.7131866
+  preprocessed_x__case_tenting_hole_top_middle: 14.800699900712917
+  preprocessed_x__case_tenting_hole_top_right: 115.45426785780013
+  preprocessed_x__case_thumb_top_corner: -48.91760310696899
+  preprocessed_y__case_corner_bottom_left: -32.214913278076224
+  preprocessed_y__case_corner_bottom_right: -50.88500000000003
+  preprocessed_y__case_tenting_hole_bottom_right: -45.88500000000004
+  preprocessed_y__case_tenting_hole_top_left: 41.23988391507002
+  preprocessed_y__case_tenting_hole_top_middle: 56.61414083232918
+  preprocessed_y__case_tenting_hole_top_right: 15.420236201064029
+  preprocessed_y__case_thumb_top_corner: -32.214913278076224

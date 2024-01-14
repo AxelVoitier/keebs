@@ -177,7 +177,7 @@ matrix_inner_bottom:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.8
                         qmk:
                             col: D7
                     rows:
@@ -242,6 +242,7 @@ matrix_inner_bottom:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
+                        spread: 1kx + 0.04
                         qmk:
                             col: E6
                     rows:
@@ -315,7 +316,7 @@ matrix_inner_bottom:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.035
                         qmk:
                             col: B4
                     rows:
@@ -384,6 +385,7 @@ matrix_inner_bottom:
                     key:
                         stagger: '-pinky_off + outer_off'
                         splay: +pinky_splay - outer_splay
+                        spread: 1kx - 0.12
                     rows:
                         top:
                             layers: &ref_40
@@ -640,12 +642,12 @@ matrix_index_top:
             - 0
         mirrored: false
 matrix_middle_bottom:
-    x: 39.1
+    x: 38.9
     'y': 9
     r: -5
     meta:
         stagger: 6.5
-        spread: 20.05
+        spread: 19.85
         splay: -5
         origin:
             - 0
@@ -681,12 +683,12 @@ matrix_middle_bottom:
             - 10
         mirrored: false
 matrix_middle_home:
-    x: 40.7603169
+    x: 40.5603169
     'y': 27.977509
     r: -5
     meta:
         stagger: 6.5
-        spread: 20.05
+        spread: 19.85
         splay: -5
         origin:
             - 0
@@ -722,12 +724,12 @@ matrix_middle_home:
             - 10
         mirrored: false
 matrix_middle_top:
-    x: 42.4206338
+    x: 42.220633799999995
     'y': 46.955018
     r: -5
     meta:
         stagger: 6.5
-        spread: 20.05
+        spread: 19.85
         splay: -5
         origin:
             - 0
@@ -763,12 +765,12 @@ matrix_middle_top:
             - 0
         mirrored: false
 matrix_ring_bottom:
-    x: 57.245346
-    'y': -2.1719839000000007
+    x: 57.0851938
+    'y': -2.1754701
     r: -10
     meta:
         stagger: -9.548
-        spread: 19.05
+        spread: 19.09
         splay: -5
         origin:
             - 0
@@ -804,12 +806,12 @@ matrix_ring_bottom:
             - 0
         mirrored: false
 matrix_ring_home:
-    x: 60.5533438
-    'y': 16.588603799999998
+    x: 60.3931916
+    'y': 16.585117599999997
     r: -10
     meta:
         stagger: -9.548
-        spread: 19.05
+        spread: 19.09
         splay: -5
         origin:
             - 0
@@ -845,12 +847,12 @@ matrix_ring_home:
             - 10
         mirrored: false
 matrix_ring_top:
-    x: 63.8613416
-    'y': 35.349191499999996
+    x: 63.701189400000004
+    'y': 35.34570529999999
     r: -10
     meta:
         stagger: -9.548
-        spread: 19.05
+        spread: 19.09
         splay: -5
         origin:
             - 0
@@ -886,12 +888,12 @@ matrix_ring_top:
             - 10
         mirrored: false
 matrix_pinky_bottom:
-    x: 75.3308137
-    'y': -15.067547900000001
+    x: 74.220322
+    'y': -14.9034636
     r: -15
     meta:
         stagger: -9.559142857142858
-        spread: 20.05
+        spread: 19.085
         splay: -5
         origin:
             - 0
@@ -927,12 +929,12 @@ matrix_pinky_bottom:
             - 0
         mirrored: false
 matrix_pinky_home:
-    x: 80.26131649999999
-    'y': 3.3333391
+    x: 79.1508248
+    'y': 3.4974234000000006
     r: -15
     meta:
         stagger: -9.559142857142858
-        spread: 20.05
+        spread: 19.085
         splay: -5
         origin:
             - 0
@@ -968,12 +970,12 @@ matrix_pinky_home:
             - 10
         mirrored: false
 matrix_pinky_top:
-    x: 85.19181929999999
-    'y': 21.7342261
+    x: 84.0813276
+    'y': 21.8983104
     r: -15
     meta:
         stagger: -9.559142857142858
-        spread: 20.05
+        spread: 19.085
         splay: -5
         origin:
             - 0
@@ -1009,12 +1011,12 @@ matrix_pinky_top:
             - 10
         mirrored: false
 matrix_outer_bottom:
-    x: 90.7830123
-    'y': -31.0027055
+    x: 89.5566095
+    'y': -30.807563000000002
     r: -20
     meta:
         stagger: -11.392857142857142
-        spread: 19.05
+        spread: 18.93
         splay: -5
         origin:
             - 0
@@ -1049,12 +1051,12 @@ matrix_outer_bottom:
             - 0
         mirrored: false
 matrix_outer_home:
-    x: 97.298496
-    'y': -13.101561100000001
+    x: 96.0720932
+    'y': -12.906418600000002
     r: -20
     meta:
         stagger: -11.392857142857142
-        spread: 19.05
+        spread: 18.93
         splay: -5
         origin:
             - 0
@@ -1088,12 +1090,12 @@ matrix_outer_home:
             - 10
         mirrored: false
 matrix_outer_top:
-    x: 103.8139797
-    'y': 4.799583299999998
+    x: 102.5875769
+    'y': 4.994725799999998
     r: -20
     meta:
         stagger: -11.392857142857142
-        spread: 19.05
+        spread: 18.93
         splay: -5
         origin:
             - 0
@@ -1167,9 +1169,9 @@ arc_center:
         mirrored: false
         tags: {}
 thumb_cluster_outer_top:
-    x: -26.6726987
-    'y': -32.41897380000002
-    r: 31
+    x: -26.6547879
+    'y': -32.28867150000002
+    r: 30.953
     meta:
         stagger: 0
         spread: 0
@@ -1177,10 +1179,10 @@ thumb_cluster_outer_top:
         origin:
             - 0
             - 0
-        orient: 31
+        orient: 30.953
         shift:
             - 0
-            - 100.42500000000001
+            - 100.5275
         rotate: 0
         adjust: {}
         width: 19.05
@@ -1222,10 +1224,10 @@ thumb_cluster_outer_top:
             columns:
                 outer_top: &ref_42
                     key:
-                        orient: thumb_middle_angle + 12
+                        orient: thumb_middle_angle + thumb_sides_top_angle_offset
                         shift:
                             - 0
-                            - thumb_central_radius + 0.5ky + 0.5
+                            - thumb_sides_top_radius
                         layers:
                             Base:
                                 legend: ⌫
@@ -1241,10 +1243,10 @@ thumb_cluster_outer_top:
                     name: outer_top
                 outer_bottom: &ref_44
                     key:
-                        orient: thumb_middle_angle + 15
+                        orient: thumb_middle_angle + thumb_sides_bottom_angle_offset
                         shift:
                             - -0.5
-                            - thumb_central_radius - 0.5ky
+                            - thumb_sides_bottom_radius
                         layers:
                             Base:
                                 legend: ⌦
@@ -1293,10 +1295,10 @@ thumb_cluster_outer_top:
                     name: middle
                 inner_top: &ref_46
                     key:
-                        orient: thumb_middle_angle - 12
+                        orient: thumb_middle_angle - thumb_sides_top_angle_offset
                         shift:
                             - 0
-                            - thumb_central_radius + 0.5ky + 0.5
+                            - thumb_sides_top_radius
                         layers:
                             Base:
                                 legend: ⇧
@@ -1314,10 +1316,10 @@ thumb_cluster_outer_top:
                     name: inner_top
                 inner_bottom: &ref_47
                     key:
-                        orient: thumb_middle_angle - 15
+                        orient: thumb_middle_angle - thumb_sides_bottom_angle_offset
                         shift:
                             - 0.5
-                            - thumb_central_radius - 0.5ky - 0
+                            - thumb_sides_bottom_radius
                         layers:
                             Base:
                                 legend: ⎈
@@ -1340,9 +1342,9 @@ thumb_cluster_outer_top:
             - 0
         mirrored: false
 thumb_cluster_outer_bottom:
-    x: -20.5892449
-    'y': -51.73118280000001
-    r: 34
+    x: -20.4681537
+    'y': -51.328225500000016
+    r: 33.769999999999996
     meta:
         stagger: 0
         spread: 0
@@ -1350,10 +1352,10 @@ thumb_cluster_outer_bottom:
         origin:
             - 0
             - 0
-        orient: 34
+        orient: 33.769999999999996
         shift:
             - -0.5
-            - 80.875
+            - 81.13999999999999
         rotate: 0
         adjust: {}
         width: 19.05
@@ -1393,8 +1395,8 @@ thumb_cluster_outer_bottom:
             - 0
         mirrored: false
 thumb_cluster_middle:
-    x: -4.381361200000001
-    'y': -33.02512080000001
+    x: -4.446474800000001
+    'y': -32.83601710000002
     r: 19
     meta:
         stagger: 0
@@ -1406,7 +1408,7 @@ thumb_cluster_middle:
         orient: 19
         shift:
             - 0
-            - 90.4
+            - 90.6
         rotate: 0
         adjust: {}
         width: 19.05
@@ -1450,9 +1452,9 @@ thumb_cluster_middle:
             - 0
         mirrored: false
 thumb_cluster_inner_top:
-    x: 12.8112712
-    'y': -18.823552700000008
-    r: 7
+    x: 12.7169352
+    'y': -18.73190000000001
+    r: 7.047000000000001
     meta:
         stagger: 0
         spread: 0
@@ -1460,10 +1462,10 @@ thumb_cluster_inner_top:
         origin:
             - 0
             - 0
-        orient: 7
+        orient: 7.047000000000001
         shift:
             - 0
-            - 100.42500000000001
+            - 100.5275
         rotate: 0
         adjust: {}
         width: 19.05
@@ -1503,9 +1505,9 @@ thumb_cluster_inner_top:
             - 0
         mirrored: false
 thumb_cluster_inner_bottom:
-    x: 19.9072272
-    'y': -37.78712920000001
-    r: 4
+    x: 19.5637208
+    'y': -37.544145700000016
+    r: 4.23
     meta:
         stagger: 0
         spread: 0
@@ -1513,10 +1515,10 @@ thumb_cluster_inner_bottom:
         origin:
             - 0
             - 0
-        orient: 4
+        orient: 4.23
         shift:
             - 0.5
-            - 80.875
+            - 81.13999999999999
         rotate: 0
         adjust: {}
         width: 19.05
@@ -1552,10 +1554,143 @@ thumb_cluster_inner_bottom:
             - 0
             - 0
         mirrored: false
+pro_micro:
+    x: -18.65
+    'y': 28.623
+    r: 0
+    meta:
+        stagger: 0
+        spread: 19
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 19.05
+        height: 19.05
+        padding: 19
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: default_default
+        name: pro_micro
+        tags:
+            pro_micro: true
+        zone:
+            key:
+                tags:
+                    pro_micro: true
+            name: pro_micro
+        col:
+            rows: {}
+            key: {}
+            name: default
+        row: default
+        bind:
+            - 0
+            - 0
+            - 0
+            - 0
+        mirrored: false
+_case_corner_bottom_right:
+    x: 96.6420244
+    'y': -50.885
+    r: 0
+    meta:
+        stagger: 0
+        spread: 19
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 19.05
+        height: 19.05
+        padding: 19
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: default_default
+        name: _case_corner_bottom_right
+        preprocess:
+            method: intersect
+            lines:
+                -
+                    -
+                        ref: matrix_outer_top
+                        shift:
+                            - 0.5kx + case_padding
+                            - 0
+                    -
+                        ref: matrix_outer_bottom
+                        shift:
+                            - 0.5kx + case_padding
+                            - 0
+                -
+                    -
+                        ref: arc_center
+                        shift:
+                            - 0
+                            - case_thumb_bottom_arc_radius
+                    -
+                        ref: arc_center
+                        shift:
+                            - 10
+                            - case_thumb_bottom_arc_radius
+        zone:
+            key:
+                preprocess:
+                    method: intersect
+                    lines:
+                        -
+                            -
+                                ref: matrix_outer_top
+                                shift:
+                                    - 0.5kx + case_padding
+                                    - 0
+                            -
+                                ref: matrix_outer_bottom
+                                shift:
+                                    - 0.5kx + case_padding
+                                    - 0
+                        -
+                            -
+                                ref: arc_center
+                                shift:
+                                    - 0
+                                    - case_thumb_bottom_arc_radius
+                            -
+                                ref: arc_center
+                                shift:
+                                    - 10
+                                    - case_thumb_bottom_arc_radius
+            name: _case_corner_bottom_right
+        col:
+            rows: {}
+            key: {}
+            name: default
+        row: default
+        bind:
+            - 0
+            - 0
+            - 0
+            - 0
+        mirrored: false
+        tags: {}
 _case_thumb_bottom_arc_end:
-    x: -12.611642
-    'y': -62.66431950000001
-    r: 34
+    x: -12.534503400000002
+    'y': -62.29329820000002
+    r: 33.769999999999996
     meta:
         stagger: 0
         spread: 19
@@ -1592,9 +1727,9 @@ _case_thumb_bottom_arc_end:
         mirrored: false
         tags: {}
 _case_thumb_bottom_corner:
-    x: -23.8243752
-    'y': -70.22740350000001
-    r: 124
+    x: -23.777506300000002
+    'y': -69.81131060000001
+    r: 123.77
     meta:
         stagger: 0
         spread: 19
@@ -1631,9 +1766,9 @@ _case_thumb_bottom_corner:
         mirrored: false
         tags: {}
 _case_thumb_top_corner:
-    x: -49.6031681
-    'y': -32.00877140000001
-    r: 34
+    x: -48.9176031
+    'y': -32.2149133
+    r: 0
     meta:
         stagger: 0
         spread: 19
@@ -1655,7 +1790,42 @@ _case_thumb_top_corner:
         asym: both
         colrow: default_default
         name: _case_thumb_top_corner
+        preprocess:
+            method: intersect
+            circle:
+                center:
+                    ref: arc_center
+                radius: case_thumb_top_arc_radius
+            line:
+                start:
+                    ref: _case_thumb_bottom_corner
+                end:
+                    -
+                        ref: _case_thumb_bottom_corner
+                        orient: -90
+                        shift:
+                            - 0
+                            - 10
+            determinant-sign: minus
         zone:
+            key:
+                preprocess:
+                    method: intersect
+                    circle:
+                        center:
+                            ref: arc_center
+                        radius: case_thumb_top_arc_radius
+                    line:
+                        start:
+                            ref: _case_thumb_bottom_corner
+                        end:
+                            -
+                                ref: _case_thumb_bottom_corner
+                                orient: -90
+                                shift:
+                                    - 0
+                                    - 10
+                    determinant-sign: minus
             name: _case_thumb_top_corner
         col:
             rows: {}
@@ -1669,10 +1839,10 @@ _case_thumb_top_corner:
             - 0
         mirrored: false
         tags: {}
-_case_thumb_top_arc_end:
-    x: -38.390434899999995
-    'y': -24.445687400000008
-    r: 124
+_case_tenting_hole_bottom_left:
+    x: -30.7131866
+    'y': -68.43423460000001
+    r: 123.77
     meta:
         stagger: 0
         spread: 19
@@ -1693,9 +1863,14 @@ _case_thumb_top_arc_end:
         skip: false
         asym: both
         colrow: default_default
-        name: _case_thumb_top_arc_end
+        name: _case_tenting_hole_bottom_left
+        tags:
+            tenting_hole: true
         zone:
-            name: _case_thumb_top_arc_end
+            key:
+                tags:
+                    tenting_hole: true
+            name: _case_tenting_hole_bottom_left
         col:
             rows: {}
             key: {}
@@ -1707,7 +1882,382 @@ _case_thumb_top_arc_end:
             - 0
             - 0
         mirrored: false
-        tags: {}
+_case_tenting_hole_top_left:
+    x: -30.7131866
+    'y': 41.2398839
+    r: 0
+    meta:
+        stagger: 0
+        spread: 19
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 19.05
+        height: 19.05
+        padding: 19
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: default_default
+        name: _case_tenting_hole_top_left
+        tags:
+            tenting_hole: true
+        preprocess:
+            method: circle-on-line-tangent-to-other-circle
+            circle:
+                center:
+                    ref: matrix_middle_top
+                    shift:
+                        - case_top_arc_x_offset
+                        - case_top_arc_y_offset
+                radius: case_top_arc_radius
+            line:
+                start:
+                    ref: _case_tenting_hole_bottom_left
+                end:
+                    -
+                        affect: r
+                    -
+                        ref: _case_tenting_hole_bottom_left
+                        affect:
+                            - x
+                            - 'y'
+                    -
+                        shift:
+                            - 0
+                            - 10
+            radius: case_fillet
+            internal: true
+            determinant-sign: plus
+        zone:
+            key:
+                tags:
+                    tenting_hole: true
+                preprocess:
+                    method: circle-on-line-tangent-to-other-circle
+                    circle:
+                        center:
+                            ref: matrix_middle_top
+                            shift:
+                                - case_top_arc_x_offset
+                                - case_top_arc_y_offset
+                        radius: case_top_arc_radius
+                    line:
+                        start:
+                            ref: _case_tenting_hole_bottom_left
+                        end:
+                            -
+                                affect: r
+                            -
+                                ref: _case_tenting_hole_bottom_left
+                                affect:
+                                    - x
+                                    - 'y'
+                            -
+                                shift:
+                                    - 0
+                                    - 10
+                    radius: case_fillet
+                    internal: true
+                    determinant-sign: plus
+            name: _case_tenting_hole_top_left
+        col:
+            rows: {}
+            key: {}
+            name: default
+        row: default
+        bind:
+            - 0
+            - 0
+            - 0
+            - 0
+        mirrored: false
+_case_tenting_hole_bottom_right:
+    x: 93.1409867
+    'y': -45.885
+    r: 0
+    meta:
+        stagger: 0
+        spread: 19
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 19.05
+        height: 19.05
+        padding: 19
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: default_default
+        name: _case_tenting_hole_bottom_right
+        tags:
+            tenting_hole: true
+        preprocess:
+            method: intersect
+            lines:
+                -
+                    -
+                        ref: matrix_outer_top
+                        shift:
+                            - 0.5kx + case_padding - case_fillet
+                            - 0
+                    -
+                        ref: matrix_outer_bottom
+                        shift:
+                            - 0.5kx + case_padding - case_fillet
+                            - 0
+                -
+                    -
+                        ref: arc_center
+                        shift:
+                            - 0
+                            - case_thumb_bottom_arc_radius + case_fillet
+                    -
+                        ref: arc_center
+                        shift:
+                            - 10
+                            - case_thumb_bottom_arc_radius + case_fillet
+        zone:
+            key:
+                tags:
+                    tenting_hole: true
+                preprocess:
+                    method: intersect
+                    lines:
+                        -
+                            -
+                                ref: matrix_outer_top
+                                shift:
+                                    - 0.5kx + case_padding - case_fillet
+                                    - 0
+                            -
+                                ref: matrix_outer_bottom
+                                shift:
+                                    - 0.5kx + case_padding - case_fillet
+                                    - 0
+                        -
+                            -
+                                ref: arc_center
+                                shift:
+                                    - 0
+                                    - >-
+                                        case_thumb_bottom_arc_radius +
+                                        case_fillet
+                            -
+                                ref: arc_center
+                                shift:
+                                    - 10
+                                    - >-
+                                        case_thumb_bottom_arc_radius +
+                                        case_fillet
+            name: _case_tenting_hole_bottom_right
+        col:
+            rows: {}
+            key: {}
+            name: default
+        row: default
+        bind:
+            - 0
+            - 0
+            - 0
+            - 0
+        mirrored: false
+_case_tenting_hole_top_right:
+    x: 115.4542679
+    'y': 15.4202362
+    r: 0
+    meta:
+        stagger: 0
+        spread: 19
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 19.05
+        height: 19.05
+        padding: 19
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: default_default
+        name: _case_tenting_hole_top_right
+        tags:
+            tenting_hole: true
+        preprocess:
+            method: circle-on-line-tangent-to-other-circle
+            circle:
+                center:
+                    ref: matrix_middle_top
+                    shift:
+                        - case_top_arc_x_offset
+                        - case_top_arc_y_offset
+                radius: case_top_arc_radius
+            line:
+                start:
+                    ref: matrix_outer_bottom
+                    shift:
+                        - 0.5kx + case_padding - case_fillet
+                        - 0
+                end:
+                    ref: matrix_outer_top
+                    shift:
+                        - 0.5kx + case_padding - case_fillet
+                        - 0
+            radius: case_fillet
+            internal: true
+            determinant-sign: plus
+        zone:
+            key:
+                tags:
+                    tenting_hole: true
+                preprocess:
+                    method: circle-on-line-tangent-to-other-circle
+                    circle:
+                        center:
+                            ref: matrix_middle_top
+                            shift:
+                                - case_top_arc_x_offset
+                                - case_top_arc_y_offset
+                        radius: case_top_arc_radius
+                    line:
+                        start:
+                            ref: matrix_outer_bottom
+                            shift:
+                                - 0.5kx + case_padding - case_fillet
+                                - 0
+                        end:
+                            ref: matrix_outer_top
+                            shift:
+                                - 0.5kx + case_padding - case_fillet
+                                - 0
+                    radius: case_fillet
+                    internal: true
+                    determinant-sign: plus
+            name: _case_tenting_hole_top_right
+        col:
+            rows: {}
+            key: {}
+            name: default
+        row: default
+        bind:
+            - 0
+            - 0
+            - 0
+            - 0
+        mirrored: false
+_case_tenting_hole_top_middle:
+    x: 14.8006999
+    'y': 56.6141408
+    r: 0
+    meta:
+        stagger: 0
+        spread: 19
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 19.05
+        height: 19.05
+        padding: 19
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: default_default
+        name: _case_tenting_hole_top_middle
+        tags:
+            tenting_hole: true
+        preprocess:
+            method: circle-on-line-tangent-to-other-circle
+            circle:
+                center:
+                    ref: matrix_middle_top
+                    shift:
+                        - case_top_arc_x_offset
+                        - case_top_arc_y_offset
+                radius: case_top_arc_radius
+            line:
+                start:
+                    ref: _case_tenting_hole_bottom_left
+                end:
+                    -
+                        ref: _case_tenting_hole_bottom_left
+                    -
+                        ref: matrix_outer_bottom
+                        affect: r
+                    -
+                        shift:
+                            - 0
+                            - 10
+            radius: case_fillet
+            internal: true
+            determinant-sign: plus
+        zone:
+            key:
+                tags:
+                    tenting_hole: true
+                preprocess:
+                    method: circle-on-line-tangent-to-other-circle
+                    circle:
+                        center:
+                            ref: matrix_middle_top
+                            shift:
+                                - case_top_arc_x_offset
+                                - case_top_arc_y_offset
+                        radius: case_top_arc_radius
+                    line:
+                        start:
+                            ref: _case_tenting_hole_bottom_left
+                        end:
+                            -
+                                ref: _case_tenting_hole_bottom_left
+                            -
+                                ref: matrix_outer_bottom
+                                affect: r
+                            -
+                                shift:
+                                    - 0
+                                    - 10
+                    radius: case_fillet
+                    internal: true
+                    determinant-sign: plus
+            name: _case_tenting_hole_top_middle
+        col:
+            rows: {}
+            key: {}
+            name: default
+        row: default
+        bind:
+            - 0
+            - 0
+            - 0
+            - 0
+        mirrored: false
 mirror_matrix_inner_bottom:
     x: -95.25
     'y': 0
@@ -1901,7 +2451,7 @@ mirror_matrix_inner_bottom:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.8
                         qmk:
                             col: D7
                     rows:
@@ -1966,6 +2516,7 @@ mirror_matrix_inner_bottom:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
+                        spread: 1kx + 0.04
                         qmk:
                             col: E6
                     rows:
@@ -2039,7 +2590,7 @@ mirror_matrix_inner_bottom:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.035
                         qmk:
                             col: B4
                     rows:
@@ -2108,6 +2659,7 @@ mirror_matrix_inner_bottom:
                     key:
                         stagger: '-pinky_off + outer_off'
                         splay: +pinky_splay - outer_splay
+                        spread: 1kx - 0.12
                     rows:
                         top:
                             layers:
@@ -2421,7 +2973,7 @@ mirror_matrix_inner_home:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.8
                         qmk:
                             col: D7
                     rows:
@@ -2486,6 +3038,7 @@ mirror_matrix_inner_home:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
+                        spread: 1kx + 0.04
                         qmk:
                             col: E6
                     rows:
@@ -2559,7 +3112,7 @@ mirror_matrix_inner_home:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.035
                         qmk:
                             col: B4
                     rows:
@@ -2628,6 +3181,7 @@ mirror_matrix_inner_home:
                     key:
                         stagger: '-pinky_off + outer_off'
                         splay: +pinky_splay - outer_splay
+                        spread: 1kx - 0.12
                     rows:
                         top:
                             layers:
@@ -2934,7 +3488,7 @@ mirror_matrix_inner_top:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.8
                         qmk:
                             col: D7
                     rows:
@@ -2999,6 +3553,7 @@ mirror_matrix_inner_top:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
+                        spread: 1kx + 0.04
                         qmk:
                             col: E6
                     rows:
@@ -3072,7 +3627,7 @@ mirror_matrix_inner_top:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.035
                         qmk:
                             col: B4
                     rows:
@@ -3141,6 +3696,7 @@ mirror_matrix_inner_top:
                     key:
                         stagger: '-pinky_off + outer_off'
                         splay: +pinky_splay - outer_splay
+                        spread: 1kx - 0.12
                     rows:
                         top:
                             layers:
@@ -3448,7 +4004,7 @@ mirror_matrix_index_bottom:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.8
                         qmk:
                             col: D7
                     rows:
@@ -3513,6 +4069,7 @@ mirror_matrix_index_bottom:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
+                        spread: 1kx + 0.04
                         qmk:
                             col: E6
                     rows:
@@ -3586,7 +4143,7 @@ mirror_matrix_index_bottom:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.035
                         qmk:
                             col: B4
                     rows:
@@ -3655,6 +4212,7 @@ mirror_matrix_index_bottom:
                     key:
                         stagger: '-pinky_off + outer_off'
                         splay: +pinky_splay - outer_splay
+                        spread: 1kx - 0.12
                     rows:
                         top:
                             layers:
@@ -3962,7 +4520,7 @@ mirror_matrix_index_home:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.8
                         qmk:
                             col: D7
                     rows:
@@ -4027,6 +4585,7 @@ mirror_matrix_index_home:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
+                        spread: 1kx + 0.04
                         qmk:
                             col: E6
                     rows:
@@ -4100,7 +4659,7 @@ mirror_matrix_index_home:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.035
                         qmk:
                             col: B4
                     rows:
@@ -4169,6 +4728,7 @@ mirror_matrix_index_home:
                     key:
                         stagger: '-pinky_off + outer_off'
                         splay: +pinky_splay - outer_splay
+                        spread: 1kx - 0.12
                     rows:
                         top:
                             layers:
@@ -4475,7 +5035,7 @@ mirror_matrix_index_top:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.8
                         qmk:
                             col: D7
                     rows:
@@ -4540,6 +5100,7 @@ mirror_matrix_index_top:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
+                        spread: 1kx + 0.04
                         qmk:
                             col: E6
                     rows:
@@ -4613,7 +5174,7 @@ mirror_matrix_index_top:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.035
                         qmk:
                             col: B4
                     rows:
@@ -4682,6 +5243,7 @@ mirror_matrix_index_top:
                     key:
                         stagger: '-pinky_off + outer_off'
                         splay: +pinky_splay - outer_splay
+                        spread: 1kx - 0.12
                     rows:
                         top:
                             layers:
@@ -4799,12 +5361,12 @@ mirror_matrix_index_top:
             - 0
         mirrored: true
 mirror_matrix_middle_bottom:
-    x: -134.35
+    x: -134.15
     'y': 9
     r: 5
     meta:
         stagger: 6.5
-        spread: 20.05
+        spread: 19.85
         splay: -5
         origin:
             - 0
@@ -4987,7 +5549,7 @@ mirror_matrix_middle_bottom:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.8
                         qmk:
                             col: D7
                     rows:
@@ -5052,6 +5614,7 @@ mirror_matrix_middle_bottom:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
+                        spread: 1kx + 0.04
                         qmk:
                             col: E6
                     rows:
@@ -5125,7 +5688,7 @@ mirror_matrix_middle_bottom:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.035
                         qmk:
                             col: B4
                     rows:
@@ -5194,6 +5757,7 @@ mirror_matrix_middle_bottom:
                     key:
                         stagger: '-pinky_off + outer_off'
                         splay: +pinky_splay - outer_splay
+                        spread: 1kx - 0.12
                     rows:
                         top:
                             layers:
@@ -5240,7 +5804,7 @@ mirror_matrix_middle_bottom:
             key:
                 stagger: '-index_off + middle_off'
                 splay: +index_splay - middle_splay
-                spread: 1kx + 1
+                spread: 1kx + 0.8
                 qmk:
                     col: D7
             rows:
@@ -5309,12 +5873,12 @@ mirror_matrix_middle_bottom:
             - 10
         mirrored: true
 mirror_matrix_middle_home:
-    x: -136.0103169
+    x: -135.8103169
     'y': 27.977509
     r: 5
     meta:
         stagger: 6.5
-        spread: 20.05
+        spread: 19.85
         splay: -5
         origin:
             - 0
@@ -5499,7 +6063,7 @@ mirror_matrix_middle_home:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.8
                         qmk:
                             col: D7
                     rows:
@@ -5564,6 +6128,7 @@ mirror_matrix_middle_home:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
+                        spread: 1kx + 0.04
                         qmk:
                             col: E6
                     rows:
@@ -5637,7 +6202,7 @@ mirror_matrix_middle_home:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.035
                         qmk:
                             col: B4
                     rows:
@@ -5706,6 +6271,7 @@ mirror_matrix_middle_home:
                     key:
                         stagger: '-pinky_off + outer_off'
                         splay: +pinky_splay - outer_splay
+                        spread: 1kx - 0.12
                     rows:
                         top:
                             layers:
@@ -5752,7 +6318,7 @@ mirror_matrix_middle_home:
             key:
                 stagger: '-index_off + middle_off'
                 splay: +index_splay - middle_splay
-                spread: 1kx + 1
+                spread: 1kx + 0.8
                 qmk:
                     col: D7
             rows:
@@ -5821,12 +6387,12 @@ mirror_matrix_middle_home:
             - 10
         mirrored: true
 mirror_matrix_middle_top:
-    x: -137.6706338
+    x: -137.4706338
     'y': 46.955018
     r: 5
     meta:
         stagger: 6.5
-        spread: 20.05
+        spread: 19.85
         splay: -5
         origin:
             - 0
@@ -6009,7 +6575,7 @@ mirror_matrix_middle_top:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.8
                         qmk:
                             col: D7
                     rows:
@@ -6074,6 +6640,7 @@ mirror_matrix_middle_top:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
+                        spread: 1kx + 0.04
                         qmk:
                             col: E6
                     rows:
@@ -6147,7 +6714,7 @@ mirror_matrix_middle_top:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.035
                         qmk:
                             col: B4
                     rows:
@@ -6216,6 +6783,7 @@ mirror_matrix_middle_top:
                     key:
                         stagger: '-pinky_off + outer_off'
                         splay: +pinky_splay - outer_splay
+                        spread: 1kx - 0.12
                     rows:
                         top:
                             layers:
@@ -6262,7 +6830,7 @@ mirror_matrix_middle_top:
             key:
                 stagger: '-index_off + middle_off'
                 splay: +index_splay - middle_splay
-                spread: 1kx + 1
+                spread: 1kx + 0.8
                 qmk:
                     col: D7
             rows:
@@ -6331,12 +6899,12 @@ mirror_matrix_middle_top:
             - 0
         mirrored: true
 mirror_matrix_ring_bottom:
-    x: -152.49534599999998
-    'y': -2.1719839000000007
+    x: -152.3351938
+    'y': -2.1754701
     r: 10
     meta:
         stagger: -9.548
-        spread: 19.05
+        spread: 19.09
         splay: -5
         origin:
             - 0
@@ -6519,7 +7087,7 @@ mirror_matrix_ring_bottom:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.8
                         qmk:
                             col: D7
                     rows:
@@ -6584,6 +7152,7 @@ mirror_matrix_ring_bottom:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
+                        spread: 1kx + 0.04
                         qmk:
                             col: E6
                     rows:
@@ -6657,7 +7226,7 @@ mirror_matrix_ring_bottom:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.035
                         qmk:
                             col: B4
                     rows:
@@ -6726,6 +7295,7 @@ mirror_matrix_ring_bottom:
                     key:
                         stagger: '-pinky_off + outer_off'
                         splay: +pinky_splay - outer_splay
+                        spread: 1kx - 0.12
                     rows:
                         top:
                             layers:
@@ -6772,6 +7342,7 @@ mirror_matrix_ring_bottom:
             key:
                 stagger: '-middle_off + ring_off'
                 splay: +middle_splay - ring_splay
+                spread: 1kx + 0.04
                 qmk:
                     col: E6
             rows:
@@ -6849,12 +7420,12 @@ mirror_matrix_ring_bottom:
             - 0
         mirrored: true
 mirror_matrix_ring_home:
-    x: -155.8033438
-    'y': 16.588603799999998
+    x: -155.6431916
+    'y': 16.585117599999997
     r: 10
     meta:
         stagger: -9.548
-        spread: 19.05
+        spread: 19.09
         splay: -5
         origin:
             - 0
@@ -7039,7 +7610,7 @@ mirror_matrix_ring_home:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.8
                         qmk:
                             col: D7
                     rows:
@@ -7104,6 +7675,7 @@ mirror_matrix_ring_home:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
+                        spread: 1kx + 0.04
                         qmk:
                             col: E6
                     rows:
@@ -7177,7 +7749,7 @@ mirror_matrix_ring_home:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.035
                         qmk:
                             col: B4
                     rows:
@@ -7246,6 +7818,7 @@ mirror_matrix_ring_home:
                     key:
                         stagger: '-pinky_off + outer_off'
                         splay: +pinky_splay - outer_splay
+                        spread: 1kx - 0.12
                     rows:
                         top:
                             layers:
@@ -7292,6 +7865,7 @@ mirror_matrix_ring_home:
             key:
                 stagger: '-middle_off + ring_off'
                 splay: +middle_splay - ring_splay
+                spread: 1kx + 0.04
                 qmk:
                     col: E6
             rows:
@@ -7369,12 +7943,12 @@ mirror_matrix_ring_home:
             - 10
         mirrored: true
 mirror_matrix_ring_top:
-    x: -159.1113416
-    'y': 35.349191499999996
+    x: -158.9511894
+    'y': 35.34570529999999
     r: 10
     meta:
         stagger: -9.548
-        spread: 19.05
+        spread: 19.09
         splay: -5
         origin:
             - 0
@@ -7558,7 +8132,7 @@ mirror_matrix_ring_top:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.8
                         qmk:
                             col: D7
                     rows:
@@ -7623,6 +8197,7 @@ mirror_matrix_ring_top:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
+                        spread: 1kx + 0.04
                         qmk:
                             col: E6
                     rows:
@@ -7696,7 +8271,7 @@ mirror_matrix_ring_top:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.035
                         qmk:
                             col: B4
                     rows:
@@ -7765,6 +8340,7 @@ mirror_matrix_ring_top:
                     key:
                         stagger: '-pinky_off + outer_off'
                         splay: +pinky_splay - outer_splay
+                        spread: 1kx - 0.12
                     rows:
                         top:
                             layers:
@@ -7811,6 +8387,7 @@ mirror_matrix_ring_top:
             key:
                 stagger: '-middle_off + ring_off'
                 splay: +middle_splay - ring_splay
+                spread: 1kx + 0.04
                 qmk:
                     col: E6
             rows:
@@ -7888,12 +8465,12 @@ mirror_matrix_ring_top:
             - 10
         mirrored: true
 mirror_matrix_pinky_bottom:
-    x: -170.5808137
-    'y': -15.067547900000001
+    x: -169.470322
+    'y': -14.9034636
     r: 15
     meta:
         stagger: -9.559142857142858
-        spread: 20.05
+        spread: 19.085
         splay: -5
         origin:
             - 0
@@ -8076,7 +8653,7 @@ mirror_matrix_pinky_bottom:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.8
                         qmk:
                             col: D7
                     rows:
@@ -8141,6 +8718,7 @@ mirror_matrix_pinky_bottom:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
+                        spread: 1kx + 0.04
                         qmk:
                             col: E6
                     rows:
@@ -8214,7 +8792,7 @@ mirror_matrix_pinky_bottom:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.035
                         qmk:
                             col: B4
                     rows:
@@ -8283,6 +8861,7 @@ mirror_matrix_pinky_bottom:
                     key:
                         stagger: '-pinky_off + outer_off'
                         splay: +pinky_splay - outer_splay
+                        spread: 1kx - 0.12
                     rows:
                         top:
                             layers:
@@ -8329,7 +8908,7 @@ mirror_matrix_pinky_bottom:
             key:
                 stagger: '-ring_off + pinky_off + 1'
                 splay: +ring_splay - pinky_splay
-                spread: 1kx + 1
+                spread: 1kx + 0.035
                 qmk:
                     col: B4
             rows:
@@ -8402,12 +8981,12 @@ mirror_matrix_pinky_bottom:
             - 0
         mirrored: true
 mirror_matrix_pinky_home:
-    x: -175.5113165
-    'y': 3.3333391
+    x: -174.4008248
+    'y': 3.4974234000000006
     r: 15
     meta:
         stagger: -9.559142857142858
-        spread: 20.05
+        spread: 19.085
         splay: -5
         origin:
             - 0
@@ -8592,7 +9171,7 @@ mirror_matrix_pinky_home:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.8
                         qmk:
                             col: D7
                     rows:
@@ -8657,6 +9236,7 @@ mirror_matrix_pinky_home:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
+                        spread: 1kx + 0.04
                         qmk:
                             col: E6
                     rows:
@@ -8730,7 +9310,7 @@ mirror_matrix_pinky_home:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.035
                         qmk:
                             col: B4
                     rows:
@@ -8799,6 +9379,7 @@ mirror_matrix_pinky_home:
                     key:
                         stagger: '-pinky_off + outer_off'
                         splay: +pinky_splay - outer_splay
+                        spread: 1kx - 0.12
                     rows:
                         top:
                             layers:
@@ -8845,7 +9426,7 @@ mirror_matrix_pinky_home:
             key:
                 stagger: '-ring_off + pinky_off + 1'
                 splay: +ring_splay - pinky_splay
-                spread: 1kx + 1
+                spread: 1kx + 0.035
                 qmk:
                     col: B4
             rows:
@@ -8918,12 +9499,12 @@ mirror_matrix_pinky_home:
             - 10
         mirrored: true
 mirror_matrix_pinky_top:
-    x: -180.4418193
-    'y': 21.7342261
+    x: -179.3313276
+    'y': 21.8983104
     r: 15
     meta:
         stagger: -9.559142857142858
-        spread: 20.05
+        spread: 19.085
         splay: -5
         origin:
             - 0
@@ -9107,7 +9688,7 @@ mirror_matrix_pinky_top:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.8
                         qmk:
                             col: D7
                     rows:
@@ -9172,6 +9753,7 @@ mirror_matrix_pinky_top:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
+                        spread: 1kx + 0.04
                         qmk:
                             col: E6
                     rows:
@@ -9245,7 +9827,7 @@ mirror_matrix_pinky_top:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.035
                         qmk:
                             col: B4
                     rows:
@@ -9314,6 +9896,7 @@ mirror_matrix_pinky_top:
                     key:
                         stagger: '-pinky_off + outer_off'
                         splay: +pinky_splay - outer_splay
+                        spread: 1kx - 0.12
                     rows:
                         top:
                             layers:
@@ -9360,7 +9943,7 @@ mirror_matrix_pinky_top:
             key:
                 stagger: '-ring_off + pinky_off + 1'
                 splay: +ring_splay - pinky_splay
-                spread: 1kx + 1
+                spread: 1kx + 0.035
                 qmk:
                     col: B4
             rows:
@@ -9433,12 +10016,12 @@ mirror_matrix_pinky_top:
             - 10
         mirrored: true
 mirror_matrix_outer_bottom:
-    x: -186.0330123
-    'y': -31.0027055
+    x: -184.80660949999998
+    'y': -30.807563000000002
     r: 20
     meta:
         stagger: -11.392857142857142
-        spread: 19.05
+        spread: 18.93
         splay: -5
         origin:
             - 0
@@ -9617,7 +10200,7 @@ mirror_matrix_outer_bottom:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.8
                         qmk:
                             col: D7
                     rows:
@@ -9682,6 +10265,7 @@ mirror_matrix_outer_bottom:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
+                        spread: 1kx + 0.04
                         qmk:
                             col: E6
                     rows:
@@ -9755,7 +10339,7 @@ mirror_matrix_outer_bottom:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.035
                         qmk:
                             col: B4
                     rows:
@@ -9824,6 +10408,7 @@ mirror_matrix_outer_bottom:
                     key:
                         stagger: '-pinky_off + outer_off'
                         splay: +pinky_splay - outer_splay
+                        spread: 1kx - 0.12
                     rows:
                         top:
                             layers:
@@ -9870,6 +10455,7 @@ mirror_matrix_outer_bottom:
             key:
                 stagger: '-pinky_off + outer_off'
                 splay: +pinky_splay - outer_splay
+                spread: 1kx - 0.12
             rows:
                 top:
                     layers:
@@ -9909,12 +10495,12 @@ mirror_matrix_outer_bottom:
             - 0
         mirrored: true
 mirror_matrix_outer_home:
-    x: -192.548496
-    'y': -13.101561100000001
+    x: -191.32209319999998
+    'y': -12.906418600000002
     r: 20
     meta:
         stagger: -11.392857142857142
-        spread: 19.05
+        spread: 18.93
         splay: -5
         origin:
             - 0
@@ -10089,7 +10675,7 @@ mirror_matrix_outer_home:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.8
                         qmk:
                             col: D7
                     rows:
@@ -10154,6 +10740,7 @@ mirror_matrix_outer_home:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
+                        spread: 1kx + 0.04
                         qmk:
                             col: E6
                     rows:
@@ -10227,7 +10814,7 @@ mirror_matrix_outer_home:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.035
                         qmk:
                             col: B4
                     rows:
@@ -10296,6 +10883,7 @@ mirror_matrix_outer_home:
                     key:
                         stagger: '-pinky_off + outer_off'
                         splay: +pinky_splay - outer_splay
+                        spread: 1kx - 0.12
                     rows:
                         top:
                             layers:
@@ -10342,6 +10930,7 @@ mirror_matrix_outer_home:
             key:
                 stagger: '-pinky_off + outer_off'
                 splay: +pinky_splay - outer_splay
+                spread: 1kx - 0.12
             rows:
                 top:
                     layers:
@@ -10385,12 +10974,12 @@ mirror_matrix_outer_home:
                 legend: ⌫
                 size: 6
 mirror_matrix_outer_top:
-    x: -199.0639797
-    'y': 4.799583299999998
+    x: -197.8375769
+    'y': 4.994725799999998
     r: 20
     meta:
         stagger: -11.392857142857142
-        spread: 19.05
+        spread: 18.93
         splay: -5
         origin:
             - 0
@@ -10571,7 +11160,7 @@ mirror_matrix_outer_top:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.8
                         qmk:
                             col: D7
                     rows:
@@ -10636,6 +11225,7 @@ mirror_matrix_outer_top:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
+                        spread: 1kx + 0.04
                         qmk:
                             col: E6
                     rows:
@@ -10709,7 +11299,7 @@ mirror_matrix_outer_top:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 1
+                        spread: 1kx + 0.035
                         qmk:
                             col: B4
                     rows:
@@ -10778,6 +11368,7 @@ mirror_matrix_outer_top:
                     key:
                         stagger: '-pinky_off + outer_off'
                         splay: +pinky_splay - outer_splay
+                        spread: 1kx - 0.12
                     rows:
                         top:
                             layers:
@@ -10824,6 +11415,7 @@ mirror_matrix_outer_top:
             key:
                 stagger: '-pinky_off + outer_off'
                 splay: +pinky_splay - outer_splay
+                spread: 1kx - 0.12
             rows:
                 top:
                     layers:
@@ -10902,9 +11494,9 @@ mirror_arc_center:
         mirrored: true
         tags: {}
 mirror_thumb_cluster_outer_top:
-    x: -68.5773013
-    'y': -32.41897380000002
-    r: -31
+    x: -68.5952121
+    'y': -32.28867150000002
+    r: -30.953
     meta:
         stagger: 0
         spread: 0
@@ -10912,10 +11504,10 @@ mirror_thumb_cluster_outer_top:
         origin:
             - 0
             - 0
-        orient: 31
+        orient: 30.953
         shift:
             - 0
-            - 100.42500000000001
+            - 100.5275
         rotate: 0
         adjust: {}
         width: 19.05
@@ -10957,10 +11549,10 @@ mirror_thumb_cluster_outer_top:
             columns:
                 outer_top:
                     key:
-                        orient: thumb_middle_angle + 12
+                        orient: thumb_middle_angle + thumb_sides_top_angle_offset
                         shift:
                             - 0
-                            - thumb_central_radius + 0.5ky + 0.5
+                            - thumb_sides_top_radius
                         layers:
                             Base:
                                 legend: ⌫
@@ -10976,10 +11568,10 @@ mirror_thumb_cluster_outer_top:
                     name: outer_top
                 outer_bottom:
                     key:
-                        orient: thumb_middle_angle + 15
+                        orient: thumb_middle_angle + thumb_sides_bottom_angle_offset
                         shift:
                             - -0.5
-                            - thumb_central_radius - 0.5ky
+                            - thumb_sides_bottom_radius
                         layers:
                             Base:
                                 legend: ⌦
@@ -11028,10 +11620,10 @@ mirror_thumb_cluster_outer_top:
                     name: middle
                 inner_top:
                     key:
-                        orient: thumb_middle_angle - 12
+                        orient: thumb_middle_angle - thumb_sides_top_angle_offset
                         shift:
                             - 0
-                            - thumb_central_radius + 0.5ky + 0.5
+                            - thumb_sides_top_radius
                         layers:
                             Base:
                                 legend: ⇧
@@ -11049,10 +11641,10 @@ mirror_thumb_cluster_outer_top:
                     name: inner_top
                 inner_bottom:
                     key:
-                        orient: thumb_middle_angle - 15
+                        orient: thumb_middle_angle - thumb_sides_bottom_angle_offset
                         shift:
                             - 0.5
-                            - thumb_central_radius - 0.5ky - 0
+                            - thumb_sides_bottom_radius
                         layers:
                             Base:
                                 legend: ⎈
@@ -11068,10 +11660,10 @@ mirror_thumb_cluster_outer_top:
             name: thumb_cluster
         col:
             key:
-                orient: thumb_middle_angle + 12
+                orient: thumb_middle_angle + thumb_sides_top_angle_offset
                 shift:
                     - 0
-                    - thumb_central_radius + 0.5ky + 0.5
+                    - thumb_sides_top_radius
                 layers:
                     Base:
                         legend: ⌫
@@ -11093,9 +11685,9 @@ mirror_thumb_cluster_outer_top:
             - 0
         mirrored: true
 mirror_thumb_cluster_outer_bottom:
-    x: -74.6607551
-    'y': -51.73118280000001
-    r: -34
+    x: -74.7818463
+    'y': -51.328225500000016
+    r: -33.769999999999996
     meta:
         stagger: 0
         spread: 0
@@ -11103,10 +11695,10 @@ mirror_thumb_cluster_outer_bottom:
         origin:
             - 0
             - 0
-        orient: 34
+        orient: 33.769999999999996
         shift:
             - -0.5
-            - 80.875
+            - 81.13999999999999
         rotate: 0
         adjust: {}
         width: 19.05
@@ -11145,10 +11737,10 @@ mirror_thumb_cluster_outer_bottom:
             columns:
                 outer_top:
                     key:
-                        orient: thumb_middle_angle + 12
+                        orient: thumb_middle_angle + thumb_sides_top_angle_offset
                         shift:
                             - 0
-                            - thumb_central_radius + 0.5ky + 0.5
+                            - thumb_sides_top_radius
                         layers:
                             Base:
                                 legend: ⌫
@@ -11164,10 +11756,10 @@ mirror_thumb_cluster_outer_bottom:
                     name: outer_top
                 outer_bottom:
                     key:
-                        orient: thumb_middle_angle + 15
+                        orient: thumb_middle_angle + thumb_sides_bottom_angle_offset
                         shift:
                             - -0.5
-                            - thumb_central_radius - 0.5ky
+                            - thumb_sides_bottom_radius
                         layers:
                             Base:
                                 legend: ⌦
@@ -11216,10 +11808,10 @@ mirror_thumb_cluster_outer_bottom:
                     name: middle
                 inner_top:
                     key:
-                        orient: thumb_middle_angle - 12
+                        orient: thumb_middle_angle - thumb_sides_top_angle_offset
                         shift:
                             - 0
-                            - thumb_central_radius + 0.5ky + 0.5
+                            - thumb_sides_top_radius
                         layers:
                             Base:
                                 legend: ⇧
@@ -11237,10 +11829,10 @@ mirror_thumb_cluster_outer_bottom:
                     name: inner_top
                 inner_bottom:
                     key:
-                        orient: thumb_middle_angle - 15
+                        orient: thumb_middle_angle - thumb_sides_bottom_angle_offset
                         shift:
                             - 0.5
-                            - thumb_central_radius - 0.5ky - 0
+                            - thumb_sides_bottom_radius
                         layers:
                             Base:
                                 legend: ⎈
@@ -11256,10 +11848,10 @@ mirror_thumb_cluster_outer_bottom:
             name: thumb_cluster
         col:
             key:
-                orient: thumb_middle_angle + 15
+                orient: thumb_middle_angle + thumb_sides_bottom_angle_offset
                 shift:
                     - -0.5
-                    - thumb_central_radius - 0.5ky
+                    - thumb_sides_bottom_radius
                 layers:
                     Base:
                         legend: ⌦
@@ -11285,8 +11877,8 @@ mirror_thumb_cluster_outer_bottom:
             - 0
         mirrored: true
 mirror_thumb_cluster_middle:
-    x: -90.8686388
-    'y': -33.02512080000001
+    x: -90.8035252
+    'y': -32.83601710000002
     r: -19
     meta:
         stagger: 0
@@ -11298,7 +11890,7 @@ mirror_thumb_cluster_middle:
         orient: 19
         shift:
             - 0
-            - 90.4
+            - 90.6
         rotate: 0
         adjust: {}
         width: 19.05
@@ -11342,10 +11934,10 @@ mirror_thumb_cluster_middle:
             columns:
                 outer_top:
                     key:
-                        orient: thumb_middle_angle + 12
+                        orient: thumb_middle_angle + thumb_sides_top_angle_offset
                         shift:
                             - 0
-                            - thumb_central_radius + 0.5ky + 0.5
+                            - thumb_sides_top_radius
                         layers:
                             Base:
                                 legend: ⌫
@@ -11361,10 +11953,10 @@ mirror_thumb_cluster_middle:
                     name: outer_top
                 outer_bottom:
                     key:
-                        orient: thumb_middle_angle + 15
+                        orient: thumb_middle_angle + thumb_sides_bottom_angle_offset
                         shift:
                             - -0.5
-                            - thumb_central_radius - 0.5ky
+                            - thumb_sides_bottom_radius
                         layers:
                             Base:
                                 legend: ⌦
@@ -11413,10 +12005,10 @@ mirror_thumb_cluster_middle:
                     name: middle
                 inner_top:
                     key:
-                        orient: thumb_middle_angle - 12
+                        orient: thumb_middle_angle - thumb_sides_top_angle_offset
                         shift:
                             - 0
-                            - thumb_central_radius + 0.5ky + 0.5
+                            - thumb_sides_top_radius
                         layers:
                             Base:
                                 legend: ⇧
@@ -11434,10 +12026,10 @@ mirror_thumb_cluster_middle:
                     name: inner_top
                 inner_bottom:
                     key:
-                        orient: thumb_middle_angle - 15
+                        orient: thumb_middle_angle - thumb_sides_bottom_angle_offset
                         shift:
                             - 0.5
-                            - thumb_central_radius - 0.5ky - 0
+                            - thumb_sides_bottom_radius
                         layers:
                             Base:
                                 legend: ⎈
@@ -11488,9 +12080,9 @@ mirror_thumb_cluster_middle:
             - 0
         mirrored: true
 mirror_thumb_cluster_inner_top:
-    x: -108.0612712
-    'y': -18.823552700000008
-    r: -7
+    x: -107.9669352
+    'y': -18.73190000000001
+    r: -7.047000000000001
     meta:
         stagger: 0
         spread: 0
@@ -11498,10 +12090,10 @@ mirror_thumb_cluster_inner_top:
         origin:
             - 0
             - 0
-        orient: 7
+        orient: 7.047000000000001
         shift:
             - 0
-            - 100.42500000000001
+            - 100.5275
         rotate: 0
         adjust: {}
         width: 19.05
@@ -11541,10 +12133,10 @@ mirror_thumb_cluster_inner_top:
             columns:
                 outer_top:
                     key:
-                        orient: thumb_middle_angle + 12
+                        orient: thumb_middle_angle + thumb_sides_top_angle_offset
                         shift:
                             - 0
-                            - thumb_central_radius + 0.5ky + 0.5
+                            - thumb_sides_top_radius
                         layers:
                             Base:
                                 legend: ⌫
@@ -11560,10 +12152,10 @@ mirror_thumb_cluster_inner_top:
                     name: outer_top
                 outer_bottom:
                     key:
-                        orient: thumb_middle_angle + 15
+                        orient: thumb_middle_angle + thumb_sides_bottom_angle_offset
                         shift:
                             - -0.5
-                            - thumb_central_radius - 0.5ky
+                            - thumb_sides_bottom_radius
                         layers:
                             Base:
                                 legend: ⌦
@@ -11612,10 +12204,10 @@ mirror_thumb_cluster_inner_top:
                     name: middle
                 inner_top:
                     key:
-                        orient: thumb_middle_angle - 12
+                        orient: thumb_middle_angle - thumb_sides_top_angle_offset
                         shift:
                             - 0
-                            - thumb_central_radius + 0.5ky + 0.5
+                            - thumb_sides_top_radius
                         layers:
                             Base:
                                 legend: ⇧
@@ -11633,10 +12225,10 @@ mirror_thumb_cluster_inner_top:
                     name: inner_top
                 inner_bottom:
                     key:
-                        orient: thumb_middle_angle - 15
+                        orient: thumb_middle_angle - thumb_sides_bottom_angle_offset
                         shift:
                             - 0.5
-                            - thumb_central_radius - 0.5ky - 0
+                            - thumb_sides_bottom_radius
                         layers:
                             Base:
                                 legend: ⎈
@@ -11652,10 +12244,10 @@ mirror_thumb_cluster_inner_top:
             name: thumb_cluster
         col:
             key:
-                orient: thumb_middle_angle - 12
+                orient: thumb_middle_angle - thumb_sides_top_angle_offset
                 shift:
                     - 0
-                    - thumb_central_radius + 0.5ky + 0.5
+                    - thumb_sides_top_radius
                 layers:
                     Base:
                         legend: ⇧
@@ -11679,9 +12271,9 @@ mirror_thumb_cluster_inner_top:
             - 0
         mirrored: true
 mirror_thumb_cluster_inner_bottom:
-    x: -115.1572272
-    'y': -37.78712920000001
-    r: -4
+    x: -114.8137208
+    'y': -37.544145700000016
+    r: -4.23
     meta:
         stagger: 0
         spread: 0
@@ -11689,10 +12281,10 @@ mirror_thumb_cluster_inner_bottom:
         origin:
             - 0
             - 0
-        orient: 4
+        orient: 4.23
         shift:
             - 0.5
-            - 80.875
+            - 81.13999999999999
         rotate: 0
         adjust: {}
         width: 19.05
@@ -11730,10 +12322,10 @@ mirror_thumb_cluster_inner_bottom:
             columns:
                 outer_top:
                     key:
-                        orient: thumb_middle_angle + 12
+                        orient: thumb_middle_angle + thumb_sides_top_angle_offset
                         shift:
                             - 0
-                            - thumb_central_radius + 0.5ky + 0.5
+                            - thumb_sides_top_radius
                         layers:
                             Base:
                                 legend: ⌫
@@ -11749,10 +12341,10 @@ mirror_thumb_cluster_inner_bottom:
                     name: outer_top
                 outer_bottom:
                     key:
-                        orient: thumb_middle_angle + 15
+                        orient: thumb_middle_angle + thumb_sides_bottom_angle_offset
                         shift:
                             - -0.5
-                            - thumb_central_radius - 0.5ky
+                            - thumb_sides_bottom_radius
                         layers:
                             Base:
                                 legend: ⌦
@@ -11801,10 +12393,10 @@ mirror_thumb_cluster_inner_bottom:
                     name: middle
                 inner_top:
                     key:
-                        orient: thumb_middle_angle - 12
+                        orient: thumb_middle_angle - thumb_sides_top_angle_offset
                         shift:
                             - 0
-                            - thumb_central_radius + 0.5ky + 0.5
+                            - thumb_sides_top_radius
                         layers:
                             Base:
                                 legend: ⇧
@@ -11822,10 +12414,10 @@ mirror_thumb_cluster_inner_bottom:
                     name: inner_top
                 inner_bottom:
                     key:
-                        orient: thumb_middle_angle - 15
+                        orient: thumb_middle_angle - thumb_sides_bottom_angle_offset
                         shift:
                             - 0.5
-                            - thumb_central_radius - 0.5ky - 0
+                            - thumb_sides_bottom_radius
                         layers:
                             Base:
                                 legend: ⎈
@@ -11841,10 +12433,10 @@ mirror_thumb_cluster_inner_bottom:
             name: thumb_cluster
         col:
             key:
-                orient: thumb_middle_angle - 15
+                orient: thumb_middle_angle - thumb_sides_bottom_angle_offset
                 shift:
                     - 0.5
-                    - thumb_central_radius - 0.5ky - 0
+                    - thumb_sides_bottom_radius
                 layers:
                     Base:
                         legend: ⎈
@@ -11864,10 +12456,143 @@ mirror_thumb_cluster_inner_bottom:
             - 0
             - 0
         mirrored: true
+mirror_pro_micro:
+    x: -76.6
+    'y': 28.623
+    r: -0.0
+    meta:
+        stagger: 0
+        spread: 19
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 19.05
+        height: 19.05
+        padding: 19
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: mirror_default_default
+        name: mirror_pro_micro
+        tags:
+            pro_micro: true
+        zone:
+            key:
+                tags:
+                    pro_micro: true
+            name: pro_micro
+        col:
+            rows: {}
+            key: {}
+            name: default
+        row: default
+        bind:
+            - 0
+            - 0
+            - 0
+            - 0
+        mirrored: true
+mirror__case_corner_bottom_right:
+    x: -191.8920244
+    'y': -50.885
+    r: -0.0
+    meta:
+        stagger: 0
+        spread: 19
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 19.05
+        height: 19.05
+        padding: 19
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: mirror_default_default
+        name: mirror__case_corner_bottom_right
+        preprocess:
+            method: intersect
+            lines:
+                -
+                    -
+                        ref: matrix_outer_top
+                        shift:
+                            - 0.5kx + case_padding
+                            - 0
+                    -
+                        ref: matrix_outer_bottom
+                        shift:
+                            - 0.5kx + case_padding
+                            - 0
+                -
+                    -
+                        ref: arc_center
+                        shift:
+                            - 0
+                            - case_thumb_bottom_arc_radius
+                    -
+                        ref: arc_center
+                        shift:
+                            - 10
+                            - case_thumb_bottom_arc_radius
+        zone:
+            key:
+                preprocess:
+                    method: intersect
+                    lines:
+                        -
+                            -
+                                ref: matrix_outer_top
+                                shift:
+                                    - 0.5kx + case_padding
+                                    - 0
+                            -
+                                ref: matrix_outer_bottom
+                                shift:
+                                    - 0.5kx + case_padding
+                                    - 0
+                        -
+                            -
+                                ref: arc_center
+                                shift:
+                                    - 0
+                                    - case_thumb_bottom_arc_radius
+                            -
+                                ref: arc_center
+                                shift:
+                                    - 10
+                                    - case_thumb_bottom_arc_radius
+            name: _case_corner_bottom_right
+        col:
+            rows: {}
+            key: {}
+            name: default
+        row: default
+        bind:
+            - 0
+            - 0
+            - 0
+            - 0
+        mirrored: true
+        tags: {}
 mirror__case_thumb_bottom_arc_end:
-    x: -82.638358
-    'y': -62.66431950000001
-    r: -34
+    x: -82.7154966
+    'y': -62.29329820000002
+    r: -33.769999999999996
     meta:
         stagger: 0
         spread: 19
@@ -11904,9 +12629,9 @@ mirror__case_thumb_bottom_arc_end:
         mirrored: true
         tags: {}
 mirror__case_thumb_bottom_corner:
-    x: -71.42562480000001
-    'y': -70.22740350000001
-    r: -124
+    x: -71.4724937
+    'y': -69.81131060000001
+    r: -123.77
     meta:
         stagger: 0
         spread: 19
@@ -11943,9 +12668,9 @@ mirror__case_thumb_bottom_corner:
         mirrored: true
         tags: {}
 mirror__case_thumb_top_corner:
-    x: -45.6468319
-    'y': -32.00877140000001
-    r: -34
+    x: -46.3323969
+    'y': -32.2149133
+    r: -0.0
     meta:
         stagger: 0
         spread: 19
@@ -11967,7 +12692,42 @@ mirror__case_thumb_top_corner:
         asym: both
         colrow: mirror_default_default
         name: mirror__case_thumb_top_corner
+        preprocess:
+            method: intersect
+            circle:
+                center:
+                    ref: arc_center
+                radius: case_thumb_top_arc_radius
+            line:
+                start:
+                    ref: _case_thumb_bottom_corner
+                end:
+                    -
+                        ref: _case_thumb_bottom_corner
+                        orient: -90
+                        shift:
+                            - 0
+                            - 10
+            determinant-sign: minus
         zone:
+            key:
+                preprocess:
+                    method: intersect
+                    circle:
+                        center:
+                            ref: arc_center
+                        radius: case_thumb_top_arc_radius
+                    line:
+                        start:
+                            ref: _case_thumb_bottom_corner
+                        end:
+                            -
+                                ref: _case_thumb_bottom_corner
+                                orient: -90
+                                shift:
+                                    - 0
+                                    - 10
+                    determinant-sign: minus
             name: _case_thumb_top_corner
         col:
             rows: {}
@@ -11981,10 +12741,10 @@ mirror__case_thumb_top_corner:
             - 0
         mirrored: true
         tags: {}
-mirror__case_thumb_top_arc_end:
-    x: -56.859565100000005
-    'y': -24.445687400000008
-    r: -124
+mirror__case_tenting_hole_bottom_left:
+    x: -64.5368134
+    'y': -68.43423460000001
+    r: -123.77
     meta:
         stagger: 0
         spread: 19
@@ -12005,9 +12765,14 @@ mirror__case_thumb_top_arc_end:
         skip: false
         asym: both
         colrow: mirror_default_default
-        name: mirror__case_thumb_top_arc_end
+        name: mirror__case_tenting_hole_bottom_left
+        tags:
+            tenting_hole: true
         zone:
-            name: _case_thumb_top_arc_end
+            key:
+                tags:
+                    tenting_hole: true
+            name: _case_tenting_hole_bottom_left
         col:
             rows: {}
             key: {}
@@ -12019,4 +12784,379 @@ mirror__case_thumb_top_arc_end:
             - 0
             - 0
         mirrored: true
-        tags: {}
+mirror__case_tenting_hole_top_left:
+    x: -64.5368134
+    'y': 41.2398839
+    r: -0.0
+    meta:
+        stagger: 0
+        spread: 19
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 19.05
+        height: 19.05
+        padding: 19
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: mirror_default_default
+        name: mirror__case_tenting_hole_top_left
+        tags:
+            tenting_hole: true
+        preprocess:
+            method: circle-on-line-tangent-to-other-circle
+            circle:
+                center:
+                    ref: matrix_middle_top
+                    shift:
+                        - case_top_arc_x_offset
+                        - case_top_arc_y_offset
+                radius: case_top_arc_radius
+            line:
+                start:
+                    ref: _case_tenting_hole_bottom_left
+                end:
+                    -
+                        affect: r
+                    -
+                        ref: _case_tenting_hole_bottom_left
+                        affect:
+                            - x
+                            - 'y'
+                    -
+                        shift:
+                            - 0
+                            - 10
+            radius: case_fillet
+            internal: true
+            determinant-sign: plus
+        zone:
+            key:
+                tags:
+                    tenting_hole: true
+                preprocess:
+                    method: circle-on-line-tangent-to-other-circle
+                    circle:
+                        center:
+                            ref: matrix_middle_top
+                            shift:
+                                - case_top_arc_x_offset
+                                - case_top_arc_y_offset
+                        radius: case_top_arc_radius
+                    line:
+                        start:
+                            ref: _case_tenting_hole_bottom_left
+                        end:
+                            -
+                                affect: r
+                            -
+                                ref: _case_tenting_hole_bottom_left
+                                affect:
+                                    - x
+                                    - 'y'
+                            -
+                                shift:
+                                    - 0
+                                    - 10
+                    radius: case_fillet
+                    internal: true
+                    determinant-sign: plus
+            name: _case_tenting_hole_top_left
+        col:
+            rows: {}
+            key: {}
+            name: default
+        row: default
+        bind:
+            - 0
+            - 0
+            - 0
+            - 0
+        mirrored: true
+mirror__case_tenting_hole_bottom_right:
+    x: -188.39098669999998
+    'y': -45.885
+    r: -0.0
+    meta:
+        stagger: 0
+        spread: 19
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 19.05
+        height: 19.05
+        padding: 19
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: mirror_default_default
+        name: mirror__case_tenting_hole_bottom_right
+        tags:
+            tenting_hole: true
+        preprocess:
+            method: intersect
+            lines:
+                -
+                    -
+                        ref: matrix_outer_top
+                        shift:
+                            - 0.5kx + case_padding - case_fillet
+                            - 0
+                    -
+                        ref: matrix_outer_bottom
+                        shift:
+                            - 0.5kx + case_padding - case_fillet
+                            - 0
+                -
+                    -
+                        ref: arc_center
+                        shift:
+                            - 0
+                            - case_thumb_bottom_arc_radius + case_fillet
+                    -
+                        ref: arc_center
+                        shift:
+                            - 10
+                            - case_thumb_bottom_arc_radius + case_fillet
+        zone:
+            key:
+                tags:
+                    tenting_hole: true
+                preprocess:
+                    method: intersect
+                    lines:
+                        -
+                            -
+                                ref: matrix_outer_top
+                                shift:
+                                    - 0.5kx + case_padding - case_fillet
+                                    - 0
+                            -
+                                ref: matrix_outer_bottom
+                                shift:
+                                    - 0.5kx + case_padding - case_fillet
+                                    - 0
+                        -
+                            -
+                                ref: arc_center
+                                shift:
+                                    - 0
+                                    - >-
+                                        case_thumb_bottom_arc_radius +
+                                        case_fillet
+                            -
+                                ref: arc_center
+                                shift:
+                                    - 10
+                                    - >-
+                                        case_thumb_bottom_arc_radius +
+                                        case_fillet
+            name: _case_tenting_hole_bottom_right
+        col:
+            rows: {}
+            key: {}
+            name: default
+        row: default
+        bind:
+            - 0
+            - 0
+            - 0
+            - 0
+        mirrored: true
+mirror__case_tenting_hole_top_right:
+    x: -210.7042679
+    'y': 15.4202362
+    r: -0.0
+    meta:
+        stagger: 0
+        spread: 19
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 19.05
+        height: 19.05
+        padding: 19
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: mirror_default_default
+        name: mirror__case_tenting_hole_top_right
+        tags:
+            tenting_hole: true
+        preprocess:
+            method: circle-on-line-tangent-to-other-circle
+            circle:
+                center:
+                    ref: matrix_middle_top
+                    shift:
+                        - case_top_arc_x_offset
+                        - case_top_arc_y_offset
+                radius: case_top_arc_radius
+            line:
+                start:
+                    ref: matrix_outer_bottom
+                    shift:
+                        - 0.5kx + case_padding - case_fillet
+                        - 0
+                end:
+                    ref: matrix_outer_top
+                    shift:
+                        - 0.5kx + case_padding - case_fillet
+                        - 0
+            radius: case_fillet
+            internal: true
+            determinant-sign: plus
+        zone:
+            key:
+                tags:
+                    tenting_hole: true
+                preprocess:
+                    method: circle-on-line-tangent-to-other-circle
+                    circle:
+                        center:
+                            ref: matrix_middle_top
+                            shift:
+                                - case_top_arc_x_offset
+                                - case_top_arc_y_offset
+                        radius: case_top_arc_radius
+                    line:
+                        start:
+                            ref: matrix_outer_bottom
+                            shift:
+                                - 0.5kx + case_padding - case_fillet
+                                - 0
+                        end:
+                            ref: matrix_outer_top
+                            shift:
+                                - 0.5kx + case_padding - case_fillet
+                                - 0
+                    radius: case_fillet
+                    internal: true
+                    determinant-sign: plus
+            name: _case_tenting_hole_top_right
+        col:
+            rows: {}
+            key: {}
+            name: default
+        row: default
+        bind:
+            - 0
+            - 0
+            - 0
+            - 0
+        mirrored: true
+mirror__case_tenting_hole_top_middle:
+    x: -110.0506999
+    'y': 56.6141408
+    r: -0.0
+    meta:
+        stagger: 0
+        spread: 19
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 19.05
+        height: 19.05
+        padding: 19
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: mirror_default_default
+        name: mirror__case_tenting_hole_top_middle
+        tags:
+            tenting_hole: true
+        preprocess:
+            method: circle-on-line-tangent-to-other-circle
+            circle:
+                center:
+                    ref: matrix_middle_top
+                    shift:
+                        - case_top_arc_x_offset
+                        - case_top_arc_y_offset
+                radius: case_top_arc_radius
+            line:
+                start:
+                    ref: _case_tenting_hole_bottom_left
+                end:
+                    -
+                        ref: _case_tenting_hole_bottom_left
+                    -
+                        ref: matrix_outer_bottom
+                        affect: r
+                    -
+                        shift:
+                            - 0
+                            - 10
+            radius: case_fillet
+            internal: true
+            determinant-sign: plus
+        zone:
+            key:
+                tags:
+                    tenting_hole: true
+                preprocess:
+                    method: circle-on-line-tangent-to-other-circle
+                    circle:
+                        center:
+                            ref: matrix_middle_top
+                            shift:
+                                - case_top_arc_x_offset
+                                - case_top_arc_y_offset
+                        radius: case_top_arc_radius
+                    line:
+                        start:
+                            ref: _case_tenting_hole_bottom_left
+                        end:
+                            -
+                                ref: _case_tenting_hole_bottom_left
+                            -
+                                ref: matrix_outer_bottom
+                                affect: r
+                            -
+                                shift:
+                                    - 0
+                                    - 10
+                    radius: case_fillet
+                    internal: true
+                    determinant-sign: plus
+            name: _case_tenting_hole_top_middle
+        col:
+            rows: {}
+            key: {}
+            name: default
+        row: default
+        bind:
+            - 0
+            - 0
+            - 0
+            - 0
+        mirrored: true
