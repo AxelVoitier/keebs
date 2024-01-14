@@ -52,7 +52,7 @@ points:
     _case_thumb_top_corner:
       key.preprocess:
         method: intersect
-        circle:  # Circle the target circle has to be tangent to
+        circle:
           # Top arc
           center:
             ref: arc_center
@@ -92,10 +92,11 @@ points:
           start:
             ref: _case_tenting_hole_bottom_left
           end:
+            # Get the position of _case_tenting_hole_bottom_left,
+            # but have it look up.
             - affect: r
             - ref: _case_tenting_hole_bottom_left
               affect: [x, y]
-              # orient: -90 - (thumb_middle_angle + thumb_sides_bottom_angle_offset)
             - shift: [0, 10]
         radius: case_fillet  # Radius of target circle
         internal: true  # Target circle needs to be inside the bigger one
