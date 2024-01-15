@@ -808,8 +808,11 @@ class Token:
                         else:
                             yield field, [key, *item]
                     else:
-                        if isinstance(item, str) and not item:
-                            item = '""'
+                        if isinstance(item, str):
+                            if field.metadata.get('quoted', False):
+                                item = f'"{item}"'
+                            elif not item:
+                                item = '""'
                         yield field, [key, item]
 
                 if value and field.metadata.get('newline_after_last', False):
@@ -1205,7 +1208,9 @@ class Footprint(Token):
     tstamp: uuid.UUID | None = uuid_field(default=None, newlines='()\n')
     at: At | None = token_field(default=None, newlines='()\n')
 
-    # Covers things like attr, descr, tags, property, path, ...
+    descr: str | None = named_field(default=None, newlines='()\n')
+    tags: str | None = named_field(default=None, newlines='()\n')
+    # Covers things like attr, property, path, ...
     settings: dict[str, Any] = token_field(newlines='()\n')
 
     graphic_items: list[GraphicItem] = token_field(newlines='()\n')
