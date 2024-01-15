@@ -75,6 +75,15 @@ class Points:
 
         return (min_x, max_y)
 
+    @property
+    def keys(self) -> Iterator[dict[str, Points.ElementData]]:
+        for point in self:
+            if not (tags := point['original']['meta']['tags']):
+                continue
+            if ('1u' not in tags) and ('1-5u' not in tags) and ('2u' not in tags):
+                continue
+            yield point
+
     def __iter__(self) -> Iterator[dict[str, Points.ElementData]]:
         # offset_x, offset_y = self._keyboard.general_offset
         offset_x, offset_y = self.top_left_offset()
@@ -87,11 +96,6 @@ class Points:
             )
 
         for k, v in sorted(self.data.items(), key=sort_key):
-            if not (tags := v['meta']['tags']):
-                continue
-            if ('1u' not in tags) and ('1-5u' not in tags) and ('2u' not in tags):
-                continue
-
             yield dict(
                 x=v['x'] - offset_x,
                 y=-(v['y'] - offset_y),
@@ -421,7 +425,7 @@ def gen_kle(
     from kle import Keyboard as KLEKeyboard
 
     keeb = Keyboard(ergogen_yaml, points_yaml, units_yaml)
-    points = keeb.points
+    keys = keeb.points.keys
 
     if output is None:
         output = ergogen_yaml.with_suffix('.json')
@@ -429,7 +433,7 @@ def gen_kle(
 
     kle.name = keeb.kle.get('name', None)
     kle.layers = keeb.kle['layers']
-    for key in points:
+    for key in keys:
         kle.add_key(**key)
 
     kle.write()

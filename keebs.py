@@ -62,7 +62,7 @@ def gen_qmk_info_json(
     qmk_info.layout_meta = keeb.qmk['_layout']
     qmk_info.layout.clear()
 
-    for key in keeb.points:
+    for key in keeb.points.keys:
         qmk_info.add_key(**key)
 
     print('writing')
@@ -98,7 +98,7 @@ def gen_qmk_keymap_json(
     keymap.layers.clear()
     keymap.layers_meta = keeb.data['layers']
 
-    for key in keeb.points:
+    for key in keeb.points.keys:
         qmk_info.add_key(**key)
         keymap.add_key(**key)
 
