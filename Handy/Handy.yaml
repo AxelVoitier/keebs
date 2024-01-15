@@ -1181,6 +1181,11 @@ fabrication:
         footprint: Keebs:CherryMX_2u_with_smd_diode
         angle: -90
         ref: SW_{meta.name}
+      - where:
+        - meta.tags.tenting_hole ~ true
+        - meta.mirrored ~ false
+        footprint: Keebs:M5_with_washer
+        ref: HW_{meta.name}
 kle:
   layers:
     Base:

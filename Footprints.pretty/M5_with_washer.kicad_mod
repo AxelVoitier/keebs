@@ -1,0 +1,22 @@
+(footprint "M5_with_washer" (version 20221018) (generator pcbnew)
+  (layer "F.Cu")
+  (descr "Mounting Hole 2.2mm, no annular, M2, ISO14580")
+  (tags "mounting hole 2.2mm no annular m2 iso14580")
+  (attr exclude_from_pos_files exclude_from_bom)
+  (fp_text reference "REF**" (at 0 -2.9) (layer "B.Fab") hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    (tstamp 9be8cd1a-2bc9-48c8-b14c-d287daaed377)
+  )
+  (fp_text value "MountingHole_2.2mm_M2_ISO14580" (at 0 2.9) (layer "F.Fab") hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    (tstamp f80171dd-cddf-4b6c-a9d5-2663979a0977)
+  )
+  (fp_text user "${REFERENCE}" (at 0.3 0) (layer "F.Fab") hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    (tstamp 90c8caf4-6cae-48c0-b870-c0ee849aa83a)
+  )
+  (fp_circle (center 0 0) (end 5 0)
+    (stroke (width 0.05) (type solid)) (fill none) (layer "F.CrtYd") (tstamp c1a66769-66a2-4b71-adc4-a08ca30dd223))
+  (pad "" np_thru_hole circle (at 0 0) (size 5.3 5.3) (drill 5.3) (layers "*.Cu" "*.Mask")
+    (clearance 2.35) (tstamp 85c8dde3-4865-4fd5-a47c-f5ad988865b7))
+)
