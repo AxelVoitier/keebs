@@ -138,6 +138,81 @@ def test_basic_arc_math(
             """(gr_arc_20221018 (start -11.525 5.706893) (mid -12.135502 8.101117) (end -13.817924 9.91067)
     (stroke (width 0.15) (type solid)) (layer "Edge.Cuts") (tstamp d39bcc29-b8c7-4a22-8fa9-e5cb1c8d022c))""",
         ),
+        (  # That one led to an obvious apparent bug as it used to turn the arc around
+            '(gr_arc_20171130 (start 27.478653999999995 55.97431099999999) (end 119.3366868 -18.570922300000014) (angle -441.7053006987691) (layer Edge.Cuts) (width 0.15))',
+            """(gr_arc_20221018 (start -33.034904 -45.67705) (mid 48.19832 -60.497082) (end 119.336687 -18.570922)
+        (stroke (width 0.15) (type solid)) (layer "Edge.Cuts") (tstamp 84c3426e-fa2a-459d-a664-17a439759652))""",
+        ),
+        (
+            '(gr_arc_20171130 (start 25.05 118.50000000000001) (end 25.05 50.88500000000002) (angle -33.76999992911506) (layer Edge.Cuts) (width 0.15))',
+            """(gr_arc_20221018 (start -12.534503 62.293298) (mid 5.411109 53.799906) (end 25.05 50.885)
+    (stroke (width 0.15) (type solid)) (layer "Edge.Cuts") (tstamp 004f8fc4-1471-44e6-949c-f8965640a974))""",
+        ),
+        (
+            '(gr_arc_20171130 (start -30.7131866 -41.2398839) (end -33.0312533 -45.670072000000005) (angle -152.37948209584056) (layer Edge.Cuts) (width 0.15))',
+            """(gr_arc_20221018 (start -30.713188 -36.239884) (mid -35.568645 -40.046348) (end -33.031253 -45.670072)
+    (stroke (width 0.15) (type solid)) (layer "Edge.Cuts") (tstamp c4862bec-7070-465f-9b0d-ef168b850954))""",
+        ),
+        (
+            '(gr_arc_20171130 (start 25.05 118.50000000000001) (end -30.614253199999997 19.41512010000001) (angle -8.943661861590428) (layer Edge.Cuts) (width 0.15))',
+            """(gr_arc_20221018 (start -45.341523 29.273569) (mid -38.170344 24.056839) (end -30.614253 19.41512)
+    (stroke (width 0.15) (type solid)) (layer "Edge.Cuts") (tstamp c0340a8d-8e51-4517-8546-66e64de9002d))""",
+        ),
+        (
+            '(gr_arc_20171130 (start -33.06318639999999 15.055908500000015) (end -30.614253199999993 19.415120200000015) (angle -60.67344138800814) (layer Edge.Cuts) (width 0.15))',
+            """(gr_arc_20221018 (start -28.063187 15.055909) (mid -28.747827 17.581313) (end -30.614253 19.41512)
+    (stroke (width 0.15) (type solid)) (layer "Edge.Cuts") (tstamp 38c7fc31-0360-4b58-8347-a1470636ca88))""",
+        ),
+        (
+            '(gr_arc_20171130 (start -42.2446676 33.19906090000002) (end -45.3415229 29.27356900000002) (angle -85.49977815602023) (layer Edge.Cuts) (width 0.15))',
+            """(gr_arc_20221018 (start -46.401046 35.978363) (mid -47.183384 32.418622) (end -45.341523 29.273569)
+    (stroke (width 0.15) (type solid)) (layer "Edge.Cuts") (tstamp 8c0a1171-8f16-466b-85f5-fe385d65a421))""",
+        ),
+        (
+            '(gr_arc_20171130 (start -36.27179098129984 60.12147817062715) (end -33.49248848129984 64.27785617062715) (angle -89.99999523714158) (layer Edge.Cuts) (width 0.15))',
+            """(gr_arc_20221018 (start -32.115413 57.342175) (mid -31.367524 61.095217) (end -33.492488 64.277856)
+    (stroke (width 0.15) (type solid)) (layer "Edge.Cuts") (tstamp 31d4fc85-c529-4907-9af8-c74fa46addde))""",
+        ),
+        (
+            '(gr_arc_20171130 (start -30.713186580758283 68.43423450400175) (end -33.49248908075828 64.27785650400175) (angle -179.99999523714126) (layer Edge.Cuts) (width 0.15))',
+            """(gr_arc_20221018 (start -27.933885 72.590613) (mid -34.869565 71.213537) (end -33.492489 64.277857)
+    (stroke (width 0.15) (type solid)) (layer "Edge.Cuts") (tstamp bc7f00cb-db62-4e79-ab45-be34d807f52f))""",
+        ),
+        (
+            '(gr_arc_20171130 (start 93.14098671573296 45.885) (end 93.14098671573296 50.885) (angle -70.00000118663905) (layer Edge.Cuts) (width 0.15))',
+            """(gr_arc_20221018 (start 97.83945 47.595101) (mid 96.008869 49.98076) (end 93.140987 50.885)
+    (stroke (width 0.15) (type solid)) (layer "Edge.Cuts") (tstamp 81437819-a921-4b15-ba8a-d3385dcb25e6))""",
+        ),
+        (
+            '(gr_arc_20171130 (start 115.45426789999999 -15.420236200000012) (end 120.1527311 -13.710135600000012) (angle -59.06024527255928) (layer Edge.Cuts) (width 0.15))',
+            """(gr_arc_20221018 (start 119.336686 -18.570922) (mid 120.385261 -16.248067) (end 120.152731 -13.710136)
+    (stroke (width 0.15) (type solid)) (layer "Edge.Cuts") (tstamp 9d438dae-93ea-4cbf-8dc5-925d0e2df39f))""",
+        ),
+        (
+            '(gr_arc_20171130 (start -30.713186499999996 -33.589883900000004) (end -28.063186499999997 -33.589883900000004) (angle -90) (layer Edge.Cuts) (width 0.15))',
+            """(gr_arc_20221018 (start -30.713186 -36.239884) (mid -28.839354 -35.463717) (end -28.063186 -33.589884)
+    (stroke (width 0.15) (type solid)) (layer "Edge.Cuts") (tstamp d5590ab8-f07c-4e6f-9291-c68af492fda5))""",
+        ),
+        #     (  # Buggy ergogen arc
+        #         '(gr_arc_20171130 (start -31.91218779999999 17.104738000000015) (end -30.61425319999999 19.415120200000015) (angle -0.0000012873069294982997) (layer Edge.Cuts) (width 0.15))',
+        #         """(gr_arc_20221018 (start -30.614253 19.41512) (mid -33.210123 14.794356) (end -30.614253 19.41512)
+        # (stroke (width 0.15) (type solid)) (layer "Edge.Cuts") (tstamp 30d09ff1-a586-463c-a88d-ba909e9c3fb9))""",
+        #     ),
+        #     (  # Buggy ergogen arc
+        #         '(gr_arc_20171130 (start -43.7001896 31.354079700000014) (end -45.3415229 29.273569000000013) (angle -6.812539936618123e-7) (layer Edge.Cuts) (width 0.15))',
+        #         """(gr_arc_20221018 (start -45.341523 29.273569) (mid -42.058857 33.434591) (end -45.341523 29.273569)
+        # (stroke (width 0.15) (type solid)) (layer "Edge.Cuts") (tstamp c4790076-ca36-4766-a8d3-75564ebfda3c))""",
+        #     ),
+        #     (  # Buggy ergogen arc
+        #         '(gr_arc_20171130 (start -11.061473199999998 64.49617860000001) (end -12.534503299999997 62.29329820000001) (angle -6.934595404572974e-7) (layer Edge.Cuts) (width 0.15))',
+        #         """(gr_arc_20221018 (start -12.534503 62.293298) (mid -9.588443 66.69906) (end -12.534503 62.293298)
+        # (stroke (width 0.15) (type solid)) (layer "Edge.Cuts") (tstamp f85fa6bc-fe20-4eb5-b902-b780807aaa5e))""",
+        #     ),
+        #     (  # Buggy ergogen arc
+        #         '(gr_arc_20171130 (start 95.34926441573296 46.688747299999996) (end 97.83944991573296 47.595100599999995) (angle -7.387059213215252e-7) (layer Edge.Cuts) (width 0.15))',
+        #         """(gr_arc_20221018 (start 97.83945 47.595101) (mid 92.859078 45.782393) (end 97.83945 47.595101)
+        # (stroke (width 0.15) (type solid)) (layer "Edge.Cuts") (tstamp 600b172f-8dec-4a9b-b23c-54056c509e7b))""",
+        #     ),
     ],
 )
 def test_arc_conversion(arc_20171130_str: str, arc_20221018_str: str) -> None:

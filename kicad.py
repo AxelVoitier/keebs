@@ -1374,13 +1374,19 @@ class Xyz(Xy):
     z: float | int = token_field(eq=float_key)
 
 
+def _angle_normalizer(angle: float | None) -> float | None:
+    if angle is None:
+        return None
+    angle %= 360
+    if -180 < angle <= 180:
+        return angle
+    else:
+        return angle - 360
+
+
 @define
 class At(Xy):
-    angle: float | int | None = token_field(
-        default=None,
-        eq=float_key,
-        converter=lambda a: a if (a is None) or (-180 < a <= 180) else a - 360,
-    )
+    angle: float | int | None = token_field(default=None, eq=float_key, converter=_angle_normalizer)
     unlocked: bool = literal_field()
 
 
@@ -1662,7 +1668,7 @@ class Arc(Protocol):
 
     @property
     def end_angle(self) -> float:
-        """Returns the angle formed between the end point and the virtual zero point."""
+        """Returns the angle (in radian) formed between the end point and the virtual zero point."""
 
         relative_end = (self.end - self.center) / self.radius
         return math.atan2(relative_end.y, relative_end.x)
@@ -1680,7 +1686,7 @@ class Arc(Protocol):
 class Arc_20171130(Arc):
     start: Start  # It is the center point actually
     end: End
-    angle: float | int = token_field(eq=float_key)
+    angle: float | int = token_field(eq=float_key, converter=_angle_normalizer)
     layer: str = named_field()
     width: float | int = REQUIRED
 
