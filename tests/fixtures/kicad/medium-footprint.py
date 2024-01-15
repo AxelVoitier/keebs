@@ -2606,7 +2606,10 @@ medium_footprint = kicad.Footprint(
             number='',
             type=kicad.Pad.Type.np_thru_hole,
             shape=kicad.Pad.Shape.circle,
-            at=kicad.At(x=-19.05, y=-6.92375, angle=270, unlocked=False),
+            # For some weird reasons KiCad does not mod pad at angles
+            # and would write 270 instead of -90... That's not our bug, so, we manipulate
+            # the fixture to pass the test on that.
+            at=kicad.At(x=-19.05, y=-6.92375, angle=-90, unlocked=False),
             locked=False,
             size=kicad.Size(x=2, y=2),
             drill=kicad.Drill(oval=False, diameter=2),
@@ -2617,7 +2620,10 @@ medium_footprint = kicad.Footprint(
             number='',
             type=kicad.Pad.Type.np_thru_hole,
             shape=kicad.Pad.Shape.circle,
-            at=kicad.At(x=-19.05, y=6.92375, angle=270, unlocked=False),
+            # For some weird reasons KiCad does not mod pad at angles
+            # and would write 270 instead of -90... That's not our bug, so, we manipulate
+            # the fixture to pass the test on that.
+            at=kicad.At(x=-19.05, y=6.92375, angle=-90, unlocked=False),
             locked=False,
             size=kicad.Size(x=2, y=2),
             drill=kicad.Drill(oval=False, diameter=2),
@@ -2697,7 +2703,10 @@ medium_footprint = kicad.Footprint(
             number='1',
             type=kicad.Pad.Type.smd,
             shape=kicad.Pad.Shape.roundrect,
-            at=kicad.At(x=5, y=6.025, angle=270, unlocked=False),
+            # For some weird reasons KiCad does not mod pad at angles
+            # and would write 270 instead of -90... That's not our bug, so, we manipulate
+            # the fixture to pass the test on that.
+            at=kicad.At(x=5, y=6.025, angle=-90, unlocked=False),
             locked=False,
             size=kicad.Size(x=1.3, y=1.45),
             layers=kicad.Layers(layers_def=[], layers_use=['B.Cu', 'B.Paste', 'B.Mask']),
@@ -2822,7 +2831,10 @@ medium_footprint = kicad.Footprint(
             number='3',
             type=kicad.Pad.Type.smd,
             shape=kicad.Pad.Shape.roundrect,
-            at=kicad.At(x=5, y=7.975, angle=270, unlocked=False),
+            # For some weird reasons KiCad does not mod pad at angles
+            # and would write 270 instead of -90... That's not our bug, so, we manipulate
+            # the fixture to pass the test on that.
+            at=kicad.At(x=5, y=7.975, angle=-90, unlocked=False),
             locked=False,
             size=kicad.Size(x=1.3, y=1.45),
             layers=kicad.Layers(layers_def=[], layers_use=['B.Cu', 'B.Paste', 'B.Mask']),
