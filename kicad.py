@@ -1946,6 +1946,14 @@ def convert_pcb_to_footprint(
     old_items = list(reversed(old_items))
     for item in sorted(pcb.graphic_items, key=sorting_key):
         fp_item = item.to_version(version).to_footprint()
+
+        # Filter out buggy ergogen arcs and lines that ends on the same point than it starts.
+        # In case of arcs, due to rounding in newer versions of KiCad, it displays them
+        # as full circles.
+        # And in cases of lines if can make an Edge.Cut non-manifold (or even weirder, inverted).
+        if isinstance(fp_item, (FpLine, FpArc)) and (fp_item.start == fp_item.end.cast_to(Start)):
+            continue
+
         if not old_items:
             footprint.graphic_items.append(fp_item)
         elif old_items[-1] == fp_item:
