@@ -10,6 +10,7 @@ pcb = kicad.KicadPcb(
                 layer='F.Cu',
                 tstamp='5f775835-9456-4241-a7d6-0427a488fb39',
                 at=kicad.At(x=120, y=90),
+                properties=[],
                 settings=dict(attr=['board_only', 'exclude_from_pos_files', 'exclude_from_bom']),
                 graphic_items=[
                     kicad.FpText(
@@ -206,6 +207,8 @@ pcb = kicad.KicadPcb(
             ),
         ],
         graphic_items=[],
+        segments=[],
+        zones=[],
         data=[],
     ),
 )

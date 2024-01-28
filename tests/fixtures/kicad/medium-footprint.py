@@ -5,6 +5,7 @@ medium_footprint = kicad.Footprint(
     version=kicad.Version(version=20221018),
     generator='pcbnew',
     layer='F.Cu',
+    properties=[],
     settings={'attr': 'through_hole'},
     graphic_items=[
         kicad.FpText(

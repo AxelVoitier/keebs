@@ -245,6 +245,8 @@ pcb = kicad.KicadPcb(
                 width=0.15,
             ),
         ],
+        segments=[],
+        zones=[],
         data=[],
     ),
 )

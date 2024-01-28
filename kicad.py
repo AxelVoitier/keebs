@@ -1387,25 +1387,62 @@ class Layers(Token):
 
 
 @define(field_transformer=ensure_metadata)
+class _LayerStackup(Token):
+    name: str | int
+    type: str = named_field()
+    color: str | None = named_field(default=None)
+    thickness: float | int | None = named_field(default=None)
+    material: str | None = named_field(default=None)
+    epsilon_r: float | int | None = named_field(default=None)
+    loss_tangent: float | int | None = named_field(default=None)
+
+    @classmethod
+    def token_name(cls, usage: Literal['parse', 'export']) -> str | None:
+        return 'layer'
+
+    @classmethod
+    def accept(cls, sexpr: SExpr) -> bool:
+        return Token.CURRENT_CONTEXT[-1] == Stackup
+
+
+@define(field_transformer=ensure_metadata)
+class Stackup(Token):
+    layers: list[_LayerStackup] = token_field(newlines='\n[()\n]')
+    copper_finish: str | None = named_field(default=None, newlines='()\n')
+    dielectric_constraints: str | None = named_field(default=None, quoted=False, newlines='()\n')
+    edge_connector: str | None = named_field(default=None, quoted=False, newlines='()\n')
+    castellated_pads: str | None = named_field(default=None, quoted=False, newlines='()\n')
+    edge_plating: str | None = named_field(default=None, quoted=False, newlines='()\n')
+
+
+@define(field_transformer=ensure_metadata)
 class Pcbplotparams(Token):
     params: dict[str, Any] = token_field(newlines='\n[()\n]', strip_0=False)
 
 
 @define(kw_only=True, field_transformer=ensure_metadata)
 class Setup(Token):
+    stackup: Stackup | None = token_field(default=None, newlines='\n()')
     other_settings: dict[str, Any] = token_field(newlines='\n[()\n]')
     plot_settings: Pcbplotparams = token_field(newlines='()\n')
 
 
+# This is for a pad property. It is incompatible with a footprint property...
+# @define(field_transformer=ensure_metadata)
+# class Property(Token):
+#     props = dict[str, Any]
+
+
 @define(field_transformer=ensure_metadata)
 class Property(Token):
-    props = dict[str, Any]
+    key: str
+    value: str
 
 
 @define(field_transformer=ensure_metadata)
 class Net(Token):
     ordinal: int
-    net_name: str
+    net_name: str | None = None
 
 
 @define(field_transformer=ensure_metadata)
@@ -1451,6 +1488,8 @@ class KicadPcb(Token):
     net_classes: list[NetClass] | None = None  # Old versions
     footprints: list[Footprint] | None = token_field(newlines='\n()\n')
     graphic_items: list[GraphicItem] = token_field(newlines='\n[()\n]')
+    segments: list[Segment] = token_field(newlines='\n[()\n]')
+    zones: list[Zone] = token_field(newlines='\n[()\n]')
     data: list[Token | list] = token_field(newlines='[\n()\n]')
 
     def newlines_filter(
@@ -1512,10 +1551,14 @@ class Footprint(Token):
 
     descr: str | None = named_field(default=None, newlines='()\n')
     tags: str | None = named_field(default=None, newlines='()\n')
+    properties: list[Property] | None = token_field(default=None, newlines='()\n')
+    path: str | None = named_field(default=None, newlines='()\n')
     # Covers things like attr, property, path, ...
     settings: dict[str, Any] = token_field(newlines='()\n')
 
     graphic_items: list[GraphicItem] = token_field(newlines='()\n')
+    # pads: list[Pad] | None = token_field(default=None, newlines='()\n')
+    # models: list[Model] | None = token_field(default=None, newlines='()\n')
     pads: list[Pad] = token_field(newlines='()\n')
     models: list[Model] = token_field(newlines='()\n')
     data: list[Token | list] = token_field(newlines='()\n')
@@ -1675,6 +1718,10 @@ class Xy(Token):
         else:
             return self
 
+    def __hash__(self) -> int:
+        return hash((float_key(self.x), float_key(self.y)))
+        # return hash((self.x, self.y))
+
 
 @define(field_transformer=ensure_metadata)
 class Xyz(Xy):
@@ -1787,6 +1834,15 @@ class Effects(Token):
     font: Font
     justify: Justify | None = None
     hide: bool = literal_field()
+
+
+@define(field_transformer=ensure_metadata)
+class GrText(GraphicItem):
+    text: str
+    at: At
+    layer: str = named_field()  # NB: Not supporting knockout...
+    tstamp: uuid.UUID = uuid_field(newlines='()\n')
+    effects: Effects = token_field(newlines='()\n')
 
 
 @define(field_transformer=ensure_metadata)
@@ -1926,7 +1982,7 @@ class GrLine_20221018(GrLine, Line_20221018):
 
 
 @define(field_transformer=ensure_metadata)
-class FpRect(GraphicItem):
+class Rect:
     class FillType(Enum):
         none = 'none'
         solid = 'solid'
@@ -1937,6 +1993,16 @@ class FpRect(GraphicItem):
     fill: FillType | None = named_field(default=None, converter=FillType)
     layer: str = named_field()
     tstamp: uuid.UUID = uuid_field()
+
+
+@define(field_transformer=ensure_metadata)
+class FpRect(Rect, GraphicItem):
+    pass
+
+
+@define(field_transformer=ensure_metadata)
+class GrRect(Rect, GraphicItem):
+    pass
 
 
 @define(field_transformer=ensure_metadata)
@@ -2085,6 +2151,21 @@ class GrArc_20221018(GrArc, Arc_20221018):
 class Pts(Token):
     list_: list[Xy] = token_field(newlines='\n[()\n]')
 
+    def newlines_filter(
+        self,
+        field: attrs.Attribute[Any] | None,
+        value: Any | None,
+        newlines: dict[str, bool],
+    ) -> dict[str, bool]:
+        if not field:  # Init
+            return newlines
+        if Token.CURRENT_CONTEXT[-2] is not Dimension:
+            return newlines
+
+        newlines['before_first'] = False
+        newlines['after'] = False
+        return newlines
+
 
 @define(field_transformer=ensure_metadata)
 class FpPoly(GraphicItem):
@@ -2098,6 +2179,50 @@ class FpPoly(GraphicItem):
     locked: bool = literal_field()
     layer: str = named_field()
     tstamp: uuid.UUID = uuid_field()
+
+
+@define(field_transformer=ensure_metadata)
+class Format(Token):
+    prefix: str | None = named_field(default=None)
+    suffix: str | None = named_field(default=None)
+    units: int = named_field()
+    units_format: int = named_field()
+    precision: int = named_field()
+    override_value: str | None = named_field(default=None)
+    suppress_zeros: bool = literal_field()
+
+
+@define(field_transformer=ensure_metadata)
+class Style(Token):
+    thickness: float | int = named_field()
+    arrow_length: float | int = named_field()
+    text_position_mode: int = named_field()
+    extension_height: float | int | None = named_field(default=None)
+    text_frame: int | None = named_field(default=None)
+    extension_offset: float | int | None = named_field(default=None)
+    keep_text_aligned: bool = literal_field()
+
+
+@define(field_transformer=ensure_metadata)
+class Dimension(GraphicItem):
+    class Type(Enum):
+        aligned = 'aligned'
+        leader = 'leader'
+        center = 'center'
+        orthogonal = 'orthogonal'
+        radial = 'radial'
+
+    locked: bool = literal_field()
+    type: Type = named_field(converter=Type)
+    layer: str = named_field()
+    tstamp: uuid.UUID = uuid_field(newlines='()\n')
+    points: Pts = token_field(newlines='()\n')
+    height: float | int | None = named_field(default=None)
+    orientation: float | int | None = named_field(default=None)
+    leader_length: float | int | None = named_field(default=None)
+    text: GrText | None = token_field(default=None, newlines='\n()')
+    format: Format | None = token_field(default=None, newlines='\n()')
+    style: Style = token_field(newlines='\n()\n')
 
 
 @define(field_transformer=ensure_metadata)
@@ -2140,12 +2265,13 @@ class Pad(Token):
     size: Size = REQUIRED
     drill: Drill | None = None
     layers: Layers = REQUIRED
-    properties: Property | None = None
+    # properties: Property | None = None
     remove_unused_layer: bool = literal_field()
     keep_end_layers: bool = literal_field()
     roundrect_rratio: float | int | None = named_field(default=None)
     chamfer_ratio: float | int | None = named_field(default=None, metadata=dict(opt_group=1))
     chamfer: Chamfer | None = named_field(default=None, metadata=dict(opt_group=1))
+    net: Net | None = token_field(default=None, eq=False, metadata=dict(opt_group=2))
     pinfunction: str | None = named_field(default=None, metadata=dict(opt_group=2))
     pintype: str | None = named_field(default=None, eq=False, metadata=dict(opt_group=2))
     die_length: float | int | None = named_field(default=None, metadata=dict(opt_group=2))
@@ -2189,10 +2315,89 @@ class Pad(Token):
 
 @define(field_transformer=ensure_metadata)
 class Model(Token):
-    file: str = token_field(newlines='()\n')
-    offset: Xyz = named_field(newlines='()\n')
+    file: str
+    hide: bool | None = literal_field(default=None)
+    offset: Xyz = named_field(newlines='\n()\n')
     scale: Xyz = named_field(newlines='()\n')
     rotate: Xyz = named_field(newlines='()\n')
+
+
+@define(field_transformer=ensure_metadata)
+class Segment(Token):
+    start: Start
+    end: End
+    width: float | int = named_field()
+    layer: str = named_field()
+    locked: bool | None = literal_field(default=None)
+    net: Net = REQUIRED
+    tstamp: uuid.UUID = uuid_field()
+
+
+@define(field_transformer=ensure_metadata)
+class Hatch(Token):
+    class Style(Enum):
+        none = 'none'
+        edge = 'edge'
+        full = 'full'
+
+    style: Hatch.Style = token_field(converter=Style)
+    pitch: float | int = REQUIRED
+
+
+@define(field_transformer=ensure_metadata)
+class ConnectPads(Token):
+    class ConnectionType(Enum):
+        thru_hole_only = 'thru_hole_only'
+        full = 'full'
+        no = 'no'
+
+    connection_type: ConnectionType | None = token_field(
+        default=None, converter=lambda value: ConnectPads.ConnectionType(value) if value else None
+    )
+    clearance: float | int = named_field()
+
+
+@define(field_transformer=ensure_metadata)
+class Keepout(Token):
+    class KeepoutType(Enum):
+        allowed = 'allowed'
+        not_allowed = 'not_allowed'
+
+    tracks: KeepoutType = named_field(converter=KeepoutType)
+    vias: KeepoutType = named_field(converter=KeepoutType)
+    pads: KeepoutType = named_field(converter=KeepoutType)
+    copperpour: KeepoutType = named_field(converter=KeepoutType)
+    footprints: KeepoutType = named_field(converter=KeepoutType)
+
+
+@define(field_transformer=ensure_metadata)
+class Polygon(Token):
+    points: Pts = token_field(newlines='\n()\n')
+
+
+@define(field_transformer=ensure_metadata)
+class FilledPolygon(Token):
+    layer: str = named_field(newlines='\n()\n')
+    points: Pts = token_field(newlines='()\n')
+
+
+@define(field_transformer=ensure_metadata)
+class Zone(Token):
+    net: Net
+    net_name: str = named_field()
+    layer: str | None = named_field(default=None)
+    layers: Layers | None = None
+    tstamp: uuid.UUID = uuid_field()
+    name: str | None = named_field(default=None)
+    hatch: Hatch = token_field(newlines='()\n')
+    priority: int | None = named_field(default=None)
+    connect_pads: ConnectPads = token_field(newlines='()\n')
+    min_thickness: float | int = named_field()
+    filled_areas_thickness: str | None = named_field(default=None, quoted=False, newlines='()\n')
+    keepout: Keepout | None = None
+    fill: dict[str, Any] | None = named_field(newlines='[()]\n')
+    polygon: Polygon = token_field(newlines='()\n')
+    filled_polygons: list[FilledPolygon] | None = token_field(default=None, newlines='()\n')
 
 
 def convert_pcb_to_footprint(
@@ -2558,12 +2763,13 @@ def do_keys(
 
         pcb_footprint = pcb.find_ref(ref, Footprint)
         if pcb_footprint is None:
-            print(f'Adding {point['name']} at pos={position} with {ref=}')
+            print(f'Adding {point["name"]} at pos={position} with {ref=}')
             footprint.add_on_pcb(pcb, lib=lib_name, ref=ref, at=position)
         else:
-            print(f'Updating {point['name']} at pos={position} with {ref=}')
+            print(f'Updating {point["name"]} at pos={position} with {ref=}')
             pcb_footprint.update_from(footprint, angle)
             pcb_footprint.at = position
+            pcb_footprint.name = f'{lib_name}:{footprint.name}'
 
 
 def _ergogen_lib_info(project_folder: Path, name: str = 'Ergogen') -> tuple[FpLibTable, Lib]:
