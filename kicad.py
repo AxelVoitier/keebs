@@ -114,11 +114,17 @@ class Token:
     the way attrs declares fields.
     """
 
+    CURRENT_CONTEXT: ClassVar[list[type[Token]]] = []
+
     #
     # Token name <-> class matching, and versioning section
     #
 
-    __inheritors__: dict[type, dict[str, type[Self]]] = collections.defaultdict(dict)
+    __inheritors__: ClassVar[
+        dict[type, dict[str, dict[str, type[Self]]]]
+    ] = collections.defaultdict(
+        partial(collections.defaultdict, dict),
+    )
 
     def __init_subclass__(cls, *args: Any, **kwargs: Any) -> None:
         """We keep track of all inheritors of Token in order to match their
@@ -127,19 +133,34 @@ class Token:
 
         super().__init_subclass__(*args, **kwargs)
 
-        our_name = cls.token_name(usage='parse')
-        for base in cls.mro()[1:-1]:
-            cls.__inheritors__[base][our_name] = cls
+        token_name = cls.token_name(usage='parse')
+        if token_name:
+            class_name = f'{cls.__module__}.{cls.__qualname__}'
+            for base in cls.mro()[1:-1]:
+                Token.__inheritors__[base][token_name][class_name] = cls
+                # This last dict level is here to keep only the last "declared"
+                # class for a given class name. It is needed because this method
+                # sees a class more than once: first the original one, then the
+                # attrs.define() wrapped one. They have the same name, but are
+                # not the same objects, such that a simple set cannot be used.
+                # We only want to keep the wrapped one.
+                # Also, filtering on __attrs_attrs__ is not sufficient as in the case
+                # of a class subclassing another attrs.defined one, this special
+                # member will be present even in the original one (and that's not
+                # the one we want).
+                # So, in practice, we don't really care about the class name here.
+                # We only need it to base our set (ie. dict keys) on it, while
+                # being interested only in the value (ie. class object) it represents.
 
     @classmethod
     @functools.cache
-    def token_name_to_class(cls, token_name: str) -> type[Self] | None:
+    def token_name_to_classes(cls, token_name: str) -> Iterable[type[Token]]:
         """Returns the token class corresponding to token_name"""
-        return cls.__inheritors__[Token].get(token_name, None)
+        return Token.__inheritors__[Token][token_name].values()
 
     @classmethod
     @functools.cache
-    def token_name(cls, usage: Literal['parse', 'export']) -> str:
+    def token_name(cls, usage: Literal['parse', 'export']) -> str | None:
         """Returns the token name for this class.
 
         usage corresponds to whether this is used for parsing or export.
@@ -154,6 +175,29 @@ class Token:
         if (usage == 'export') and cls._extract_version(name):
             name = name.rsplit('_', maxsplit=1)[0]
         return name
+
+    @classmethod
+    def accept(cls, sexpr: SExpr) -> bool:
+        """Says if this class accept the current sexpr.
+
+        During the resolution of token name to class, this method is invoked on a
+        tentative class. By default, to cover the most common and simple case, if
+        a token class has a unique token name (ie. no two token classes share the same token name),
+        then just accepting it regardless of the SExpr content should be fine.
+
+        But in case several token classes share the same token name, then they are all asked
+        to accept or not. In the end, if more than one accepts, an error is raised.
+        Therefore, token class reimplementing this method should really be certain to
+        accept only what is for them.
+        Note that it is fine if none accept, as in that case the SExpr will be kept in raw form.
+
+        To determine if they should accept or not, token classes can implement any strategy
+        they want. The provided SExpr may help by inspecting its structure.
+        Another helper is the Token.CURRENT_CONTEXT stack. The last element of that stack
+        is the parent token class. And by walking up the stack, one can retrace the entire
+        current hierarchy of token classes.
+        """
+        return True
 
     @staticmethod
     @functools.cache
@@ -190,9 +234,10 @@ class Token:
             return cls
 
         candidates: dict[int, type[Self]] = {}
-        for subcls_name, subcls in subclasses.items():
-            if version := cls._extract_version(subcls_name):
-                candidates[version] = subcls
+        for more_subclasses in subclasses.values():
+            for subcls_name, subcls in more_subclasses.items():
+                if version := cls._extract_version(subcls_name):
+                    candidates[version] = subcls
 
         if not candidates:
             return cls
@@ -296,7 +341,18 @@ class Token:
             return sexpr
 
         token_name = sexpr[0]
-        token_class = cls.token_name_to_class(token_name)
+        token_classes = cls.token_name_to_classes(token_name)
+        candidates = [
+            tentative_class for tentative_class in token_classes if tentative_class.accept(sexpr)
+        ]
+        if not candidates:
+            token_class = None
+        elif len(candidates) == 1:
+            token_class = candidates[0]
+        else:
+            msg = f'Got more than one accepting token class for {sexpr=}: {candidates=}'
+            raise RuntimeError(msg)
+
         if token_class is None:
             # If we don't have one, we resort to keeping it in list form.
             # Can be more intelligently used later (or just appended as raw data
@@ -311,7 +367,19 @@ class Token:
             is_token = True
 
         # Deep convertion here:
-        args: list[Self | str | Number] = [cls.from_sexpr(attribute) for attribute in attributes]
+        # with cls._with_context(token_class):
+        #     args: list[Self | str | Number] = [
+        #         cls.from_sexpr(attribute) for attribute in attributes
+        #     ]
+        args: list[Self | str | Number]
+        if is_token:
+            Token.CURRENT_CONTEXT.append(token_class)
+            try:
+                args = [cls.from_sexpr(attribute) for attribute in attributes]
+            finally:
+                Token.CURRENT_CONTEXT.pop()
+        else:
+            args = [cls.from_sexpr(attribute) for attribute in attributes]
 
         # Actual object instantiation...
         # print('token is', token_name, token_class, args)
