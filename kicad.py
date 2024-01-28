@@ -12,6 +12,7 @@ from __future__ import annotations
 
 # System imports
 import collections
+import functools
 import logging
 import math
 import re
@@ -25,6 +26,7 @@ from enum import Enum
 from itertools import chain
 from numbers import Number
 from pathlib import Path
+from types import GeneratorType
 from typing import (
     TYPE_CHECKING,
     Annotated,
@@ -34,7 +36,7 @@ from typing import (
     Literal,
     Optional,
     Protocol,
-    Self,
+    Union,
     runtime_checkable,
 )
 
@@ -45,15 +47,18 @@ import pyparsing as pp
 from attr import field, fields
 from attrs import define
 from rich import print
+from typing_extensions import Self
 
 # Local imports
 
 if TYPE_CHECKING:
+    from collections.abc import Iterable
+    from numbers import Number
     from typing import TypeAlias
 
     from ergogen import Keyboard, Points
 
-    SExpr: TypeAlias = str | Number | list['SExpr']
+    SExpr: TypeAlias = str | float | int | list['SExpr']
 
 _logger = logging.getLogger(__name__)
 kicad_cli = clyo.ClyoTyper(help='KiCAD-related commands')
@@ -127,11 +132,13 @@ class Token:
             cls.__inheritors__[base][our_name] = cls
 
     @classmethod
+    @functools.cache
     def token_name_to_class(cls, token_name: str) -> type[Self] | None:
         """Returns the token class corresponding to token_name"""
         return cls.__inheritors__[Token].get(token_name, None)
 
     @classmethod
+    @functools.cache
     def token_name(cls, usage: Literal['parse', 'export']) -> str:
         """Returns the token name for this class.
 
@@ -149,6 +156,7 @@ class Token:
         return name
 
     @staticmethod
+    @functools.cache
     def _camel_to_snake(name: str) -> str:
         """Converts a class name in Camel form into a snake form corresponding to
         the way token names are made."""
@@ -157,6 +165,7 @@ class Token:
         return re.sub(r'(?<!^)(?=[A-Z])', '_', name).lower()
 
     @staticmethod
+    @functools.cache
     def _extract_version(name: str) -> int | None:
         """Token classes can have a _VERSION suffix used for versioning the
         various file formats kicad had."""
@@ -166,6 +175,7 @@ class Token:
         return None
 
     @classmethod
+    @functools.cache  # Pretty much one static per class
     def _get_versionned_token_class(cls) -> type[Token]:
         """Handles versionned tokens
 
@@ -201,15 +211,15 @@ class Token:
     #
 
     @staticmethod
+    @functools.cache
     def _get_field_types(
-        field: attrs.Attribute[Any],
+        field_type: Any,
     ) -> tuple[type[Any], tuple[type[Any], ...] | None]:
         """Determines proper field type.
 
         Takes care of interpreting Unions and Generics.
         """
 
-        field_type = field.type
         field_type_args = None
 
         if isinstance(field_type, types.UnionType):
@@ -234,9 +244,7 @@ class Token:
         """Recognises a boolean field to be matched with a literal"""
 
         return (
-            not isinstance(field_type, tuple)
-            and issubclass(field_type, bool)
-            and field.metadata.get('literal', False)
+            (type(field_type) is not tuple) and (field_type is bool) and field.metadata['literal']
         )
 
     @staticmethod
@@ -258,13 +266,14 @@ class Token:
     def _is_named_value(arg: Any, match_name: str) -> bool:
         """Recognises a case of uncasted "(name value)" simple S-Expression"""
 
-        return isinstance(arg, list) and (len(arg) == 2) and (arg[0] == match_name)
+        return (type(arg) is list) and (len(arg) == 2) and (arg[0] == match_name)  # noqa: E721
 
     @staticmethod
-    def _is_optional_field(field: attrs.Attribute[Any]) -> bool:
+    @functools.cache
+    def _is_optional_field(default: Any) -> bool:
         """Recognises a field that is not required"""
 
-        return field.default not in (attrs.NOTHING, REQUIRED)
+        return default not in (attrs.NOTHING, REQUIRED)
 
     #
     # Token parsing section
@@ -283,7 +292,7 @@ class Token:
         """Takes the output from SParser and produces object representation of it."""
 
         # print('evaluating', sexpr)
-        if isinstance(sexpr, (str, Number)):
+        if (type(sexpr) is str) or (type(sexpr) is float) or (type(sexpr) is int):
             return sexpr
 
         token_name = sexpr[0]
@@ -293,27 +302,27 @@ class Token:
             # Can be more intelligently used later (or just appended as raw data
             # in a dedicated token class member).
             token_class = list
+            is_token = False
             attributes = sexpr
         else:
             # Otherwise we strip out the token name itself from what needs to be
             # deeply/recursively parsed.
             attributes = sexpr[1:]
+            is_token = True
 
         # Deep convertion here:
         args: list[Self | str | Number] = [cls.from_sexpr(attribute) for attribute in attributes]
 
         # Actual object instantiation...
         # print('token is', token_name, token_class, args)
-        if issubclass(token_class, list):
+        if not is_token:  # Ie. it's a list
             return token_class(args)
-        elif issubclass(token_class, Token):
+        else:
             # ... except if it is a token class, in which case we deffer to the
             # (much more) complex from_sexpr_data().
             # This split allows subclasses to customise args before feeding them
             # back to Token.from_sexpr_data().
             return token_class.from_sexpr_data(args)
-        else:
-            return token_class(*args)
 
     @classmethod
     def from_sexpr_data(cls, args: list[Self | str | Number]) -> Token:
@@ -342,53 +351,71 @@ class Token:
         # To build the kwargs, we take each declared field, and try to match it
         # to 0, 1, or more positional args. To match, we rely on type hints.
         kwargs = {}
+        # Optimisation: Instead of popping each arg we use, we rather keep an index
+        # on the current positional arg. Except in (rare) case of kw_only, where we will pop them.
+        consummed_args = 0
+        # Optimisation: Minimize calling len(). In case of kw_only, we have to
+        # decrement len_args each time we pop an arg.
+        len_args = len(args)
         for field in fields(cls):  # noqa: F402
             field: attrs.Attribute[Any]
-            field_type, field_type_args = cls._get_field_types(field)
+            field_type, field_type_args = cls._get_field_types(field.type)
+            kw_only = field.kw_only
 
             # print(
             #     f'> {field.name}, {field.type}, {field_type}, {field_type_args}, '
-            #     f'{field.default=}, {field.kw_only=}'  # , {args[0]}'
+            #     f'{field.default=}, {field.kw_only=}'  # , {args[consummed_args]}'
             # )
             # Process optionals
-            if cls._is_optional_field(field):
-                if not args:  # Not even any positional argument left, skip this field
+            if cls._is_optional_field(field.default):
+                if (
+                    len_args == consummed_args
+                ):  # Not even any positional argument left, skip this field
                     continue
 
                 if cls._is_literal_field(field, field_type):
                     # Case of literals that are just boolean True if present
-                    if not cls._match_literal_field(field, args[0]):
+                    if not cls._match_literal_field(field, args[consummed_args]):
                         continue  # Not matching => skip this field
-                    args[0] = True
+                    args[consummed_args] = True
 
-                elif cls._is_named_value(args[0], field.name):  # noqa: SIM114
+                elif cls._is_named_value(args[consummed_args], field.name):  # noqa: SIM114
                     pass  # Handled later
 
                 # Optional lists and dicts handling
-                elif not isinstance(field_type, tuple) and issubclass(field_type, (list, dict)):
+                elif (type(field_type) is not tuple) and issubclass(field_type, (list, dict)):
                     pass  # Handled later
 
                 # If type of this optional field does not match next positional arg, skip this field
-                elif not isinstance(args[0], field_type):
+                elif not isinstance(args[consummed_args], field_type):
                     continue
 
                 # TODO: Handle case of kw_only field, which, by luck is no issue for the only cases
                 # of optional kw_only field (title_block in kicad_pcb)
 
-            if not isinstance(field_type, tuple):  # issubclass can't handle Union field type
+            if type(field_type) is not tuple:  # issubclass can't handle Union field type
                 if issubclass(field_type, list):
                     # Case of a list[AToken] definition.
                     # We exhaust all of this AToken type in the positional args to fill the list.
-                    list_ = []
-                    i = 0
-                    while i < len(args):
-                        if not isinstance(args[i], field_type_args):
-                            if field.kw_only:
+
+                    if kw_only:
+                        list_ = []
+                        i = consummed_args
+                        while i < len_args:
+                            if not isinstance(args[i], field_type_args):
                                 i += 1
                             else:
+                                list_.append(args.pop(i))
+                                len_args -= 1
+                    else:
+                        i = 0
+                        for i, arg in enumerate(args[consummed_args:]):
+                            if not isinstance(arg, field_type_args):
                                 break
                         else:
-                            list_.append(args.pop(i))
+                            i += 1  # Case of a list terminating on a matching item
+                        list_ = args[consummed_args : consummed_args + i]
+                        consummed_args += i
 
                     kwargs[field.name] = list_
                     continue
@@ -398,42 +425,62 @@ class Token:
                     # We exhaust all positional args that are non-empty lists (must have a name)
                     # to fill the dict.
                     dict_ = {}
-                    i = 0
-                    while i < len(args):
-                        if not (isinstance(args[i], list) and args[i]):
-                            if field.kw_only:
+                    if kw_only:
+                        i = consummed_args
+                        while i < len_args:
+                            if not ((type(args[i]) is list) and args[i]):  # noqa: E721  # Opti.
                                 i += 1
                             else:
+                                name, *value = args.pop(i)
+                                len_args -= 1
+
+                                if len(value) == 1:
+                                    value = value[0]
+                                dict_[name] = value
+                    else:
+                        for arg in args[consummed_args:]:
+                            if not ((type(arg) is list) and arg):  # noqa: E721  # Opti.
                                 break
-                        else:
-                            name, *value = args.pop(i)
-                            if len(value) == 1:  # Pop-out the list container in simple cases
+                            name, *value = args[consummed_args]
+                            consummed_args += 1
+
+                            if len(value) == 1:
                                 value = value[0]
                             dict_[name] = value
 
                     kwargs[field.name] = dict_
                     continue
 
-            i = 0
-            while i < len(args):
-                if cls._is_named_value(args[i], field.name):
-                    kwargs[field.name] = args.pop(i)[1]
-                    break
+            if kw_only:
+                i = consummed_args
+                while i < len_args:
+                    if cls._is_named_value(args[i], field.name):
+                        kwargs[field.name] = args.pop(i)[1]
+                        len_args -= 1
+                        break
 
-                if isinstance(args[i], field_type):
-                    kwargs[field.name] = args.pop(i)
-                    break
+                    if isinstance(args[i], field_type):
+                        kwargs[field.name] = args.pop(i)
+                        len_args -= 1
+                        break
 
-                if field.kw_only:
                     i += 1
+            else:
+                arg = args[consummed_args]
+                if cls._is_named_value(arg, field.name):
+                    kwargs[field.name] = arg[1]
+                    consummed_args += 1
+
                 else:
                     # Any other case, the next positional arg is our current field value
-                    kwargs[field.name] = args.pop(i)
-                    break
+                    kwargs[field.name] = arg
+                    consummed_args += 1
 
         # print(cls.__name__, f'{kwargs=}')
 
-        if args:
+        if consummed_args < len_args:
+            # print(f'{consummed_args=}, {args[:consummed_args]=}, {args[consummed_args:]=}')
+            args = args[consummed_args:]
             msg = f'Unprocessed args in {cls.__name__}: {args}'
             raise ValueError(msg)
 
@@ -516,9 +563,15 @@ class Token:
     if TYPE_CHECKING:
         # The iterator to_sexpr_elements() returns.
         _ToSExprIterator: TypeAlias = Iterator[
-            tuple[
-                attrs.Attribute[Any] | None,
-                SExpr | '_ToSExprIterator',
+            Union[
+                tuple[
+                    attrs.Attribute[Any],
+                    SExpr | '_ToSExprIterator',
+                ],
+                tuple[
+                    None,
+                    str | None,
+                ],
             ]
         ]
 
@@ -527,9 +580,10 @@ class Token:
 
         def list_walker(value: list[SExpr]) -> Iterator[SExpr]:
             for item in value:
-                if isinstance(item, Iterator):
+                item_type = type(item)
+                if item_type is GeneratorType:
                     yield list(walker(item))
-                elif isinstance(item, list):
+                elif item_type is list:
                     yield list(list_walker(item))
                 elif item in ('', '\n'):
                     continue
@@ -543,13 +597,14 @@ class Token:
             in a list() to be joined."""
 
             for _, value in it:
-                if isinstance(value, Iterator):
+                value_type = type(value)
+                if value_type is GeneratorType:
                     yield list(walker(value))
-                elif isinstance(value, list):
+                elif value_type is list:
                     yield list(list_walker(value))
                 elif value in ('', '\n'):
                     continue
-                else:
+                elif value is not None:
                     yield value
 
         return list(walker(self.to_sexpr_elements()))
@@ -571,28 +626,28 @@ class Token:
             Handles a precision level, as well as if we need to remove trailing zeros or not.
             """
 
-            precision = field.metadata.get('precision', 6) if field else 6
+            precision = field.metadata['precision']
             s = f'{value:.{precision}f}'
-            strip_0 = field.metadata.get('strip_0', True) if field else True
-            if strip_0:
-                return s.rstrip('0.')
+            if (s[-1] == '0') and field.metadata['strip_0']:
+                return s.rstrip('.0')
             else:
                 return s
 
-        def list_walker(field: attrs.Attribute[Any], value: list[SExpr]) -> Iterator[str]:
+        def list_walker(field: attrs.Attribute[Any] | None, value: list[SExpr]) -> Iterator[str]:
             """Walk-down a list. Returns an iterator of strings representing SExpr elements"""
 
             for item in value:
-                if isinstance(item, list):
+                item_type = type(item)
+                if item_type is list:
                     yield f'({joiner(list_walker(field, item))})'
-                elif isinstance(item, float):
+                elif item_type is float:
                     yield float_to_str(item, field)
-                elif isinstance(item, Iterator):
+                elif item_type is GeneratorType:
                     yield f'({joiner(walker(item))})'
                 else:
                     yield str(item)
 
-        def walker(it: Token._ToSExprIterator) -> Iterator[str]:
+        def walker(it: Token._ToSExprIterator) -> Iterator[str | None]:
             """Walk-down a token-sexpr iterator as returned by to_sexpr_elements().
 
             Returns an iterator of strings representing SExpr elements."""
@@ -601,38 +656,43 @@ class Token:
             indent += INDENT_BY
 
             for field, value in it:
-                local_indent = 0
-                if field:
-                    if field.metadata.get('newline_before', False):
+                if not field:  # value is str | None
+                    yield value
+
+                else:
+                    local_indent = 0
+                    if field.metadata['newline_before']:
                         yield '\n'
-                    if local_indent := field.metadata.get('indent', False):
-                        if isinstance(local_indent, bool):
+                    if local_indent := field.metadata['indent']:
+                        if type(local_indent) is bool:  # noqa: E721  # Opti.
                             local_indent = INDENT_BY
                         indent += local_indent
 
-                if isinstance(value, Iterator):
-                    str_value = f'({joiner(walker(value))})'
-                elif isinstance(value, list):
-                    str_value = f'({joiner(list_walker(field, value))})'
-                elif isinstance(value, float):
-                    str_value = float_to_str(value, field)
-                else:
-                    str_value = str(value)
+                    value_type = type(value)
+                    if value_type is GeneratorType:
+                        str_value = f'({joiner(walker(value))})'
+                    elif value_type is list:
+                        str_value = f'({joiner(list_walker(field, value))})'
+                    elif value_type is float:
+                        str_value = float_to_str(value, field)
+                    elif value_type is str:
+                        str_value = value
+                    else:
+                        str_value = str(value)
 
-                if field:
-                    skip_space = field.metadata.get('skip_space', False)
-                yield str_value
+                    skip_space = field.metadata['skip_space']
+                    yield str_value
 
-                if local_indent:
-                    indent -= local_indent
+                    if local_indent:
+                        indent -= local_indent
 
-                if field and field.metadata.get('newline_after', False):
-                    yield '\n'
+                    if field.metadata['newline_after']:
+                        yield '\n'
 
             indent -= INDENT_BY
             yield None
 
-        def joiner(it: Iterator[str]) -> str:
+        def joiner(it: Iterator[str | None]) -> str:
             """Takes an iterator from one of the walker functions, and handles joining,
             spacing, newlines, and indentation."""
 
@@ -649,7 +709,7 @@ class Token:
                         s += ' '
                     skip_space = False
                     had_newline = is_newline
-                    if is_newline:
+                    if s and (s[-1] == ' ') and is_newline:
                         s = s.rstrip(' ')
                     s += item
                 else:
@@ -689,10 +749,10 @@ class Token:
 
         for field in fields(type(self)):
             field: attrs.Attribute[Any]
-            field_type, field_type_args = self._get_field_types(field)
+            field_type, field_type_args = self._get_field_types(field.type)
             value = getattr(self, field.name)
 
-            if self._is_optional_field(field) and (
+            if self._is_optional_field(field.default) and (
                 (value is None) or not isinstance(value, field_type)
             ):
                 # print(f'skipping {field.name} on {type(self).__name__}')
@@ -702,7 +762,7 @@ class Token:
                 msg = f'Field {field.name} of {type(self).__name__} is missing'
                 raise ValueError(msg)
 
-            if isinstance(field_type, tuple):
+            if type(field_type) is tuple:
                 for type_ in field_type:
                     if isinstance(value, type_):
                         field_type = type_
@@ -722,28 +782,38 @@ class Token:
             #     value,
             # )
 
-            if self._is_literal_field(field, field_type) and isinstance(value, bool):
+            if (type(value) is bool) and self._is_literal_field(field, field_type):  # noqa: E721
                 if not value:
                     continue
 
                 literal = field.metadata['literal']
-                if isinstance(literal, bool):
+                if type(literal) is bool:  # noqa: E721  # Opti.
                     literal = field.name
 
                 yield field, literal
                 continue
 
-            elif issubclass(field_type, str):
+            elif field_type is str:
                 if field.metadata.get('quoted', True):
                     value = f'"{value}"'
-                if field.metadata.get('is_named', False):
+                if field.metadata['is_named']:
                     value = [field.name, value]
 
                 yield field, value
                 continue
 
-            elif issubclass(field_type, Number):
-                if field.metadata.get('is_named', False):
+            elif (field_type is float) or (field_type is int):
+                if field.metadata['is_named']:
+                    value = [field.name, value]
+
+                yield field, value
+                continue
+
+            elif field_type is uuid.UUID:
+                value = str(value)
+                if field.metadata.get('quoted', False):
+                    value = f'"{value}"'
+                if field.metadata['is_named']:
                     value = [field.name, value]
 
                 yield field, value
@@ -753,69 +823,59 @@ class Token:
                 value = value.value
                 if field.metadata.get('quoted', False):
                     value = f'"{value}"'
-                if field.metadata.get('is_named', False):
-                    value = [field.name, value]
-
-                yield field, value
-                continue
-
-            elif issubclass(field_type, uuid.UUID):
-                value = str(value)
-                if field.metadata.get('quoted', False):
-                    value = f'"{value}"'
-                if field.metadata.get('is_named', False):
+                if field.metadata['is_named']:
                     value = [field.name, value]
 
                 yield field, value
                 continue
 
             elif issubclass(field_type, Token):
-                if field.metadata.get('is_named', False):
+                if field.metadata['is_named']:
                     yield field, [field.name, value.to_sexpr_elements()]
                 else:
                     yield field, value.to_sexpr_elements()
                 continue
 
-            elif issubclass(field_type, list):
-                if value and field.metadata.get('newline_before_first', False):
+            elif field_type is list:
+                if value and field.metadata['newline_before_first']:
                     yield None, '\n'
 
                 for item in value:
-                    if isinstance(item, Token):
-                        yield field, item.to_sexpr_elements()
-                    elif isinstance(item, str):
+                    if type(item) is str:  # noqa: E721  # Opti.
                         if field.metadata.get('quoted', True):
                             item = f'"{item}"'
                         yield field, item
+                    elif isinstance(item, Token):
+                        yield field, item.to_sexpr_elements()
                     else:
                         yield field, item
 
-                if value and field.metadata.get('newline_after_last', False):
+                if value and field.metadata['newline_after_last']:
                     yield None, '\n'
 
                 continue
 
-            elif issubclass(field_type, dict):
-                if value and field.metadata.get('newline_before_first', False):
+            elif field_type is dict:
+                if value and field.metadata['newline_before_first']:
                     yield None, '\n'
 
                 for key, item in value.items():
-                    if isinstance(item, list):
+                    if type(item) is list:  # noqa: E721  # Opti.
                         if not item:
-                            if isinstance(key, str):
+                            if type(key) is str:  # noqa: E721  # Opti.
                                 key = f'"{key}"'
                             yield field, key
                         else:
                             yield field, [key, *item]
                     else:
-                        if isinstance(item, str):
+                        if type(item) is str:  # noqa: E721  # Opti.
                             if field.metadata.get('quoted', False):
                                 item = f'"{item}"'
                             elif not item:
                                 item = '""'
                         yield field, [key, item]
 
-                if value and field.metadata.get('newline_after_last', False):
+                if value and field.metadata['newline_after_last']:
                     yield None, '\n'
 
                 continue
@@ -866,17 +926,18 @@ def float_key(value: float | None) -> float | None:
 
 def token_field(
     *,
-    is_named: bool | None = None,
+    is_named: bool = False,
     quoted: bool | None = None,
-    literal: bool | str | None = None,
-    strip_0: bool | None = None,
-    skip_space: bool | None = None,
-    indent: bool | None = None,
+    literal: bool | str = False,
+    precision: int = 6,
+    strip_0: bool = True,
+    skip_space: bool = False,
+    indent: bool = False,
     newlines: str | None = None,
-    newline_before: bool | None = None,
-    newline_after: bool | None = None,
-    newline_before_first: bool | None = None,
-    newline_after_last: bool | None = None,
+    newline_before: bool = False,
+    newline_after: bool = False,
+    newline_before_first: bool = False,
+    newline_after_last: bool = False,
     **kwargs: Any,
 ) -> Any:
     if newlines:
@@ -933,6 +994,7 @@ def token_field(
     _add(is_named, 'is_named')
     _add(quoted, 'quoted')
     _add(literal, 'literal')
+    _add(precision, 'precision')
     _add(strip_0, 'strip_0')
     _add(skip_space, 'skip_space')
     _add(indent, 'indent')
@@ -971,12 +1033,41 @@ def named_field(**kwargs: Any) -> Any:
     return token_field(**kwargs)
 
 
+def ensure_metadata(
+    cls: type[Token],
+    fields: list[attrs.Attribute[Any]],
+) -> list[attrs.Attribute[Any]]:
+    result: list[attrs.Attribute[Any]] = []
+    for field in fields:
+        if field.metadata:
+            result.append(field)
+        else:
+            result.append(
+                field.evolve(
+                    metadata=dict(
+                        is_named=False,
+                        literal=False,
+                        precision=6,
+                        strip_0=True,
+                        skip_space=False,
+                        indent=False,
+                        newline_before=False,
+                        newline_after=False,
+                        newline_before_first=False,
+                        newline_after_last=False,
+                    ),
+                ),
+            )
+
+    return result
+
+
 #
 # Token classes declarations
 #
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Lib(Token):
     class LibType(Enum):
         KiCad = 'KiCad'
@@ -992,18 +1083,18 @@ class Lib(Token):
     descr: str = named_field(skip_space=True)
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class FpLibTable(Token):
     version: Version = token_field(newlines='\n()\n')
     libs: list[Lib] = token_field(newlines='()\n')
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class General(Token):
     thickness: float | int = named_field(newlines='\n()\n')
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Paper(Token):
     class PaperSize(Enum):
         A0 = 'A0'
@@ -1028,18 +1119,18 @@ class Paper(Token):
     portrait: bool = literal_field()
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Page(Paper):  # Older compatible name for paper
     pass
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Comment(Token):
     n: int
     comment: str
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class TitleBlock(Token):
     title: str | None = None
     date: str | None = None
@@ -1048,7 +1139,7 @@ class TitleBlock(Token):
     comment: list[Comment] | None = None
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class _LayerDef(Token):
     """This is an "internal" token declaration to model layers declared in
     the header of a kicad_pcb token.
@@ -1081,7 +1172,7 @@ class _LayerDef(Token):
     user_name: str | None = None
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Layers(Token):
     layers_def: list[_LayerDef] = token_field(newlines='\n[()\n]')
     layers_use: list[str] = token_field(quoted=True)
@@ -1100,29 +1191,29 @@ class Layers(Token):
         return super().from_sexpr_data(new_args)
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Pcbplotparams(Token):
     params: dict[str, Any] = token_field(newlines='\n[()\n]', strip_0=False)
 
 
-@define(kw_only=True)
+@define(kw_only=True, field_transformer=ensure_metadata)
 class Setup(Token):
     other_settings: dict[str, Any] = token_field(newlines='\n[()\n]')
     plot_settings: Pcbplotparams = token_field(newlines='()\n')
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Property(Token):
     props = dict[str, Any]
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Net(Token):
     ordinal: int
     net_name: str
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class NetClass(Token):
     name: str
     description: str
@@ -1135,7 +1226,7 @@ class NetClass(Token):
     add_net: str
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Version(Token):
     CURRENT: ClassVar[Self | None] = None
 
@@ -1149,7 +1240,7 @@ class Version(Token):
         type(self).CURRENT = self
 
 
-@define(kw_only=True)
+@define(kw_only=True, field_transformer=ensure_metadata)
 class KicadPcb(Token):
     """Token for a .kicad_pcb file."""
 
@@ -1188,7 +1279,7 @@ class KicadPcb(Token):
         return None
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Footprint(Token):
     """Token for a .kicad_mod file."""
 
@@ -1318,7 +1409,7 @@ class Footprint(Token):
         update_items('models')
 
 
-@define(order=True)
+@define(order=True, field_transformer=ensure_metadata)
 class Xy(Token):
     """XY token that we also use as a base class for any token behaving like a point.
 
@@ -1374,7 +1465,7 @@ class Xy(Token):
             return self
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Xyz(Xy):
     z: float | int = token_field(eq=float_key)
 
@@ -1389,44 +1480,44 @@ def _angle_normalizer(angle: float | None) -> float | None:
         return angle - 360
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class At(Xy):
     angle: float | int | None = token_field(default=None, eq=float_key, converter=_angle_normalizer)
     unlocked: bool = literal_field()
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Start(Xy):
     pass
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Mid(Xy):
     pass
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Center(Xy):
     pass
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class End(Xy):
     pass
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Size(Xy):
     pass
 
 
 # Interferes with Model.offset who is just a named XYZ
-# @define
+# @define(field_transformer=ensure_metadata)
 # class Offset(XY):
 #     pass
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Color(Token):
     r: float | int
     g: float | int
@@ -1434,7 +1525,7 @@ class Color(Token):
     a: float | int
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Stroke(Token):
     class StrokeType(Enum):
         dash = 'dash'
@@ -1449,12 +1540,12 @@ class Stroke(Token):
     color: Color | None = None
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class GraphicItem(Token):
     """A base token class usable to group all graphic items."""
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Font(Token):
     face: str | None = named_field(default=None)
     size: Size = REQUIRED
@@ -1464,7 +1555,7 @@ class Font(Token):
     line_spacing: float | int | None = named_field(default=None)
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Justify(Token):
     # TODO: Redo by supporting Literal[this, that]
     left: bool = literal_field()
@@ -1474,14 +1565,14 @@ class Justify(Token):
     mirror: bool = literal_field()
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Effects(Token):
     font: Font
     justify: Justify | None = None
     hide: bool = literal_field()
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class FpText(GraphicItem):
     class FpTextType(Enum):
         reference = 'reference'
@@ -1506,12 +1597,12 @@ class FpText(GraphicItem):
         return self.type == FpText.FpTextType.user
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class FpTextBox(GraphicItem):
     data: dict[str, Any]
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Line:
     """Base definition of a line defined by 2 points.
 
@@ -1562,7 +1653,7 @@ class Line:
         )
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Line_20171130(Line):
     angle: float | int = token_field(eq=float_key)
     layer: str = named_field()
@@ -1579,7 +1670,7 @@ class Line_20171130(Line):
         )
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Line_20221018(Line):
     angle: float | int | None = token_field(default=None, eq=float_key)
     stroke: Stroke = token_field(newlines='\n()')
@@ -1587,37 +1678,37 @@ class Line_20221018(Line):
     tstamp: uuid.UUID = uuid_field()
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class FpLine(GraphicItem):
     pass
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class FpLine_20171130(FpLine, Line_20171130):
     pass
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class FpLine_20221018(FpLine, Line_20221018):
     pass
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class GrLine(GraphicItem):
     pass
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class GrLine_20171130(GrLine, Line_20171130):
     pass
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class GrLine_20221018(GrLine, Line_20221018):
     pass
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class FpRect(GraphicItem):
     class FillType(Enum):
         none = 'none'
@@ -1631,7 +1722,7 @@ class FpRect(GraphicItem):
     tstamp: uuid.UUID = uuid_field()
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class FpCircle(GraphicItem):
     class FillType(Enum):
         none = 'none'
@@ -1687,7 +1778,7 @@ class Arc(Protocol):
         )
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Arc_20171130(Arc):
     start: Start  # It is the center point actually
     end: End
@@ -1717,7 +1808,7 @@ class Arc_20171130(Arc):
         )
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Arc_20221018(Arc):
     start: Start
     mid: Mid
@@ -1743,42 +1834,42 @@ class Arc_20221018(Arc):
         return sm_chord.intersect(me_chord).cast_to(Xy)
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class FpArc(GraphicItem):
     pass
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class FpArc_20171130(FpArc, Arc_20171130):
     pass
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class FpArc_20221018(FpArc, Arc_20221018):
     pass
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class GrArc(GraphicItem):
     pass
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class GrArc_20171130(GrArc, Arc_20171130):
     pass
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class GrArc_20221018(GrArc, Arc_20221018):
     pass
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Pts(Token):
     list_: list[Xy] = token_field(newlines='\n[()\n]')
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class FpPoly(GraphicItem):
     class FillType(Enum):
         none = 'none'
@@ -1792,7 +1883,7 @@ class FpPoly(GraphicItem):
     tstamp: uuid.UUID = uuid_field()
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Drill(Token):
     oval: bool = literal_field()
     diameter: float | int = REQUIRED
@@ -1800,7 +1891,7 @@ class Drill(Token):
     # offset: Offset | None = None  # Interferes with Model.offset...
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Chamfer(Token):
     top_left: bool = literal_field()
     top_right: bool = literal_field()
@@ -1808,7 +1899,7 @@ class Chamfer(Token):
     bottom_right: bool = literal_field()
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Pad(Token):
     class Type(Enum):
         thru_hole = 'thru_hole'
@@ -1852,7 +1943,7 @@ class Pad(Token):
     # TODO: Custom options and primitives
 
 
-@define
+@define(field_transformer=ensure_metadata)
 class Model(Token):
     file: str = token_field(newlines='()\n')
     offset: Xyz = named_field(newlines='()\n')
@@ -1978,18 +2069,43 @@ def convert_pcb_to_footprint(
 def cli_parse(
     filename: Path,
     reexport: Optional[Path] = None,
+    do_print: bool = True,
     as_list: bool = False,
     as_text: bool = False,
+    profile: bool = False,
 ) -> None:
-    obj = Token.from_file(filename)
+    if profile:
+        import cProfile
 
-    print('>>>', obj)
+        # All of parsing
+        # cProfile.runctx('Token.from_file(filename)', locals(), globals(), 'parsing.stats')
+
+        # Just the SParser
+        # cProfile.runctx('SParser.parse(filename)', globals(), locals(), 'parsing.stats')
+
+        # Just the reifier
+        # content = SParser.parse(filename)
+        # cProfile.runctx('Token.from_sexpr(content)', locals(), globals(), 'parsing.stats')
+
+        # Export
+        obj = Token.from_file(filename)
+        print(f'Loaded a {type(obj).__name__}')
+        cProfile.runctx('obj.to_sexpr_text()', globals(), locals(), 'exporting.stats')
+
+        return
+
+    obj = Token.from_file(filename)
+    print(f'Loaded a {type(obj).__name__}')
+
+    if do_print:
+        print('>>>', obj)
     if as_list:
         print('>>>', obj.to_sexpr_list())
     if as_text:
         print('>>>', obj.to_sexpr_text())
 
     if reexport:
+        print('Exporting...')
         obj.to_file(reexport)
 
 
