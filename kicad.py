@@ -20,7 +20,7 @@ import types
 import typing
 import uuid
 from abc import abstractmethod
-from contextlib import suppress
+from contextlib import contextmanager, suppress
 from copy import deepcopy
 from enum import Enum
 from itertools import chain
@@ -169,6 +169,19 @@ class Token:
     """
 
     CURRENT_CONTEXT: ClassVar[list[type[Token]]] = []
+
+    @staticmethod
+    @contextmanager
+    def with_context(context: type[Token]) -> Iterator[None]:
+        Token.CURRENT_CONTEXT.append(context)
+        try:
+            yield
+        finally:
+            Token.CURRENT_CONTEXT.pop()
+
+    @classmethod
+    def as_context(cls) -> _GeneratorContextManager[None]:
+        return cls.with_context(cls)
 
     #
     # Token name <-> class matching, and versioning section
@@ -1595,8 +1608,14 @@ class Xyz(Xy):
 def _angle_normalizer(angle: float | None) -> float | None:
     if angle is None:
         return None
-    angle %= 360
-    if -180 < angle <= 180:
+    if not Token.CURRENT_CONTEXT:
+        return angle
+    if not (-360 < angle < 360):
+        angle %= 360
+    is_pad_or_text = Token.CURRENT_CONTEXT and (Token.CURRENT_CONTEXT[-1] in (Pad, FpText))
+    if is_pad_or_text and (-180 < angle <= 360):  # noqa: SIM114
+        return angle
+    elif -180 < angle <= 180:
         return angle
     else:
         return angle - 360
@@ -2314,11 +2333,12 @@ def _update_project(
             if pcb is None:
                 pcb = KicadPcb.from_file(pcb_path)
 
-            position = At(0, 0)
-            if 'offset' in project:
-                position += At(*project['offset'])
-            if 'offset' in obj:
-                position += At(*obj['offset'])
+            with Footprint.as_context():
+                position = At(0, 0)
+                if 'offset' in project:
+                    position += At(*project['offset'])
+                if 'offset' in obj:
+                    position += At(*obj['offset'])
 
             outline_fp = pcb.find_ref(obj['ref'], Footprint) if 'ref' in obj else None
             if outline_fp is None:
@@ -2422,13 +2442,14 @@ def do_keys(
         if attribs is None:
             attribs = AttrDict(point['original'])
 
-        position = At(attribs.x, -attribs.y)
-        if 'offset' in project:
-            position += At(*project['offset'])
-        if 'offset' in spec:
-            position += At(*spec['offset'])
-        angle = attribs.r + spec.get('angle', 0)
-        position.angle = angle if angle else None
+        with Footprint.as_context():
+            position = At(attribs.x, -attribs.y)
+            if 'offset' in project:
+                position += At(*project['offset'])
+            if 'offset' in spec:
+                position += At(*spec['offset'])
+            angle = attribs.r + spec.get('angle', 0)
+            position.angle = angle if angle else None
 
         ref = spec['ref'].format(**attribs)
 

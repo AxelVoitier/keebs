@@ -216,12 +216,14 @@ def test_basic_arc_math(
     ],
 )
 def test_arc_conversion(arc_20171130_str: str, arc_20221018_str: str) -> None:
-    arc_20171130 = kicad.GrArc_20171130.from_text(arc_20171130_str)
-    arc_20221018 = kicad.GrArc_20221018.from_text(arc_20221018_str)
+    with kicad.KicadPcb.as_context():
+        arc_20171130 = kicad.GrArc_20171130.from_text(arc_20171130_str)
+        arc_20221018 = kicad.GrArc_20221018.from_text(arc_20221018_str)
 
-    print(arc_20171130)
-    print(arc_20221018)
-    converted = arc_20171130.to_version(20221018)
+        print(arc_20171130)
+        print(arc_20221018)
+        converted = arc_20171130.to_version(20221018)
+
     print(converted)
     assert isinstance(converted, kicad.GrArc_20221018)
 
