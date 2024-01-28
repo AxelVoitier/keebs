@@ -43,7 +43,6 @@ from typing import (
 # Third-party imports
 import attrs
 import clyo
-import pyparsing as pp
 from attr import field, fields
 from attrs import define
 from rich import print
@@ -65,28 +64,83 @@ kicad_cli = clyo.ClyoTyper(help='KiCAD-related commands')
 
 
 class SParser:
-    # Inspired by https://gist.github.com/hastern/ac2d7eab7a2a85f588d1
-    _Open = pp.Suppress('(')
-    _String = pp.QuotedString(quoteChar='"', unquoteResults=True)
-    _Attribute = _String ^ pp.common.number ^ pp.Word(pp.alphanums + '_-.')
-    _Close = pp.Suppress(')')
-    _SExpr = pp.Forward()
-    _SubSExpr = pp.Group(pp.ZeroOrMore(_SExpr | _Attribute))
-    _SExpr << (_Open + _SubSExpr + _Close)
+    # The following is no longer used as pyparsing is ULTRA slow
+    # # Inspired by https://gist.github.com/hastern/ac2d7eab7a2a85f588d1
+    # _Open = pp.Suppress('(')
+    # _String = pp.QuotedString(quoteChar='"', unquoteResults=True)
+    # _Attribute = _String ^ pp.common.number ^ pp.Word(pp.alphanums + '_-.')
+    # _Close = pp.Suppress(')')
+    # _SExpr = pp.Forward()
+    # _SubSExpr = pp.Group(pp.ZeroOrMore(_SExpr | _Attribute))
+    # _SExpr << (_Open + _SubSExpr + _Close)
+
+    # @classmethod
+    # def _parse_pyparsing(cls, content: str, *, unquote: bool = True) -> SExpr:
+    #     if not unquote:
+    #         cls._String.unquote_results = False
+
+    #     result = cls._SExpr.parse_string(content).as_list()[0]
+    #     # print(f'Done parsing: {len(result)} elements')
+
+    #     if not unquote:
+    #         cls._String.unquote_results = True
+
+    #     return result
+
+    # The following regexp-based version is inspired by:
+    # https://rosettacode.org/wiki/S-expressions#Python
+    # Adapted to fix a few quirks, comply with KiCad variant of SExpr (numbers and strings),
+    # and optimise the speed of it.
+    _SExpr_RE = r"""(?mx)
+        \s*(?:
+            (?P<brackl>\()|
+            (?P<brackr>\))|
+            (?P<num>[+-]?\d+\.\d+(?=[\ \)\n])|(\-?\d+(?=[\ \)\n])))|
+            (?P<sq>"((?:[^"]|(?<=\\)")*)")|
+            (?P<s>[^(^)\s]+)
+        )"""
 
     @classmethod
-    def parse(cls, content: str | Path, unquote: bool = True) -> SExpr:
+    def _parse_regex(cls, content: str, *, unquote: bool = True) -> SExpr:
+        stack: list[list[SExpr]] = []
+        out: list[SExpr] = []
+
+        for match in re.finditer(cls._SExpr_RE, content):
+            if match['brackl'] is not None:
+                stack.append(out)
+                out = []
+            elif match['brackr'] is not None:
+                assert stack, 'Trouble with nesting of brackets'
+                tmpout, out = out, stack.pop()
+                out.append(tmpout)
+            elif (value := match['num']) is not None:
+                v = float(value) if '.' in value else int(value)
+                out.append(v)
+            elif (value := match['sq']) is not None:
+                if unquote:
+                    out.append(value[1:-1].replace(r'\"', '"'))
+                else:
+                    out.append(value.replace(r'\"', '"'))
+            elif (value := match['s']) is not None:
+                out.append(value)
+            else:
+                msg = f'Error: "{match.group()}" => {match.groupdict()}'
+                raise RuntimeError(msg)
+
+        assert not stack, 'Trouble with nesting of brackets'
+        return out[0]
+
+    @classmethod
+    def parse(cls, content: str | Path, *, unquote: bool = True) -> SExpr:
         if isinstance(content, Path):
+            # print(f'Parsing {content}...')
             content = content.read_text()
+        # else:
+        #     print('Parsing...')
 
-        if not unquote:
-            cls._String.unquote_results = False
-
-        result = cls._SExpr.parse_string(content).as_list()[0]
-
-        if not unquote:
-            cls._String.unquote_results = True
-
+        # result = cls._parse_pyparsing(content, unquote=unquote)
+        result = cls._parse_regex(content, unquote=unquote)
+        # print(f'Done parsing: {len(result)} elements')
         return result
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
