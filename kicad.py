@@ -20,17 +20,18 @@ import types
 import typing
 import uuid
 from abc import abstractmethod
-from contextlib import contextmanager, suppress
+from contextlib import _GeneratorContextManager, contextmanager, suppress
 from copy import deepcopy
 from enum import Enum
+from functools import partial
 from itertools import chain
-from numbers import Number
 from pathlib import Path
 from types import GeneratorType
 from typing import (
     TYPE_CHECKING,
     Annotated,
     Any,
+    Callable,
     ClassVar,
     Iterator,
     Literal,
@@ -710,6 +711,10 @@ class Token:
             ]
         ]
 
+        NewlinesFilter: TypeAlias = Callable[
+            [attrs.Attribute[Any] | None, Any | None, dict[str, bool]], dict[str, bool]
+        ]
+
     def to_sexpr_list(self) -> SExpr:
         """Deeply converts this token to SExpr list-form"""
 
@@ -796,8 +801,6 @@ class Token:
 
                 else:
                     local_indent = 0
-                    if field.metadata['newline_before']:
-                        yield '\n'
                     if local_indent := field.metadata['indent']:
                         if type(local_indent) is bool:  # noqa: E721  # Opti.
                             local_indent = INDENT_BY
@@ -820,9 +823,6 @@ class Token:
 
                     if local_indent:
                         indent -= local_indent
-
-                    if field.metadata['newline_after']:
-                        yield '\n'
 
             indent -= INDENT_BY
             yield None
@@ -879,18 +879,45 @@ class Token:
         internal token declarations (such as _LayerDef for instance).
         """
 
+        Token.CURRENT_CONTEXT.append(type(self))
         attrs.resolve_types(type(self), include_extras=True)
         yield None, self.token_name(usage='export')
+
+        newlines_filter: NewlinesFilter = None
+        if hasattr(self, 'newlines_filter'):
+            newlines_filter = self.newlines_filter
+            newlines: dict[str, bool] = dict(at_end=False)
+            newlines_filter(None, None, newlines)
 
         for field in fields(type(self)):
             field: attrs.Attribute[Any]
             field_type, field_type_args = self._get_field_types(field.type)
             value = getattr(self, field.name)
 
+            nl_before_first = field.metadata['newline_before_first']
+            nl_before = field.metadata['newline_before']
+            nl_after = field.metadata['newline_after']
+            nl_after_last = field.metadata['newline_after_last']
+            nl_force = field.metadata['force_newline_if_none']
+            if newlines_filter:
+                newlines['before_first'] = nl_before_first
+                newlines['before'] = nl_before
+                newlines['after'] = nl_after
+                newlines['after_last'] = nl_after_last
+                newlines['force_if_none'] = nl_force
+                newlines = newlines_filter(field, value, newlines)
+                nl_before_first = newlines['before_first']
+                nl_before = newlines['before']
+                nl_after = newlines['after']
+                nl_after_last = newlines['after_last']
+                nl_force = newlines['force_if_none']
+
             if self._is_optional_field(field.default) and (
                 (value is None) or not isinstance(value, field_type)
             ):
                 # print(f'skipping {field.name} on {type(self).__name__}')
+                if nl_force:
+                    yield None, '\n'
                 continue
 
             if value is REQUIRED:
@@ -917,65 +944,17 @@ class Token:
             #     value,
             # )
 
-            if (type(value) is bool) and self._is_literal_field(field, field_type):  # noqa: E721
+            if field_type is list:
                 if not value:
                     continue
 
-                literal = field.metadata['literal']
-                if type(literal) is bool:  # noqa: E721  # Opti.
-                    literal = field.name
-
-                yield field, literal
-                continue
-
-            elif field_type is str:
-                if field.metadata.get('quoted', True):
-                    value = f'"{value}"'
-                if field.metadata['is_named']:
-                    value = [field.name, value]
-
-                yield field, value
-                continue
-
-            elif (field_type is float) or (field_type is int):
-                if field.metadata['is_named']:
-                    value = [field.name, value]
-
-                yield field, value
-                continue
-
-            elif field_type is uuid.UUID:
-                value = str(value)
-                if field.metadata.get('quoted', False):
-                    value = f'"{value}"'
-                if field.metadata['is_named']:
-                    value = [field.name, value]
-
-                yield field, value
-                continue
-
-            elif issubclass(field_type, Enum):
-                value = value.value
-                if field.metadata.get('quoted', False):
-                    value = f'"{value}"'
-                if field.metadata['is_named']:
-                    value = [field.name, value]
-
-                yield field, value
-                continue
-
-            elif issubclass(field_type, Token):
-                if field.metadata['is_named']:
-                    yield field, [field.name, value.to_sexpr_elements()]
-                else:
-                    yield field, value.to_sexpr_elements()
-                continue
-
-            elif field_type is list:
-                if value and field.metadata['newline_before_first']:
+                if nl_before_first:
                     yield None, '\n'
 
                 for item in value:
+                    if nl_before:
+                        yield None, '\n'
+
                     if type(item) is str:  # noqa: E721  # Opti.
                         if field.metadata.get('quoted', True):
                             item = f'"{item}"'
@@ -985,16 +964,25 @@ class Token:
                     else:
                         yield field, item
 
-                if value and field.metadata['newline_after_last']:
+                    if nl_after:
+                        yield None, '\n'
+
+                if nl_after_last:
                     yield None, '\n'
 
                 continue
 
             elif field_type is dict:
-                if value and field.metadata['newline_before_first']:
+                if not value:
+                    continue
+
+                if nl_before_first:
                     yield None, '\n'
 
                 for key, item in value.items():
+                    if nl_before:
+                        yield None, '\n'
+
                     if type(item) is list:  # noqa: E721  # Opti.
                         if not item:
                             if type(key) is str:  # noqa: E721  # Opti.
@@ -1010,13 +998,80 @@ class Token:
                                 item = '""'
                         yield field, [key, item]
 
-                if value and field.metadata['newline_after_last']:
+                    if nl_after:
+                        yield None, '\n'
+
+                if nl_after_last:
                     yield None, '\n'
 
                 continue
 
-        if getattr(type(self), 'NEWLINE_AT_END', False):
+            elif (type(value) is bool) and self._is_literal_field(field, field_type):  # noqa: E721
+                if not value:
+                    continue
+
+                literal = field.metadata['literal']
+                if type(literal) is bool:  # noqa: E721  # Opti.
+                    literal = field.name
+
+                if nl_before:
+                    yield None, '\n'
+
+                yield field, literal
+
+                if nl_after:
+                    yield None, '\n'
+
+                continue
+
+            if nl_before:
+                yield None, '\n'
+
+            if field_type is str:
+                if field.metadata.get('quoted', True):
+                    value = f'"{value}"'
+                if field.metadata['is_named']:
+                    value = [field.name, value]
+
+                yield field, value
+
+            elif (field_type is float) or (field_type is int):
+                if field.metadata['is_named']:
+                    value = [field.name, value]
+
+                yield field, value
+
+            elif field_type is uuid.UUID:
+                value = str(value)
+                if field.metadata.get('quoted', False):
+                    value = f'"{value}"'
+                if field.metadata['is_named']:
+                    value = [field.name, value]
+
+                yield field, value
+
+            elif issubclass(field_type, Enum):
+                value = value.value
+                if field.metadata.get('quoted', False):
+                    value = f'"{value}"'
+                if field.metadata['is_named']:
+                    value = [field.name, value]
+
+                yield field, value
+
+            elif issubclass(field_type, Token):
+                if field.metadata['is_named']:
+                    yield field, [field.name, value.to_sexpr_elements()]
+                else:
+                    yield field, value.to_sexpr_elements()
+
+            if nl_after:
+                yield None, '\n'
+
+        if newlines_filter and newlines['at_end']:
             yield None, '\n'
+
+        Token.CURRENT_CONTEXT.pop()
 
     #
     # Manipulation methods
@@ -1073,6 +1128,8 @@ def token_field(
     newline_after: bool = False,
     newline_before_first: bool = False,
     newline_after_last: bool = False,
+    force_newline_if_none: bool = False,
+    metadata: dict[str, Any] | None = None,
     **kwargs: Any,
 ) -> Any:
     if newlines:
@@ -1125,7 +1182,8 @@ def token_field(
         if value is not None:
             metadata[name] = value
 
-    metadata = {}
+    if metadata is None:
+        metadata = {}
     _add(is_named, 'is_named')
     _add(quoted, 'quoted')
     _add(literal, 'literal')
@@ -1137,6 +1195,7 @@ def token_field(
     _add(newline_after, 'newline_after')
     _add(newline_before_first, 'newline_before_first')
     _add(newline_after_last, 'newline_after_last')
+    _add(force_newline_if_none, 'force_newline_if_none')
 
     if not metadata:
         metadata = None
@@ -1190,6 +1249,7 @@ def ensure_metadata(
                         newline_after=False,
                         newline_before_first=False,
                         newline_after_last=False,
+                        force_newline_if_none=False,
                     ),
                 ),
             )
@@ -1387,13 +1447,29 @@ class KicadPcb(Token):
     layers: Layers = token_field(newlines='()\n')
     setup: Setup = token_field(newlines='\n()\n')
     # properties
-    nets: list[Net] = token_field(newlines='\n()\n')
+    nets: list[Net] = token_field(newlines='\n[()\n]')
     net_classes: list[NetClass] | None = None  # Old versions
     footprints: list[Footprint] | None = token_field(newlines='\n()\n')
-    graphic_items: list[GraphicItem] = token_field(newlines='\n()\n')
-    data: list[Token | list] = token_field(newlines='[\n()\n]\n')
+    graphic_items: list[GraphicItem] = token_field(newlines='\n[()\n]')
+    data: list[Token | list] = token_field(newlines='[\n()\n]')
 
-    NEWLINE_AT_END: ClassVar[bool] = True
+    def newlines_filter(
+        self,
+        field: attrs.Attribute[Any] | None,
+        value: Any | None,
+        newlines: dict[str, bool],
+    ) -> dict[str, bool]:
+        if not field:  # Init
+            newlines['at_end'] = True
+            return newlines
+
+        if not value:
+            return newlines
+
+        if field.name in ('segments', 'zones'):
+            newlines['at_end'] = False
+
+        return newlines
 
     @classmethod
     def from_sexpr_data(cls, args: list[Self | str | Number]) -> Self:
@@ -2068,20 +2144,47 @@ class Pad(Token):
     remove_unused_layer: bool = literal_field()
     keep_end_layers: bool = literal_field()
     roundrect_rratio: float | int | None = named_field(default=None)
-    chamfer_ratio: float | int | None = named_field(default=None)
-    chamfer: Chamfer | None = named_field(default=None)
-    pinfunction: str | None = named_field(default=None)
-    pintype: str | None = named_field(default=None)
-    die_length: float | int | None = named_field(default=None)
-    solder_mask_margin: float | int | None = named_field(default=None)
-    solder_paste_margin: float | int | None = named_field(default=None)
-    solder_paste_margin_ratio: float | int | None = named_field(default=None)
-    clearance: float | int | None = named_field(default=None, newlines='\n()')
-    zone_connect: int | None = named_field(default=None, newlines='\n()')
-    thermal_bridge_width: float | int | None = named_field(default=None, newlines='\n()')
-    thermal_gap: float | int | None = named_field(default=None)
+    chamfer_ratio: float | int | None = named_field(default=None, metadata=dict(opt_group=1))
+    chamfer: Chamfer | None = named_field(default=None, metadata=dict(opt_group=1))
+    pinfunction: str | None = named_field(default=None, metadata=dict(opt_group=2))
+    pintype: str | None = named_field(default=None, eq=False, metadata=dict(opt_group=2))
+    die_length: float | int | None = named_field(default=None, metadata=dict(opt_group=2))
+    solder_mask_margin: float | int | None = named_field(default=None, metadata=dict(opt_group=2))
+    solder_paste_margin: float | int | None = named_field(default=None, metadata=dict(opt_group=2))
+    solder_paste_margin_ratio: float | int | None = named_field(
+        default=None, metadata=dict(opt_group=2)
+    )
+    clearance: float | int | None = named_field(default=None, metadata=dict(opt_group=2))
+    zone_connect: int | None = named_field(default=None, metadata=dict(opt_group=2))
+    thermal_bridge_width: float | int | None = named_field(default=None, metadata=dict(opt_group=2))
+    thermal_gap: float | int | None = named_field(default=None, metadata=dict(opt_group=2))
     tstamp: uuid.UUID = uuid_field()
     # TODO: Custom options and primitives
+
+    def newlines_filter(
+        self,
+        field: attrs.Attribute[Any] | None,
+        value: Any | None,
+        newlines: dict[str, bool],
+    ) -> dict[str, bool]:
+        if not field:  # Init
+            newlines['opt_group1'] = False
+            newlines['opt_group2'] = False
+            return newlines
+
+        if value is None:
+            return newlines
+
+        opt_group = field.metadata.get('opt_group', None)
+        if opt_group is None:
+            return newlines
+
+        opt_group_key = f'opt_group{opt_group}'
+        if newlines[opt_group_key] is False:
+            newlines['before'] = True
+            newlines[opt_group_key] = True
+
+        return newlines
 
 
 @define(field_transformer=ensure_metadata)
