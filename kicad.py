@@ -93,13 +93,25 @@ class SParser:
     # https://rosettacode.org/wiki/S-expressions#Python
     # Adapted to fix a few quirks, comply with KiCad variant of SExpr (numbers and strings),
     # and optimise the speed of it.
+    # sq: handles escaped "
+    # num:
+    #   - accept +number notation
+    #   - accept scientific notation, eg. +1.23e4 (that's for some buggy ergogen
+    #     outputs with almost nul values)
+    #   - match only if followed by space, ) or newline. This allows for:
+    #     - avoid catching SEM.VER.SION style as a number (SEM.VER) and a string (.SION)
+    #     - avoid breaking apart things like 0x1234 (will match as string instead)
     _SExpr_RE = r"""(?mx)
         \s*(?:
-            (?P<brackl>\()|
-            (?P<brackr>\))|
-            (?P<num>[+-]?\d+\.\d+(?=[\ \)\n])|(\-?\d+(?=[\ \)\n])))|
-            (?P<sq>"((?:[^"]|(?<=\\)")*)")|
-            (?P<s>[^(^)\s]+)
+            (?P<lparen>\() |   # Opening parenthesis
+            (?P<rparen>\)) |   # Closing parenthesis
+            (?P<number>(?:[+-]?\d+\.\d+(?=[ )\n])) |  # Real
+                       (?:[+-]?\d+(?=[ )\n])) |  # Integer
+                       (?:[+-]?\d+\.\d+[eE][+-]?\d+(?=[ )\n])) |  # Sci-real
+                       (?:[+-]?\d+[eE][+-]?\d+(?=[ )\n]))  # Sci-integer
+            ) |
+            (?P<quoted_string>"((?:[^"]|(?<=\\)")*)") |
+            (?P<string>[^()\s]+)
         )"""
 
     @classmethod
@@ -108,22 +120,22 @@ class SParser:
         out: list[SExpr] = []
 
         for match in re.finditer(cls._SExpr_RE, content):
-            if match['brackl'] is not None:
+            if match['lparen'] is not None:
                 stack.append(out)
                 out = []
-            elif match['brackr'] is not None:
+            elif match['rparen'] is not None:
                 assert stack, 'Trouble with nesting of brackets'
                 tmpout, out = out, stack.pop()
                 out.append(tmpout)
-            elif (value := match['num']) is not None:
+            elif (value := match['number']) is not None:
                 v = float(value) if '.' in value else int(value)
                 out.append(v)
-            elif (value := match['sq']) is not None:
+            elif (value := match['quoted_string']) is not None:
                 if unquote:
                     out.append(value[1:-1].replace(r'\"', '"'))
                 else:
                     out.append(value.replace(r'\"', '"'))
-            elif (value := match['s']) is not None:
+            elif (value := match['string']) is not None:
                 out.append(value)
             else:
                 msg = f'Error: "{match.group()}" => {match.groupdict()}'
@@ -135,10 +147,10 @@ class SParser:
     @classmethod
     def parse(cls, content: str | Path, *, unquote: bool = True) -> SExpr:
         if isinstance(content, Path):
-            # print(f'Parsing {content}...')
+            print(f'Parsing {content}...')
             content = content.read_text()
-        # else:
-        #     print('Parsing...')
+        else:
+            print('Parsing...')
 
         # result = cls._parse_pyparsing(content, unquote=unquote)
         result = cls._parse_regex(content, unquote=unquote)
