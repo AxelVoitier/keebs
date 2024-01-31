@@ -38,6 +38,7 @@ from typing import (
     Optional,
     Protocol,
     Union,
+    overload,
     runtime_checkable,
 )
 
@@ -1107,6 +1108,16 @@ def to_uuid(value: str | uuid.UUID) -> uuid.UUID:
     return uuid.UUID(value) if isinstance(value, str) else value
 
 
+@overload
+def float_key(value: float) -> float:
+    ...
+
+
+@overload
+def float_key(value: None) -> None:
+    ...
+
+
 def float_key(value: float | None) -> float | None:
     if value is not None:
         return round(value, 6)
@@ -1611,9 +1622,10 @@ class Footprint(Token):
             self.settings = deepcopy(model.settings)
 
         old_angle = self.at.angle or 0
+        angle_changed = abs(old_angle - new_angle) >= 1e-6
 
         def update_angle(item: GraphicItem) -> GraphicItem:
-            if (new_angle != old_angle) and hasattr(item, 'at'):
+            if angle_changed and hasattr(item, 'at'):
                 if item.at.angle is None:
                     item.at.angle = 0
                 item.at.angle -= old_angle
@@ -1630,7 +1642,8 @@ class Footprint(Token):
             if not texts and old_items:
                 for item in old_items:
                     if isinstance(item, FpText):
-                        new_items.append(update_angle(item))
+                        with FpText.as_context():
+                            new_items.append(update_angle(item))
 
             for item in getattr(model, collection_name):
                 if isinstance(item, FpText) and not texts:
@@ -1641,22 +1654,24 @@ class Footprint(Token):
                     item.tstamp = uuid.uuid4()
                 if (ref is not None) and isinstance(new_item, FpText) and new_item.is_ref():
                     new_item.text = ref
-                if old_angle and hasattr(new_item, 'at'):
-                    if new_item.at.angle is None:
-                        new_item.at.angle = 0
-                    new_item.at.angle += old_angle
 
-                if not old_items:
-                    new_items.append(update_angle(new_item))
-                elif old_items[-1] == new_item:
-                    new_items.append(update_angle(old_items.pop()))
-                else:
-                    try:
-                        index = old_items.index(new_item)
-                    except ValueError:
+                with type(new_item).as_context():
+                    if old_angle and hasattr(new_item, 'at'):
+                        if new_item.at.angle is None:
+                            new_item.at.angle = 0
+                        new_item.at.angle += old_angle
+
+                    if not old_items:
                         new_items.append(update_angle(new_item))
+                    elif old_items[-1] == new_item:
+                        new_items.append(update_angle(old_items.pop()))
                     else:
-                        new_items.append(update_angle(old_items.pop(index)))
+                        try:
+                            index = old_items.index(new_item)
+                        except ValueError:
+                            new_items.append(update_angle(new_item))
+                        else:
+                            new_items.append(update_angle(old_items.pop(index)))
 
         update_items('graphic_items')
         update_items('pads')
@@ -1728,7 +1743,7 @@ class Xyz(Xy):
     z: float | int = token_field(eq=float_key)
 
 
-def _angle_normalizer(angle: float | None) -> float | None:
+def angle_normalizer(angle: float | None) -> float | None:
     if angle is None:
         return None
     if not Token.CURRENT_CONTEXT:
@@ -1738,15 +1753,33 @@ def _angle_normalizer(angle: float | None) -> float | None:
     is_pad_or_text = Token.CURRENT_CONTEXT and (Token.CURRENT_CONTEXT[-1] in (Pad, FpText))
     if is_pad_or_text and (-180 < angle <= 360):  # noqa: SIM114
         return angle
-    elif -180 < angle <= 180:
+    elif not is_pad_or_text and (-180 < angle <= 180):
         return angle
     else:
-        return angle - 360
+        sign = 1 if angle > 0 else -1
+        return angle % (360 * -sign)
+
+
+def angle_key(angle: float | None) -> float | None:
+    if angle is None:
+        return None
+    if not (-360 < angle < 360):
+        angle %= 360
+    if -180 < angle <= 180:
+        return float_key(angle)
+    else:
+        sign = 1 if angle > 0 else -1
+        return float_key(angle % (360 * -sign))
 
 
 @define(field_transformer=ensure_metadata)
 class At(Xy):
-    angle: float | int | None = token_field(default=None, eq=float_key, converter=_angle_normalizer)
+    angle: float | int | None = token_field(
+        default=None,
+        eq=angle_key,
+        converter=angle_normalizer,
+        on_setattr=attrs.setters.convert,
+    )
     unlocked: bool = literal_field()
 
 
@@ -2065,7 +2098,7 @@ class Arc(Protocol):
 class Arc_20171130(Arc):
     start: Start  # It is the center point actually
     end: End
-    angle: float | int = token_field(eq=float_key, converter=_angle_normalizer)
+    angle: float | int = token_field(eq=angle_key, converter=angle_normalizer)
     layer: str = named_field()
     width: float | int = REQUIRED
 
