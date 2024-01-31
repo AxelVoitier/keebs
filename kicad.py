@@ -300,8 +300,8 @@ class Token:
         return None
 
     @classmethod
-    @functools.cache  # Pretty much one static per class
-    def _get_versionned_token_class(cls) -> type[Token]:
+    @functools.cache  # Pretty much one static per (class, version) pair
+    def _get_versionned_token_class(cls, current_version: int) -> type[Token]:
         """Handles versionned tokens
 
         The logic is that versionned token classes have a date suffix in their name.
@@ -311,7 +311,7 @@ class Token:
         the current file version.
         """
 
-        if (not Version.CURRENT) or not (subclasses := cls.__inheritors__[cls]):
+        if not (subclasses := cls.__inheritors__[cls]):
             return cls
 
         candidates: dict[int, type[Self]] = {}
@@ -323,7 +323,6 @@ class Token:
         if not candidates:
             return cls
 
-        current_version = Version.CURRENT.version
         for class_version in sorted(candidates, reverse=True):
             if class_version <= current_version:
                 # print(f'New class for {current_version=} is {cls.__name__}')
@@ -494,7 +493,8 @@ class Token:
         """
         # print(cls.__name__, f'{args=}')
 
-        cls = cls._get_versionned_token_class()
+        if Version.CURRENT is not None:
+            cls = cls._get_versionned_token_class(Version.CURRENT.version)
         attrs.resolve_types(cls, include_extras=True)
 
         # To build the kwargs, we take each declared field, and try to match it
