@@ -182,6 +182,8 @@ class Token:
     the way attrs declares fields.
     """
 
+    __slots__ = ()
+
     CURRENT_CONTEXT: ClassVar[list[type[Token]]] = []
 
     @staticmethod
@@ -222,8 +224,9 @@ class Token:
                 # This last dict level is here to keep only the last "declared"
                 # class for a given class name. It is needed because this method
                 # sees a class more than once: first the original one, then the
-                # attrs.define() wrapped one. They have the same name, but are
-                # not the same objects, such that a simple set cannot be used.
+                # attrs.define() wrapped one (because it uses slots by default).
+                # They have the same name, but are not the same objects, such
+                # that a simple set cannot be used.
                 # We only want to keep the wrapped one.
                 # Also, filtering on __attrs_attrs__ is not sufficient as in the case
                 # of a class subclassing another attrs.defined one, this special
@@ -1471,14 +1474,14 @@ class Net(Token):
 @define(field_transformer=ensure_metadata)
 class NetClass(Token):
     name: str
-    description: str
-    clearance: float | int
-    trace_width: float | int
-    via_dia: float | int
-    via_drill: float | int
-    uvia_dia: float | int
-    uvia_drill: float | int
-    add_net: str
+    description: str = token_field(newlines='()\n')
+    clearance: float | int = named_field(newlines='()\n')
+    trace_width: float | int = named_field(newlines='()\n')
+    via_dia: float | int = named_field(newlines='()\n')
+    via_drill: float | int = named_field(newlines='()\n')
+    uvia_dia: float | int = named_field(newlines='()\n')
+    uvia_drill: float | int = named_field(newlines='()\n')
+    add_net: str = named_field(newlines='()\n')
 
 
 @define(field_transformer=ensure_metadata)
@@ -1973,9 +1976,9 @@ class Line:
 
 @define(field_transformer=ensure_metadata)
 class Line_20171130(Line):
-    angle: float | int = token_field(eq=float_key)
+    angle: float | int = named_field(eq=float_key)
     layer: str = named_field()
-    width: float | int = REQUIRED
+    width: float | int = named_field()
 
     def to_20221018(self, target_cls: type[Line_20221018]) -> Line_20221018:
         return target_cls(
@@ -2110,9 +2113,9 @@ class Arc(Protocol):
 class Arc_20171130(Arc):
     start: Start  # It is the center point actually
     end: End
-    angle: float | int = token_field(eq=angle_key, converter=angle_normalizer)
+    angle: float | int = named_field(eq=angle_key, converter=angle_normalizer)
     layer: str = named_field()
-    width: float | int = REQUIRED
+    width: float | int = named_field()
 
     @property
     def center(self) -> Xy:
@@ -2317,7 +2320,7 @@ class Pad(Token):
     chamfer_ratio: float | int | None = named_field(default=None, metadata=dict(opt_group=1))
     chamfer: Chamfer | None = named_field(default=None, metadata=dict(opt_group=1))
     net: Net | None = token_field(default=None, eq=False, metadata=dict(opt_group=2))
-    pinfunction: str | None = named_field(default=None, metadata=dict(opt_group=2))
+    pinfunction: str | None = named_field(default=None, eq=False, metadata=dict(opt_group=2))
     pintype: str | None = named_field(default=None, eq=False, metadata=dict(opt_group=2))
     die_length: float | int | None = named_field(default=None, metadata=dict(opt_group=2))
     solder_mask_margin: float | int | None = named_field(default=None, metadata=dict(opt_group=2))
