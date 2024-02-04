@@ -47,6 +47,7 @@ import attrs
 import clyo
 from attr import field, fields
 from attrs import define
+from clyo import ProgressContext, StatusContext
 from rich import print
 from typing_extensions import Self
 
@@ -116,46 +117,54 @@ class SParser:
 
     @classmethod
     def _parse_regex(cls, content: str, *, unquote: bool = True) -> SExpr:
+        progress = ProgressContext()
+        progress.increase('parse', len(content), flush=True)
+        last_pos = 0
+
         stack: list[list[SExpr]] = []
         out: list[SExpr] = []
 
         for match in re.finditer(cls._SExpr_RE, content):
+            start = match.start()
+            progress.advance('parse', steps=start - last_pos)
+            last_pos = start
+
             if match['lparen'] is not None:
                 stack.append(out)
                 out = []
+
             elif match['rparen'] is not None:
                 assert stack, 'Trouble with nesting of brackets'
                 tmpout, out = out, stack.pop()
                 out.append(tmpout)
+                progress.increase('parse', len(tmpout))
+
             elif (value := match['number']) is not None:
                 v = float(value) if '.' in value else int(value)
                 out.append(v)
+
             elif (value := match['quoted_string']) is not None:
                 if unquote:
                     out.append(value[1:-1].replace(r'\"', '"'))
                 else:
                     out.append(value.replace(r'\"', '"'))
+
             elif (value := match['string']) is not None:
                 out.append(value)
+
             else:
                 msg = f'Error: "{match.group()}" => {match.groupdict()}'
                 raise RuntimeError(msg)
+
+        progress.advance('parse', steps=len(content) - last_pos, flush=True)
 
         assert not stack, 'Trouble with nesting of brackets'
         return out[0]
 
     @classmethod
-    def parse(cls, content: str | Path, *, unquote: bool = True) -> SExpr:
-        if isinstance(content, Path):
-            print(f'Parsing {content}...')
-            content = content.read_text()
-        else:
-            print('Parsing...')
-
+    def parse(cls, content: str, *, unquote: bool = True) -> SExpr:
         # result = cls._parse_pyparsing(content, unquote=unquote)
-        result = cls._parse_regex(content, unquote=unquote)
-        # print(f'Done parsing: {len(result)} elements')
-        return result
+        return cls._parse_regex(content, unquote=unquote)
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         msg = 'SParser is not meant to be instantiated'
@@ -412,11 +421,25 @@ class Token:
 
     @classmethod
     def from_file(cls, path: Path) -> Self:
-        return cls.from_sexpr(SParser.parse(path))
+        ProgressContext().add_task('parse', f'Loading {path}')
+
+        sexpr = SParser.parse(path.read_text())
+        result = cls.from_sexpr(sexpr)
+
+        ProgressContext().flush('parse')
+        ProgressContext().update('parse', visible=False)
+        return result
 
     @classmethod
     def from_text(cls, content: str) -> Self:
-        return cls.from_sexpr(SParser.parse(content))
+        ProgressContext().add_task('parse', 'Loading')
+
+        sexpr = SParser.parse(content)
+        result = cls.from_sexpr(sexpr)
+
+        ProgressContext().flush('parse')
+        ProgressContext().update('parse', visible=False)
+        return result
 
     @classmethod
     def from_sexpr(cls, sexpr: SExpr) -> Token | str | Number:
@@ -446,10 +469,12 @@ class Token:
             token_class = list
             is_token = False
             attributes = sexpr
+            nargs = len(attributes)
         else:
             # Otherwise we strip out the token name itself from what needs to be
             # deeply/recursively parsed.
             attributes = sexpr[1:]
+            nargs = len(attributes) + 1
             is_token = True
 
         # Deep convertion here:
@@ -470,13 +495,17 @@ class Token:
         # Actual object instantiation...
         # print('token is', token_name, token_class, args)
         if not is_token:  # Ie. it's a list
-            return token_class(args)
+            obj = token_class(args)
+            ProgressContext().advance('parse', steps=nargs)
+            return obj
         else:
             # ... except if it is a token class, in which case we deffer to the
             # (much more) complex from_sexpr_data().
             # This split allows subclasses to customise args before feeding them
             # back to Token.from_sexpr_data().
-            return token_class.from_sexpr_data(args)
+            obj = token_class.from_sexpr_data(args)
+            ProgressContext().advance('parse', steps=nargs)
+            return obj
 
     @classmethod
     def from_sexpr_data(cls, args: list[Self | str | Number]) -> Token:
@@ -712,7 +741,12 @@ class Token:
     #
 
     def to_file(self, path: Path) -> None:
+        ProgressContext().add_task('export', f'Exporting to {path}', total=self._count_elements())
+
         path.write_text(self.to_sexpr_text())
+
+        ProgressContext().flush('export')
+        ProgressContext().update('export', visible=False)
 
     if TYPE_CHECKING:
         # The iterator to_sexpr_elements() returns.
@@ -735,6 +769,7 @@ class Token:
 
     def to_sexpr_list(self) -> SExpr:
         """Deeply converts this token to SExpr list-form"""
+        ProgressContext().add_task('export', 'Exporting', total=self._count_elements())
 
         def list_walker(value: list[SExpr]) -> Iterator[SExpr]:
             for item in value:
@@ -765,7 +800,10 @@ class Token:
                 elif value is not None:
                     yield value
 
-        return list(walker(self.to_sexpr_elements()))
+        to_return = list(walker(self.to_sexpr_elements()))
+        ProgressContext().flush('export')
+        ProgressContext().update('export', visible=False)
+        return to_return
 
     def to_sexpr_text(self) -> str:
         """Deeply converts this token to SExpr text-form.
@@ -872,6 +910,39 @@ class Token:
 
         return f'({joiner(walker(self.to_sexpr_elements()))})\n'
 
+    def _count_elements(self) -> int:
+        """Recurse to walk down our fields in order to know how much elements we have."""
+
+        our_fields = fields(type(self))
+        count = len(our_fields) + 1
+
+        for field in our_fields:
+            field: attrs.Attribute[Any]
+            field_type, _ = self._get_field_types(field.type)
+
+            value = getattr(self, field.name)
+            if value is None:
+                continue
+
+            if type(field_type) is tuple:
+                for type_ in field_type:
+                    if isinstance(value, type_):
+                        field_type = type_
+                        break
+                else:
+                    msg = f'Field {field.name} of {type(self).__name__} is not of correct type: {field_type}'
+                    raise ValueError(msg)
+
+            if field_type is list:
+                for item in value:
+                    if isinstance(item, Token):
+                        count += item._count_elements()
+
+            elif issubclass(field_type, Token):
+                count += value._count_elements()
+
+        return count
+
     def to_sexpr_elements(self) -> _ToSExprIterator:
         """Iterates over the fields of this token, and yield tuples of (field, value).
 
@@ -897,8 +968,10 @@ class Token:
         internal token declarations (such as _LayerDef for instance).
         """
 
+        progress = ProgressContext()
         Token.CURRENT_CONTEXT.append(type(self))
         yield None, self.token_name(usage='export')
+        progress.advance('export', 1)
 
         newlines_filter: NewlinesFilter = None
         if hasattr(self, 'newlines_filter'):
@@ -935,6 +1008,8 @@ class Token:
                 # print(f'skipping {field.name} on {type(self).__name__}')
                 if nl_force:
                     yield None, '\n'
+
+                progress.advance('export', 1)
                 continue
 
             if value is REQUIRED:
@@ -963,6 +1038,7 @@ class Token:
 
             if field_type is list:
                 if not value:
+                    progress.advance('export', 1)
                     continue
 
                 if nl_before_first:
@@ -987,10 +1063,12 @@ class Token:
                 if nl_after_last:
                     yield None, '\n'
 
+                progress.advance('export', 1)
                 continue
 
             elif field_type is dict:
                 if not value:
+                    progress.advance('export', 1)
                     continue
 
                 if nl_before_first:
@@ -1021,10 +1099,12 @@ class Token:
                 if nl_after_last:
                     yield None, '\n'
 
+                progress.advance('export', 1)
                 continue
 
             elif (type(value) is bool) and self._is_literal_field(field, field_type):  # noqa: E721
                 if not value:
+                    progress.advance('export', 1)
                     continue
 
                 literal = field.metadata['literal']
@@ -1039,6 +1119,7 @@ class Token:
                 if nl_after:
                     yield None, '\n'
 
+                progress.advance('export', 1)
                 continue
 
             if nl_before:
@@ -1084,6 +1165,8 @@ class Token:
 
             if nl_after:
                 yield None, '\n'
+
+            progress.advance('export', 1)
 
         if newlines_filter and newlines['at_end']:
             yield None, '\n'
@@ -2592,19 +2675,20 @@ def cli_parse(
 
         return
 
-    obj = Token.from_file(filename)
-    print(f'Loaded a {type(obj).__name__}')
+    with ProgressContext():
+        obj = Token.from_file(filename)
+        print(f'Loaded a {type(obj).__name__}')
 
-    if do_print:
-        print('>>>', obj)
-    if as_list:
-        print('>>>', obj.to_sexpr_list())
-    if as_text:
-        print('>>>', obj.to_sexpr_text())
+        if do_print:
+            print('>>>', obj)
+        if as_list:
+            print('>>>', obj.to_sexpr_list())
+        if as_text:
+            print('>>>', obj.to_sexpr_text())
 
-    if reexport:
-        print('Exporting...')
-        obj.to_file(reexport)
+        if reexport:
+            print('Exporting...')
+            obj.to_file(reexport)
 
 
 @kicad_cli.command('convert-pcb-to-footprint')
@@ -2612,19 +2696,20 @@ def cli_convert_pcb_to_footprint(
     pcb_path: Path,
     footprint_path: Path,
 ) -> None:
-    name = pcb_path.stem
-    pcb = KicadPcb.from_file(pcb_path)
+    with ProgressContext():
+        name = pcb_path.stem
+        pcb = KicadPcb.from_file(pcb_path)
 
-    footprint = None
-    if (footprint_path.suffix == '.kicad_mod') and footprint_path.exists():
-        footprint = Footprint.from_file(footprint_path)
+        footprint = None
+        if (footprint_path.suffix == '.kicad_mod') and footprint_path.exists():
+            footprint = Footprint.from_file(footprint_path)
 
-    footprint = convert_pcb_to_footprint(pcb, name, 'ergogen_keebs', footprint)
+        footprint = convert_pcb_to_footprint(pcb, name, 'ergogen_keebs', footprint)
 
-    if footprint_path.suffix == '.pretty':
-        footprint_path /= f'{name}.kicad_mod'
-    footprint_path.parent.mkdir(exist_ok=True)
-    footprint.to_file(footprint_path)
+        if footprint_path.suffix == '.pretty':
+            footprint_path /= f'{name}.kicad_mod'
+        footprint_path.parent.mkdir(exist_ok=True)
+        footprint.to_file(footprint_path)
 
 
 @kicad_cli.command('update-fabrication-files')
@@ -2636,13 +2721,17 @@ def cli_update_fabrication_files(
 ) -> None:
     from ergogen import Keyboard
 
-    keeb = Keyboard(ergogen_yaml, points_yaml, units_yaml)
+    with StatusContext() as status, ProgressContext():
+        keeb = Keyboard(ergogen_yaml, points_yaml, units_yaml)
 
-    if project:
-        _update_project(keeb, keeb.fabrication[project])
-    else:
-        for project_data in keeb.fabrication.values():
-            _update_project(keeb, project_data)
+        if project:
+            _update_project(keeb, keeb.fabrication[project])
+        else:
+            for project_name, project_data in keeb.fabrication.items():
+                status.update(f'Updating for {project_name}')
+                _update_project(keeb, project_data)
+
+        status.update('Done')
 
 
 def _update_project(
@@ -2669,6 +2758,7 @@ def _update_project(
 
     for obj in project['objects']:
         if 'outline' in obj:
+            StatusContext().update(f'Updating outline {obj["outline"]}')
             # First, convert the outline as footprint
             source_path = Path(f'ergogen-output/pcbs/{obj["outline"]}.kicad_pcb')
             target_path = ergogen_lib_path / f'{obj["outline"]}.kicad_mod'
@@ -2702,20 +2792,21 @@ def _update_project(
                 target_footprint.add_on_pcb(
                     pcb, lib=ergogen_lib.name, ref=obj.get('ref', None), at=position
                 )
-                pcb.to_file(pcb_path)
             else:
                 outline_fp.update_from(target_footprint, 0)
                 outline_fp.at = position
-                pcb.to_file(pcb_path)
 
         elif 'keys' in obj:
+            StatusContext().update('Updating keys')
             if pcb is None:
                 pcb = KicadPcb.from_file(pcb_path)
 
             for spec in obj['keys']:
                 do_keys(keeb, project, fp_lib_table, paths, pcb, spec)
 
-            pcb.to_file(pcb_path)
+    if pcb is not None:
+        StatusContext().update('Writing PCB file')
+        pcb.to_file(pcb_path)
 
 
 def footprint_from_lib(
@@ -2798,6 +2889,9 @@ def do_keys(
             continue
         if attribs is None:
             attribs = AttrDict(point['original'])
+        ref = spec['ref'].format(**attribs)
+
+        StatusContext().update(f'Updating key {point["name"]} ({ref=})')
 
         with Footprint.as_context():
             position = At(attribs.x, -attribs.y)
@@ -2808,14 +2902,12 @@ def do_keys(
             angle = attribs.r + spec.get('angle', 0)
             position.angle = angle if angle else None
 
-        ref = spec['ref'].format(**attribs)
-
         pcb_footprint = pcb.find_ref(ref, Footprint)
         if pcb_footprint is None:
-            print(f'Adding {point["name"]} at pos={position} with {ref=}')
+            _logger.info(f'Adding {point["name"]} at pos={position} with {ref=}')
             footprint.add_on_pcb(pcb, lib=lib_name, ref=ref, at=position)
         else:
-            print(f'Updating {point["name"]} at pos={position} with {ref=}')
+            _logger.info(f'Updating {point["name"]} at pos={position} with {ref=}')
             pcb_footprint.update_from(footprint, angle)
             pcb_footprint.at = position
             pcb_footprint.name = f'{lib_name}:{footprint.name}'

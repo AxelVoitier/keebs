@@ -123,7 +123,12 @@ def prompt() -> None:
 if __name__ == '__main__':
     if hasattr(cli, 'set_main_callback'):
         cli.set_main_callback(
-            NAME, config=config, default_command=prompt, default_config_path=Path('config.cfg')
+            NAME,
+            config=config,
+            default_command=prompt,
+            default_config_path=Path('config.cfg'),
+            default_logging_level='WARNING',
+            rich_tracebacks=False,
         )
 
     cli(prog_name=NAME)
