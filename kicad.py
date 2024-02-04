@@ -216,6 +216,9 @@ class Token:
 
         super().__init_subclass__(*args, **kwargs)
 
+        if hasattr(cls, '__attrs_attrs__'):
+            attrs.resolve_types(cls, include_extras=True)
+
         token_name = cls.token_name(usage='parse')
         if token_name:
             class_name = f'{cls.__module__}.{cls.__qualname__}'
@@ -420,7 +423,7 @@ class Token:
         """Takes the output from SParser and produces object representation of it."""
 
         # print('evaluating', sexpr)
-        if (type(sexpr) is str) or (type(sexpr) is float) or (type(sexpr) is int):
+        if (type(sexpr) is str) or (type(sexpr) is float) or (type(sexpr) is int):  # noqa: E721
             return sexpr
 
         token_name = sexpr[0]
@@ -498,7 +501,6 @@ class Token:
 
         if Version.CURRENT is not None:
             cls = cls._get_versionned_token_class(Version.CURRENT.version)
-        attrs.resolve_types(cls, include_extras=True)
 
         # To build the kwargs, we take each declared field, and try to match it
         # to 0, 1, or more positional args. To match, we rely on type hints.
@@ -896,7 +898,6 @@ class Token:
         """
 
         Token.CURRENT_CONTEXT.append(type(self))
-        attrs.resolve_types(type(self), include_extras=True)
         yield None, self.token_name(usage='export')
 
         newlines_filter: NewlinesFilter = None
@@ -1305,12 +1306,6 @@ class Lib(Token):
 
 
 @define(field_transformer=ensure_metadata)
-class FpLibTable(Token):
-    version: Version = token_field(newlines='\n()\n')
-    libs: list[Lib] = token_field(newlines='()\n')
-
-
-@define(field_transformer=ensure_metadata)
 class General(Token):
     thickness: float | int = named_field(newlines='\n()\n')
 
@@ -1496,201 +1491,6 @@ class Version(Token):
         # on the main file token (eg. kicad_pcb) version member as this happens
         # last and we need to access it before to build versionned tokens).
         type(self).CURRENT = self
-
-
-@define(kw_only=True, field_transformer=ensure_metadata)
-class KicadPcb(Token):
-    """Token for a .kicad_pcb file."""
-
-    version: Version
-    generator: str = named_field(newlines='()\n', quoted=False)
-    general: General = token_field(newlines='\n()\n')
-    paper: Paper | Page = token_field(newlines='\n()\n')
-    title_block: TitleBlock | None = None
-    layers: Layers = token_field(newlines='()\n')
-    setup: Setup = token_field(newlines='\n()\n')
-    # properties
-    nets: list[Net] = token_field(newlines='\n[()\n]')
-    net_classes: list[NetClass] | None = None  # Old versions
-    footprints: list[Footprint] | None = token_field(newlines='\n()\n')
-    graphic_items: list[GraphicItem] = token_field(newlines='\n[()\n]')
-    segments: list[Segment] = token_field(newlines='\n[()\n]')
-    zones: list[Zone] = token_field(newlines='\n[()\n]')
-    data: list[Token | list] = token_field(newlines='[\n()\n]')
-
-    def newlines_filter(
-        self,
-        field: attrs.Attribute[Any] | None,
-        value: Any | None,
-        newlines: dict[str, bool],
-    ) -> dict[str, bool]:
-        if not field:  # Init
-            newlines['at_end'] = True
-            return newlines
-
-        if not value:
-            return newlines
-
-        if field.name in ('segments', 'zones'):
-            newlines['at_end'] = False
-
-        return newlines
-
-    @classmethod
-    def from_sexpr_data(cls, args: list[Self | str | Number]) -> Self:
-        if args[1][0] == 'host':  # Older host variant of generator
-            args[1] = ['generator', ' '.join(args[1][1:])]
-
-        return super().from_sexpr_data(args)
-
-    def find_ref[T: Token](self, ref: str, type_: type[T] = Token) -> T | None:
-        if issubclass(type_, Footprint) or (type_ is Token):
-            for footprint in self.footprints:
-                ref_field = footprint.find_item(FpText, type=FpText.FpTextType.reference)
-                if ref_field is None:
-                    continue
-                if ref_field.text == ref:
-                    return footprint
-
-        return None
-
-
-@define(field_transformer=ensure_metadata)
-class Footprint(Token):
-    """Token for a .kicad_mod file."""
-
-    name: str  # Aka library_link when placed in a PCB
-
-    # In .kicad_mod only
-    version: Version | None = None
-    generator: str | None = named_field(default=None, quoted=False, newlines='()\n')
-
-    # In .kicad_pcb only
-    locked: bool | None = literal_field(default=None)
-    placed: bool | None = literal_field(default=None)
-
-    layer: str = named_field(newlines='()\n')
-
-    # In .kicad_pcb only
-    tstamp: uuid.UUID | None = uuid_field(default=None, newlines='()\n')
-    at: At | None = token_field(default=None, newlines='()\n')
-
-    descr: str | None = named_field(default=None, newlines='()\n')
-    tags: str | None = named_field(default=None, newlines='()\n')
-    properties: list[Property] | None = token_field(default=None, newlines='()\n')
-    path: str | None = named_field(default=None, newlines='()\n')
-    # Covers things like attr, property, path, ...
-    settings: dict[str, Any] = token_field(newlines='()\n')
-
-    graphic_items: list[GraphicItem] = token_field(newlines='()\n')
-    # pads: list[Pad] | None = token_field(default=None, newlines='()\n')
-    # models: list[Model] | None = token_field(default=None, newlines='()\n')
-    pads: list[Pad] = token_field(newlines='()\n')
-    models: list[Model] = token_field(newlines='()\n')
-    data: list[Token | list] = token_field(newlines='()\n')
-
-    def find_item[T: Token](self, type_: type[T] = Token, **fields: Any) -> T | None:
-        for graphic_item in self.graphic_items:
-            if not isinstance(graphic_item, type_):
-                continue
-            if graphic_item.match(**fields):
-                return graphic_item
-        return None
-
-    def add_on_pcb(self, pcb: KicadPcb, lib: str, ref: str | None, at: At) -> None:
-        footprint = deepcopy(self)
-        footprint.name = f'{lib}:{footprint.name}'
-        footprint.version = None
-        footprint.generator = None
-        footprint.tstamp = uuid.uuid4()
-        footprint.at = at
-        if ref:
-            ref_text = footprint.find_item(FpText, type=FpText.FpTextType.reference)
-            if ref_text:
-                ref_text.text = ref
-
-        for item in chain(footprint.graphic_items, footprint.pads, footprint.models):
-            if hasattr(item, 'tstamp'):
-                item.tstamp = uuid.uuid4()
-            if at.angle and hasattr(item, 'at'):
-                if item.at.angle is None:
-                    item.at.angle = 0
-                item.at.angle += at.angle
-
-        pcb.footprints.append(footprint)
-
-    def update_from(
-        self,
-        model: Footprint,
-        new_angle: float,
-        *,
-        settings: bool = True,
-        texts: bool = True,
-    ) -> None:
-        ref = None
-        if texts:
-            ref_text = self.find_item(FpText, type=FpText.FpTextType.reference)
-            if ref_text:
-                ref = ref_text.text
-
-        if settings:
-            self.settings = deepcopy(model.settings)
-
-        old_angle = self.at.angle or 0
-        angle_changed = abs(old_angle - new_angle) >= 1e-6
-
-        def update_angle(item: GraphicItem) -> GraphicItem:
-            if angle_changed and hasattr(item, 'at'):
-                if item.at.angle is None:
-                    item.at.angle = 0
-                item.at.angle -= old_angle
-                item.at.angle += new_angle
-                if not item.at.angle:
-                    item.at.angle = None
-            return item
-
-        def update_items(collection_name: str) -> None:
-            old_items: list[Token] = getattr(self, collection_name)
-            new_items: list[Token] = []
-            setattr(self, collection_name, new_items)
-
-            if not texts and old_items:
-                for item in old_items:
-                    if isinstance(item, FpText):
-                        with FpText.as_context():
-                            new_items.append(update_angle(item))
-
-            for item in getattr(model, collection_name):
-                if isinstance(item, FpText) and not texts:
-                    continue
-
-                new_item = deepcopy(item)
-                if hasattr(new_item, 'tstamp'):
-                    item.tstamp = uuid.uuid4()
-                if (ref is not None) and isinstance(new_item, FpText) and new_item.is_ref():
-                    new_item.text = ref
-
-                with type(new_item).as_context():
-                    if old_angle and hasattr(new_item, 'at'):
-                        if new_item.at.angle is None:
-                            new_item.at.angle = 0
-                        new_item.at.angle += old_angle
-
-                    if not old_items:
-                        new_items.append(update_angle(new_item))
-                    elif old_items[-1] == new_item:
-                        new_items.append(update_angle(old_items.pop()))
-                    else:
-                        try:
-                            index = old_items.index(new_item)
-                        except ValueError:
-                            new_items.append(update_angle(new_item))
-                        else:
-                            new_items.append(update_angle(old_items.pop(index)))
-
-        update_items('graphic_items')
-        update_items('pads')
-        update_items('models')
 
 
 @define(order=True, field_transformer=ensure_metadata)
@@ -2383,12 +2183,12 @@ class Segment(Token):
 
 @define(field_transformer=ensure_metadata)
 class Hatch(Token):
-    class Style(Enum):
+    class HatchStyle(Enum):
         none = 'none'
         edge = 'edge'
         full = 'full'
 
-    style: Hatch.Style = token_field(converter=Style)
+    style: HatchStyle = token_field(converter=HatchStyle)
     pitch: float | int = REQUIRED
 
 
@@ -2446,6 +2246,207 @@ class Zone(Token):
     fill: dict[str, Any] | None = named_field(newlines='[()]\n')
     polygon: Polygon = token_field(newlines='()\n')
     filled_polygons: list[FilledPolygon] | None = token_field(default=None, newlines='()\n')
+
+
+@define(field_transformer=ensure_metadata)
+class FpLibTable(Token):
+    version: Version = token_field(newlines='\n()\n')
+    libs: list[Lib] = token_field(newlines='()\n')
+
+
+@define(field_transformer=ensure_metadata)
+class Footprint(Token):
+    """Token for a .kicad_mod file."""
+
+    name: str  # Aka library_link when placed in a PCB
+
+    # In .kicad_mod only
+    version: Version | None = None
+    generator: str | None = named_field(default=None, quoted=False, newlines='()\n')
+
+    # In .kicad_pcb only
+    locked: bool | None = literal_field(default=None)
+    placed: bool | None = literal_field(default=None)
+
+    layer: str = named_field(newlines='()\n')
+
+    # In .kicad_pcb only
+    tstamp: uuid.UUID | None = uuid_field(default=None, newlines='()\n')
+    at: At | None = token_field(default=None, newlines='()\n')
+
+    descr: str | None = named_field(default=None, newlines='()\n')
+    tags: str | None = named_field(default=None, newlines='()\n')
+    properties: list[Property] | None = token_field(default=None, newlines='()\n')
+    path: str | None = named_field(default=None, newlines='()\n')
+    # Covers things like attr, property, path, ...
+    settings: dict[str, Any] = token_field(newlines='()\n')
+
+    graphic_items: list[GraphicItem] = token_field(newlines='()\n')
+    # pads: list[Pad] | None = token_field(default=None, newlines='()\n')
+    # models: list[Model] | None = token_field(default=None, newlines='()\n')
+    pads: list[Pad] = token_field(newlines='()\n')
+    models: list[Model] = token_field(newlines='()\n')
+    data: list[Token | list] = token_field(newlines='()\n')
+
+    def find_item[T: Token](self, type_: type[T] = Token, **fields: Any) -> T | None:
+        for graphic_item in self.graphic_items:
+            if not isinstance(graphic_item, type_):
+                continue
+            if graphic_item.match(**fields):
+                return graphic_item
+        return None
+
+    def add_on_pcb(self, pcb: KicadPcb, lib: str, ref: str | None, at: At) -> None:
+        footprint = deepcopy(self)
+        footprint.name = f'{lib}:{footprint.name}'
+        footprint.version = None
+        footprint.generator = None
+        footprint.tstamp = uuid.uuid4()
+        footprint.at = at
+        if ref:
+            ref_text = footprint.find_item(FpText, type=FpText.FpTextType.reference)
+            if ref_text:
+                ref_text.text = ref
+
+        for item in chain(footprint.graphic_items, footprint.pads, footprint.models):
+            if hasattr(item, 'tstamp'):
+                item.tstamp = uuid.uuid4()
+            if at.angle and hasattr(item, 'at'):
+                if item.at.angle is None:
+                    item.at.angle = 0
+                item.at.angle += at.angle
+
+        pcb.footprints.append(footprint)
+
+    def update_from(
+        self,
+        model: Footprint,
+        new_angle: float,
+        *,
+        settings: bool = True,
+        texts: bool = True,
+    ) -> None:
+        ref = None
+        if texts:
+            ref_text = self.find_item(FpText, type=FpText.FpTextType.reference)
+            if ref_text:
+                ref = ref_text.text
+
+        if settings:
+            self.settings = deepcopy(model.settings)
+
+        old_angle = self.at.angle or 0
+        angle_changed = abs(old_angle - new_angle) >= 1e-6
+
+        def update_angle(item: GraphicItem) -> GraphicItem:
+            if angle_changed and hasattr(item, 'at'):
+                if item.at.angle is None:
+                    item.at.angle = 0
+                item.at.angle -= old_angle
+                item.at.angle += new_angle
+                if not item.at.angle:
+                    item.at.angle = None
+            return item
+
+        def update_items(collection_name: str) -> None:
+            old_items: list[Token] = getattr(self, collection_name)
+            new_items: list[Token] = []
+            setattr(self, collection_name, new_items)
+
+            if not texts and old_items:
+                for item in old_items:
+                    if isinstance(item, FpText):
+                        with FpText.as_context():
+                            new_items.append(update_angle(item))
+
+            for item in getattr(model, collection_name):
+                if isinstance(item, FpText) and not texts:
+                    continue
+
+                new_item = deepcopy(item)
+                if hasattr(new_item, 'tstamp'):
+                    item.tstamp = uuid.uuid4()
+                if (ref is not None) and isinstance(new_item, FpText) and new_item.is_ref():
+                    new_item.text = ref
+
+                with type(new_item).as_context():
+                    if old_angle and hasattr(new_item, 'at'):
+                        if new_item.at.angle is None:
+                            new_item.at.angle = 0
+                        new_item.at.angle += old_angle
+
+                    if not old_items:
+                        new_items.append(update_angle(new_item))
+                    elif old_items[-1] == new_item:
+                        new_items.append(update_angle(old_items.pop()))
+                    else:
+                        try:
+                            index = old_items.index(new_item)
+                        except ValueError:
+                            new_items.append(update_angle(new_item))
+                        else:
+                            new_items.append(update_angle(old_items.pop(index)))
+
+        update_items('graphic_items')
+        update_items('pads')
+        update_items('models')
+
+
+@define(kw_only=True, field_transformer=ensure_metadata)
+class KicadPcb(Token):
+    """Token for a .kicad_pcb file."""
+
+    version: Version
+    generator: str = named_field(newlines='()\n', quoted=False)
+    general: General = token_field(newlines='\n()\n')
+    paper: Paper | Page = token_field(newlines='\n()\n')
+    title_block: TitleBlock | None = None
+    layers: Layers = token_field(newlines='()\n')
+    setup: Setup = token_field(newlines='\n()\n')
+    # properties
+    nets: list[Net] = token_field(newlines='\n[()\n]')
+    net_classes: list[NetClass] | None = None  # Old versions
+    footprints: list[Footprint] | None = token_field(newlines='\n()\n')
+    graphic_items: list[GraphicItem] = token_field(newlines='\n[()\n]')
+    segments: list[Segment] = token_field(newlines='\n[()\n]')
+    zones: list[Zone] = token_field(newlines='\n[()\n]')
+    data: list[Token | list] = token_field(newlines='[\n()\n]')
+
+    def newlines_filter(
+        self,
+        field: attrs.Attribute[Any] | None,
+        value: Any | None,
+        newlines: dict[str, bool],
+    ) -> dict[str, bool]:
+        if not field:  # Init
+            newlines['at_end'] = True
+            return newlines
+
+        if not value:
+            return newlines
+
+        if field.name in ('segments', 'zones'):
+            newlines['at_end'] = False
+
+        return newlines
+
+    @classmethod
+    def from_sexpr_data(cls, args: list[Self | str | Number]) -> Self:
+        if args[1][0] == 'host':  # Older host variant of generator
+            args[1] = ['generator', ' '.join(args[1][1:])]
+
+        return super().from_sexpr_data(args)
+
+    def find_ref[T: Token](self, ref: str, type_: type[T] = Token) -> T | None:
+        if issubclass(type_, Footprint) or (type_ is Token):
+            for footprint in self.footprints:
+                ref_field = footprint.find_item(FpText, type=FpText.FpTextType.reference)
+                if ref_field is None:
+                    continue
+                if ref_field.text == ref:
+                    return footprint
+
+        return None
 
 
 def convert_pcb_to_footprint(

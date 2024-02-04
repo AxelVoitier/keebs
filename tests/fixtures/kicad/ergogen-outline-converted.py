@@ -5,6 +5,7 @@ footprint = kicad.Footprint(
     version=kicad.Version(version=20221018),
     generator='pcbnew',
     layer='F.Cu',
+    properties=[],
     settings=dict(attr=['board_only', 'exclude_from_pos_files', 'exclude_from_bom']),
     graphic_items=[
         kicad.FpText(
