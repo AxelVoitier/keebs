@@ -5,8 +5,10 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #
 # spell-checker:enableCompoundWords
-# spell-checker:words kicad altium geda pyparsing uncasted reexport keebs
+# spell-checker:words kicad altium geda pyparsing uncasted reexport keeb keebs
+# spell-checker:words reifier stackup vias wheres attribs
 # spell-checker:ignore sexpr descr alphanums subcls uvia mult tstamp Pcbplotparams
+# spell-checker: ignore thru rratio tmpout KIPRJMOD
 """"""
 from __future__ import annotations
 
@@ -1783,7 +1785,7 @@ class FpText(GraphicItem):
         value = 'value'
         user = 'user'
 
-    type: FpTextType = token_field(converter=FpTextType)  # noqa: A003
+    type: FpTextType = token_field(converter=FpTextType)
     text: str = REQUIRED
     at: At = REQUIRED
     layer: str = named_field()
@@ -1858,7 +1860,7 @@ class Line:
 
 
 @define(field_transformer=ensure_metadata)
-class Line_20171130(Line):
+class Line_20171130(Line):  # noqa: N801
     angle: float | int = named_field(eq=float_key)
     layer: str = named_field()
     width: float | int = named_field()
@@ -1875,7 +1877,7 @@ class Line_20171130(Line):
 
 
 @define(field_transformer=ensure_metadata)
-class Line_20221018(Line):
+class Line_20221018(Line):  # noqa: N801
     angle: float | int | None = token_field(default=None, eq=float_key)
     stroke: Stroke = token_field(newlines='\n()')
     layer: str = named_field()
@@ -1888,12 +1890,12 @@ class FpLine(GraphicItem):
 
 
 @define(field_transformer=ensure_metadata)
-class FpLine_20171130(FpLine, Line_20171130):
+class FpLine_20171130(FpLine, Line_20171130):  # noqa: N801
     pass
 
 
 @define(field_transformer=ensure_metadata)
-class FpLine_20221018(FpLine, Line_20221018):
+class FpLine_20221018(FpLine, Line_20221018):  # noqa: N801
     pass
 
 
@@ -1903,12 +1905,12 @@ class GrLine(GraphicItem):
 
 
 @define(field_transformer=ensure_metadata)
-class GrLine_20171130(GrLine, Line_20171130):
+class GrLine_20171130(GrLine, Line_20171130):  # noqa: N801
     pass
 
 
 @define(field_transformer=ensure_metadata)
-class GrLine_20221018(GrLine, Line_20221018):
+class GrLine_20221018(GrLine, Line_20221018):  # noqa: N801
     pass
 
 
@@ -1961,6 +1963,7 @@ class Arc(Protocol):
     Relies on the presence of an end field, and center property to do its math.
     """
 
+    start: Start
     end: End
 
     @property
@@ -1993,7 +1996,7 @@ class Arc(Protocol):
 
 
 @define(field_transformer=ensure_metadata)
-class Arc_20171130(Arc):
+class Arc_20171130(Arc):  # noqa: N801
     start: Start  # It is the center point actually
     end: End
     angle: float | int = named_field(eq=angle_key, converter=angle_normalizer)
@@ -2023,7 +2026,7 @@ class Arc_20171130(Arc):
 
 
 @define(field_transformer=ensure_metadata)
-class Arc_20221018(Arc):
+class Arc_20221018(Arc):  # noqa: N801
     start: Start
     mid: Mid
     end: End
@@ -2054,12 +2057,12 @@ class FpArc(GraphicItem):
 
 
 @define(field_transformer=ensure_metadata)
-class FpArc_20171130(FpArc, Arc_20171130):
+class FpArc_20171130(FpArc, Arc_20171130):  # noqa: N801
     pass
 
 
 @define(field_transformer=ensure_metadata)
-class FpArc_20221018(FpArc, Arc_20221018):
+class FpArc_20221018(FpArc, Arc_20221018):  # noqa: N801
     pass
 
 
@@ -2069,12 +2072,12 @@ class GrArc(GraphicItem):
 
 
 @define(field_transformer=ensure_metadata)
-class GrArc_20171130(GrArc, Arc_20171130):
+class GrArc_20171130(GrArc, Arc_20171130):  # noqa: N801
     pass
 
 
 @define(field_transformer=ensure_metadata)
-class GrArc_20221018(GrArc, Arc_20221018):
+class GrArc_20221018(GrArc, Arc_20221018):  # noqa: N801
     pass
 
 
@@ -2209,7 +2212,8 @@ class Pad(Token):
     solder_mask_margin: float | int | None = named_field(default=None, metadata=dict(opt_group=2))
     solder_paste_margin: float | int | None = named_field(default=None, metadata=dict(opt_group=2))
     solder_paste_margin_ratio: float | int | None = named_field(
-        default=None, metadata=dict(opt_group=2)
+        default=None,
+        metadata=dict(opt_group=2),
     )
     clearance: float | int | None = named_field(default=None, metadata=dict(opt_group=2))
     zone_connect: int | None = named_field(default=None, metadata=dict(opt_group=2))
@@ -2283,7 +2287,8 @@ class ConnectPads(Token):
         no = 'no'
 
     connection_type: ConnectionType | None = token_field(
-        default=None, converter=lambda value: ConnectPads.ConnectionType(value) if value else None
+        default=None,
+        converter=lambda value: ConnectPads.ConnectionType(value) if value else None,
     )
     clearance: float | int = named_field()
 
@@ -2594,7 +2599,7 @@ def convert_pcb_to_footprint(
 
     version = footprint.version.version
 
-    def sorting_key(item: GraphicItem) -> Any:
+    def sorting_key(item: GraphicItem) -> tuple[int, int | float | None, Any]:
         """Tries to sort like kicad seems to sort."""
 
         i1 = i2 = i3 = None
@@ -2625,7 +2630,7 @@ def convert_pcb_to_footprint(
         fp_item = item.to_version(version).to_footprint()
 
         # Filter out buggy ergogen arcs and lines that ends on the same point than it starts.
-        # In case of arcs, due to rounding in newer versions of KiCad, it displays them
+        # In case of arcs, due to rounding in newer versions of KiCad, it displays them
         # as full circles.
         # And in cases of lines if can make an Edge.Cut non-manifold (or even weirder, inverted).
         if isinstance(fp_item, (FpLine, FpArc)) and (fp_item.start == fp_item.end.cast_to(Start)):
@@ -2649,7 +2654,8 @@ def convert_pcb_to_footprint(
 @kicad_cli.command('parse')
 def cli_parse(
     filename: Path,
-    reexport: Optional[Path] = None,
+    reexport: Optional[Path] = None,  # noqa: UP007
+    *,
     do_print: bool = True,
     as_list: bool = False,
     as_text: bool = False,
@@ -2752,7 +2758,8 @@ def _update_project(
     paths = dict(KIPRJMOD=str(project_folder))
 
     fp_lib_table, ergogen_lib = _ergogen_lib_info(
-        project_folder, project.get('ergogen-lib-name', 'Ergogen')
+        project_folder,
+        project.get('ergogen-lib-name', 'Ergogen'),
     )
     ergogen_lib_path = Path(ergogen_lib.uri.replace('${KIPRJMOD}', str(project_folder)))
 
@@ -2810,7 +2817,9 @@ def _update_project(
 
 
 def footprint_from_lib(
-    fp_lib_table: FpLibTable, paths: dict[str, str], name: str
+    fp_lib_table: FpLibTable,
+    paths: dict[str, str],
+    name: str,
 ) -> Footprint | None:
     # TODO: Also lookup in user config (~/.config/kicad/<version?>/fp-lib-table)
     lib_name, footprint_name = name.split(':', maxsplit=1)
@@ -2836,7 +2845,7 @@ class AttrDict(dict[str, Any]):
             if isinstance(value, dict):
                 self[key] = type(self)(value)
 
-    def __getattr__(self, key: str) -> Any:
+    def __getattr__(self, key: str) -> Any:  # noqa: ANN401
         try:
             return self[key]
         except KeyError as ex:
@@ -2851,7 +2860,7 @@ def do_keys(
     pcb: KicadPcb,
     spec: dict[str, Any],
 ) -> None:
-    wheres = spec.get('where', None)
+    wheres = spec.get('where')
     if wheres:
         if not isinstance(wheres, list):
             wheres = [wheres]
@@ -2875,7 +2884,7 @@ def do_keys(
                 point_where = where.format(**locs, **attribs)
             except AttributeError:
                 return False, attribs
-            if not eval(point_where, None, locs):
+            if not eval(point_where, None, locs):  # noqa: S307  # It's fine...
                 return False, attribs
 
         return True, attribs
@@ -2904,10 +2913,10 @@ def do_keys(
 
         pcb_footprint = pcb.find_ref(ref, Footprint)
         if pcb_footprint is None:
-            _logger.info(f'Adding {point["name"]} at pos={position} with {ref=}')
+            _logger.info('Adding %s at pos=%s with ref=%s', point['name'], position, ref)
             footprint.add_on_pcb(pcb, lib=lib_name, ref=ref, at=position)
         else:
-            _logger.info(f'Updating {point["name"]} at pos={position} with {ref=}')
+            _logger.info('Updating %s at pos=%s with ref=%s', point['name'], position, ref)
             pcb_footprint.update_from(footprint, angle)
             pcb_footprint.at = position
             pcb_footprint.name = f'{lib_name}:{footprint.name}'
