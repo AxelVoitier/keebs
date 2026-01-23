@@ -17,5 +17,8 @@ Bottom view without 3D model
 Bottom in footprint editor (flipped, with FAB layer on to see the pin mapping)
 [![image](OKM%2004.png)](OKM%2004.png)
 
-> [!WARNING]
-> Pin mapping not confirmed.
+## A1 Input Module Board
+
+[![image](A1%20Board%2001.png)](A1%20Board%2001.png)
+
+[![image](A1%20Board%2002.png)](A1%20Board%2002.png)
