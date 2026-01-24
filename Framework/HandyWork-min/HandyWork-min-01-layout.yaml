@@ -1,0 +1,132 @@
+units:
+  kx: u  # 19 mm
+  ky: u  # 19mm
+
+  # Columns stagger, referenced to index column
+  inner_off: -2.5  # Kyria
+  index_off: 0  # Should remain 0
+  middle_off: +6.5  # Kyria
+  ring_off: -(4/25)U  # YAEMK
+  pinky_off: -(5/7)U  # YAEMK
+  #outer_off: -(103/125)U  # YAEMK
+  #outer_off: -21.4  # Elephant42
+  outer_off: -25
+
+  # Columns absolute splay (degrees)
+  inner_splay: 0
+  index_splay: 0
+  middle_splay: 5
+  ring_splay: 10
+  pinky_splay: 15
+  outer_splay: 20
+
+points:
+  key:
+    width: kx
+    height: ky
+
+  zones:
+    matrix:
+      anchor.shift: [1.5kx, -3ky+3]
+      mirror: 0
+      rotate: 25
+
+      key:
+        padding: 1ky
+        spread: 1kx
+        tags:
+          1u: true
+
+      columns:
+        inner:
+          key.splay: -inner_splay
+          rows.mod.skip: true
+        index:
+          key.stagger: -inner_off + index_off
+          key.splay: +inner_splay - index_splay
+          rows.mod.skip: true
+        middle:
+          key.stagger: -index_off + middle_off
+          key.splay: +index_splay - middle_splay
+          key.spread: 1kx + 0.8
+          #rows.mod.skip: true
+        ring:
+          key.stagger: -middle_off + ring_off
+          key.splay: +middle_splay - ring_splay
+          key.spread: 1kx + 0.04
+          #rows.mod.skip: true  # Defined by nav cluster instead
+        pinky:
+          key.stagger: -ring_off + pinky_off + 1
+          key.splay: +ring_splay - pinky_splay
+          key.spread: 1kx + 0.035
+          #rows.mod.skip: true  # Defined by nav cluster instead
+        # outer:
+        #   # $skip: true
+        #   key.stagger: -pinky_off + outer_off
+        #   key.splay: +pinky_splay - outer_splay
+        #   key.spread: 1kx - 0.12
+        #   # rows.mod.skip: true
+      rows:
+        mod:
+        bottom:
+        home:
+        top:
+
+    thumb_cluster:
+      anchor:
+        ref: matrix_inner_bottom
+        orient: -25
+        shift: [5, -23]
+      mirror: 0
+      key:
+        padding: 1ky
+        spread: 0
+        tags:
+          1u: true
+      columns:
+        outer.key:
+          shift: [-kx-4, 1]
+          rotate: 37
+        under.key:
+          shift: [0, 0]
+        inner.key:
+          shift: [kx+4, 1]
+          rotate: -37
+
+outlines:
+  keys:
+    1u:
+      what: rectangle
+      where:
+        - meta.tags.1u ~ true
+      size: [kx, ky]
+      operation: stack
+
+  keycaps:
+    1u:
+      what: rectangle
+      where:
+        - meta.tags.1u ~ true
+      size: [15.76, 15.76]
+      corner: 1.5
+      operation: stack
+
+  A1_design_space:
+    center:
+      what: circle
+      radius: 0.5
+    H0:
+      what: rectangle
+      size: [283.16, 114.35]
+      adjust.shift: [0, -(114.35-105)/2 + 3.2]
+      operation: stack
+    H1-35:
+      what: rectangle
+      size: [276.76, 105]
+      operation: stack
+
+  all:
+    # - ^keys
+    - ^keycaps
+    - ^A1_design_space
+    #- ^debug
