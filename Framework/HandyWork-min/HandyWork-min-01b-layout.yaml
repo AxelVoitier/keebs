@@ -1,0 +1,39 @@
+points:
+  zones:
+    matrix:
+      anchor.shift: [1.5kx, -3ky+3]
+      rotate: 25
+
+      columns:
+        inner:
+          rows.mod.skip: true
+        index:
+          rows.mod.skip: true
+
+    thumb_cluster:
+      anchor:
+        ref: matrix_inner_bottom
+        orient: -25
+        shift: [5, -23]
+      mirror: 0
+      key:
+        padding: 1ky
+        spread: 0
+        tags:
+          1u: true
+      columns:
+        outer.key:
+          shift: [-kx-4, 1]
+          rotate: 37
+        under.key:
+          shift: [0, 0]
+        inner.key:
+          shift: [kx+4, 1]
+          rotate: -37
+
+outlines:
+  HandyWork-min-test-layout:
+    # - ^keys
+    - ^keycaps
+    - ^A1_design_space
+    #- ^debug

@@ -27,9 +27,7 @@ points:
 
   zones:
     matrix:
-      anchor.shift: [1.5kx, -3ky+3]
       mirror: 0
-      rotate: 25
 
       key:
         padding: 1ky
@@ -40,11 +38,11 @@ points:
       columns:
         inner:
           key.splay: -inner_splay
-          rows.mod.skip: true
+          #rows.mod.skip: true
         index:
           key.stagger: -inner_off + index_off
           key.splay: +inner_splay - index_splay
-          rows.mod.skip: true
+          #rows.mod.skip: true
         middle:
           key.stagger: -index_off + middle_off
           key.splay: +index_splay - middle_splay
@@ -60,38 +58,17 @@ points:
           key.splay: +ring_splay - pinky_splay
           key.spread: 1kx + 0.035
           #rows.mod.skip: true  # Defined by nav cluster instead
-        # outer:
-        #   # $skip: true
-        #   key.stagger: -pinky_off + outer_off
-        #   key.splay: +pinky_splay - outer_splay
-        #   key.spread: 1kx - 0.12
-        #   # rows.mod.skip: true
+        outer:
+          $skip: true
+          key.stagger: -pinky_off + outer_off
+          key.splay: +pinky_splay - outer_splay
+          key.spread: 1kx - 0.12
+          # rows.mod.skip: true
       rows:
         mod:
         bottom:
         home:
         top:
-
-    thumb_cluster:
-      anchor:
-        ref: matrix_inner_bottom
-        orient: -25
-        shift: [5, -23]
-      mirror: 0
-      key:
-        padding: 1ky
-        spread: 0
-        tags:
-          1u: true
-      columns:
-        outer.key:
-          shift: [-kx-4, 1]
-          rotate: 37
-        under.key:
-          shift: [0, 0]
-        inner.key:
-          shift: [kx+4, 1]
-          rotate: -37
 
 outlines:
   keys:
@@ -124,9 +101,3 @@ outlines:
       what: rectangle
       size: [276.76, 105]
       operation: stack
-
-  all:
-    # - ^keys
-    - ^keycaps
-    - ^A1_design_space
-    #- ^debug

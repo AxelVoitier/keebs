@@ -13,25 +13,13 @@ units:
   ring_splay: 10
   pinky_splay: 15
   outer_splay: 20
-  arc_index_home_x_offset: 6
-  arc_index_home_y_offset: ky + 120 + 1
-  thumb_central_radius: 90.6
-  thumb_middle_angle: 19
-  thumb_sides_top_angle_offset: 12 - 0.047
-  thumb_sides_bottom_angle_offset: 15 - 0.23
-  thumb_sides_top_radius: thumb_central_radius + 0.5ky + 0.4025
-  thumb_sides_bottom_radius: thumb_central_radius - 0.5ky + 0.065
 points:
   key:
     width: kx
     height: ky
   zones:
     matrix:
-      anchor.shift:
-      - 1.5kx
-      - -3ky+3
       mirror: 0
-      rotate: 25
       key:
         padding: 1ky
         spread: 1kx
@@ -39,29 +27,49 @@ points:
           1u: true
       columns:
         inner:
-          key.splay: -inner_splay
-          rows.mod.skip: true
+          key:
+            splay: -inner_splay
+          rows:
+            mod:
+              skip: true
         index:
-          key.stagger: -inner_off + index_off
-          key.splay: +inner_splay - index_splay
-          rows.mod.skip: true
+          key:
+            stagger: -inner_off + index_off
+            splay: +inner_splay - index_splay
+          rows:
+            mod:
+              skip: true
         middle:
-          key.stagger: -index_off + middle_off
-          key.splay: +index_splay - middle_splay
-          key.spread: 1kx + 0.8
+          key:
+            stagger: -index_off + middle_off
+            splay: +index_splay - middle_splay
+            spread: 1kx + 0.8
         ring:
-          key.stagger: -middle_off + ring_off
-          key.splay: +middle_splay - ring_splay
-          key.spread: 1kx + 0.04
+          key:
+            stagger: -middle_off + ring_off
+            splay: +middle_splay - ring_splay
+            spread: 1kx + 0.04
         pinky:
-          key.stagger: -ring_off + pinky_off + 1
-          key.splay: +ring_splay - pinky_splay
-          key.spread: 1kx + 0.035
+          key:
+            stagger: -ring_off + pinky_off + 1
+            splay: +ring_splay - pinky_splay
+            spread: 1kx + 0.035
+        outer:
+          $skip: true
+          key:
+            stagger: -pinky_off + outer_off
+            splay: +pinky_splay - outer_splay
+            spread: 1kx - 0.12
       rows:
         mod: null
         bottom: null
         home: null
         top: null
+      anchor:
+        shift:
+        - 1.5kx
+        - -3ky+3
+      rotate: 25
     thumb_cluster:
       anchor:
         ref: matrix_inner_bottom
@@ -76,20 +84,23 @@ points:
         tags:
           1u: true
       columns:
-        outer.key:
-          shift:
-          - -kx-4
-          - 1
-          rotate: 37
-        under.key:
-          shift:
-          - 0
-          - 0
-        inner.key:
-          shift:
-          - kx+4
-          - 1
-          rotate: -37
+        outer:
+          key:
+            shift:
+            - -kx-4
+            - 1
+            rotate: 37
+        under:
+          key:
+            shift:
+            - 0
+            - 0
+        inner:
+          key:
+            shift:
+            - kx+4
+            - 1
+            rotate: -37
 outlines:
   keys:
     1u:
@@ -119,9 +130,10 @@ outlines:
       size:
       - 283.16
       - 114.35
-      adjust.shift:
-      - 0
-      - -(114.35-105)/2 + 3.2
+      adjust:
+        shift:
+        - 0
+        - -(114.35-105)/2 + 3.2
       operation: stack
     H1-35:
       what: rectangle
@@ -129,6 +141,6 @@ outlines:
       - 276.76
       - 105
       operation: stack
-  all:
+  HandyWork-min-test-layout:
   - ^keycaps
   - ^A1_design_space
