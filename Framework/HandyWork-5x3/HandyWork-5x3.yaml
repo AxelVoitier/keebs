@@ -6,13 +6,16 @@ units:
   middle_off: 6.5
   ring_off: -(4/25)U
   pinky_off: -(5/7)U
-  outer_off: -25
+  outer_off: 0
   inner_splay: 0
   index_splay: 0
   middle_splay: 5
   ring_splay: 10
   pinky_splay: 15
-  outer_splay: 20
+  outer_splay: 0
+  split_x_offset: 2kx - 3
+  split_y_offset: -3ky + 1
+  split_angle: 25
 points:
   key:
     width: kx
@@ -20,6 +23,11 @@ points:
   zones:
     matrix:
       mirror: 0
+      anchor:
+        shift:
+        - split_x_offset
+        - split_y_offset
+      rotate: split_angle
       key:
         padding: 1ky
         spread: 1kx
@@ -29,16 +37,10 @@ points:
         inner:
           key:
             splay: -inner_splay
-          rows:
-            mod:
-              skip: true
         index:
           key:
             stagger: -inner_off + index_off
             splay: +inner_splay - index_splay
-          rows:
-            mod:
-              skip: true
         middle:
           key:
             stagger: -index_off + middle_off
@@ -55,25 +57,20 @@ points:
             splay: +ring_splay - pinky_splay
             spread: 1kx + 0.035
         outer:
-          $skip: true
           key:
             stagger: -pinky_off + outer_off
             splay: +pinky_splay - outer_splay
-            spread: 1kx - 0.12
+          $skip: true
       rows:
-        mod: null
+        mod:
+          skip: true
         bottom: null
         home: null
         top: null
-      anchor:
-        shift:
-        - 1.5kx
-        - -3ky+3
-      rotate: 25
     thumb_cluster:
       anchor:
         ref: matrix_inner_bottom
-        orient: -25
+        orient: -split_angle
         shift:
         - 5
         - -23
@@ -89,7 +86,7 @@ points:
             shift:
             - -kx-4
             - 1
-            rotate: 37
+            rotate: split_angle + 12
         under:
           key:
             shift:
@@ -100,7 +97,7 @@ points:
             shift:
             - kx+4
             - 1
-            rotate: -37
+            rotate: -(split_angle + 12)
 outlines:
   keys:
     1u:
@@ -122,9 +119,6 @@ outlines:
       corner: 1.5
       operation: stack
   A1_design_space:
-    center:
-      what: circle
-      radius: 0.5
     H0:
       what: rectangle
       size:
@@ -141,6 +135,6 @@ outlines:
       - 276.76
       - 105
       operation: stack
-  HandyWork-min-test-layout:
+  HandyWork-5x3-test-layout:
   - ^keycaps
   - ^A1_design_space

@@ -1,0 +1,62 @@
+units:
+  # Columns stagger, referenced to index column
+  inner_off: -2.5  # Kyria
+  index_off: 0  # Should remain 0
+  middle_off: +6.5  # Kyria
+  ring_off: -(4/25)U  # YAEMK
+  pinky_off: -(5/7)U  # YAEMK
+  #outer_off: -(103/125)U  # YAEMK
+  #outer_off: -21.4  # Elephant42
+  outer_off: -25
+
+  # Columns absolute splay (degrees)
+  middle_splay: 5
+  ring_splay: 10
+  pinky_splay: 15
+  outer_splay: 20
+
+  # Mirroring offset and angle
+  split_x_offset: 1kx - 0.75
+  split_y_offset: -2.6ky
+  split_angle: 25
+
+points:
+  zones:
+    matrix:
+      columns:
+        middle:
+          key.spread: 1kx + 0.8
+        ring:
+          key.spread: 1kx + 0.04
+        pinky:
+          key.stagger: -ring_off + pinky_off + 1
+          key.spread: 1kx + 0.035
+        outer:
+          key.spread: 1kx - 0.12
+          rows.mod.skip: true
+
+    thumb_cluster:
+      anchor:
+        ref: matrix_inner_bottom
+        orient: -split_angle
+        shift: [8, -23]
+      mirror: 0
+      key:
+        padding: 1ky
+        spread: 0
+        tags:
+          1u: true
+      columns:
+        outer.key:
+          shift: [-kx-4, 1]
+          rotate: split_angle + 12
+        inner.key:
+          shift: [1.7kx, 1]
+          rotate: -(split_angle + 30)
+
+outlines:
+  HandyWork-6x4-test-layout:
+    # - ^keys
+    - ^keycaps
+    - ^A1_design_space
+    #- ^debug

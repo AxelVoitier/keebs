@@ -1,0 +1,23 @@
+units:
+  nav_cluster_x_offset: -1kx
+  nav_cluster_y_offset: -0.9ky
+
+points:
+  zones:
+    nav_cluster:
+      anchor:
+        shift: [nav_cluster_x_offset, nav_cluster_y_offset]
+      key:
+        padding: 1ky
+        spread: 1kx
+        tags:
+          1u: true
+      columns:
+        left:
+          rows.top.skip: true
+        center:
+        right:
+          rows.top.skip: true
+      rows:
+        bottom:
+        top:

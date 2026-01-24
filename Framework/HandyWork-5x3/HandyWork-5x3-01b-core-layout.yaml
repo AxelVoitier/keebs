@@ -1,0 +1,61 @@
+units:
+  # Columns stagger, referenced to index column
+  inner_off: -2.5  # Kyria
+  index_off: 0  # Should remain 0
+  middle_off: +6.5  # Kyria
+  ring_off: -(4/25)U  # YAEMK
+  pinky_off: -(5/7)U  # YAEMK
+
+  # Columns absolute splay (degrees)
+  middle_splay: 5
+  ring_splay: 10
+  pinky_splay: 15
+
+  # Mirroring offset and angle
+  split_x_offset: 2kx - 3
+  split_y_offset: -3ky + 1
+  split_angle: 25
+
+points:
+  zones:
+    matrix:
+      columns:
+        middle:
+          key.spread: 1kx + 0.8
+        ring:
+          key.spread: 1kx + 0.04
+        pinky:
+          key.stagger: -ring_off + pinky_off + 1
+          key.spread: 1kx + 0.035
+        outer:
+          $skip: true
+
+      rows.mod.skip: true
+
+    thumb_cluster:
+      anchor:
+        ref: matrix_inner_bottom
+        orient: -split_angle
+        shift: [5, -23]
+      mirror: 0
+      key:
+        padding: 1ky
+        spread: 0
+        tags:
+          1u: true
+      columns:
+        outer.key:
+          shift: [-kx-4, 1]
+          rotate: split_angle + 12
+        under.key:
+          shift: [0, 0]
+        inner.key:
+          shift: [kx+4, 1]
+          rotate: -(split_angle + 12)
+
+outlines:
+  HandyWork-5x3-test-layout:
+    # - ^keys
+    - ^keycaps
+    - ^A1_design_space
+    #- ^debug

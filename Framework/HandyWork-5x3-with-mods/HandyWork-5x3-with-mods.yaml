@@ -1,0 +1,146 @@
+units:
+  kx: u
+  ky: u
+  inner_off: -2.5
+  index_off: 0
+  middle_off: 6.5
+  ring_off: -(4/25)U
+  pinky_off: -(5/7)U
+  outer_off: 0
+  inner_splay: 0
+  index_splay: 0
+  middle_splay: 5
+  ring_splay: 10
+  pinky_splay: 15
+  outer_splay: 0
+  split_x_offset: 2kx - 3
+  split_y_offset: -3ky + 1
+  split_angle: 25
+points:
+  key:
+    width: kx
+    height: ky
+  zones:
+    matrix:
+      mirror: 0
+      anchor:
+        shift:
+        - split_x_offset
+        - split_y_offset
+      rotate: split_angle
+      key:
+        padding: 1ky
+        spread: 1kx
+        tags:
+          1u: true
+      columns:
+        inner:
+          key:
+            splay: -inner_splay
+          rows:
+            mod:
+              skip: true
+        index:
+          key:
+            stagger: -inner_off + index_off
+            splay: +inner_splay - index_splay
+          rows:
+            mod:
+              skip: true
+        middle:
+          key:
+            stagger: -index_off + middle_off
+            splay: +index_splay - middle_splay
+            spread: 1kx + 0.8
+        ring:
+          key:
+            stagger: -middle_off + ring_off
+            splay: +middle_splay - ring_splay
+            spread: 1kx + 0.04
+        pinky:
+          key:
+            stagger: -ring_off + pinky_off + 1
+            splay: +ring_splay - pinky_splay
+            spread: 1kx + 0.035
+        outer:
+          key:
+            stagger: -pinky_off + outer_off
+            splay: +pinky_splay - outer_splay
+          $skip: true
+      rows:
+        mod:
+          skip: false
+        bottom: null
+        home: null
+        top: null
+    thumb_cluster:
+      anchor:
+        ref: matrix_inner_bottom
+        orient: -split_angle
+        shift:
+        - 5
+        - -23
+      mirror: 0
+      key:
+        padding: 1ky
+        spread: 0
+        tags:
+          1u: true
+      columns:
+        outer:
+          key:
+            shift:
+            - -kx-4
+            - 1
+            rotate: split_angle + 12
+        under:
+          key:
+            shift:
+            - 0
+            - 0
+        inner:
+          key:
+            shift:
+            - kx+4
+            - 1
+            rotate: -(split_angle + 12)
+outlines:
+  keys:
+    1u:
+      what: rectangle
+      where:
+      - meta.tags.1u ~ true
+      size:
+      - kx
+      - ky
+      operation: stack
+  keycaps:
+    1u:
+      what: rectangle
+      where:
+      - meta.tags.1u ~ true
+      size:
+      - 15.76
+      - 15.76
+      corner: 1.5
+      operation: stack
+  A1_design_space:
+    H0:
+      what: rectangle
+      size:
+      - 283.16
+      - 114.35
+      adjust:
+        shift:
+        - 0
+        - -(114.35-105)/2 + 3.2
+      operation: stack
+    H1-35:
+      what: rectangle
+      size:
+      - 276.76
+      - 105
+      operation: stack
+  HandyWork-5x3-test-layout:
+  - ^keycaps
+  - ^A1_design_space

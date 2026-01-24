@@ -1,0 +1,9 @@
+points:
+  zones:
+    matrix:
+      columns:
+        inner:
+          rows.mod.skip: true
+        index:
+          rows.mod.skip: true
+      rows.mod.skip: false
