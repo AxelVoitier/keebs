@@ -1,5 +1,24 @@
 # Ergo keyboards for the Framework 16
 
+## Main properties of HandyWork
+
+- Mimics a split ergo but as a unibody fitting on the Framework 16 using One Key Modules
+- Design pipeline flexible enough to propose variations: 5x3, 5x4, 6x3, 6x4, with or without extra keys
+- Staggered columns using offsets found in various popular design. Baseline column offsets are:
+  - Index inner: -2.5 mm (from Kyria)
+  - Index: 0 (reference column)
+  - Middle: +6.5 mm (from Kyria)
+  - Ring: -(4 / 25) U (ie. ~ -3.05 mm, from YAEMK)
+  - Pinky: -(5 / 7) U (ie. ~ -13.61 mm, from YAEMK)
+  - Pinky outer: -25 mm (from Handy)
+- 25 degrees angle for each hand
+- Splayed middle, ring, pinky and outer columns
+  - 5-10-15-20 in absolute angles,
+  - or 5-5-5-5 in relative (ie. stacked) angles
+
+
+## Variants
+
 > [!NOTE]
 > These are *proposed* layouts for now. Not all are meant to be supported in the long term, and a selection will have to be made (aiming for 2 or 3 only).
 
