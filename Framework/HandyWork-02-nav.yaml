@@ -1,0 +1,24 @@
+points.zones:
+  nav_cluster.key.layers.transparent: true
+  nav_cluster.columns:
+    left:
+      rows.bottom.layers:
+        Base:
+          legend: ◀
+          size: 6
+
+    center:
+      rows.bottom.layers:
+        Base:
+          legend: ▼
+          size: 8
+      rows.top.layers:
+        Base:
+          legend: ▲
+          size: 8
+
+    right:
+      rows.bottom.layers:
+        Base:
+          legend: ▶
+          size: 6

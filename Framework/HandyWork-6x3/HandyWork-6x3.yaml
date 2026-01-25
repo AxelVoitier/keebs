@@ -37,25 +37,178 @@ points:
         inner:
           key:
             splay: -inner_splay
+          rows:
+            number:
+              layers:
+                Qwerty:
+                  alt-no-mod: 6
+                  shift: ^
+              mirror:
+                layers:
+                  Qwerty:
+                    alt-no-mod: 5
+                    shift: '%'
+            top:
+              layers:
+                Qwerty: Y
+              mirror:
+                layers:
+                  Qwerty: T
+            home:
+              layers:
+                Qwerty: H
+              mirror:
+                layers:
+                  Qwerty: G
+            bottom:
+              layers:
+                Qwerty: N
+              mirror:
+                layers:
+                  Qwerty: B
         index:
           key:
             stagger: -inner_off + index_off
             splay: +inner_splay - index_splay
+          rows:
+            number:
+              layers:
+                Qwerty:
+                  alt-no-mod: 7
+                  shift: '&'
+              mirror:
+                layers:
+                  Qwerty:
+                    alt-no-mod: 4
+                    shift: $
+            top:
+              layers:
+                Qwerty: U
+              mirror:
+                layers:
+                  Qwerty: R
+            home:
+              layers:
+                Qwerty: J
+              mirror:
+                layers:
+                  Qwerty: F
+            bottom:
+              layers:
+                Qwerty: M
+              mirror:
+                layers:
+                  Qwerty: V
         middle:
           key:
             stagger: -index_off + middle_off
             splay: +index_splay - middle_splay
             spread: 1kx + 0.8
+          rows:
+            number:
+              layers:
+                Qwerty:
+                  alt-no-mod: 8
+                  shift: '*'
+              mirror:
+                layers:
+                  Qwerty:
+                    alt-no-mod: 3
+                    shift: '#'
+            top:
+              layers:
+                Qwerty: I
+              mirror:
+                layers:
+                  Qwerty: E
+            home:
+              layers:
+                Qwerty: K
+              mirror:
+                layers:
+                  Qwerty: D
+            bottom:
+              layers:
+                Qwerty:
+                  alt-no-mod: ','
+                  shift: <
+              mirror:
+                layers:
+                  Qwerty: C
         ring:
           key:
             stagger: -middle_off + ring_off
             splay: +middle_splay - ring_splay
             spread: 1kx + 0.04
+          rows:
+            number:
+              layers:
+                Qwerty:
+                  alt-no-mod: 9
+                  shift: (
+              mirror:
+                layers:
+                  Qwerty:
+                    alt-no-mod: 2
+                    shift: '@'
+            top:
+              layers:
+                Qwerty: O
+              mirror:
+                layers:
+                  Qwerty: W
+            home:
+              layers:
+                Qwerty: L
+              mirror:
+                layers:
+                  Qwerty: S
+            bottom:
+              layers:
+                Qwerty:
+                  alt-no-mod: .
+                  shift: '>'
+              mirror:
+                layers:
+                  Qwerty: X
         pinky:
           key:
             stagger: -ring_off + pinky_off + 1
             splay: +ring_splay - pinky_splay
             spread: 1kx + 0.035
+          rows:
+            number:
+              layers:
+                Qwerty:
+                  alt-no-mod: 0
+                  shift: )
+              mirror:
+                layers:
+                  Qwerty:
+                    alt-no-mod: 1
+                    shift: '!'
+            top:
+              layers:
+                Qwerty: P
+              mirror:
+                layers:
+                  Qwerty: Q
+            home:
+              layers:
+                Qwerty:
+                  alt-no-mod: ;
+                  shift: ':'
+              mirror:
+                layers:
+                  Qwerty: A
+            bottom:
+              layers:
+                Qwerty:
+                  alt-no-mod: /
+                  shift: '?'
+              mirror:
+                layers:
+                  Qwerty: Z
         outer:
           key:
             stagger: -pinky_off + outer_off
@@ -82,6 +235,8 @@ points:
         spread: 0
         tags:
           1u: true
+        layers:
+          transparent: true
       columns:
         outer:
           key:
@@ -89,17 +244,42 @@ points:
             - -kx-4
             - 1
             rotate: split_angle + 12
+            layers:
+              Base:
+                legend: "\u23CE"
+                size: 9
+            mirror:
+              layers:
+                Base: "\u21E5"
         under:
           key:
             shift:
             - 0
             - 0
+            layers:
+              Base:
+                legend: "\u232B"
+                size: 6
+            mirror:
+              layers:
+                Base:
+                  legend: "\u2423"
+                  size: 9
         inner:
           key:
             shift:
             - kx+4
             - 1
             rotate: -(split_angle + 12)
+            layers:
+              Base:
+                legend: "\u2326"
+                size: 6
+            mirror:
+              layers:
+                Base:
+                  legend: Esc
+                  size: 4
 outlines:
   keys:
     1u:
@@ -140,3 +320,26 @@ outlines:
   HandyWork-6x3-test-layout:
   - ^keycaps
   - ^A1_design_space
+kle:
+  layers:
+    Qwerty:
+      no-mod:
+        index: 9
+      alt-no-mod:
+        index: 10
+      shift:
+        index: 8
+      size: 7
+      color: '#000000'
+    Base:
+      no-mod:
+        index: 9
+      alt-no-mod:
+        index: 10
+      shift:
+        index: 8
+      size: 7
+      color: '#000000'
+layers:
+  Qwerty: null
+  Base: null

@@ -7,7 +7,8 @@
 # spell-checker:enableCompoundWords
 # spell-checker:words
 # spell-checker:ignore
-''''''
+""""""
+
 from __future__ import annotations
 
 # System imports
@@ -28,7 +29,6 @@ _logger = logging.getLogger(__name__)
 
 
 class Keyboard:
-
     if TYPE_CHECKING:
         ElementType: TypeAlias = str | int | float | list['ElementType'] | dict[str, 'ElementType']
         LayerInfoType: TypeAlias = int | str | dict[str, 'LayerInfoType']
@@ -95,7 +95,7 @@ class Keyboard:
         width: float,
         height: float,
         layers: dict[str, Keyboard.LayerInfoType],
-        **kwargs: Any
+        **kwargs: Any,
     ) -> None:
         # y = (-y / 19.05) - self._current_y
         # self.data.append([
@@ -141,7 +141,7 @@ class Keyboard:
             else:
                 info = dict(defaults)
 
-            not_legend = (modifier != 'no-mod')
+            not_legend = modifier != 'no-mod'
 
             info.update(filter_keys(self.layers, not_legend))
             info.update(filter_keys(self.layers.get(modifier, {})))
@@ -178,7 +178,7 @@ class Keyboard:
             if layer not in self.layers:
                 continue
 
-            for modifier in ('no-mod', 'shift'):
+            for modifier in ('no-mod', 'alt-no-mod', 'shift'):
                 layer_info = get_layer_info(layer, modifier, value, layers)
                 if layer_info['kle_ignore']:
                     continue
@@ -194,7 +194,9 @@ class Keyboard:
         params['t'] = '\n'.join(colors).rstrip('\n')
         params['g'] = ghosted
 
-        self.data.append([
-            params,
-            '\n'.join([str(v) for v in legends]).rstrip('\n'),
-        ])
+        self.data.append(
+            [
+                params,
+                '\n'.join([str(v) for v in legends]).rstrip('\n'),
+            ],
+        )

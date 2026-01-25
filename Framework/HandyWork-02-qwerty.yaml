@@ -1,0 +1,146 @@
+kle:
+  layers:
+    Qwerty:
+      no-mod.index: 9
+      alt-no-mod.index: 10
+      shift.index: 8
+      size: 7
+      color: "#000000"
+
+layers:
+  Qwerty:
+
+points.zones:
+  matrix.columns:
+    inner:
+      rows.number.layers:
+        Qwerty:
+          alt-no-mod: 6
+          shift: "^"
+      rows.number.mirror.layers:
+        Qwerty:
+          alt-no-mod: 5
+          shift: "%"
+
+      rows.top.layers:
+        Qwerty: Y
+      rows.top.mirror.layers:
+        Qwerty: T
+
+      rows.home.layers:
+        Qwerty: H
+      rows.home.mirror.layers:
+        Qwerty: G
+
+      rows.bottom.layers:
+        Qwerty: N
+      rows.bottom.mirror.layers:
+        Qwerty: B
+
+    index:
+      rows.number.layers:
+        Qwerty:
+          alt-no-mod: 7
+          shift: "&"
+      rows.number.mirror.layers:
+        Qwerty:
+          alt-no-mod: 4
+          shift: "$"
+
+      rows.top.layers:
+        Qwerty: U
+      rows.top.mirror.layers:
+        Qwerty: R
+
+      rows.home.layers:
+        Qwerty: J
+      rows.home.mirror.layers:
+        Qwerty: F
+
+      rows.bottom.layers:
+        Qwerty: M
+      rows.bottom.mirror.layers:
+        Qwerty: V
+
+    middle:
+      rows.number.layers:
+        Qwerty:
+          alt-no-mod: 8
+          shift: "*"
+      rows.number.mirror.layers:
+        Qwerty:
+          alt-no-mod: 3
+          shift: "#"
+
+      rows.top.layers:
+        Qwerty: I
+      rows.top.mirror.layers:
+        Qwerty: E
+
+      rows.home.layers:
+        Qwerty: K
+      rows.home.mirror.layers:
+        Qwerty: D
+
+      rows.bottom.layers:
+        Qwerty:
+          alt-no-mod: ","
+          shift: "<"
+      rows.bottom.mirror.layers:
+        Qwerty: C
+
+    ring:
+      rows.number.layers:
+        Qwerty:
+          alt-no-mod: 9
+          shift: "("
+      rows.number.mirror.layers:
+        Qwerty:
+          alt-no-mod: 2
+          shift: "@"
+
+      rows.top.layers:
+        Qwerty: O
+      rows.top.mirror.layers:
+        Qwerty: W
+
+      rows.home.layers:
+        Qwerty: L
+      rows.home.mirror.layers:
+        Qwerty: S
+
+      rows.bottom.layers:
+        Qwerty:
+          alt-no-mod: "."
+          shift: ">"
+      rows.bottom.mirror.layers:
+        Qwerty: X
+
+    pinky:
+      rows.number.layers:
+        Qwerty:
+          alt-no-mod: 0
+          shift: ")"
+      rows.number.mirror.layers:
+        Qwerty:
+          alt-no-mod: 1
+          shift: "!"
+
+      rows.top.layers:
+        Qwerty: P
+      rows.top.mirror.layers:
+        Qwerty: Q
+
+      rows.home.layers:
+        Qwerty:
+          alt-no-mod: ";"
+          shift: ":"
+      rows.home.mirror.layers:
+        Qwerty: A
+
+      rows.bottom.layers:
+        Qwerty:
+          alt-no-mod: "/"
+          shift: "?"
+      rows.bottom.mirror.layers:
+        Qwerty: Z

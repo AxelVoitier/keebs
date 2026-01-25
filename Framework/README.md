@@ -1,9 +1,34 @@
-# Split ergo keyboards for the Framework 16
+# Ergo keyboards for the Framework 16
 
-## Handywork-min
+> [!NOTE]
+> These are *proposed* layouts for now. Not all are meant to be supported in the long term, and a selection will have to be made (aiming for 2 or 3 only).
 
-A 5x3 for the alpha keys, with a 3x1 thumb cluster, and 3x1 keys for mods.
+| Name | Look | Printable layout | Description | Pros | Cons | N keys |
+| ---- | ---- | ---------------- | ----------- | ---- | ---- | ------ |
+| [5x3](HandyWork-5x3) | [<img src="HandyWork-5x3/HandyWork-5x3-keymap.png" alt="5x3 keymap" width=400>](HandyWork-5x3/HandyWork-5x3-keymap.png) | [<img src="HandyWork-5x3/HandyWork-5x3-layout.png" alt="5x3 layout" width=400>](HandyWork-5x3/HandyWork-5x3-layout.pdf) | A minimalist 2 * 5 columns * 3 rows, plus 3 keys thumb clusters | - Typical layout for the popular [Miryoku](https://github.com/manna-harbour/miryoku) design<br/>- Small comfortable hand movements | - Hard to learn because:<br/> - Nearly everything beside the alphas is behind layers<br/>- Home row modifiers are tricky<br/> | 36 keys |
+| [5x3-with-mods](HandyWork-5x3-with-mods) | [<img src="HandyWork-5x3-with-mods/HandyWork-5x3-with-mods-keymap.png" alt="5x3-with-mods keymap" width=400>](HandyWork-5x3-with-mods/HandyWork-5x3-with-mods-keymap.png) | [<img src="HandyWork-5x3-with-mods/HandyWork-5x3-with-mods-layout.png" alt="5x3-with-mods layout" width=400>](HandyWork-5x3-with-mods/HandyWork-5x3-with-mods-layout.pdf) | Like 5x3, but with 2 * 3 keys added on each outer side at the bottom for direct access to modifiers | - Solve the home row modifiers issue for those that cannot get used to it | - Still many layers<br/> | 42 keys |
+| [5x3-with-nav](HandyWork-5x3-with-nav) | [<img src="HandyWork-5x3-with-nav/HandyWork-5x3-with-nav-keymap.png" alt="5x3-with-nav keymap" width=400>](HandyWork-5x3-with-nav/HandyWork-5x3-with-nav-keymap.png) | [<img src="HandyWork-5x3-with-nav/HandyWork-5x3-with-nav-layout.png" alt="5x3-with-nav layout" width=400>](HandyWork-5x3-with-nav/HandyWork-5x3-with-nav-layout.pdf) | Like 5x3, but with dedicated navigation keys in the middle | - Navigation keys are direct (ie. not behind a layer) | - Still many layers<br/>- Home row modifiers are tricky<br/>- Navigation requires hand movements instead of just finger movement | 40 keys |
+| [5x3-with-mods-with-nav](HandyWork-5x3-with-mods-with-nav) | [<img src="HandyWork-5x3-with-mods-with-nav/HandyWork-5x3-with-mods-with-nav-keymap.png" alt="5x3-with-mods-with-nav keymap" width=400>](HandyWork-5x3-with-mods-with-nav/HandyWork-5x3-with-mods-with-nav-keymap.png) | [<img src="HandyWork-5x3-with-mods-with-nav/HandyWork-5x3-with-mods-with-nav-layout.png" alt="5x3-with-mods-with-nav layout" width=400>](HandyWork-5x3-with-mods-with-nav/HandyWork-5x3-with-mods-with-nav-layout.pdf) | A 5x3 with both dedicated modifiers and navigation keys | - Solve the home row modifiers issue for those that cannot get used to it<br/>- Navigation keys are direct (ie. not behind a layer) | - Still many layers<br/>- Navigation requires hand movements instead of just finger movement | 46 keys |
+| [5x4](HandyWork-5x4) | [<img src="HandyWork-5x4/HandyWork-5x4-keymap.png" alt="5x4 keymap" width=400>](HandyWork-5x4/HandyWork-5x4-keymap.png) | [<img src="HandyWork-5x4/HandyWork-5x4-layout.png" alt="5x4 layout" width=400>](HandyWork-5x4/HandyWork-5x4-layout.pdf) | Adds a number row to 5x3. Becomes 2 * 5 columns * 4 rows, plus 2 keys thumb clusters | - Great for those that cannot do without a number row<br/>- Less layers needed for most special characters and numbers | - One less key in the thumb cluster<br/>- Home row modifiers are tricky | 44 keys |
+| [5x4-with-nav](HandyWork-5x4-with-nav) | [<img src="HandyWork-5x4-with-nav/HandyWork-5x4-with-nav-keymap.png" alt="5x4-with-nav keymap" width=400>](HandyWork-5x4-with-nav/HandyWork-5x4-with-nav-keymap.png) | [<img src="HandyWork-5x4-with-nav/HandyWork-5x4-with-nav-layout.png" alt="5x4-with-nav layout" width=400>](HandyWork-5x4-with-nav/HandyWork-5x4-with-nav-layout.pdf) | Like 5x4, but with dedicated navigation keys in the middle | - Great for those that cannot do without a number row<br/>- Less layers needed for most special characters, numbers, and navigation | - One less key in the thumb cluster<br/>- Home row modifiers are tricky | 48 keys |
+| [6x3](HandyWork-6x3) | [<img src="HandyWork-6x3/HandyWork-6x3-keymap.png" alt="6x3 keymap" width=400>](HandyWork-6x3/HandyWork-6x3-keymap.png) | [<img src="HandyWork-6x3/HandyWork-6x3-layout.png" alt="6x3 layout" width=400>](HandyWork-6x3/HandyWork-6x3-layout.pdf) | Adds a second pinky column to 5x3. Becomes 2 * 6 columns * 3 rows, plus 3 keys thumb clusters | - These outer keys are typically used for modifiers, or very often used special characters | - Depends on what you choose to NOT put on these outer keys | 42 keys |
+| [6x4](HandyWork-6x4) | [<img src="HandyWork-6x4/HandyWork-6x4-keymap.png" alt="6x4 keymap" width=400>](HandyWork-6x4/HandyWork-6x4-keymap.png) | [<img src="HandyWork-6x4/HandyWork-6x4-layout.png" alt="6x4 layout" width=400>](HandyWork-6x4/HandyWork-6x4-layout.pdf) | Adds a second pinky column to 5x4, but with only 3 keys, not 4. Becomes 2 * 5 columns * 4 rows, plus 2 keys thumb clusters, plus 3 keys per outer pinky. Layout with the most keys. | - Great for those that cannot do without a number row<br/>- Less layers needed for most special characters and numbers<br/>- These outer keys are typically used for modifiers, or very often used special characters | - One less key in the thumb cluster<br/>- Greater hand movements overall | 50 keys |
 
-[![image](Handywork-min.png)](Handywork-min.png)
+## Source files organisation
 
-[Printable test layout](Test%20prints/5x3-3x1-3x1--01.pdf)
+A special pipeline is used to get to these results. Since the software setup is currently not very user friendly, I have committed not only the source files, but also the generated ones.
+
+For each variant (ie. sub folder starting with `HandyWork-` here), various YAML files are combined in layers to generate a final one, named `<FOLDER-NAME>.yaml`.
+You can take that file and directly input it in [Ergogen](https://ergogen.xyz/) to visualise and play around with each layout.
+
+Another file named `<FOLDER-NAME>.json` is generated, and can be directly imported into [Keyboard Layout Editor NG](https://editor.keyboard-tools.xyz/) to edit the keymap.
+
+I actually don't do editing in these tools, but rather directly in the layered YAML source files. The same source YAML files will later be used to generate the skeleton of the PCB, as well as the firmware files.
+
+## Note on the printable layouts
+
+A typical A4 paper in landscape (297 mm * 210 mm) is enough to fit the Framework 16 A1 design space (283.16 mm * 114.35 mm). The printable layouts show a frame for both this outer design space (the one for H 0mm), as well as the inner one (the one for H 1.35mm, 276.76 mm * 105 mm) that can receive the One Key Module full height (ie. the keycap).
+
+Those should be to scale, in theory. However, most printers introduce a small scaling variation. If you print on something else than A4 you might also end up with a very different scale.
+
+If you really care about getting the scaling right, print one, then measure the height of the inner frame on one of the side. It should be 105 mm. If not, take that measurement, and divide 105 by it, then multiply by 100. This will give you a scaling factor in percent that most application/printer driver allows you to input in their print settings.

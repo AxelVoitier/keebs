@@ -1,0 +1,150 @@
+kle:
+  layers:
+    Colemak:
+      no-mod.index: 9
+      alt-no-mod.index: 10
+      shift.index: 8
+      size: 7
+      color: "#000000"
+
+layers:
+  Colemak:
+
+points.zones:
+  matrix.columns:
+    inner:
+      rows.number.layers:
+        Colemak:
+          alt-no-mod: 6
+          shift: "^"
+      rows.number.mirror.layers:
+        Colemak:
+          alt-no-mod: 5
+          shift: "%"
+
+      rows.top.layers:
+        Colemak: J
+      rows.top.mirror.layers:
+        Colemak: B
+
+      rows.home.layers:
+        Colemak: M
+      rows.home.mirror.layers:
+        Colemak: G
+
+      rows.bottom.layers:
+        Colemak: K
+      rows.bottom.mirror.layers:
+        Colemak: V
+
+    index:
+      rows.number.layers:
+        Colemak:
+          alt-no-mod: 7
+          shift: "&"
+      rows.number.mirror.layers:
+        Colemak:
+          alt-no-mod: 4
+          shift: "$"
+
+      rows.top.layers:
+        Colemak: L
+      rows.top.mirror.layers:
+        Colemak: P
+
+      rows.home.layers:
+        Colemak: N
+      rows.home.mirror.layers:
+        Colemak: T
+
+      rows.bottom.layers:
+        Colemak: H
+      rows.bottom.mirror.layers:
+        Colemak: D
+
+    middle:
+      rows.number.layers:
+        Colemak:
+          alt-no-mod: 8
+          shift: "*"
+      rows.number.mirror.layers:
+        Colemak:
+          alt-no-mod: 3
+          shift: "#"
+
+      rows.top.layers:
+        Colemak: U
+      rows.top.mirror.layers:
+        Colemak: F
+
+      rows.home.layers:
+        Colemak: E
+      rows.home.mirror.layers:
+        Colemak: S
+
+      rows.bottom.layers:
+        Colemak:
+          no-mod: ","
+          shift:
+            legend: ";"
+            size: 5
+      rows.bottom.mirror.layers:
+        Colemak: C
+
+    ring:
+      rows.number.layers:
+        Colemak:
+          alt-no-mod: 9
+          shift: "("
+      rows.number.mirror.layers:
+        Colemak:
+          alt-no-mod: 2
+          shift: "@"
+
+      rows.top.layers:
+        Colemak: Y
+      rows.top.mirror.layers:
+        Colemak: W
+
+      rows.home.layers:
+        Colemak: I
+      rows.home.mirror.layers:
+        Colemak: R
+
+      rows.bottom.layers:
+        Colemak:
+          no-mod: "."
+          shift:
+            legend: ":"
+            size: 5
+      rows.bottom.mirror.layers:
+        Colemak: X
+
+    pinky:
+      rows.number.layers:
+        Colemak:
+          alt-no-mod: 0
+          shift: ")"
+      rows.number.mirror.layers:
+        Colemak:
+          alt-no-mod: 1
+          shift: "!"
+
+      rows.top.layers:
+        Colemak:
+          alt-no-mod: "-"
+          shift: "_"
+      rows.top.mirror.layers:
+        Colemak: "Q"
+
+      rows.home.layers:
+        Colemak: O
+      rows.home.mirror.layers:
+        Colemak: A
+
+      rows.bottom.layers:
+        Colemak:
+          alt-no-mod: "'"
+          shift: '"'
+      rows.bottom.mirror.layers:
+        Colemak: Z

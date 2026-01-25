@@ -1,0 +1,30 @@
+points.zones:
+  matrix.columns:
+    middle.rows.mod:
+      layers:
+        Base:
+          legend: ⇧
+          size: 9
+          keycode: KC_RIGHT_SHIFT
+      mirror.layers:
+        Base.keycode: $unset
+
+    ring.rows.mod:
+      layers:
+        Base:
+          legend: ⎈
+          size: 9
+      mirror.layers:
+        Base:
+          legend: ⎈
+          size: 9
+
+    pinky.rows.mod:
+      layers:
+        Base:
+          legend: ❖
+          size: 8
+      mirror.layers:
+        Base:
+          legend: ⎇
+          size: 6

@@ -1,0 +1,36 @@
+kle:
+  layers:
+    Base:
+      no-mod.index: 9
+      alt-no-mod.index: 10
+      shift.index: 8
+      size: 7
+      color: "#000000"
+
+layers:
+  Base:
+
+points.zones:
+  thumb_cluster.key.layers.transparent: true
+  thumb_cluster.columns:
+    outer.key:
+      layers:
+        Base:
+          legend: ⏎
+          size: 9
+      mirror.layers:
+        Base:
+          legend: ␣
+          size: 9
+
+    inner.key:
+      layers:
+        Base:
+          alt-no-mod: ⌦
+          shift: ⌫
+      mirror.layers:
+        Base:
+          alt-no-mod: ⇥
+          shift:
+            legend: Esc
+            size: 4

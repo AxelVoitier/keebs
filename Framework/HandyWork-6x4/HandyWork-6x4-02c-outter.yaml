@@ -1,0 +1,65 @@
+kle:
+  layers:
+    Base:
+      no-mod.index: 9
+      alt-no-mod.index: 10
+      shift.index: 8
+      size: 7
+      color: "#000000"
+
+layers:
+  Base:
+
+points.zones:
+  matrix.columns.outer.rows:
+    number:
+      layers:
+        Base:
+          alt-no-mod: "-"
+          shift: "_"
+      mirror.layers:
+        Base:
+          legend: ⎇
+          size: 6
+          alt-no-mod: $unset
+          shift: $unset
+
+    top:
+      layers:
+        Base:
+          alt-no-mod: "="
+          shift: "+"
+      mirror.layers:
+        Base:
+          legend: ⇧
+          size: 9
+          alt-no-mod: $unset
+          shift: $unset
+
+    home:
+      layers:
+        Base:
+          alt-no-mod:
+            legend: "\\"
+            size: 6
+          shift:
+            legend: "|"
+            size: 6
+      mirror.layers:
+        Base:
+          legend: ⎈
+          size: 9
+          alt-no-mod: $unset
+          shift: $unset
+
+    # inner.key:
+    #   layers:
+    #     Base:
+    #       alt-no-mod: ⌦
+    #       shift: ⌫
+    #   mirror.layers:
+    #     Base:
+    #       alt-no-mod: ⇥
+    #       shift:
+    #         legend: Esc
+    #         size: 4
