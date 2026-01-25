@@ -69,6 +69,8 @@ points:
         bottom: null
         home: null
         top: null
+        number:
+          skip: true
     thumb_cluster:
       anchor:
         ref: matrix_inner_bottom

@@ -23,6 +23,8 @@ units:
 points:
   zones:
     matrix:
+      key.adjust.shift: [0, -ky]
+
       columns:
         middle:
           key.spread: 1kx + 0.8
@@ -33,13 +35,15 @@ points:
           key.spread: 1kx + 0.035
         outer:
           key.spread: 1kx - 0.12
-          rows.mod.skip: true
+          rows.bottom.skip: true
+
+      rows.mod.skip: true
 
     thumb_cluster:
       anchor:
         ref: matrix_inner_bottom
         orient: -split_angle
-        shift: [8, -23]
+        shift: [0, -5]
       mirror: 0
       key:
         padding: 1ky
@@ -48,10 +52,10 @@ points:
           1u: true
       columns:
         outer.key:
-          shift: [-kx-4, 1]
+          shift: [-kx - 4, 0]
           rotate: split_angle + 12
         inner.key:
-          shift: [1.7kx, 1]
+          shift: [1.7kx, 0]
           rotate: -(split_angle + 30)
 
 outlines:

@@ -33,10 +33,6 @@ points:
         spread: 1kx
         tags:
           1u: true
-        adjust:
-          shift:
-          - 0
-          - -ky
       columns:
         inner:
           key:
@@ -66,22 +62,20 @@ points:
             splay: +pinky_splay - outer_splay
             spread: 1kx - 0.12
           rows:
-            bottom:
+            mod:
               skip: true
       rows:
-        mod:
-          skip: true
+        mod: null
         bottom: null
         home: null
         top: null
-        number: null
     thumb_cluster:
       anchor:
         ref: matrix_inner_bottom
         orient: -split_angle
         shift:
-        - 0
-        - -5
+        - 8
+        - -23
       mirror: 0
       key:
         padding: 1ky
@@ -92,14 +86,14 @@ points:
         outer:
           key:
             shift:
-            - -kx - 4
-            - 0
+            - -kx-4
+            - 1
             rotate: split_angle + 12
         inner:
           key:
             shift:
             - 1.7kx
-            - 0
+            - 1
             rotate: -(split_angle + 30)
 outlines:
   keys:

@@ -34,8 +34,9 @@ points:
         outer:
           key.spread: 1kx - 0.12
 
-
-      rows.mod.skip: true
+      rows:
+        mod.skip: true
+        number.skip: true
 
     thumb_cluster:
       anchor:

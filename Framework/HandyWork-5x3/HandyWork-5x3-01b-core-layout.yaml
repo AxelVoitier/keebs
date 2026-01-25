@@ -30,7 +30,9 @@ points:
         outer:
           $skip: true
 
-      rows.mod.skip: true
+      rows:
+        mod.skip: true
+        number.skip: true
 
     thumb_cluster:
       anchor:
