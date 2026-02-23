@@ -1,0 +1,30 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "ee3cd668-8cd6-4b8a-a034-f8cf76dd62dd")
+	(paper "A4")
+	(lib_symbols)
+	(hierarchical_label "COL[1..13]"
+		(shape bidirectional)
+		(at 57.15 45.72 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "9ab2d049-666c-4739-99c4-83101b63c4a4")
+	)
+	(hierarchical_label "ROW[1..5]"
+		(shape bidirectional)
+		(at 57.15 50.8 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "a05808f8-4ac6-47b2-9cd9-f02f1636627e")
+	)
+)
