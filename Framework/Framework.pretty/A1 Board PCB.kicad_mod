@@ -55,6 +55,26 @@
 		)
 	)
 	(attr smd)
+	(fp_line
+		(start -141.58 59)
+		(end 141.58 59)
+		(stroke
+			(width 0.05)
+			(type dash)
+		)
+		(layer "Dwgs.User")
+		(uuid "11fbfb0b-f186-4122-92bd-1301a088c6af")
+	)
+	(fp_line
+		(start 74.98 31.05)
+		(end -79.98 31.05)
+		(stroke
+			(width 0.05)
+			(type dash)
+		)
+		(layer "Dwgs.User")
+		(uuid "cee856ba-9308-48da-b92c-0b5b85077910")
+	)
 	(fp_rect
 		(start -141.58 -56.899999)
 		(end 141.58 74.600001)
@@ -665,8 +685,18 @@
 		(uuid "2dcf049e-eb4d-4243-b593-379ad0949fa1")
 	)
 	(fp_line
+		(start -141.58 -56.899999)
+		(end -141.58 31.05)
+		(stroke
+			(width 0.05)
+			(type dash)
+		)
+		(layer "B.CrtYd")
+		(uuid "a8174b3b-f52a-4e24-b197-9e9980d7dc70")
+	)
+	(fp_line
 		(start -141.58 31.05)
-		(end 141.58 31.05)
+		(end -79.98 31.05)
 		(stroke
 			(width 0.05)
 			(type dash)
@@ -685,14 +715,14 @@
 		(uuid "42887a18-374f-4ed5-86b2-120920387d7e")
 	)
 	(fp_line
-		(start -141.58 59)
-		(end 141.58 59)
+		(start -141.58 74.600001)
+		(end -141.58 51.6)
 		(stroke
 			(width 0.05)
 			(type dash)
 		)
 		(layer "B.CrtYd")
-		(uuid "11fbfb0b-f186-4122-92bd-1301a088c6af")
+		(uuid "23b3b2b2-32ad-4643-9204-b9395eff4bf3")
 	)
 	(fp_line
 		(start -79.98 31.05)
@@ -715,6 +745,16 @@
 		(uuid "08b8d464-9fcd-45af-a43a-5840db35f703")
 	)
 	(fp_line
+		(start 74.98 31.05)
+		(end 141.58 31.05)
+		(stroke
+			(width 0.05)
+			(type dash)
+		)
+		(layer "B.CrtYd")
+		(uuid "c736630a-2058-459a-95f2-c9f5ecf71929")
+	)
+	(fp_line
 		(start 74.98 51.6)
 		(end 141.58 51.6)
 		(stroke
@@ -723,6 +763,46 @@
 		)
 		(layer "B.CrtYd")
 		(uuid "edce684f-d2e3-447b-8e29-aca4596d0b62")
+	)
+	(fp_line
+		(start 141.58 -56.899999)
+		(end -141.58 -56.899999)
+		(stroke
+			(width 0.05)
+			(type dash)
+		)
+		(layer "B.CrtYd")
+		(uuid "f790ad62-12f3-48ef-9ef4-bf19b1e15f83")
+	)
+	(fp_line
+		(start 141.58 31.05)
+		(end 141.58 -56.899999)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "B.CrtYd")
+		(uuid "e25e4289-1634-486c-898c-e76a34b06785")
+	)
+	(fp_line
+		(start 141.58 51.6)
+		(end 141.58 74.600001)
+		(stroke
+			(width 0.05)
+			(type dash)
+		)
+		(layer "B.CrtYd")
+		(uuid "0bfbc9df-9081-4d18-b5c4-6a57120a5943")
+	)
+	(fp_line
+		(start 141.58 74.600001)
+		(end -141.58 74.600001)
+		(stroke
+			(width 0.05)
+			(type dash)
+		)
+		(layer "B.CrtYd")
+		(uuid "6dd4d889-89b6-475e-ace1-91613f938e8f")
 	)
 	(fp_rect
 		(start -138.38 -52.5)
