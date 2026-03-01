@@ -44,6 +44,8 @@ Another file named `<FOLDER-NAME>.json` is generated, and can be directly import
 
 I actually don't do editing in these tools, but rather directly in the layered YAML source files. The same source YAML files will later be used to generate the skeleton of the PCB, as well as the firmware files.
 
+Each variant KiCad projects are derived from [templates](Kicad%20templates). There is notably a PCB template with a prerouted RPI2040 and a matrix LED driver for individual LED control.
+
 ## Note on the printable layouts
 
 A typical A4 paper in landscape (297 mm * 210 mm) is enough to fit the Framework 16 A1 design space (283.16 mm * 114.35 mm). The printable layouts show a frame for both this outer design space (the one for H 0mm), as well as the inner one (the one for H 1.35mm, 276.76 mm * 105 mm) that can receive the One Key Module full height (ie. the keycap).

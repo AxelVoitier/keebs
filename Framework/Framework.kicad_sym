@@ -7,11 +7,13 @@
 		(in_bom yes)
 		(on_board yes)
 		(property "Reference" "SW"
-			(at -4.826 7.62 0)
+			(at 1.27 7.62 0)
+			(do_not_autoplace)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Value" ""
@@ -24,7 +26,7 @@
 			)
 		)
 		(property "Footprint" "Framework:One Key Module"
-			(at 12.446 -9.652 0)
+			(at 10.414 -8.382 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -77,7 +79,7 @@
 					)
 				)
 			)
-			(pin output line
+			(pin input line
 				(at 0 8.89 270)
 				(length 2.54)
 				(name "COL"
@@ -113,7 +115,7 @@
 					)
 				)
 			)
-			(pin passive line
+			(pin power_in line
 				(at 3.81 -8.89 90)
 				(length 2.54)
 				(hide yes)
@@ -150,7 +152,7 @@
 					)
 				)
 			)
-			(pin input line
+			(pin output line
 				(at 8.89 0 180)
 				(length 2.54)
 				(name "ROW"
@@ -184,24 +186,6 @@
 		)
 		(symbol "One_Key_Module_2_0"
 			(pin input line
-				(at -8.89 3.81 0)
-				(length 2.54)
-				(name "LED+"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "5"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
 				(at -8.89 -3.81 0)
 				(length 2.54)
 				(name "LED-"
@@ -220,7 +204,25 @@
 				)
 			)
 			(pin input line
-				(at 8.89 3.81 180)
+				(at 8.89 5.08 180)
+				(length 2.54)
+				(name "LED+"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin bidirectional line
+				(at 8.89 2.54 180)
 				(length 2.54)
 				(name "LED+"
 					(effects
@@ -265,7 +267,7 @@
 					(type solid)
 				)
 				(fill
-					(type background)
+					(type none)
 				)
 			)
 			(polyline
