@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Framework One Key Module")
+	(tags "OKM")
 	(property "Reference" "REF**"
 		(at 8.5 9 0)
 		(unlocked yes)
