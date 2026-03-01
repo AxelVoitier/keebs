@@ -1,0 +1,48 @@
+points.zones:
+  matrix:
+    columns:
+      # outer.key.mirror.qmk.col: C1
+      pinky.key.mirror.qmk.col: C1
+      ring.key.mirror.qmk.col: C2
+      middle.key.mirror.qmk.col: C3
+      index.key.mirror.qmk.col: C4
+      inner.key.mirror.qmk.col: C5
+
+      inner.key.qmk.col: C9
+      index.key.qmk.col: C10
+      middle.key.qmk.col: C11
+      ring.key.qmk.col: C12
+      pinky.key.qmk.col: C13
+      # outer.key.qmk.col: C13
+
+      pinky.rows.top.qmk.row: R2
+      pinky.rows.home.qmk.row: R3
+      pinky.rows.bottom.qmk.row: R4
+      pinky.rows.mod.qmk.row: R5
+
+    rows:
+      # number.qmk.row: R1
+      top.qmk.row: R1
+      home.qmk.row: R2
+      bottom.qmk.row: R3
+      mod.qmk.row: R4
+
+  thumb_cluster:
+    key.qmk.row: R5
+    columns:
+      inner.key.mirror.qmk.col: C4
+      under.key.mirror.qmk.col: C5
+      outer.key.mirror.qmk.col: C6
+
+      outer.key.qmk.col: C8
+      under.key.qmk.col: C9
+      inner.key.qmk.col: C10
+
+  nav_cluster:
+    columns:
+      left.key.qmk.col: C6
+      center.key.qmk.col: C7
+      right.key.qmk.col: C8
+    rows:
+      top.qmk.row: R2
+      bottom.qmk.row: R3

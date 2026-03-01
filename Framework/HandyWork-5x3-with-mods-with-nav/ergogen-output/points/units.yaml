@@ -28,3 +28,4 @@ split_y_offset: -56
 split_angle: 25
 nav_cluster_x_offset: -19
 nav_cluster_y_offset: -17.1
+mil: 0.0254

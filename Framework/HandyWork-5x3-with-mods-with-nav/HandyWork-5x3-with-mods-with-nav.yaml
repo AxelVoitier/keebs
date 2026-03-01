@@ -18,6 +18,7 @@ units:
   split_angle: 25
   nav_cluster_x_offset: -1kx
   nav_cluster_y_offset: -0.9ky
+  mil: 0.0254
 points:
   key:
     width: kx
@@ -39,6 +40,11 @@ points:
         inner:
           key:
             splay: -inner_splay
+            mirror:
+              qmk:
+                col: C5
+            qmk:
+              col: C9
           rows:
             mod:
               skip: true
@@ -74,6 +80,11 @@ points:
           key:
             stagger: -inner_off + index_off
             splay: +inner_splay - index_splay
+            mirror:
+              qmk:
+                col: C4
+            qmk:
+              col: C10
           rows:
             mod:
               skip: true
@@ -110,6 +121,11 @@ points:
             stagger: -index_off + middle_off
             splay: +index_splay - middle_splay
             spread: 1kx + 0.4
+            mirror:
+              qmk:
+                col: C3
+            qmk:
+              col: C11
           rows:
             number:
               layers:
@@ -156,6 +172,11 @@ points:
             stagger: -middle_off + ring_off
             splay: +middle_splay - ring_splay
             spread: 1kx + 0.44
+            mirror:
+              qmk:
+                col: C2
+            qmk:
+              col: C12
           rows:
             number:
               layers:
@@ -202,6 +223,11 @@ points:
             stagger: -ring_off + pinky_off + 1
             splay: +ring_splay - pinky_splay
             spread: 0.95kx
+            mirror:
+              qmk:
+                col: C1
+            qmk:
+              col: C13
           rows:
             number:
               layers:
@@ -219,6 +245,8 @@ points:
               mirror:
                 layers:
                   Qwerty: Q
+              qmk:
+                row: R2
             home:
               layers:
                 Qwerty:
@@ -227,6 +255,8 @@ points:
               mirror:
                 layers:
                   Qwerty: A
+              qmk:
+                row: R3
             bottom:
               layers:
                 Qwerty:
@@ -235,6 +265,8 @@ points:
               mirror:
                 layers:
                   Qwerty: Z
+              qmk:
+                row: R4
             mod:
               layers:
                 Base:
@@ -245,6 +277,8 @@ points:
                   Base:
                     legend: "\u2387"
                     size: 6
+              qmk:
+                row: R5
         outer:
           key:
             stagger: -pinky_off + outer_off
@@ -253,9 +287,17 @@ points:
       rows:
         mod:
           skip: false
-        bottom: null
-        home: null
-        top: null
+          qmk:
+            row: R4
+        bottom:
+          qmk:
+            row: R3
+        home:
+          qmk:
+            row: R2
+        top:
+          qmk:
+            row: R1
         number:
           skip: true
     thumb_cluster:
@@ -273,6 +315,8 @@ points:
           1u: true
         layers:
           transparent: true
+        qmk:
+          row: R5
       columns:
         outer:
           key:
@@ -287,6 +331,10 @@ points:
             mirror:
               layers:
                 Base: "\u21E5"
+              qmk:
+                col: C6
+            qmk:
+              col: C8
         under:
           key:
             shift:
@@ -301,6 +349,10 @@ points:
                 Base:
                   legend: "\u2423"
                   size: 9
+              qmk:
+                col: C5
+            qmk:
+              col: C9
         inner:
           key:
             shift:
@@ -316,6 +368,10 @@ points:
                 Base:
                   legend: Esc
                   size: 4
+              qmk:
+                col: C4
+            qmk:
+              col: C10
     nav_cluster:
       anchor:
         shift:
@@ -338,6 +394,9 @@ points:
                 Base:
                   legend: "\u25C0"
                   size: 6
+          key:
+            qmk:
+              col: C6
         center:
           rows:
             bottom:
@@ -350,6 +409,9 @@ points:
                 Base:
                   legend: "\u25B2"
                   size: 8
+          key:
+            qmk:
+              col: C7
         right:
           rows:
             top:
@@ -359,9 +421,16 @@ points:
                 Base:
                   legend: "\u25B6"
                   size: 6
+          key:
+            qmk:
+              col: C8
       rows:
-        bottom: null
-        top: null
+        bottom:
+          qmk:
+            row: R3
+        top:
+          qmk:
+            row: R2
 outlines:
   keys:
     1u:
@@ -435,3 +504,141 @@ kle:
 layers:
   Qwerty: null
   Base: null
+fabrication:
+  main-pcb:
+    folder: PCB
+    project-name: HandyWork-5x3-with-mods-with-nav-PCB
+    template:
+      folder: ../Kicad templates/PCB
+      project-name: HandyWork-PCB
+      files:
+      - fp-lib-table
+      - sym-lib-table
+      - HandyWork-PCB.kicad_pro
+      - HandyWork-PCB.kicad_sch
+      - HandyWork-PCB-LEDs.kicad_sch
+      - HandyWork-PCB-Switches.kicad_sch
+      - HandyWork-PCB.kicad_pcb
+    offset:
+      x: 297 / 2
+      y: (210 / 2) - 10
+    objects:
+    - keys:
+      - where:
+        - meta.tags.1u ~ true
+        ref: SW_{meta.qmk.row}{meta.qmk.col}
+        symbol:
+          name: Framework:One_Key_Module
+          units:
+          - unit: 1
+            sheet: HandyWork-5x3-with-mods-with-nav-PCB-Switches.kicad_sch
+            path: /{Root}/{Switches}
+            grid:
+              bind:
+                x: '{meta.qmk.col}'
+                y: '{meta.qmk.row}'
+              order:
+                x:
+                - C1
+                - C2
+                - C3
+                - C4
+                - C5
+                - C6
+                - C7
+                - C8
+                - C9
+                - C10
+                - C11
+                - C12
+                - C13
+                y:
+                - R1
+                - R2
+                - R3
+                - R4
+                - R5
+              start:
+                x: 750mil
+                y: 1600mil
+              pitch:
+                x: 800mil
+                y: 1150mil
+              wire:
+                pins:
+                  left: 3
+                  right: 4
+                  up: 1
+                  down: 9
+                anchors:
+                  left: 150mil
+                  right: 10900mil
+                  up: 1200mil
+                  down: 6900mil
+            extra_symbols:
+            - name: power:GND
+              to_pin: 2
+              properties:
+                Value:
+                  effects:
+                    hide: true
+          - unit: 2
+            sheet: HandyWork-5x3-with-mods-with-nav-PCB-LEDs.kicad_sch
+            path: /{Root}/{LEDs}
+            grid:
+              bind:
+                x: '{meta.qmk.col}'
+                y: '{meta.qmk.row}'
+              order:
+                x:
+                - C1
+                - C2
+                - C3
+                - C4
+                - C5
+                - C6
+                - C7
+                - C8
+                - C9
+                - C10
+                - C11
+                - C12
+                - C13
+                y:
+                - R1
+                - R2
+                - R3
+                - R4
+                - R5
+              start:
+                x: 750mil
+                y: 1600mil
+              pitch:
+                x: 800mil
+                y: 1150mil
+              wire:
+                pins:
+                  left: 7
+                  right: 8
+                  up:
+                    number: 6 if meta.qmk.col in ('C1', 'C2', 'C3', 'C5', 'C10', 'C11',
+                      'C12') else 5
+                    offset:
+                    - 50mil
+                    - 0
+                  down:
+                    number: 6 if meta.qmk.col in ('C1', 'C2', 'C3', 'C5', 'C10', 'C11',
+                      'C12') else 5
+                    offset:
+                    - 50mil
+                    - 0
+                anchors:
+                  down: 6900mil
+            extra_symbols:
+            - type: no-connect
+              to_pin: 5 if meta.qmk.col in ('C1', 'C2', 'C3', 'C5', 'C10', 'C11',
+                'C12') else 6
+        footprint: Framework:One Key Module
+        3d_model:
+          offset:
+            z: -1.2

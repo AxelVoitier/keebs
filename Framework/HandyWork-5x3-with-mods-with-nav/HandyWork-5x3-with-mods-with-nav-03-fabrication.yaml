@@ -1,0 +1,104 @@
+units:
+  mil: 0.0254
+
+fabrication:
+  main-pcb:
+    folder: PCB
+    project-name: HandyWork-5x3-with-mods-with-nav-PCB
+    template:
+      folder: "../Kicad templates/PCB"
+      project-name: HandyWork-PCB
+      files:
+        - fp-lib-table
+        - sym-lib-table
+        - HandyWork-PCB.kicad_pro
+        # - HandyWork-PCB.kicad_prl
+        - HandyWork-PCB.kicad_sch
+        - HandyWork-PCB-LEDs.kicad_sch
+        - HandyWork-PCB-Switches.kicad_sch
+        - HandyWork-PCB.kicad_pcb
+
+    offset: {x: 297 / 2, y: (210 / 2) - 10}
+    objects:
+      - keys:
+          - where:
+              - meta.tags.1u ~ true
+            ref: SW_{meta.qmk.row}{meta.qmk.col}
+            # ref: SW_{x:.0f}_{y:.0f}
+            symbol:
+              name: Framework:One_Key_Module
+              units:
+                - unit: 1
+                  sheet: HandyWork-5x3-with-mods-with-nav-PCB-Switches.kicad_sch
+                  path: '/{Root}/{Switches}'
+                  grid:
+                    bind:
+                      x: '{meta.qmk.col}'
+                      y: '{meta.qmk.row}'
+                    order:
+                      x: [C1, C2, C3, C4, C5, C6, C7, C8, C9, C10, C11, C12, C13]
+                      y: [R1, R2, R3, R4, R5]
+                    start: {x: 750mil, y: 1600mil}
+                    pitch: {x: 800mil, y: 1150mil}
+                    wire:
+                      pins:
+                        left: 3
+                        right: 4
+                        up: 1
+                        down: 9
+                      anchors:
+                        left: 150mil
+                        right: 10900mil
+                        up: 1200mil
+                        down: 6900mil
+                  extra_symbols:
+                    - name: 'power:GND'
+                      to_pin: 2
+                      properties:
+                        Value:
+                          effects:
+                            hide: true
+                - unit: 2
+                  sheet: HandyWork-5x3-with-mods-with-nav-PCB-LEDs.kicad_sch
+                  path: '/{Root}/{LEDs}'
+                  grid:
+                    bind:
+                      x: '{meta.qmk.col}'
+                      y: '{meta.qmk.row}'
+                    order:
+                      x: [C1, C2, C3, C4, C5, C6, C7, C8, C9, C10, C11, C12, C13]
+                      y: [R1, R2, R3, R4, R5]
+                    start: {x: 750mil, y: 1600mil}
+                    pitch: {x: 800mil, y: 1150mil}
+                    wire:
+                      pins:
+                        left: 7
+                        right: 8
+                        up:
+                          number: "6 if meta.qmk.col in ('C1', 'C2', 'C3', 'C5', 'C10', 'C11', 'C12') else 5"
+                          offset: [50mil, 0]
+                        down:
+                          number: "6 if meta.qmk.col in ('C1', 'C2', 'C3', 'C5', 'C10', 'C11', 'C12') else 5"
+                          offset: [50mil, 0]
+                      anchors:
+                        down: 6900mil
+                  extra_symbols:
+                    - type: no-connect
+                      to_pin: "5 if meta.qmk.col in ('C1', 'C2', 'C3', 'C5', 'C10', 'C11', 'C12') else 6"
+            # footprint: 'Framework:One Key Module for 3D Print'
+            footprint: 'Framework:One Key Module'
+            3d_model:
+              offset:
+                z: -1.2
+
+  # alu-plate:
+  #   folder: AluPlate
+  #   project-name: HandyWork-5x3-AluPlate
+  #   offset: {x: 297 / 2, y: (210 / 2) - 10}
+  #   objects:
+  #     - keys:
+  #         - where:
+  #             - meta.tags.1u ~ true
+  #           footprint: 'Framework:One Key Module for Top Plate'
+  #           # ref: SW_{meta.qmk.col}_{meta.qmk.row}
+  #           ref: SW_{x:.0f}_{y:.0f}

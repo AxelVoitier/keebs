@@ -11,3 +11,15 @@
 Fits Framework 16 A1 design space.
 
 [![image](HandyWork-5x3-with-mods-with-nav-layout.png)](HandyWork-5x3-with-mods-with-nav-layout.png)
+
+## PCB
+
+[![image](HandyWork-5x3-with-mods-with-nav-PCB%2001.png)](HandyWork-5x3-with-mods-with-nav-PCB%2001.png)
+
+[![image](HandyWork-5x3-with-mods-with-nav-PCB%2002.png)](HandyWork-5x3-with-mods-with-nav-PCB%2002.png)
+
+[![image](HandyWork-5x3-with-mods-with-nav-PCB%2003.png)](HandyWork-5x3-with-mods-with-nav-PCB%2003.png)
+
+[![image](HandyWork-5x3-with-mods-with-nav-PCB%2004.png)](HandyWork-5x3-with-mods-with-nav-PCB%2004.png)
+
+[![image](HandyWork-5x3-with-mods-with-nav-PCB%2005.png)](HandyWork-5x3-with-mods-with-nav-PCB%2005.png)
