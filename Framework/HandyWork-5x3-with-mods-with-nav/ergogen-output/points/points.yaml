@@ -112,7 +112,7 @@ matrix_inner_bottom:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -159,7 +159,7 @@ matrix_inner_bottom:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -206,7 +206,7 @@ matrix_inner_bottom:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -416,7 +416,7 @@ matrix_inner_home:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -463,7 +463,7 @@ matrix_inner_home:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -510,7 +510,7 @@ matrix_inner_home:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -720,7 +720,7 @@ matrix_inner_top:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -767,7 +767,7 @@ matrix_inner_top:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -814,7 +814,7 @@ matrix_inner_top:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -911,11 +911,11 @@ matrix_inner_top:
             - 10
             - 0
 matrix_index_bottom:
-    x: 63.5209505
-    'y': -8.4462325
+    x: 64.5774962
+    'y': -10.712002
     r: 25
     meta:
-        stagger: 2.5
+        stagger: 0
         spread: 19
         splay: 0
         origin:
@@ -1024,7 +1024,7 @@ matrix_index_bottom:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -1071,7 +1071,7 @@ matrix_index_bottom:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -1118,7 +1118,7 @@ matrix_index_bottom:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -1216,11 +1216,11 @@ matrix_index_bottom:
             - 0
             - 10
 matrix_index_home:
-    x: 55.4912036
-    'y': 8.7736154
+    x: 56.5477492
+    'y': 6.507846
     r: 25
     meta:
-        stagger: 2.5
+        stagger: 0
         spread: 19
         splay: 0
         origin:
@@ -1329,7 +1329,7 @@ matrix_index_home:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -1376,7 +1376,7 @@ matrix_index_home:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -1423,7 +1423,7 @@ matrix_index_home:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -1521,11 +1521,11 @@ matrix_index_home:
             - 10
             - 10
 matrix_index_top:
-    x: 47.4614566
-    'y': 25.9934634
+    x: 48.5180022
+    'y': 23.7276939
     r: 25
     meta:
-        stagger: 2.5
+        stagger: 0
         spread: 19
         splay: 0
         origin:
@@ -1634,7 +1634,7 @@ matrix_index_top:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -1681,7 +1681,7 @@ matrix_index_top:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -1728,7 +1728,7 @@ matrix_index_top:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -1826,12 +1826,12 @@ matrix_index_top:
             - 10
             - 0
 matrix_middle_mod:
-    x: 86.748573
-    'y': -11.4072383
+    x: 86.3860499
+    'y': -11.5762856
     r: 20
     meta:
-        stagger: 6.5
-        spread: 19.8
+        stagger: 9
+        spread: 19.4
         splay: -5
         origin:
             - 0
@@ -1943,7 +1943,7 @@ matrix_middle_mod:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -1990,7 +1990,7 @@ matrix_middle_mod:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -2037,7 +2037,7 @@ matrix_middle_mod:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -2095,7 +2095,7 @@ matrix_middle_mod:
             key:
                 stagger: '-index_off + middle_off'
                 splay: +index_splay - middle_splay
-                spread: 1kx + 0.8
+                spread: 1kx + 0.4
             rows:
                 number:
                     layers:
@@ -2146,12 +2146,12 @@ matrix_middle_mod:
             - 0
             - 0
 matrix_middle_bottom:
-    x: 80.2501902
-    'y': 6.4469215
+    x: 79.8876671
+    'y': 6.2778742
     r: 20
     meta:
-        stagger: 6.5
-        spread: 19.8
+        stagger: 9
+        spread: 19.4
         splay: -5
         origin:
             - 0
@@ -2261,7 +2261,7 @@ matrix_middle_bottom:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -2308,7 +2308,7 @@ matrix_middle_bottom:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -2355,7 +2355,7 @@ matrix_middle_bottom:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -2413,7 +2413,7 @@ matrix_middle_bottom:
             key:
                 stagger: '-index_off + middle_off'
                 splay: +index_splay - middle_splay
-                spread: 1kx + 0.8
+                spread: 1kx + 0.4
             rows:
                 number:
                     layers:
@@ -2464,12 +2464,12 @@ matrix_middle_bottom:
             - 10
             - 10
 matrix_middle_home:
-    x: 73.7518075
-    'y': 24.3010814
+    x: 73.3892844
+    'y': 24.1320341
     r: 20
     meta:
-        stagger: 6.5
-        spread: 19.8
+        stagger: 9
+        spread: 19.4
         splay: -5
         origin:
             - 0
@@ -2577,7 +2577,7 @@ matrix_middle_home:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -2624,7 +2624,7 @@ matrix_middle_home:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -2671,7 +2671,7 @@ matrix_middle_home:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -2729,7 +2729,7 @@ matrix_middle_home:
             key:
                 stagger: '-index_off + middle_off'
                 splay: +index_splay - middle_splay
-                spread: 1kx + 0.8
+                spread: 1kx + 0.4
             rows:
                 number:
                     layers:
@@ -2778,14 +2778,14 @@ matrix_middle_home:
             - 10
             - 10
             - 10
-            - 10
+            - 0
 matrix_middle_top:
-    x: 67.2534247
-    'y': 42.1552412
+    x: 66.8909016
+    'y': 41.9861939
     r: 20
     meta:
-        stagger: 6.5
-        spread: 19.8
+        stagger: 9
+        spread: 19.4
         splay: -5
         origin:
             - 0
@@ -2893,7 +2893,7 @@ matrix_middle_top:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -2940,7 +2940,7 @@ matrix_middle_top:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -2987,7 +2987,7 @@ matrix_middle_top:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -3045,7 +3045,7 @@ matrix_middle_top:
             key:
                 stagger: '-index_off + middle_off'
                 splay: +index_splay - middle_splay
-                spread: 1kx + 0.8
+                spread: 1kx + 0.4
             rows:
                 number:
                     layers:
@@ -3096,12 +3096,12 @@ matrix_middle_top:
             - 10
             - 0
 matrix_ring_mod:
-    x: 107.9059288
-    'y': -13.8673599
+    x: 107.9192827
+    'y': -13.8995991
     r: 15
     meta:
         stagger: -9.548
-        spread: 19.04
+        spread: 19.44
         splay: -5
         origin:
             - 0
@@ -3213,7 +3213,7 @@ matrix_ring_mod:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -3260,7 +3260,7 @@ matrix_ring_mod:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -3307,7 +3307,7 @@ matrix_ring_mod:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -3365,7 +3365,7 @@ matrix_ring_mod:
             key:
                 stagger: '-middle_off + ring_off'
                 splay: +middle_splay - ring_splay
-                spread: 1kx + 0.04
+                spread: 1kx + 0.44
             rows:
                 number:
                     layers:
@@ -3416,12 +3416,12 @@ matrix_ring_mod:
             - 0
             - 0
 matrix_ring_bottom:
-    x: 102.988367
-    'y': 4.4852308
+    x: 103.0017209
+    'y': 4.4529916
     r: 15
     meta:
         stagger: -9.548
-        spread: 19.04
+        spread: 19.44
         splay: -5
         origin:
             - 0
@@ -3531,7 +3531,7 @@ matrix_ring_bottom:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -3578,7 +3578,7 @@ matrix_ring_bottom:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -3625,7 +3625,7 @@ matrix_ring_bottom:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -3683,7 +3683,7 @@ matrix_ring_bottom:
             key:
                 stagger: '-middle_off + ring_off'
                 splay: +middle_splay - ring_splay
-                spread: 1kx + 0.04
+                spread: 1kx + 0.44
             rows:
                 number:
                     layers:
@@ -3734,12 +3734,12 @@ matrix_ring_bottom:
             - 10
             - 10
 matrix_ring_home:
-    x: 98.0708051
-    'y': 22.8378215
+    x: 98.0841591
+    'y': 22.8055823
     r: 15
     meta:
         stagger: -9.548
-        spread: 19.04
+        spread: 19.44
         splay: -5
         origin:
             - 0
@@ -3847,7 +3847,7 @@ matrix_ring_home:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -3894,7 +3894,7 @@ matrix_ring_home:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -3941,7 +3941,7 @@ matrix_ring_home:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -3999,7 +3999,7 @@ matrix_ring_home:
             key:
                 stagger: '-middle_off + ring_off'
                 splay: +middle_splay - ring_splay
-                spread: 1kx + 0.04
+                spread: 1kx + 0.44
             rows:
                 number:
                     layers:
@@ -4050,12 +4050,12 @@ matrix_ring_home:
             - 10
             - 10
 matrix_ring_top:
-    x: 93.1532433
-    'y': 41.1904122
+    x: 93.1665972
+    'y': 41.158173
     r: 15
     meta:
         stagger: -9.548
-        spread: 19.04
+        spread: 19.44
         splay: -5
         origin:
             - 0
@@ -4163,7 +4163,7 @@ matrix_ring_top:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -4210,7 +4210,7 @@ matrix_ring_top:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -4257,7 +4257,7 @@ matrix_ring_top:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -4315,7 +4315,7 @@ matrix_ring_top:
             key:
                 stagger: '-middle_off + ring_off'
                 splay: +middle_splay - ring_splay
-                spread: 1kx + 0.04
+                spread: 1kx + 0.44
             rows:
                 number:
                     layers:
@@ -4366,13 +4366,13 @@ matrix_ring_top:
             - 10
             - 10
 matrix_pinky_mod:
-    x: 128.7664151
-    'y': -18.1741625
-    r: 10
+    x: 129.7300975
+    'y': -25.5588233
+    r: 5
     meta:
-        stagger: -9.559142857142858
-        spread: 19.035
-        splay: -5
+        stagger: -16.907000000000004
+        spread: 18.05
+        splay: -10
         origin:
             - 0
             - 0
@@ -4483,7 +4483,7 @@ matrix_pinky_mod:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -4530,7 +4530,7 @@ matrix_pinky_mod:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -4577,7 +4577,7 @@ matrix_pinky_mod:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -4635,7 +4635,7 @@ matrix_pinky_mod:
             key:
                 stagger: '-ring_off + pinky_off + 1'
                 splay: +ring_splay - pinky_splay
-                spread: 1kx + 0.035
+                spread: 0.95kx
             rows:
                 number:
                     layers:
@@ -4688,13 +4688,13 @@ matrix_pinky_mod:
             - 0
             - 0
 matrix_pinky_bottom:
-    x: 125.4670998
-    'y': 0.5371849
-    r: 10
+    x: 128.0741384
+    'y': -6.6311241
+    r: 5
     meta:
-        stagger: -9.559142857142858
-        spread: 19.035
-        splay: -5
+        stagger: -16.907000000000004
+        spread: 18.05
+        splay: -10
         origin:
             - 0
             - 0
@@ -4803,7 +4803,7 @@ matrix_pinky_bottom:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -4850,7 +4850,7 @@ matrix_pinky_bottom:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -4897,7 +4897,7 @@ matrix_pinky_bottom:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -4955,7 +4955,7 @@ matrix_pinky_bottom:
             key:
                 stagger: '-ring_off + pinky_off + 1'
                 splay: +ring_splay - pinky_splay
-                spread: 1kx + 0.035
+                spread: 0.95kx
             rows:
                 number:
                     layers:
@@ -5008,13 +5008,13 @@ matrix_pinky_bottom:
             - 10
             - 10
 matrix_pinky_home:
-    x: 122.1677845
-    'y': 19.2485322
-    r: 10
+    x: 126.4181792
+    'y': 12.2965752
+    r: 5
     meta:
-        stagger: -9.559142857142858
-        spread: 19.035
-        splay: -5
+        stagger: -16.907000000000004
+        spread: 18.05
+        splay: -10
         origin:
             - 0
             - 0
@@ -5123,7 +5123,7 @@ matrix_pinky_home:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -5170,7 +5170,7 @@ matrix_pinky_home:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -5217,7 +5217,7 @@ matrix_pinky_home:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -5275,7 +5275,7 @@ matrix_pinky_home:
             key:
                 stagger: '-ring_off + pinky_off + 1'
                 splay: +ring_splay - pinky_splay
-                spread: 1kx + 0.035
+                spread: 0.95kx
             rows:
                 number:
                     layers:
@@ -5328,13 +5328,13 @@ matrix_pinky_home:
             - 10
             - 10
 matrix_pinky_top:
-    x: 118.8684691
-    'y': 37.9598795
-    r: 10
+    x: 124.7622201
+    'y': 31.2242745
+    r: 5
     meta:
-        stagger: -9.559142857142858
-        spread: 19.035
-        splay: -5
+        stagger: -16.907000000000004
+        spread: 18.05
+        splay: -10
         origin:
             - 0
             - 0
@@ -5441,7 +5441,7 @@ matrix_pinky_top:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -5488,7 +5488,7 @@ matrix_pinky_top:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -5535,7 +5535,7 @@ matrix_pinky_top:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -5593,7 +5593,7 @@ matrix_pinky_top:
             key:
                 stagger: '-ring_off + pinky_off + 1'
                 splay: +ring_splay - pinky_splay
-                spread: 1kx + 0.035
+                spread: 0.95kx
             rows:
                 number:
                     layers:
@@ -5759,7 +5759,7 @@ mirror_matrix_inner_bottom:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -5806,7 +5806,7 @@ mirror_matrix_inner_bottom:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -5853,7 +5853,7 @@ mirror_matrix_inner_bottom:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -6063,7 +6063,7 @@ mirror_matrix_inner_home:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -6110,7 +6110,7 @@ mirror_matrix_inner_home:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -6157,7 +6157,7 @@ mirror_matrix_inner_home:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -6367,7 +6367,7 @@ mirror_matrix_inner_top:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -6414,7 +6414,7 @@ mirror_matrix_inner_top:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -6461,7 +6461,7 @@ mirror_matrix_inner_top:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -6558,11 +6558,11 @@ mirror_matrix_inner_top:
             - 10
             - 0
 mirror_matrix_index_bottom:
-    x: -63.5209505
-    'y': -8.4462325
+    x: -64.5774962
+    'y': -10.712002
     r: -25
     meta:
-        stagger: 2.5
+        stagger: 0
         spread: 19
         splay: 0
         origin:
@@ -6671,7 +6671,7 @@ mirror_matrix_index_bottom:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -6718,7 +6718,7 @@ mirror_matrix_index_bottom:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -6765,7 +6765,7 @@ mirror_matrix_index_bottom:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -6863,11 +6863,11 @@ mirror_matrix_index_bottom:
             - 0
             - 10
 mirror_matrix_index_home:
-    x: -55.4912036
-    'y': 8.7736154
+    x: -56.5477492
+    'y': 6.507846
     r: -25
     meta:
-        stagger: 2.5
+        stagger: 0
         spread: 19
         splay: 0
         origin:
@@ -6976,7 +6976,7 @@ mirror_matrix_index_home:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -7023,7 +7023,7 @@ mirror_matrix_index_home:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -7070,7 +7070,7 @@ mirror_matrix_index_home:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -7168,11 +7168,11 @@ mirror_matrix_index_home:
             - 10
             - 10
 mirror_matrix_index_top:
-    x: -47.4614566
-    'y': 25.9934634
+    x: -48.5180022
+    'y': 23.7276939
     r: -25
     meta:
-        stagger: 2.5
+        stagger: 0
         spread: 19
         splay: 0
         origin:
@@ -7281,7 +7281,7 @@ mirror_matrix_index_top:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -7328,7 +7328,7 @@ mirror_matrix_index_top:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -7375,7 +7375,7 @@ mirror_matrix_index_top:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -7473,12 +7473,12 @@ mirror_matrix_index_top:
             - 10
             - 0
 mirror_matrix_middle_mod:
-    x: -86.748573
-    'y': -11.4072383
+    x: -86.3860499
+    'y': -11.5762856
     r: -20
     meta:
-        stagger: 6.5
-        spread: 19.8
+        stagger: 9
+        spread: 19.4
         splay: -5
         origin:
             - 0
@@ -7589,7 +7589,7 @@ mirror_matrix_middle_mod:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -7636,7 +7636,7 @@ mirror_matrix_middle_mod:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -7683,7 +7683,7 @@ mirror_matrix_middle_mod:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -7741,7 +7741,7 @@ mirror_matrix_middle_mod:
             key:
                 stagger: '-index_off + middle_off'
                 splay: +index_splay - middle_splay
-                spread: 1kx + 0.8
+                spread: 1kx + 0.4
             rows:
                 number:
                     layers:
@@ -7792,12 +7792,12 @@ mirror_matrix_middle_mod:
             - 0
             - 0
 mirror_matrix_middle_bottom:
-    x: -80.2501902
-    'y': 6.4469215
+    x: -79.8876671
+    'y': 6.2778742
     r: -20
     meta:
-        stagger: 6.5
-        spread: 19.8
+        stagger: 9
+        spread: 19.4
         splay: -5
         origin:
             - 0
@@ -7905,7 +7905,7 @@ mirror_matrix_middle_bottom:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -7952,7 +7952,7 @@ mirror_matrix_middle_bottom:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -7999,7 +7999,7 @@ mirror_matrix_middle_bottom:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -8057,7 +8057,7 @@ mirror_matrix_middle_bottom:
             key:
                 stagger: '-index_off + middle_off'
                 splay: +index_splay - middle_splay
-                spread: 1kx + 0.8
+                spread: 1kx + 0.4
             rows:
                 number:
                     layers:
@@ -8108,12 +8108,12 @@ mirror_matrix_middle_bottom:
             - 10
             - 10
 mirror_matrix_middle_home:
-    x: -73.7518075
-    'y': 24.3010814
+    x: -73.3892844
+    'y': 24.1320341
     r: -20
     meta:
-        stagger: 6.5
-        spread: 19.8
+        stagger: 9
+        spread: 19.4
         splay: -5
         origin:
             - 0
@@ -8221,7 +8221,7 @@ mirror_matrix_middle_home:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -8268,7 +8268,7 @@ mirror_matrix_middle_home:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -8315,7 +8315,7 @@ mirror_matrix_middle_home:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -8373,7 +8373,7 @@ mirror_matrix_middle_home:
             key:
                 stagger: '-index_off + middle_off'
                 splay: +index_splay - middle_splay
-                spread: 1kx + 0.8
+                spread: 1kx + 0.4
             rows:
                 number:
                     layers:
@@ -8422,14 +8422,14 @@ mirror_matrix_middle_home:
             - 10
             - 10
             - 10
-            - 10
+            - 0
 mirror_matrix_middle_top:
-    x: -67.2534247
-    'y': 42.1552412
+    x: -66.8909016
+    'y': 41.9861939
     r: -20
     meta:
-        stagger: 6.5
-        spread: 19.8
+        stagger: 9
+        spread: 19.4
         splay: -5
         origin:
             - 0
@@ -8537,7 +8537,7 @@ mirror_matrix_middle_top:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -8584,7 +8584,7 @@ mirror_matrix_middle_top:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -8631,7 +8631,7 @@ mirror_matrix_middle_top:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -8689,7 +8689,7 @@ mirror_matrix_middle_top:
             key:
                 stagger: '-index_off + middle_off'
                 splay: +index_splay - middle_splay
-                spread: 1kx + 0.8
+                spread: 1kx + 0.4
             rows:
                 number:
                     layers:
@@ -8740,12 +8740,12 @@ mirror_matrix_middle_top:
             - 10
             - 0
 mirror_matrix_ring_mod:
-    x: -107.9059288
-    'y': -13.8673599
+    x: -107.9192827
+    'y': -13.8995991
     r: -15
     meta:
         stagger: -9.548
-        spread: 19.04
+        spread: 19.44
         splay: -5
         origin:
             - 0
@@ -8857,7 +8857,7 @@ mirror_matrix_ring_mod:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -8904,7 +8904,7 @@ mirror_matrix_ring_mod:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -8951,7 +8951,7 @@ mirror_matrix_ring_mod:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -9009,7 +9009,7 @@ mirror_matrix_ring_mod:
             key:
                 stagger: '-middle_off + ring_off'
                 splay: +middle_splay - ring_splay
-                spread: 1kx + 0.04
+                spread: 1kx + 0.44
             rows:
                 number:
                     layers:
@@ -9060,12 +9060,12 @@ mirror_matrix_ring_mod:
             - 0
             - 0
 mirror_matrix_ring_bottom:
-    x: -102.988367
-    'y': 4.4852308
+    x: -103.0017209
+    'y': 4.4529916
     r: -15
     meta:
         stagger: -9.548
-        spread: 19.04
+        spread: 19.44
         splay: -5
         origin:
             - 0
@@ -9173,7 +9173,7 @@ mirror_matrix_ring_bottom:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -9220,7 +9220,7 @@ mirror_matrix_ring_bottom:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -9267,7 +9267,7 @@ mirror_matrix_ring_bottom:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -9325,7 +9325,7 @@ mirror_matrix_ring_bottom:
             key:
                 stagger: '-middle_off + ring_off'
                 splay: +middle_splay - ring_splay
-                spread: 1kx + 0.04
+                spread: 1kx + 0.44
             rows:
                 number:
                     layers:
@@ -9376,12 +9376,12 @@ mirror_matrix_ring_bottom:
             - 10
             - 10
 mirror_matrix_ring_home:
-    x: -98.0708051
-    'y': 22.8378215
+    x: -98.0841591
+    'y': 22.8055823
     r: -15
     meta:
         stagger: -9.548
-        spread: 19.04
+        spread: 19.44
         splay: -5
         origin:
             - 0
@@ -9489,7 +9489,7 @@ mirror_matrix_ring_home:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -9536,7 +9536,7 @@ mirror_matrix_ring_home:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -9583,7 +9583,7 @@ mirror_matrix_ring_home:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -9641,7 +9641,7 @@ mirror_matrix_ring_home:
             key:
                 stagger: '-middle_off + ring_off'
                 splay: +middle_splay - ring_splay
-                spread: 1kx + 0.04
+                spread: 1kx + 0.44
             rows:
                 number:
                     layers:
@@ -9692,12 +9692,12 @@ mirror_matrix_ring_home:
             - 10
             - 10
 mirror_matrix_ring_top:
-    x: -93.1532433
-    'y': 41.1904122
+    x: -93.1665972
+    'y': 41.158173
     r: -15
     meta:
         stagger: -9.548
-        spread: 19.04
+        spread: 19.44
         splay: -5
         origin:
             - 0
@@ -9805,7 +9805,7 @@ mirror_matrix_ring_top:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -9852,7 +9852,7 @@ mirror_matrix_ring_top:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -9899,7 +9899,7 @@ mirror_matrix_ring_top:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -9957,7 +9957,7 @@ mirror_matrix_ring_top:
             key:
                 stagger: '-middle_off + ring_off'
                 splay: +middle_splay - ring_splay
-                spread: 1kx + 0.04
+                spread: 1kx + 0.44
             rows:
                 number:
                     layers:
@@ -10008,13 +10008,13 @@ mirror_matrix_ring_top:
             - 10
             - 10
 mirror_matrix_pinky_mod:
-    x: -128.7664151
-    'y': -18.1741625
-    r: -10
+    x: -129.7300975
+    'y': -25.5588233
+    r: -5
     meta:
-        stagger: -9.559142857142858
-        spread: 19.035
-        splay: -5
+        stagger: -16.907000000000004
+        spread: 18.05
+        splay: -10
         origin:
             - 0
             - 0
@@ -10125,7 +10125,7 @@ mirror_matrix_pinky_mod:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -10172,7 +10172,7 @@ mirror_matrix_pinky_mod:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -10219,7 +10219,7 @@ mirror_matrix_pinky_mod:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -10277,7 +10277,7 @@ mirror_matrix_pinky_mod:
             key:
                 stagger: '-ring_off + pinky_off + 1'
                 splay: +ring_splay - pinky_splay
-                spread: 1kx + 0.035
+                spread: 0.95kx
             rows:
                 number:
                     layers:
@@ -10330,13 +10330,13 @@ mirror_matrix_pinky_mod:
             - 0
             - 0
 mirror_matrix_pinky_bottom:
-    x: -125.4670998
-    'y': 0.5371849
-    r: -10
+    x: -128.0741384
+    'y': -6.6311241
+    r: -5
     meta:
-        stagger: -9.559142857142858
-        spread: 19.035
-        splay: -5
+        stagger: -16.907000000000004
+        spread: 18.05
+        splay: -10
         origin:
             - 0
             - 0
@@ -10443,7 +10443,7 @@ mirror_matrix_pinky_bottom:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -10490,7 +10490,7 @@ mirror_matrix_pinky_bottom:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -10537,7 +10537,7 @@ mirror_matrix_pinky_bottom:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -10595,7 +10595,7 @@ mirror_matrix_pinky_bottom:
             key:
                 stagger: '-ring_off + pinky_off + 1'
                 splay: +ring_splay - pinky_splay
-                spread: 1kx + 0.035
+                spread: 0.95kx
             rows:
                 number:
                     layers:
@@ -10648,13 +10648,13 @@ mirror_matrix_pinky_bottom:
             - 10
             - 10
 mirror_matrix_pinky_home:
-    x: -122.1677845
-    'y': 19.2485322
-    r: -10
+    x: -126.4181792
+    'y': 12.2965752
+    r: -5
     meta:
-        stagger: -9.559142857142858
-        spread: 19.035
-        splay: -5
+        stagger: -16.907000000000004
+        spread: 18.05
+        splay: -10
         origin:
             - 0
             - 0
@@ -10761,7 +10761,7 @@ mirror_matrix_pinky_home:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -10808,7 +10808,7 @@ mirror_matrix_pinky_home:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -10855,7 +10855,7 @@ mirror_matrix_pinky_home:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -10913,7 +10913,7 @@ mirror_matrix_pinky_home:
             key:
                 stagger: '-ring_off + pinky_off + 1'
                 splay: +ring_splay - pinky_splay
-                spread: 1kx + 0.035
+                spread: 0.95kx
             rows:
                 number:
                     layers:
@@ -10966,13 +10966,13 @@ mirror_matrix_pinky_home:
             - 10
             - 10
 mirror_matrix_pinky_top:
-    x: -118.8684691
-    'y': 37.9598795
-    r: -10
+    x: -124.7622201
+    'y': 31.2242745
+    r: -5
     meta:
-        stagger: -9.559142857142858
-        spread: 19.035
-        splay: -5
+        stagger: -16.907000000000004
+        spread: 18.05
+        splay: -10
         origin:
             - 0
             - 0
@@ -11079,7 +11079,7 @@ mirror_matrix_pinky_top:
                     key:
                         stagger: '-index_off + middle_off'
                         splay: +index_splay - middle_splay
-                        spread: 1kx + 0.8
+                        spread: 1kx + 0.4
                     rows:
                         number:
                             layers:
@@ -11126,7 +11126,7 @@ mirror_matrix_pinky_top:
                     key:
                         stagger: '-middle_off + ring_off'
                         splay: +middle_splay - ring_splay
-                        spread: 1kx + 0.04
+                        spread: 1kx + 0.44
                     rows:
                         number:
                             layers:
@@ -11173,7 +11173,7 @@ mirror_matrix_pinky_top:
                     key:
                         stagger: '-ring_off + pinky_off + 1'
                         splay: +ring_splay - pinky_splay
-                        spread: 1kx + 0.035
+                        spread: 0.95kx
                     rows:
                         number:
                             layers:
@@ -11231,7 +11231,7 @@ mirror_matrix_pinky_top:
             key:
                 stagger: '-ring_off + pinky_off + 1'
                 splay: +ring_splay - pinky_splay
-                spread: 1kx + 0.035
+                spread: 0.95kx
             rows:
                 number:
                     layers:

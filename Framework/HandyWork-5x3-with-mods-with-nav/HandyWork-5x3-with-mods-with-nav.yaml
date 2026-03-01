@@ -2,16 +2,16 @@ units:
   kx: u
   ky: u
   inner_off: -2.5
-  index_off: 0
+  index_off: -2.5
   middle_off: 6.5
   ring_off: -(4/25)U
-  pinky_off: -(5/7)U
+  pinky_off: -1.1U
   outer_off: 0
   inner_splay: 0
   index_splay: 0
   middle_splay: 5
   ring_splay: 10
-  pinky_splay: 15
+  pinky_splay: 20
   outer_splay: 0
   split_x_offset: 2kx - 3
   split_y_offset: -3ky + 1
@@ -109,7 +109,7 @@ points:
           key:
             stagger: -index_off + middle_off
             splay: +index_splay - middle_splay
-            spread: 1kx + 0.8
+            spread: 1kx + 0.4
           rows:
             number:
               layers:
@@ -155,7 +155,7 @@ points:
           key:
             stagger: -middle_off + ring_off
             splay: +middle_splay - ring_splay
-            spread: 1kx + 0.04
+            spread: 1kx + 0.44
           rows:
             number:
               layers:
@@ -201,7 +201,7 @@ points:
           key:
             stagger: -ring_off + pinky_off + 1
             splay: +ring_splay - pinky_splay
-            spread: 1kx + 0.035
+            spread: 0.95kx
           rows:
             number:
               layers:
@@ -398,6 +398,16 @@ outlines:
       size:
       - 276.76
       - 105
+      operation: stack
+    Electronics:
+      what: rectangle
+      size:
+      - 44.58
+      - 15.6
+      adjust:
+        shift:
+        - 44.58/2 - 141.58
+        - 15.6/2 - 51.6
       operation: stack
   HandyWork-5x3-test-layout:
   - ^keycaps

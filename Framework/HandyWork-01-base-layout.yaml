@@ -96,3 +96,8 @@ outlines:
       what: rectangle
       size: [276.76, 105]
       operation: stack
+    Electronics:
+      what: rectangle
+      size: [44.58, 15.6]
+      adjust.shift: [44.58/2 - 141.58, 15.6/2 - 51.6]
+      operation: stack

@@ -1,15 +1,15 @@
 units:
   # Columns stagger, referenced to index column
   inner_off: -2.5  # Kyria
-  index_off: 0  # Should remain 0
+  index_off: -2.5  # Would have preferred 0, but we need to align it with inner due to pad collisions (the top-left tab with right ROW pad)
   middle_off: +6.5  # Kyria
   ring_off: -(4/25)U  # YAEMK
-  pinky_off: -(5/7)U  # YAEMK
+  pinky_off: -1.1U
 
   # Columns absolute splay (degrees)
   middle_splay: 5
   ring_splay: 10
-  pinky_splay: 15
+  pinky_splay: 20
 
   # Mirroring offset and angle
   split_x_offset: 2kx - 3
@@ -21,12 +21,12 @@ points:
     matrix:
       columns:
         middle:
-          key.spread: 1kx + 0.8
+          key.spread: 1kx + 0.4
         ring:
-          key.spread: 1kx + 0.04
+          key.spread: 1kx + 0.44
         pinky:
           key.stagger: -ring_off + pinky_off + 1
-          key.spread: 1kx + 0.035
+          key.spread: 0.95kx
         outer:
           $skip: true
 
