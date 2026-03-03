@@ -5,11 +5,10 @@
 	(uuid "66956684-7b82-4bc3-9adf-3f8cede8982a")
 	(paper "A4")
 	(title_block
-		(title "HandyWork - 5x3 + Mods + Nav")
+		(title "HandyWork - PCB Template")
 		(date "2026-03-01")
 		(rev "1.0")
 		(company "Axel Voitier")
-		(comment 1 "HandyWork - 5x3 with mods with nav PCB")
 		(comment 2 "CERN Open Hardware Licence Version 2 - Weakly Reciprocal")
 		(comment 3 "Alidron")
 	)
@@ -8614,7 +8613,7 @@
 		(uuid "4095dda9-762c-4f1b-bfac-dff45ecaf007")
 	)
 	(label "LED_ROW2"
-		(at 257.81 111.76 0)
+		(at 257.81 114.3 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8634,7 +8633,7 @@
 		(uuid "4c6227aa-ab58-46c5-83bd-84e92f754f98")
 	)
 	(label "LED_ROW3"
-		(at 257.81 114.3 0)
+		(at 257.81 111.76 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9118,6 +9117,52 @@
 			(uuid 36d857b6-053b-4f0f-be2a-18282b181a6a)
 		)
 	)
+	(rule_area
+		(polyline
+			(pts
+				(xy 259.08 102.87) (xy 260.35 102.87) (xy 260.35 59.69) (xy 259.08 59.69)
+			)
+			(stroke
+				(width 0)
+				(type dash)
+			)
+			(fill
+				(type none)
+			)
+			(uuid 71de08e4-a105-436b-9ef3-7a92ba25b4fe)
+		)
+	)
+	(netclass_flag ""
+		(length 2.54)
+		(shape round)
+		(at 260.35 59.69 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ac3d5479-0981-4102-a328-10355bf599ee")
+		(property "Netclass" "LED_CS"
+			(at 261.0485 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Component Class" ""
+			(at -49.53 -19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+			)
+		)
+	)
 	(netclass_flag ""
 		(length 2.54)
 		(shape round)
@@ -9219,7 +9264,7 @@
 			(uuid "82cb1210-f47d-4d2c-87e8-fa68f6f01316")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C26")
 					(unit 1)
@@ -9334,7 +9379,7 @@
 			(uuid "78da6f5e-1ca5-4d81-abac-7cfb55aa4066")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C4")
 					(unit 1)
@@ -9401,7 +9446,7 @@
 			(uuid "468bcffa-385d-41b0-bfaf-18a12038b5e0")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR03")
 					(unit 1)
@@ -9468,7 +9513,7 @@
 			(uuid "b3d843b3-83d3-46e2-8256-5d91081acde9")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR029")
 					(unit 1)
@@ -9535,7 +9580,7 @@
 			(uuid "e1b62daf-4e44-4a00-9e0c-1f729933f336")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR032")
 					(unit 1)
@@ -9647,7 +9692,7 @@
 			(uuid "f2d35f99-2cb7-4095-a03e-21a68e0fff76")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "D3")
 					(unit 1)
@@ -9762,7 +9807,7 @@
 			(uuid "90b49ac0-aab0-4c1c-a196-e0fbf6936ede")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C9")
 					(unit 1)
@@ -9877,7 +9922,7 @@
 			(uuid "6ea8bac5-6cd1-4c97-9516-2b5014405d10")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C24")
 					(unit 1)
@@ -9992,7 +10037,7 @@
 			(uuid "165d7da0-ae59-4d79-9c70-8000378ff9de")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C5")
 					(unit 1)
@@ -10107,7 +10152,7 @@
 			(uuid "ec16a736-f677-4f29-b14e-4cd354668248")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C10")
 					(unit 1)
@@ -10369,7 +10414,7 @@
 			(uuid "31a904f7-b74e-402e-affc-f7724a82fc7f")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "R6")
 					(unit 1)
@@ -10548,7 +10593,7 @@
 			(uuid "14e144ad-a589-470e-9ef7-b32ff3072a7e")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "R10")
 					(unit 1)
@@ -10615,7 +10660,7 @@
 			(uuid "29d672c2-5204-4cec-a9e9-f305b85c1011")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR031")
 					(unit 1)
@@ -10727,7 +10772,7 @@
 			(uuid "3c7ee388-900f-4c9b-af13-33389a1b8ac2")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "D4")
 					(unit 1)
@@ -10794,7 +10839,7 @@
 			(uuid "26c4191c-5483-4227-a3f9-12197bb07eb6")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR012")
 					(unit 1)
@@ -10860,7 +10905,7 @@
 			(uuid "cbb56455-abb8-41ee-8c60-719e04ffd143")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR023")
 					(unit 1)
@@ -10876,7 +10921,7 @@
 		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
-		(dnp yes)
+		(dnp no)
 		(uuid "31914ce2-2e7d-4018-94e0-7e15e3fe0ec4")
 		(property "Reference" "J1"
 			(at 65.024 134.874 0)
@@ -11157,7 +11202,7 @@
 			(uuid "4dcbf5b3-3edd-4868-97e1-e0124fbdd0a3")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#FLG03")
 					(unit 1)
@@ -11223,7 +11268,7 @@
 			(uuid "ce8a36f6-c0f1-4b95-b6a3-02295df8f8fc")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR08")
 					(unit 1)
@@ -11290,7 +11335,7 @@
 			(uuid "12462f46-98c0-4cf8-af7c-691e6380128d")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR06")
 					(unit 1)
@@ -11405,7 +11450,7 @@
 			(uuid "daaee390-e8be-4984-aee3-d3dfe5e518c2")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C22")
 					(unit 1)
@@ -11633,7 +11678,7 @@
 			(uuid "60ed82a5-b5d9-444b-b646-b8052d72eda7")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C20")
 					(unit 1)
@@ -11700,7 +11745,7 @@
 			(uuid "bc004d79-bc7a-4e1c-bd0a-af86f695e236")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR038")
 					(unit 1)
@@ -11767,7 +11812,7 @@
 			(uuid "eef8eda9-4224-4117-8266-34e278dd6a2c")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR025")
 					(unit 1)
@@ -12042,7 +12087,7 @@
 			(uuid "82956b0b-5b4e-49ac-8509-fdab6af7e555")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "D2")
 					(unit 1)
@@ -12222,7 +12267,7 @@
 			(uuid "6a3d86e1-7411-4be3-a0d6-9aeacb25b438")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C14")
 					(unit 1)
@@ -12289,7 +12334,7 @@
 			(uuid "6e54a4a1-af4f-49be-b53f-25eded4ee589")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR028")
 					(unit 1)
@@ -12468,7 +12513,7 @@
 			(uuid "fa02bbb9-8116-4d7d-8f25-28b3f090bc88")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "R3")
 					(unit 1)
@@ -12533,7 +12578,7 @@
 			(uuid "cf56a640-1ff5-49ac-a7c2-87482c3736a1")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR010")
 					(unit 1)
@@ -12676,7 +12721,7 @@
 			(uuid "12a4130b-5a6b-430b-b25f-9daac8394d31")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "SW2")
 					(unit 1)
@@ -12791,7 +12836,7 @@
 			(uuid "afafd374-8d0d-41f6-9960-a83e088a025a")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C21")
 					(unit 1)
@@ -12858,7 +12903,7 @@
 			(uuid "afb6ce57-bf80-4baf-bb7a-43c6e8d7a0c4")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR020")
 					(unit 1)
@@ -12973,7 +13018,7 @@
 			(uuid "49262b00-5e85-49c2-9e19-858f425eef42")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C12")
 					(unit 1)
@@ -13040,7 +13085,7 @@
 			(uuid "0ead0319-81d0-455c-8ef3-09bd4a4f923c")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR026")
 					(unit 1)
@@ -13155,7 +13200,7 @@
 			(uuid "08654842-e773-4148-a890-f1cfba93c4b0")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C19")
 					(unit 1)
@@ -13222,7 +13267,7 @@
 			(uuid "5ea5556f-eb2e-46f8-af64-799b10f5db00")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR019")
 					(unit 1)
@@ -13288,7 +13333,7 @@
 			(uuid "216ea2c0-d7f6-458d-bdb3-3192875d7462")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR027")
 					(unit 1)
@@ -13355,7 +13400,7 @@
 			(uuid "e60c6dc2-b53d-42a5-a501-6962ea9c1dd1")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR016")
 					(unit 1)
@@ -13537,7 +13582,7 @@
 			(uuid "ecbc1c6e-44d0-405c-9626-c8b02a1b729f")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C2")
 					(unit 1)
@@ -13792,7 +13837,7 @@
 			(uuid "dfaf5c16-3b65-42bb-ba63-10212aaa0bdd")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR018")
 					(unit 1)
@@ -13905,7 +13950,7 @@
 			(uuid "025e1c5f-34bb-4a79-aa97-fa9c22830fb8")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "R11")
 					(unit 1)
@@ -13971,7 +14016,7 @@
 			(uuid "4152d504-bd58-4ca5-908c-f6f4725f5c8e")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR030")
 					(unit 1)
@@ -14086,7 +14131,7 @@
 			(uuid "79493237-78b4-4f94-a8e6-0d7e90355a4f")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C3")
 					(unit 1)
@@ -14199,7 +14244,7 @@
 			(uuid "c9947c87-95fa-46df-855b-c4522dbcb0cd")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "R8")
 					(unit 1)
@@ -14266,7 +14311,7 @@
 			(uuid "a8870371-e828-498a-bcb3-b1310a0a027f")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR05")
 					(unit 1)
@@ -14379,7 +14424,7 @@
 			(uuid "5173cdbd-99d8-4aed-bbda-7806add48af1")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "R2")
 					(unit 1)
@@ -14786,7 +14831,7 @@
 			(uuid "27bce804-393c-4e51-9e94-5a0c23c1f0b8")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C16")
 					(unit 1)
@@ -15210,7 +15255,7 @@
 			(uuid "17718e50-69c6-47b4-a2db-35e7bbf27fb0")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C18")
 					(unit 1)
@@ -15437,7 +15482,7 @@
 			(uuid "56b76419-0913-485e-be39-e8438370d09a")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "D5")
 					(unit 1)
@@ -15504,7 +15549,7 @@
 			(uuid "aead8ad8-aa3e-4f19-9508-7a5712e3368a")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR09")
 					(unit 1)
@@ -15619,7 +15664,7 @@
 			(uuid "35f9411f-2ae0-428c-9d9f-8239880b9d4e")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C13")
 					(unit 1)
@@ -15685,7 +15730,7 @@
 			(uuid "def23bd8-1ab2-468c-9ad1-5d29d2f9349e")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR022")
 					(unit 1)
@@ -15752,7 +15797,7 @@
 			(uuid "e265d076-6479-4be2-b386-2aaae340b2e6")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR04")
 					(unit 1)
@@ -15867,7 +15912,7 @@
 			(uuid "a824ce45-e319-4b8e-976f-1cc91a9c06c2")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C6")
 					(unit 1)
@@ -15934,7 +15979,7 @@
 			(uuid "4101c826-01cc-4c62-884a-4e7eb0d59787")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR014")
 					(unit 1)
@@ -16000,7 +16045,7 @@
 			(uuid "07517cbb-93c4-4a5a-8e28-bbaa6f133894")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR036")
 					(unit 1)
@@ -16114,7 +16159,7 @@
 			(uuid "cd03b5ae-acb3-4598-aa5d-685cf91e740d")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C17")
 					(unit 1)
@@ -16226,7 +16271,7 @@
 			(uuid "cf877d8c-c650-4dc2-9b61-470e18ecf69c")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "R12")
 					(unit 1)
@@ -16292,7 +16337,7 @@
 			(uuid "727ae1c7-cf0a-4b1f-a67e-b23308f0a839")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR024")
 					(unit 1)
@@ -16502,7 +16547,7 @@
 			(uuid "92a9b5a6-5667-466c-a9cd-9aa080255806")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR07")
 					(unit 1)
@@ -16568,7 +16613,7 @@
 			(uuid "3b377f21-dc26-4ae5-89e7-765989ec82c4")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR034")
 					(unit 1)
@@ -16681,7 +16726,7 @@
 			(uuid "ace69992-586c-44a3-a010-75187da79085")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "R5")
 					(unit 1)
@@ -16794,7 +16839,7 @@
 			(uuid "d03be280-e55d-4bcb-a94d-747886bc8cba")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "R9")
 					(unit 1)
@@ -16861,7 +16906,7 @@
 			(uuid "be182aea-43b6-435f-8306-3212164f9699")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR035")
 					(unit 1)
@@ -16928,7 +16973,7 @@
 			(uuid "321c1533-07a1-4c7b-aa57-a359149a4fbb")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR033")
 					(unit 1)
@@ -17043,7 +17088,7 @@
 			(uuid "de641a5b-b579-4610-97b7-e7e2f89370ba")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C15")
 					(unit 1)
@@ -17109,7 +17154,7 @@
 			(uuid "6104469d-246d-49a7-a44b-bfc5c1842fb4")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#FLG01")
 					(unit 1)
@@ -17175,7 +17220,7 @@
 			(uuid "e5857033-810d-4c2c-8ee2-61a1f0228859")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR015")
 					(unit 1)
@@ -17290,7 +17335,7 @@
 			(uuid "57b492a9-9190-4245-9564-91f2bb0383d1")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C23")
 					(unit 1)
@@ -17405,7 +17450,7 @@
 			(uuid "70d00419-2bd1-4980-b111-e2d420c83318")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C8")
 					(unit 1)
@@ -17518,7 +17563,7 @@
 			(uuid "db13a423-173f-4e10-a394-9047ea324632")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "R7")
 					(unit 1)
@@ -17585,7 +17630,7 @@
 			(uuid "b59cbdc2-d345-4383-9fa9-d1418754a875")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR011")
 					(unit 1)
@@ -17651,7 +17696,7 @@
 			(uuid "be66c7e8-c34c-4730-8705-09f7ed505bfd")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR021")
 					(unit 1)
@@ -17763,7 +17808,7 @@
 			(uuid "4e7c4ede-4c35-44d3-bf6b-38efdb5cc7d7")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "R13")
 					(unit 1)
@@ -17829,7 +17874,7 @@
 			(uuid "081c8a79-5b90-4130-8a08-6ef5b48b7fc1")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#FLG02")
 					(unit 1)
@@ -17944,7 +17989,7 @@
 			(uuid "1f035e8a-0e47-40b1-87ee-eab89fc912cc")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C7")
 					(unit 1)
@@ -18059,7 +18104,7 @@
 			(uuid "3a846d3f-0ddc-4793-b7e1-ed81310e270f")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "C11")
 					(unit 1)
@@ -18171,7 +18216,7 @@
 			(uuid "6eefd0c3-4d78-46fb-826f-d4d7cfb70392")
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "R4")
 					(unit 1)
@@ -18204,7 +18249,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Sheetfile" "HandyWork-5x3-with-mods-with-nav-PCB-LEDs.kicad_sch"
+		(property "Sheetfile" "HandyWork-PCB-LEDs.kicad_sch"
 			(at 226.06 184.7346 0)
 			(effects
 				(font
@@ -18234,7 +18279,7 @@
 			)
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(page "3")
 				)
@@ -18266,7 +18311,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Sheetfile" "HandyWork-5x3-with-mods-with-nav-PCB-Switches.kicad_sch"
+		(property "Sheetfile" "HandyWork-PCB-Switches.kicad_sch"
 			(at 146.05 184.7346 0)
 			(effects
 				(font
@@ -18296,7 +18341,7 @@
 			)
 		)
 		(instances
-			(project "HandyWork-5x3-with-mods-with-nav-PCB"
+			(project "HandyWork-PCB"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(page "2")
 				)

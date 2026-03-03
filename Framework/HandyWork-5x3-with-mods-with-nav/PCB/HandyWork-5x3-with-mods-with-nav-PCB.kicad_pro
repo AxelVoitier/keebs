@@ -38,8 +38,8 @@
         "other_text_upright": false,
         "pads": {
           "drill": 0.0,
-          "height": 0.64,
-          "width": 0.54
+          "height": 3.3,
+          "width": 3.3
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -88,19 +88,19 @@
           ""
         ],
         [
-          "unconnected_items|112995205|129193774|F.Cu|4|a4103dfa-2489-4fc4-89bc-db4f8bb353c2|9df20a67-0300-4322-a980-1a281604e5d1",
+          "unconnected_items|127131053|139845900|F.Cu|4|d9e1ca55-6e9c-46d1-80d6-1346ea33b46f|a4483c87-e516-4f77-b9df-b522c3ff88f6",
           ""
         ],
         [
-          "unconnected_items|169868947|139845900|F.Cu|4|40b749bb-4534-4b77-9164-7b59cc76c546|0d83e91e-2649-44e7-90e8-b3dc9b8decd9",
+          "unconnected_items|169868947|139845900|F.Cu|4|a1cec783-9e8b-4f3c-95dc-3658dce85d37|643c06ae-0945-4344-9e5f-cc1c384d31d2",
           ""
         ],
         [
-          "unconnected_items|192007648|135211749|F.Cu|4|e004b1d3-abfd-4fd3-bba1-c288481591eb|327ff404-c377-438e-b33f-a35dc0ce1ed8",
+          "unconnected_items|192007648|135211749|F.Cu|4|dc98ebac-9368-4473-8509-abb1b41345c7|68df9a47-d1ed-4b64-b322-3568d3656142",
           ""
         ],
         [
-          "unconnected_items|231846349|139845900|F.Cu|4|8574180a-2eae-4323-968e-6e8a66b2f33e|69e16a3e-9c39-4726-9725-0cd68d0a242c",
+          "unconnected_items|217710501|129193774|F.Cu|4|69e16a3e-9c39-4726-9725-0cd68d0a242c|dd1ce3f8-698e-49e2-ab66-321ee2724555",
           ""
         ]
       ],
@@ -168,7 +168,7 @@
       },
       "rules": {
         "max_error": 0.005,
-        "min_clearance": 0.1,
+        "min_clearance": 0.15,
         "min_connection": 0.0,
         "min_copper_edge_clearance": 0.199,
         "min_groove_width": 0.0,
@@ -180,10 +180,10 @@
         "min_silk_clearance": 0.0,
         "min_text_height": 1.0,
         "min_text_thickness": 0.15,
-        "min_through_hole_diameter": 0.15,
-        "min_track_width": 0.1,
-        "min_via_annular_width": 0.075,
-        "min_via_diameter": 0.25,
+        "min_through_hole_diameter": 0.3,
+        "min_track_width": 0.15,
+        "min_via_annular_width": 0.05,
+        "min_via_diameter": 0.4,
         "solder_mask_to_copper_clearance": 0.09,
         "use_height_for_length_calcs": true
       },
@@ -277,20 +277,24 @@
           "drill": 0.0
         },
         {
-          "diameter": 0.25,
-          "drill": 0.15
-        },
-        {
-          "diameter": 0.35,
-          "drill": 0.2
-        },
-        {
           "diameter": 0.4,
+          "drill": 0.3
+        },
+        {
+          "diameter": 0.45,
           "drill": 0.2
+        },
+        {
+          "diameter": 0.45,
+          "drill": 0.3
         },
         {
           "diameter": 0.5,
-          "drill": 0.25
+          "drill": 0.3
+        },
+        {
+          "diameter": 0.55,
+          "drill": 0.3
         },
         {
           "diameter": 0.6,
@@ -576,9 +580,26 @@
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
-        "name": "LED_SW",
+        "name": "LED_CS",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": 0,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.2,
+        "via_diameter": 0.4,
+        "via_drill": 0.2,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.15,
+        "diff_pair_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "LED_SW",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.4,
         "via_diameter": 0.6,
@@ -595,7 +616,7 @@
         "microvia_drill": 0.1,
         "name": "USB_90R",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 1,
+        "priority": 2,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.2,
         "via_diameter": 0.4,
@@ -608,6 +629,45 @@
     },
     "net_colors": null,
     "netclass_assignments": {
+      "/LED_COL1": [
+        "LED_CS"
+      ],
+      "/LED_COL10": [
+        "LED_CS"
+      ],
+      "/LED_COL11": [
+        "LED_CS"
+      ],
+      "/LED_COL12": [
+        "LED_CS"
+      ],
+      "/LED_COL13": [
+        "LED_CS"
+      ],
+      "/LED_COL2": [
+        "LED_CS"
+      ],
+      "/LED_COL3": [
+        "LED_CS"
+      ],
+      "/LED_COL4": [
+        "LED_CS"
+      ],
+      "/LED_COL5": [
+        "LED_CS"
+      ],
+      "/LED_COL6": [
+        "LED_CS"
+      ],
+      "/LED_COL7": [
+        "LED_CS"
+      ],
+      "/LED_COL8": [
+        "LED_CS"
+      ],
+      "/LED_COL9": [
+        "LED_CS"
+      ],
       "/LED_ROW1": [
         "LED_SW"
       ],
@@ -664,13 +724,13 @@
       "fields_ordered": [
         {
           "group_by": false,
-          "label": "Value",
+          "label": "Comment",
           "name": "Value",
           "show": true
         },
         {
           "group_by": false,
-          "label": "Reference",
+          "label": "Designator",
           "name": "Reference",
           "show": true
         },
@@ -712,7 +772,7 @@
         },
         {
           "group_by": true,
-          "label": "LCSC",
+          "label": "LCSC Part Number",
           "name": "LCSC",
           "show": true
         },

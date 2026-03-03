@@ -9117,6 +9117,52 @@
 			(uuid 36d857b6-053b-4f0f-be2a-18282b181a6a)
 		)
 	)
+	(rule_area
+		(polyline
+			(pts
+				(xy 259.08 102.87) (xy 260.35 102.87) (xy 260.35 59.69) (xy 259.08 59.69)
+			)
+			(stroke
+				(width 0)
+				(type dash)
+			)
+			(fill
+				(type none)
+			)
+			(uuid 71de08e4-a105-436b-9ef3-7a92ba25b4fe)
+		)
+	)
+	(netclass_flag ""
+		(length 2.54)
+		(shape round)
+		(at 260.35 59.69 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ac3d5479-0981-4102-a328-10355bf599ee")
+		(property "Netclass" "LED_CS"
+			(at 261.0485 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Component Class" ""
+			(at -49.53 -19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+			)
+		)
+	)
 	(netclass_flag ""
 		(length 2.54)
 		(shape round)
