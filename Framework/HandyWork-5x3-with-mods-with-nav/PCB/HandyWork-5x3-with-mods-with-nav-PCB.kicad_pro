@@ -38,8 +38,8 @@
         "other_text_upright": false,
         "pads": {
           "drill": 0.0,
-          "height": 3.3,
-          "width": 3.3
+          "height": 0.2,
+          "width": 0.75
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -59,6 +59,30 @@
         }
       ],
       "drc_exclusions": [
+        [
+          "lib_footprint_mismatch|12200000|136025000|e05f8059-edd6-40dd-9327-2c4a6448d918|00000000-0000-0000-0000-000000000000",
+          "Optional component, removed from paste layer"
+        ],
+        [
+          "lib_footprint_mismatch|18900000|138625000|1a38d357-b14d-426f-9d9e-b2d84259a7d7|00000000-0000-0000-0000-000000000000",
+          "Increased vias drill size in thermal pad"
+        ],
+        [
+          "lib_footprint_mismatch|234886050|106576286|dc66de3c-0d24-427a-aa36-8e25568fee69|00000000-0000-0000-0000-000000000000",
+          "Removed one LED+ pad"
+        ],
+        [
+          "lib_footprint_mismatch|256166285|108899599|07452c4b-ff3d-4c96-9704-78de3d046aa9|00000000-0000-0000-0000-000000000000",
+          "Removed one tab pad, and one LED+ pad"
+        ],
+        [
+          "lib_footprint_mismatch|30000000|142437500|5d79f888-1e34-48c7-a1e2-6a33c7b7c224|00000000-0000-0000-0000-000000000000",
+          "Optional component, removed from paste layer"
+        ],
+        [
+          "lib_footprint_mismatch|40300000|137924999|cc4d8fe3-b8df-4abd-b5f7-83b673c302e1|00000000-0000-0000-0000-000000000000",
+          "Increased via drill size in thermal pad, as well as thin out the end of some of the pads to make clearance for 0.3mm vias"
+        ],
         [
           "silk_overlap|40295000|142969999|9f8d05d5-0da2-4a8e-b270-e0020d3ea532|e9d4515a-9485-4eab-94be-b75ed811ddbf",
           ""
@@ -88,7 +112,7 @@
           ""
         ],
         [
-          "unconnected_items|127131053|139845900|F.Cu|4|9df20a67-0300-4322-a980-1a281604e5d1|a4103dfa-2489-4fc4-89bc-db4f8bb353c2",
+          "unconnected_items|127131053|139845900|F.Cu|4|d9e1ca55-6e9c-46d1-80d6-1346ea33b46f|a4103dfa-2489-4fc4-89bc-db4f8bb353c2",
           ""
         ],
         [
@@ -96,11 +120,11 @@
           ""
         ],
         [
-          "unconnected_items|192007648|135211749|F.Cu|4|dc98ebac-9368-4473-8509-abb1b41345c7|68df9a47-d1ed-4b64-b322-3568d3656142",
+          "unconnected_items|192007648|135211749|F.Cu|4|e004b1d3-abfd-4fd3-bba1-c288481591eb|327ff404-c377-438e-b33f-a35dc0ce1ed8",
           ""
         ],
         [
-          "unconnected_items|217710501|129193774|F.Cu|4|69e16a3e-9c39-4726-9725-0cd68d0a242c|8574180a-2eae-4323-968e-6e8a66b2f33e",
+          "unconnected_items|217710501|129193774|F.Cu|4|69e16a3e-9c39-4726-9725-0cd68d0a242c|dd1ce3f8-698e-49e2-ab66-321ee2724555",
           ""
         ]
       ],

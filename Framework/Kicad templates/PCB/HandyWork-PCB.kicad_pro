@@ -38,8 +38,8 @@
         "other_text_upright": false,
         "pads": {
           "drill": 0.0,
-          "height": 0.12,
-          "width": 0.85
+          "height": 0.64,
+          "width": 0.54
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -59,6 +59,22 @@
         }
       ],
       "drc_exclusions": [
+        [
+          "lib_footprint_mismatch|12200000|136025000|e05f8059-edd6-40dd-9327-2c4a6448d918|00000000-0000-0000-0000-000000000000",
+          "Optional component, removed from paste layer"
+        ],
+        [
+          "lib_footprint_mismatch|18900000|138625000|1a38d357-b14d-426f-9d9e-b2d84259a7d7|00000000-0000-0000-0000-000000000000",
+          "Increased vias drill size in thermal pad"
+        ],
+        [
+          "lib_footprint_mismatch|30017248|142437500|5d79f888-1e34-48c7-a1e2-6a33c7b7c224|00000000-0000-0000-0000-000000000000",
+          "Optional component, removed from paste layer"
+        ],
+        [
+          "lib_footprint_mismatch|40300000|137924999|cc4d8fe3-b8df-4abd-b5f7-83b673c302e1|00000000-0000-0000-0000-000000000000",
+          "Increased via drill size in thermal pad, as well as thin out the end of some of the pads to make clearance for 0.3mm vias"
+        ],
         [
           "silk_overlap|40295000|142969999|9f8d05d5-0da2-4a8e-b270-e0020d3ea532|e9d4515a-9485-4eab-94be-b75ed811ddbf",
           ""
