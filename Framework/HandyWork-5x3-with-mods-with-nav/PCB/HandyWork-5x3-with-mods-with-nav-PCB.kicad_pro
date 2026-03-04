@@ -731,7 +731,7 @@
   },
   "schematic": {
     "annotate_start_num": 0,
-    "bom_export_filename": "Fab/${PROJECTNAME}.csv",
+    "bom_export_filename": "Fab/${PROJECTNAME}-BOM.csv",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
       "field_delimiter": ",",
