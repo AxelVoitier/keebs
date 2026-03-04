@@ -6,8 +6,8 @@
 	(paper "A4")
 	(title_block
 		(title "HandyWork - 5x3 + Mods + Nav")
-		(date "2026-03-01")
-		(rev "1.0")
+		(date "2026-03-04")
+		(rev "v1A")
 		(company "Axel Voitier")
 		(comment 1 "HandyWork - 5x3 with mods with nav PCB")
 		(comment 2 "CERN Open Hardware Licence Version 2 - Weakly Reciprocal")
