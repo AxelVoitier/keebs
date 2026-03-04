@@ -7,7 +7,8 @@
 	(property "Reference" "REF**"
 		(at 0 63 0)
 		(unlocked yes)
-		(layer "F.SilkS")
+		(layer "F.Fab")
+		(hide yes)
 		(uuid "f9fb3d45-cf5e-4129-99a9-ccb9d3577600")
 		(effects
 			(font
@@ -20,6 +21,7 @@
 		(at 0 64.5 0)
 		(unlocked yes)
 		(layer "F.Fab")
+		(hide yes)
 		(uuid "87eb9e70-3bf6-4f93-b128-f07e40031158")
 		(effects
 			(font
@@ -388,7 +390,7 @@
 			(type dash)
 		)
 		(fill no)
-		(layer "F.CrtYd")
+		(layer "User.1")
 		(uuid "d2772558-624d-4bd0-b82a-14714746e4bb")
 	)
 	(fp_text user "${REFERENCE}"

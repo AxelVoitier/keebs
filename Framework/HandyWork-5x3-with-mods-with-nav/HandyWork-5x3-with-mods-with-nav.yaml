@@ -642,3 +642,23 @@ fabrication:
         3d_model:
           offset:
             z: -1.2
+  alu-plate:
+    folder: AluPlate
+    project-name: HandyWork-5x3-with-mods-with-nav-AluPlate
+    template:
+      folder: ../Kicad templates/AluPlate
+      project-name: HandyWork-AluPlate
+      files:
+      - fp-lib-table
+      - HandyWork-AluPlate.kicad_pro
+      - HandyWork-AluPlate.kicad_sch
+      - HandyWork-AluPlate.kicad_pcb
+    offset:
+      x: 297 / 2
+      y: (210 / 2) - 10
+    objects:
+    - keys:
+      - where:
+        - meta.tags.1u ~ true
+        footprint: Framework:One Key Module for Top Plate
+        ref: SW_{meta.qmk.row}{meta.qmk.col}

@@ -12,7 +12,6 @@ fabrication:
         - fp-lib-table
         - sym-lib-table
         - HandyWork-PCB.kicad_pro
-        # - HandyWork-PCB.kicad_prl
         - HandyWork-PCB.kicad_sch
         - HandyWork-PCB-LEDs.kicad_sch
         - HandyWork-PCB-Switches.kicad_sch
@@ -24,7 +23,6 @@ fabrication:
           - where:
               - meta.tags.1u ~ true
             ref: SW_{meta.qmk.row}{meta.qmk.col}
-            # ref: SW_{x:.0f}_{y:.0f}
             symbol:
               name: Framework:One_Key_Module
               units:
@@ -91,14 +89,23 @@ fabrication:
               offset:
                 z: -1.2
 
-  # alu-plate:
-  #   folder: AluPlate
-  #   project-name: HandyWork-5x3-AluPlate
-  #   offset: {x: 297 / 2, y: (210 / 2) - 10}
-  #   objects:
-  #     - keys:
-  #         - where:
-  #             - meta.tags.1u ~ true
-  #           footprint: 'Framework:One Key Module for Top Plate'
-  #           # ref: SW_{meta.qmk.col}_{meta.qmk.row}
-  #           ref: SW_{x:.0f}_{y:.0f}
+  alu-plate:
+    folder: AluPlate
+    project-name: HandyWork-5x3-with-mods-with-nav-AluPlate
+    template:
+      folder: "../Kicad templates/AluPlate"
+      project-name: HandyWork-AluPlate
+      files:
+        - fp-lib-table
+        # - sym-lib-table
+        - HandyWork-AluPlate.kicad_pro
+        - HandyWork-AluPlate.kicad_sch
+        - HandyWork-AluPlate.kicad_pcb
+
+    offset: {x: 297 / 2, y: (210 / 2) - 10}
+    objects:
+      - keys:
+          - where:
+              - meta.tags.1u ~ true
+            footprint: 'Framework:One Key Module for Top Plate'
+            ref: SW_{meta.qmk.row}{meta.qmk.col}
