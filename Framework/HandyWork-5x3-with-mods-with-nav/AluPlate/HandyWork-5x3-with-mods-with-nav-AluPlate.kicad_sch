@@ -531,7 +531,7 @@
 			(uuid "ebca891d-98ee-42dc-b775-830987f846f6")
 		)
 		(instances
-			(project "HandyWork-5x3-AluPlate"
+			(project "HandyWork-5x3-with-mods-with-nav-AluPlate"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "TP3")
 					(unit 1)
@@ -597,7 +597,7 @@
 			(uuid "53248539-d968-4acd-8962-875a69b0d9f9")
 		)
 		(instances
-			(project "HandyWork-5x3-AluPlate"
+			(project "HandyWork-5x3-with-mods-with-nav-AluPlate"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "TP5")
 					(unit 1)
@@ -861,7 +861,7 @@
 			(uuid "7cf0d770-f72d-4ab5-963a-07c8a7365376")
 		)
 		(instances
-			(project "HandyWork-5x3-AluPlate"
+			(project "HandyWork-5x3-with-mods-with-nav-AluPlate"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "TP2")
 					(unit 1)
@@ -927,7 +927,7 @@
 			(uuid "34ac9811-4754-498f-bd42-6cee945afbeb")
 		)
 		(instances
-			(project "HandyWork-5x3-AluPlate"
+			(project "HandyWork-5x3-with-mods-with-nav-AluPlate"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "TP6")
 					(unit 1)
@@ -993,7 +993,7 @@
 			(uuid "9be6c409-1d2f-4071-8a7b-46707d3d4384")
 		)
 		(instances
-			(project "HandyWork-5x3-AluPlate"
+			(project "HandyWork-5x3-with-mods-with-nav-AluPlate"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "#PWR02")
 					(unit 1)
@@ -1059,7 +1059,7 @@
 			(uuid "e14c936d-d160-4ce1-8090-d7998ec80006")
 		)
 		(instances
-			(project "HandyWork-5x3-AluPlate"
+			(project "HandyWork-5x3-with-mods-with-nav-AluPlate"
 				(path "/66956684-7b82-4bc3-9adf-3f8cede8982a"
 					(reference "TP4")
 					(unit 1)

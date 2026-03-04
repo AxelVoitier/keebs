@@ -451,7 +451,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "HandyWork-5x3-AluPlate.kicad_pro",
+    "filename": "HandyWork-5x3-with-mods-with-nav-AluPlate.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -487,7 +487,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "Fab",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "",
