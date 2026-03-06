@@ -63,4 +63,5 @@ You are also intended to glue a 10x3x1 mm bar magnet at the bottom in the middle
 
 ## License
 
-All original documents related to hardware designs are placed under the [CERN Open Hardware Licence Version 2 - Weakly Reciprocal](../../LICENSE-CERN-OHL-W-2.0.txt)
+All original documents related to hardware designs are licensed under the [CERN Open Hardware Licence Version 2 or later - Permissive](LICENSE-CERN-OHL-P-2.0.txt).
+
