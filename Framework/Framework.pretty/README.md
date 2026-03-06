@@ -65,3 +65,8 @@ You are also intended to glue a 10x3x1 mm bar magnet at the bottom in the middle
 
 All original documents related to hardware designs are licensed under the [CERN Open Hardware Licence Version 2 or later - Permissive](LICENSE-CERN-OHL-P-2.0.txt).
 
+### One Key Module STEP file
+
+OKM footprints embed a STEP file of the module directly. This External Material is © 2023-2026 by Framework Computer Inc, and was licensed under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/) at the time of embedding.
+
+The original file used was found on [Framework input modules repository](https://github.com/FrameworkComputer/InputModules). More specifically [this file](https://github.com/FrameworkComputer/InputModules/blob/a3cdc8724574c4a58973d1587be4465b5f1151ce/OneKeyModule/Mechanical/One_Key_Module_CAD.stp).
