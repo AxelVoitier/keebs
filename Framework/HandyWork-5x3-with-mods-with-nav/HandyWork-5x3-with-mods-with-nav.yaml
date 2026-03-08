@@ -662,3 +662,51 @@ fabrication:
         - meta.tags.1u ~ true
         footprint: Framework:One Key Module for Top Plate
         ref: SW_{meta.qmk.row}{meta.qmk.col}
+qmk:
+  keyboard:
+    keyboard_name: handywork/5x3_mods_nav
+    maintainer: Axel Voitier
+    manufacturer: Axel Voitier
+    url: https://github.com/AxelVoitier/keebs/tree/main/Framework/HandyWork-5x3-with-mods-with-nav
+    usb:
+      vid: '0xA8E1'
+      pid: '0x0003'
+      device_version: 1.0.0
+    processor: RP2040
+    bootloader: rp2040
+    build:
+      lto: true
+    features:
+      bootmagic: true
+      extrakey: true
+      mousekey: true
+      nkro: true
+    diode_direction: ROW2COL
+    matrix_pins:
+      cols:
+      - GP11
+      - GP12
+      - GP13
+      - GP14
+      - GP15
+      - GP16
+      - GP17
+      - GP18
+      - GP19
+      - GP20
+      - GP21
+      - GP22
+      - GP23
+      rows:
+      - GP06
+      - GP07
+      - GP08
+      - GP09
+      - GP10
+  _layout:
+    name: LAYOUT_3x5_1x3_1x3
+    labels: '{side_abbrev}{row_i}{col_i}'
+    sides:
+      left:
+        is_mirror: true
+      right: null

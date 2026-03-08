@@ -1,3 +1,68 @@
+qmk:
+  # These are used to populate info.json QMK file.
+  # You can also have these fields in a pre-existing info.json, and not provide them here.
+  # They will be preserved. Only matrix_pins can be complemented, and the layout itself
+  # will be cleared (but not any other layouts).
+  # In here, only _layout section is required
+
+  keyboard:  # info.json
+    keyboard_name: handywork/5x3_mods_nav
+    maintainer: Axel Voitier
+    manufacturer: Axel Voitier
+    url: https://github.com/AxelVoitier/keebs/tree/main/Framework/HandyWork-5x3-with-mods-with-nav
+
+    usb:
+      vid: "0xA8E1"
+      pid: "0x0003"
+      device_version: 1.0.0
+
+    processor: RP2040
+    # pin_compatible:
+    bootloader: rp2040
+    build:
+      # debounce_type:
+      # firmware_format:
+      lto: true
+    features:
+        bootmagic: true
+        extrakey: true
+        mousekey: true
+        nkro: true
+
+    # Matrix
+    # debounce: 5
+    diode_direction: ROW2COL
+    # matrix_pins is generated
+    # (but you can provide it as well, even partial, either here or in the original info.json)
+    matrix_pins:
+      cols: ["GP11", "GP12", "GP13", "GP14", "GP15", "GP16", "GP17", "GP18", "GP19", "GP20", "GP21", "GP22", "GP23"]
+      rows: ["GP06", "GP07", "GP08", "GP09", "GP10"]
+
+    # layouts is generated (at least the one described by _layout section).
+    # You can also manually provide other layouts, here or in the original info.json file.
+    # However, if there is one with the same name than the one we generate here, it will be wiped out.
+
+  # keymap:  # keymap.json
+  #   features:
+
+  # Required
+  _layout:
+    name: LAYOUT_3x5_1x3_1x3
+    labels: "{side_abbrev}{row_i}{col_i}" # Available: side, side_abbrev, row, row_i, col, col_i
+    sides:
+      left:
+        # abbrev: ...  # If not provided, use the first letter of the side name, capitalised
+        is_mirror: true  # Which side is generated as mirror by ergogen
+      right:
+    # structure gives the general shape of layout and keymap in C files.
+    # It is optional as the scripts can also autogenerate it from key positions.
+    # But if you want to refine it, have the script output one with "keebs.py qmk gen-layout-structure,
+    # copy/paste it here, and do your adjustments.
+    # The grid cells should contain either a key label, or spaces where there is no key.
+    # structure:
+    #   - ['L04', 'L03', 'L02', 'L01', 'L00', '   ', '   ', 'R00', 'R01', 'R02', 'R03', 'R04']
+    #   - ...
+
 points.zones:
   matrix:
     columns:
