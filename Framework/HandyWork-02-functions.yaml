@@ -1,0 +1,115 @@
+kle:
+  layers:
+    Fun:
+      index: 0
+      size: 2
+      color: "#ff0000"
+
+layers:
+  Fun:
+
+points.zones:
+  matrix.columns:
+    inner:
+      # rows.top.layers:
+      #   Fun:
+      rows.top.mirror.layers:
+        Fun: Pause
+
+      # rows.home.layers:
+      #   Fun:
+      rows.home.mirror.layers:
+        Fun:
+          legend: PrtScn
+          size: 1
+
+      # rows.bottom.layers:
+      #   Fun:
+      rows.bottom.mirror.layers:
+        Fun:
+          legend: ScrLock
+          size: 1
+
+    index:
+      # rows.top.layers:
+      #   Fun:
+      rows.top.mirror.layers:
+        Fun: F4
+
+      # rows.home.layers:
+      #   Fun:
+      rows.home.mirror.layers:
+        Fun: F8
+
+      # rows.bottom.layers:
+      #   Fun:
+      rows.bottom.mirror.layers:
+        Fun: F12
+
+    middle:
+      # rows.top.layers:
+      #   Fun:
+      rows.top.mirror.layers:
+        Fun: F3
+
+      # rows.home.layers:
+      #   Fun:
+      rows.home.mirror.layers:
+        Fun: F7
+
+      # rows.bottom.layers:
+      #   Fun:
+      rows.bottom.mirror.layers:
+        Fun: F11
+
+    ring:
+      # rows.top.layers:
+      #   Fun:
+      rows.top.mirror.layers:
+        Fun: F2
+
+      # rows.home.layers:
+      #   Fun:
+      rows.home.mirror.layers:
+        Fun: F6
+
+      # rows.bottom.layers:
+      #   Fun:
+      rows.bottom.mirror.layers:
+        Fun: F10
+
+    pinky:
+      # rows.top.layers:
+      #   Fun:
+      rows.top.mirror.layers:
+        Fun: F1
+
+      # rows.home.layers:
+      #   Fun:
+      rows.home.mirror.layers:
+        Fun: F5
+
+      # rows.bottom.layers:
+      #   Fun:
+      rows.bottom.mirror.layers:
+        Fun: F9
+
+  thumb_cluster.columns:
+    outer.key:
+      layers:
+        # Fun:
+        on_hold: Fun
+    #   mirror.layers:
+    #     Fun:
+
+    # under.key:
+    #   layers:
+    #     Fun:
+    #   mirror.layers:
+    #     Fun:
+
+    # inner.key:
+    #   layers:
+    #     Fun:
+    #   mirror.layers:
+    #     Fun:

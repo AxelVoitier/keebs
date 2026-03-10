@@ -1,3 +1,14 @@
+kle:
+  layers:
+    Nav:
+      index: 0
+      size: 4
+      # color: "#00c2bd"
+      color: "#ff00ff"
+
+layers:
+  Nav:
+
 points.zones:
   nav_cluster.key.layers.transparent: true
   nav_cluster.columns:
@@ -6,19 +17,160 @@ points.zones:
         Base:
           legend: ◀
           size: 6
+        Sym1:
+          legend: ⇱
+          size: 5
+        Media: Prev
 
     center:
       rows.bottom.layers:
         Base:
           legend: ▼
           size: 8
+        Sym1:
+          legend: ⇟
+          size: 6
+        Media: V-
       rows.top.layers:
         Base:
           legend: ▲
           size: 8
+        Sym1:
+          legend: ⇞
+          size: 6
+        Media: V+
 
     right:
       rows.bottom.layers:
         Base:
           legend: ▶
           size: 6
+        Sym1:
+          legend: ⇲
+          size: 5
+        Media: Next
+
+  matrix.columns:
+    inner:
+      rows.top.layers:
+        Nav: ⇞
+      rows.top.mirror.layers:
+        Nav: $unset
+
+      rows.home.layers:
+        Nav: ⇱
+      rows.home.mirror.layers:
+        Nav: $unset
+
+      rows.bottom.layers:
+        Nav: ⇟
+      rows.bottom.mirror.layers:
+        Nav: $unset
+
+    index:
+      rows.top.layers:
+        Nav:
+          legend: Prev
+          size: 2
+      rows.top.mirror.layers:
+        Nav: $unset
+
+      rows.home.layers:
+        Nav:
+          legend: ◀
+          size: 3
+      rows.home.mirror.layers:
+        Nav: $unset
+
+      rows.bottom.layers:
+        Nav:
+          legend: ␣◀
+          size: 2
+          keycode: LCTL(KC_LEFT)
+      rows.bottom.mirror.layers:
+        Nav: $unset
+
+    middle:
+      rows.top.layers:
+        Nav: ▲
+      rows.top.mirror.layers:
+        Nav: $unset
+
+      rows.home.layers:
+        Nav: ▼
+      rows.home.mirror.layers:
+        Nav: $unset
+
+      rows.bottom.layers:
+        Nav: ▼
+      rows.bottom.mirror.layers:
+        Nav: $unset
+
+    ring:
+      rows.top.layers:
+        Nav:
+          legend: Next
+          size: 2
+      rows.top.mirror.layers:
+        Nav: $unset
+
+      rows.home.layers:
+        Nav:
+          legend: ▶
+          size: 3
+      rows.home.mirror.layers:
+        Nav: $unset
+
+      rows.bottom.layers:
+        Nav:
+          legend: ▶␣
+          size: 2
+          keycode: LCTL(KC_RIGHT)
+      rows.bottom.mirror.layers:
+        Nav: $unset
+
+    pinky:
+      rows.top.layers:
+        Nav:
+          legend: V+
+          size: 3
+      rows.top.mirror.layers:
+        Nav: $unset
+
+      rows.home.layers:
+        Nav: ⇲
+      rows.home.mirror.layers:
+        Nav: $unset
+
+      rows.bottom.layers:
+        Nav:
+          legend: V-
+          size: 3
+      rows.bottom.mirror.layers:
+        Nav: $unset
+
+  thumb_cluster.columns:
+    outer.key:
+      layers:
+        Nav:
+          legend: ■
+          size: 4
+      mirror.layers:
+        Nav: $unset
+
+    under.key:
+      layers:
+        Nav:
+          legend: ▶||
+          size: 4
+      mirror.layers:
+        Nav: $unset
+        on_hold: Nav
+
+    inner.key:
+      layers:
+        Nav:
+          legend: Mute
+          size: 2
+      mirror.layers:
+        Nav: $unset

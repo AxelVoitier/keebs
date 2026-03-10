@@ -9,6 +9,7 @@
 # spell-checker:words
 # spell-checker:ignore
 """"""
+
 from __future__ import annotations
 
 # System imports
@@ -57,10 +58,10 @@ def gen_qmk_info_json(
 
     keeb = Keyboard(ergogen_yaml, points_yaml, units_yaml)
     qmk_cli = QMK_CLI()
-    qmk_info = QMKKeyboardInfo(qmk_cli.keyboard_path / 'info.json')
+    qmk_info = QMKKeyboardInfo(qmk_cli.keyboard_path / 'keyboard.json')
     qmk_info.set_infos(keeb.qmk.get('keyboard', {}))
     qmk_info.layout_meta = keeb.qmk['_layout']
-    qmk_info.layout.clear()
+    qmk_info.prepare_layout()
 
     for key in keeb.points.keys:
         qmk_info.add_key(**key)
@@ -74,7 +75,7 @@ def gen_qmk_keymap_json(
     ergogen_yaml: Path,
     points_yaml: Annotated[Optional[Path], Option()] = None,
     units_yaml: Annotated[Optional[Path], Option()] = None,
-    output: Path = Option(..., '--output', '-o'),
+    # output: Path = Option(..., '--output', '-o'),
 ) -> None:
     from ergogen import Keyboard
     from qmk import QMK_CLI
@@ -83,25 +84,24 @@ def gen_qmk_keymap_json(
 
     keeb = Keyboard(ergogen_yaml, points_yaml, units_yaml)
     qmk_cli = QMK_CLI()
-    qmk_info = QMKKeyboardInfo(qmk_cli.keyboard_path / 'info.json')
+    qmk_info = QMKKeyboardInfo(qmk_cli.keyboard_path / 'keyboard.json')
     qmk_info.set_infos(keeb.qmk.get('keyboard', {}))
     qmk_info.layout_meta = keeb.qmk['_layout']
-    qmk_info.layout.clear()
+    qmk_info.prepare_layout()
 
-    if output.suffix != '.json':
-        output /= f"{qmk_info.data['keyboard_name'].replace('/', '-')}.json"
-    keymap = QMKKeymap(output, qmk_info)
+    keymap = QMKKeymap(qmk_cli.keymap_path / 'keymap.json', qmk_info)
     keymap.data['keyboard'] = qmk_cli.keyboard
     keymap.data['layout'] = qmk_info.layout_meta['name']
     keymap.data['keymap'] = qmk_cli.keymap
     keymap.set_config(keeb.qmk.get('keymap', None))
-    keymap.layers.clear()
     keymap.layers_meta = keeb.data['layers']
+    keymap.prepare_layers()
 
     for key in keeb.points.keys:
-        qmk_info.add_key(**key)
-        keymap.add_key(**key)
+        layout_key = qmk_info.add_key(**key)
+        keymap.add_key(layout_label=layout_key['label'], **key)
 
+    keymap.shorten_keycodes()
     keymap.write()
 
 

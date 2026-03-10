@@ -61,21 +61,50 @@ points:
             top:
               layers:
                 Qwerty: Y
+                Sym1: '*'
+                Num: '*'
+                Nav: "\u21DE"
               mirror:
                 layers:
                   Qwerty: T
+                  Sym1: $unset
+                  Num: $unset
+                  Nav: $unset
+                  Fun: Pause
             home:
               layers:
                 Qwerty: H
+                Sym1: '='
+                Num:
+                  no-mod: .
+                  shift: ','
+                Nav: "\u21F1"
               mirror:
                 layers:
                   Qwerty: G
+                  Sym1: '@'
+                  Num: $unset
+                  Nav: $unset
+                  Fun:
+                    legend: PrtScn
+                    size: 1
             bottom:
               layers:
                 Qwerty: N
+                Sym1:
+                  no-mod: /
+                  shift: '?'
+                Num: /
+                Nav: "\u21DF"
               mirror:
                 layers:
                   Qwerty: B
+                  Sym1: \
+                  Num: $unset
+                  Nav: $unset
+                  Fun:
+                    legend: ScrLock
+                    size: 1
         index:
           key:
             stagger: -inner_off + index_off
@@ -101,21 +130,49 @@ points:
             top:
               layers:
                 Qwerty: U
+                Sym1: '?'
+                Num: 7
+                Nav:
+                  legend: Prev
+                  size: 2
               mirror:
                 layers:
                   Qwerty: R
+                  Sym1: '|'
+                  Num: $unset
+                  Nav: $unset
+                  Fun: F4
             home:
               layers:
                 Qwerty: J
+                Sym1: )
+                Num: 4
+                Nav:
+                  legend: "\u25C0"
+                  size: 3
               mirror:
                 layers:
                   Qwerty: F
+                  Sym1: (
+                  Num: $unset
+                  Nav: $unset
+                  Fun: F8
             bottom:
               layers:
                 Qwerty: M
+                Sym1: '#'
+                Num: 1
+                Nav:
+                  legend: "\u2423\u25C0"
+                  size: 2
+                  keycode: LCTL(KC_LEFT)
               mirror:
                 layers:
                   Qwerty: V
+                  Sym1: $
+                  Num: $unset
+                  Nav: $unset
+                  Fun: F12
         middle:
           key:
             stagger: -index_off + middle_off
@@ -127,6 +184,16 @@ points:
             qmk:
               col: C11
           rows:
+            mod:
+              layers:
+                Base:
+                  legend: "\u21E7"
+                  size: 9
+                  keycode: KC_RIGHT_SHIFT
+              mirror:
+                layers:
+                  Base:
+                    keycode: $unset
             number:
               layers:
                 Qwerty:
@@ -140,33 +207,44 @@ points:
             top:
               layers:
                 Qwerty: I
+                Sym1: '!'
+                Num: 8
+                Nav: "\u25B2"
               mirror:
                 layers:
                   Qwerty: E
+                  Sym1: ^
+                  Num: $unset
+                  Nav: $unset
+                  Fun: F3
             home:
               layers:
                 Qwerty: K
+                Sym1: ']'
+                Num: 5
+                Nav: "\u25BC"
               mirror:
                 layers:
                   Qwerty: D
+                  Sym1: '['
+                  Num: $unset
+                  Nav: $unset
+                  Fun: F7
             bottom:
               layers:
                 Qwerty:
                   alt-no-mod: ','
                   shift: <
+                Sym1: ;
+                Num: 2
+                Nav: "\u25BC"
               mirror:
                 layers:
                   Qwerty: C
-            mod:
-              layers:
-                Base:
-                  legend: "\u21E7"
-                  size: 9
-                  keycode: KC_RIGHT_SHIFT
-              mirror:
-                layers:
-                  Base:
-                    keycode: $unset
+                  Sym1: '&'
+                  Num: $unset
+                  Nav: $unset
+                  Fun: F11
         ring:
           key:
             stagger: -middle_off + ring_off
@@ -178,6 +256,16 @@ points:
             qmk:
               col: C12
           rows:
+            mod:
+              layers:
+                Base:
+                  legend: "\u2388"
+                  size: 9
+              mirror:
+                layers:
+                  Base:
+                    legend: "\u2388"
+                    size: 9
             number:
               layers:
                 Qwerty:
@@ -191,33 +279,51 @@ points:
             top:
               layers:
                 Qwerty: O
+                Sym1: '%'
+                Num: 9
+                Nav:
+                  legend: Next
+                  size: 2
               mirror:
                 layers:
                   Qwerty: W
+                  Sym1: '~'
+                  Num: $unset
+                  Nav: $unset
+                  Fun: F2
             home:
               layers:
                 Qwerty: L
+                Sym1: '}'
+                Num: 6
+                Nav:
+                  legend: "\u25B6"
+                  size: 3
               mirror:
                 layers:
                   Qwerty: S
+                  Sym1: '{'
+                  Num: $unset
+                  Nav: $unset
+                  Fun: F6
             bottom:
               layers:
                 Qwerty:
                   alt-no-mod: .
                   shift: '>'
+                Sym1: ':'
+                Num: 3
+                Nav:
+                  legend: "\u25B6\u2423"
+                  size: 2
+                  keycode: LCTL(KC_RIGHT)
               mirror:
                 layers:
                   Qwerty: X
-            mod:
-              layers:
-                Base:
-                  legend: "\u2388"
-                  size: 9
-              mirror:
-                layers:
-                  Base:
-                    legend: "\u2388"
-                    size: 9
+                  Sym1: $unset
+                  Num: $unset
+                  Nav: $unset
+                  Fun: F10
         pinky:
           key:
             stagger: -ring_off + pinky_off + 1
@@ -229,6 +335,18 @@ points:
             qmk:
               col: C13
           rows:
+            mod:
+              layers:
+                Base:
+                  legend: "\u2756"
+                  size: 8
+              mirror:
+                layers:
+                  Base:
+                    legend: "\u2387"
+                    size: 6
+              qmk:
+                row: R5
             number:
               layers:
                 Qwerty:
@@ -242,9 +360,18 @@ points:
             top:
               layers:
                 Qwerty: P
+                Sym1: '-'
+                Num: '-'
+                Nav:
+                  legend: V+
+                  size: 3
               mirror:
                 layers:
                   Qwerty: Q
+                  Sym1: '`'
+                  Num: $unset
+                  Nav: $unset
+                  Fun: F1
               qmk:
                 row: R2
             home:
@@ -252,9 +379,16 @@ points:
                 Qwerty:
                   alt-no-mod: ;
                   shift: ':'
+                Sym1: '>'
+                Num: 0
+                Nav: "\u21F2"
               mirror:
                 layers:
                   Qwerty: A
+                  Sym1: <
+                  Num: $unset
+                  Nav: $unset
+                  Fun: F5
               qmk:
                 row: R3
             bottom:
@@ -262,23 +396,20 @@ points:
                 Qwerty:
                   alt-no-mod: /
                   shift: '?'
+                Sym1: +
+                Num: +
+                Nav:
+                  legend: V-
+                  size: 3
               mirror:
                 layers:
                   Qwerty: Z
+                  Sym1: $unset
+                  Num: $unset
+                  Nav: $unset
+                  Fun: F9
               qmk:
                 row: R4
-            mod:
-              layers:
-                Base:
-                  legend: "\u2756"
-                  size: 8
-              mirror:
-                layers:
-                  Base:
-                    legend: "\u2387"
-                    size: 6
-              qmk:
-                row: R5
         outer:
           key:
             stagger: -pinky_off + outer_off
@@ -287,6 +418,8 @@ points:
       rows:
         mod:
           skip: false
+          layers:
+            transparent: true
           qmk:
             row: R4
         bottom:
@@ -328,9 +461,19 @@ points:
               Base:
                 legend: "\u23CE"
                 size: 9
+              Sym1:
+                legend: Ins
+                size: 2
+              Nav:
+                legend: "\u25A0"
+                size: 4
+              on_hold: Fun
             mirror:
               layers:
                 Base: "\u21E5"
+                Sym1: $unset
+                on_hold: Num
+                Nav: $unset
               qmk:
                 col: C6
             qmk:
@@ -344,11 +487,18 @@ points:
               Base:
                 legend: "\u232B"
                 size: 6
+              Num: '='
+              Nav:
+                legend: "\u25B6||"
+                size: 4
             mirror:
               layers:
                 Base:
                   legend: "\u2423"
                   size: 9
+                Num: $unset
+                Nav: $unset
+                on_hold: Nav
               qmk:
                 col: C5
             qmk:
@@ -363,11 +513,17 @@ points:
               Base:
                 legend: "\u2326"
                 size: 6
+              on_hold: Sym1
+              Nav:
+                legend: Mute
+                size: 2
             mirror:
               layers:
                 Base:
                   legend: Esc
                   size: 4
+                on_hold: Sym1
+                Nav: $unset
               qmk:
                 col: C4
             qmk:
@@ -394,6 +550,10 @@ points:
                 Base:
                   legend: "\u25C0"
                   size: 6
+                Sym1:
+                  legend: "\u21F1"
+                  size: 5
+                Media: Prev
           key:
             qmk:
               col: C6
@@ -404,11 +564,19 @@ points:
                 Base:
                   legend: "\u25BC"
                   size: 8
+                Sym1:
+                  legend: "\u21DF"
+                  size: 6
+                Media: V-
             top:
               layers:
                 Base:
                   legend: "\u25B2"
                   size: 8
+                Sym1:
+                  legend: "\u21DE"
+                  size: 6
+                Media: V+
           key:
             qmk:
               col: C7
@@ -421,6 +589,10 @@ points:
                 Base:
                   legend: "\u25B6"
                   size: 6
+                Sym1:
+                  legend: "\u21F2"
+                  size: 5
+                Media: Next
           key:
             qmk:
               col: C8
@@ -483,15 +655,6 @@ outlines:
   - ^A1_design_space
 kle:
   layers:
-    Qwerty:
-      no-mod:
-        index: 9
-      alt-no-mod:
-        index: 10
-      shift:
-        index: 8
-      size: 7
-      color: '#000000'
     Base:
       no-mod:
         index: 9
@@ -501,9 +664,44 @@ kle:
         index: 8
       size: 7
       color: '#000000'
+    Qwerty:
+      no-mod:
+        index: 9
+      alt-no-mod:
+        index: 10
+      shift:
+        index: 8
+      size: 7
+      color: '#000000'
+    Sym1:
+      no-mod:
+        index: 2
+      shift:
+        index: 7
+      size: 4
+      color: '#009600'
+    Num:
+      no-mod:
+        index: 1
+      shift:
+        index: 6
+      size: 4
+      color: '#ff9900'
+    Nav:
+      index: 0
+      size: 4
+      color: '#ff00ff'
+    Fun:
+      index: 0
+      size: 2
+      color: '#ff0000'
 layers:
-  Qwerty: null
   Base: null
+  Qwerty: null
+  Sym1: null
+  Num: null
+  Nav: null
+  Fun: null
 fabrication:
   main-pcb:
     folder: PCB
@@ -698,15 +896,106 @@ qmk:
       - GP22
       - GP23
       rows:
-      - GP06
-      - GP07
-      - GP08
-      - GP09
+      - GP6
+      - GP7
+      - GP8
+      - GP9
       - GP10
   _layout:
     name: LAYOUT_3x5_1x3_1x3
-    labels: '{side_abbrev}{row_i}{col_i}'
+    labels: '{row}{col}'
+    shift:
+    - 4.75
+    - 4.75
     sides:
       left:
         is_mirror: true
-      right: null
+        is_main: true
+      right:
+        is_main: true
+    structure:
+    - - R2C1
+      - R1C2
+      - R1C3
+      - R1C4
+      - R1C5
+      - '  '
+      - '  '
+      - '  '
+      - R1C9
+      - R1C10
+      - R1C11
+      - R1C12
+      - R2C13
+    - - R3C1
+      - R2C2
+      - R2C3
+      - R2C4
+      - R2C5
+      - '  '
+      - R2C7
+      - '  '
+      - R2C9
+      - R2C10
+      - R2C11
+      - R2C12
+      - R3C13
+    - - R4C1
+      - R3C2
+      - R3C3
+      - R3C4
+      - R3C5
+      - R3C6
+      - R3C7
+      - R3C8
+      - R3C9
+      - R3C10
+      - R3C11
+      - R3C12
+      - R4C13
+    - - R5C1
+      - R4C2
+      - R4C3
+      - '  '
+      - '  '
+      - '  '
+      - '  '
+      - '  '
+      - '  '
+      - '   '
+      - R4C11
+      - R4C12
+      - R5C13
+    - - '  '
+      - '  '
+      - '  '
+      - R5C4
+      - R5C5
+      - R5C6
+      - '  '
+      - R5C8
+      - R5C9
+      - R5C10
+      - '   '
+      - '   '
+      - '   '
+    col_aliases:
+      C1: GP11
+      C2: GP12
+      C3: GP13
+      C4: GP14
+      C5: GP15
+      C6: GP16
+      C7: GP17
+      C8: GP18
+      C9: GP19
+      C10: GP20
+      C11: GP21
+      C12: GP22
+      C13: GP23
+    row_aliases:
+      R1: GP6
+      R2: GP7
+      R3: GP8
+      R4: GP9
+      R5: GP10

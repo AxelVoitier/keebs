@@ -34,15 +34,11 @@ $(config_name).json: $(config_name).yaml $(ergogen_outputs)
 
 gen-qmk-info: $(config_name).yaml $(ergogen_outputs)
 	../../keebs.py gen-qmk-info-json ${config_name}.yaml --points-yaml ergogen-output/points/points.yaml --units-yaml ergogen-output/points/units.yaml
+# 	../../keebs.py qmk gen-layout-h ${config_name}.yaml
 
 gen-qmk-keymap: $(config_name).yaml $(ergogen_outputs)
-	../../keebs.py gen-qmk-keymap-json ${config_name}.yaml --points-yaml ergogen-output/points/points.yaml --units-yaml ergogen-output/points/units.yaml --output ../qmk_keymap
+	../../keebs.py gen-qmk-keymap-json ${config_name}.yaml --points-yaml ergogen-output/points/points.yaml --units-yaml ergogen-output/points/units.yaml
+# 	../../keebs.py qmk gen-keymap-c ${config_name}.yaml
 
 update-fabrication-files: $(config_name).yaml $(ergogen_outputs)
 	../../keebs.py kicad update-fabrication-files ${config_name}.yaml --points-yaml ergogen-output/points/points.yaml --units-yaml ergogen-output/points/units.yaml
-
-preprocess: $(config_name).yaml $(ergogen_outputs)
-	../../keebs.py ergogen preprocess ${config_name}.yaml ergogen-output/points/points.yaml ergogen-output/points/units.yaml ${config_name}-05-preprocessed.yaml
-
-gen-netlist: $(config_name).yaml $(ergogen_outputs)
-	PCB/Handy-PCB.py ${config_name}.yaml --points-yaml ergogen-output/points/points.yaml --units-yaml ergogen-output/points/units.yaml

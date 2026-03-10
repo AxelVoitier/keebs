@@ -28,3 +28,5 @@ points.zones:
         Base:
           legend: ⎇
           size: 6
+
+  matrix.rows.mod.layers.transparent: true

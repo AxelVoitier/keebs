@@ -2,7 +2,10 @@
 
 ## Example keymap
 
-[![image](HandyWork-5x3-with-mods-with-nav-keymap.png)](HandyWork-5x3-with-mods-with-nav-keymap.png)
+[![Example QWERTY keymap](HandyWork-5x3-with-mods-with-nav-keymap.png)](HandyWork-5x3-with-mods-with-nav-keymap.png)
+
+With layers:
+[![Example QWERTY keymap full](HandyWork-5x3-with-mods-with-nav-keymap-full.png)](HandyWork-5x3-with-mods-with-nav-keymap-full.png)
 
 ## Physical layout
 

@@ -1,0 +1,114 @@
+kle:
+  layers:
+    Num:
+      no-mod.index: 1
+      shift.index: 6
+      size: 4
+      color: "#ff9900"
+
+layers:
+  Num:
+
+points.zones:
+  matrix.columns:
+    inner:
+      rows.top.layers:
+        Num: "*"
+      rows.top.mirror.layers:
+        Num: $unset
+
+      rows.home.layers:
+        Num:
+          no-mod: "."
+          shift: ","
+      rows.home.mirror.layers:
+        Num: $unset
+
+      rows.bottom.layers:
+        Num: "/"
+      rows.bottom.mirror.layers:
+        Num: $unset
+
+    index:
+      rows.top.layers:
+        Num: 7
+      rows.top.mirror.layers:
+        Num: $unset
+
+      rows.home.layers:
+        Num: 4
+      rows.home.mirror.layers:
+        Num: $unset
+
+      rows.bottom.layers:
+        Num: 1
+      rows.bottom.mirror.layers:
+        Num: $unset
+
+    middle:
+      rows.top.layers:
+        Num: 8
+      rows.top.mirror.layers:
+        Num: $unset
+
+      rows.home.layers:
+        Num: 5
+      rows.home.mirror.layers:
+        Num: $unset
+
+      rows.bottom.layers:
+        Num: 2
+      rows.bottom.mirror.layers:
+        Num: $unset
+
+    ring:
+      rows.top.layers:
+        Num: 9
+      rows.top.mirror.layers:
+        Num: $unset
+
+      rows.home.layers:
+        Num: 6
+      rows.home.mirror.layers:
+        Num: $unset
+
+      rows.bottom.layers:
+        Num: 3
+      rows.bottom.mirror.layers:
+        Num: $unset
+
+    pinky:
+      rows.top.layers:
+        Num: "-"
+      rows.top.mirror.layers:
+        Num: $unset
+
+      rows.home.layers:
+        Num: 0
+      rows.home.mirror.layers:
+        Num: $unset
+
+      rows.bottom.layers:
+        Num: +
+      rows.bottom.mirror.layers:
+        Num: $unset
+
+  thumb_cluster.columns:
+    outer.key:
+      # layers:
+      #   Num:
+      mirror.layers:
+        # Num:
+        on_hold: Num
+
+    under.key:
+      layers:
+        Num: "="
+      mirror.layers:
+        Num: $unset
+
+    # inner.key:
+    #   layers:
+    #     Num:
+    #   mirror.layers:
+    #     Num:

@@ -1,0 +1,117 @@
+kle:
+  layers:
+    Sym1:
+      no-mod.index: 2
+      shift.index: 7
+      size: 4
+      color: "#009600"
+
+layers:
+  Sym1:
+
+points.zones:
+  matrix.columns:
+    inner:
+      rows.top.layers:
+        Sym1: "*"
+      rows.top.mirror.layers:
+        Sym1: $unset
+
+      rows.home.layers:
+        Sym1: "="
+      rows.home.mirror.layers:
+        Sym1: "@"
+
+      rows.bottom.layers:
+        Sym1:
+          no-mod: "/"
+          shift: "?"
+      rows.bottom.mirror.layers:
+        Sym1: "\\"
+
+    index:
+      rows.top.layers:
+        Sym1: "?"
+      rows.top.mirror.layers:
+        Sym1: "|"
+
+      rows.home.layers:
+        Sym1: ")"
+      rows.home.mirror.layers:
+        Sym1: "("
+
+      rows.bottom.layers:
+        Sym1: "#"
+      rows.bottom.mirror.layers:
+        Sym1: "$"
+
+    middle:
+      rows.top.layers:
+        Sym1: "!"
+      rows.top.mirror.layers:
+        Sym1: "^"
+
+      rows.home.layers:
+        Sym1: "]"
+      rows.home.mirror.layers:
+        Sym1: "["
+
+      rows.bottom.layers:
+        Sym1: ";"
+      rows.bottom.mirror.layers:
+        Sym1: "&"
+
+    ring:
+      rows.top.layers:
+        Sym1: "%"
+      rows.top.mirror.layers:
+        Sym1: "~"
+
+      rows.home.layers:
+        Sym1: "}"
+      rows.home.mirror.layers:
+        Sym1: "{"
+
+      rows.bottom.layers:
+        Sym1: ":"
+      rows.bottom.mirror.layers:
+        Sym1: $unset
+
+    pinky:
+      rows.top.layers:
+        Sym1: "-"
+      rows.top.mirror.layers:
+        Sym1: "`"
+
+      rows.home.layers:
+        Sym1: ">"
+      rows.home.mirror.layers:
+        Sym1: "<"
+
+      rows.bottom.layers:
+        Sym1: "+"
+      rows.bottom.mirror.layers:
+        Sym1: $unset
+
+  thumb_cluster.columns:
+    outer.key:
+      layers:
+        Sym1:
+          legend: Ins
+          size: 2
+      mirror.layers:
+        Sym1: $unset
+
+    # under.key:
+    #   layers:
+    #     Sym1:
+    #   mirror.layers:
+    #     Sym1:
+
+    inner.key:
+      layers:
+        # Sym1:
+        on_hold: Sym1
+      mirror.layers:
+        # Sym1:
+        on_hold: Sym1

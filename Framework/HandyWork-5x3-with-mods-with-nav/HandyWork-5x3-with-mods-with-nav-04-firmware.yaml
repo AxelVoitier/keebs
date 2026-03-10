@@ -36,7 +36,9 @@ qmk:
     # (but you can provide it as well, even partial, either here or in the original info.json)
     matrix_pins:
       cols: ["GP11", "GP12", "GP13", "GP14", "GP15", "GP16", "GP17", "GP18", "GP19", "GP20", "GP21", "GP22", "GP23"]
-      rows: ["GP06", "GP07", "GP08", "GP09", "GP10"]
+      rows: ["GP6", "GP7", "GP8", "GP9", "GP10"]
+      # cols: [C1, C2, C3, C4, C5, C6, C7, C8, C9, C10, C11, C12, C13]
+      # rows: [R1, R2, R3, R4, R5]
 
     # layouts is generated (at least the one described by _layout section).
     # You can also manually provide other layouts, here or in the original info.json file.
@@ -48,13 +50,17 @@ qmk:
   # Required
   _layout:
     name: LAYOUT_3x5_1x3_1x3
-    labels: "{side_abbrev}{row_i}{col_i}" # Available: side, side_abbrev, row, row_i, col, col_i
+    labels: "{row}{col}" # Available: side, side_abbrev, row, row_i, col, col_i
+    # shift: [0.16241684514435747, 0.20587816797900232]
+    shift: [4.75, 4.75]
     sides:
       left:
         # abbrev: ...  # If not provided, use the first letter of the side name, capitalised
         is_mirror: true  # Which side is generated as mirror by ergogen
+        is_main: true
       right:
-    # structure gives the general shape of layout and keymap in C files.
+        is_main: true
+    # structure gives the general shape of layout and keymap in C/JSON files.
     # It is optional as the scripts can also autogenerate it from key positions.
     # But if you want to refine it, have the script output one with "keebs.py qmk gen-layout-structure,
     # copy/paste it here, and do your adjustments.
@@ -62,6 +68,33 @@ qmk:
     # structure:
     #   - ['L04', 'L03', 'L02', 'L01', 'L00', '   ', '   ', 'R00', 'R01', 'R02', 'R03', 'R04']
     #   - ...
+    structure:
+      - [R2C1, R1C2, R1C3, R1C4, R1C5, '  ', '  ', '  ', R1C9, R1C10, R1C11, R1C12, R2C13]
+      - [R3C1, R2C2, R2C3, R2C4, R2C5, '  ', R2C7, '  ', R2C9, R2C10, R2C11, R2C12, R3C13]
+      - [R4C1, R3C2, R3C3, R3C4, R3C5, R3C6, R3C7, R3C8, R3C9, R3C10, R3C11, R3C12, R4C13]
+      - [R5C1, R4C2, R4C3, '  ', '  ', '  ', '  ', '  ', '  ', '   ', R4C11, R4C12, R5C13]
+      - ['  ', '  ', '  ', R5C4, R5C5, R5C6, '  ', R5C8, R5C9, R5C10, '   ', '   ', '   ']
+
+    col_aliases:
+      C1: GP11
+      C2: GP12
+      C3: GP13
+      C4: GP14
+      C5: GP15
+      C6: GP16
+      C7: GP17
+      C8: GP18
+      C9: GP19
+      C10: GP20
+      C11: GP21
+      C12: GP22
+      C13: GP23
+    row_aliases:
+      R1: GP6
+      R2: GP7
+      R3: GP8
+      R4: GP9
+      R5: GP10
 
 points.zones:
   matrix:
