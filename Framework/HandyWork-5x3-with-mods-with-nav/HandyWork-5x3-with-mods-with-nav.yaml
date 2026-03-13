@@ -100,7 +100,9 @@ points:
                 layers:
                   Qwerty: B
                   Sym1: \
-                  Num: $unset
+                  Num:
+                    legend: Boot
+                    size: 2
                   Nav: $unset
                   Fun:
                     legend: ScrLock
@@ -139,7 +141,9 @@ points:
                 layers:
                   Qwerty: R
                   Sym1: '|'
-                  Num: $unset
+                  Num:
+                    legend: LED_SPDU
+                    size: 1
                   Nav: $unset
                   Fun: F4
             home:
@@ -170,7 +174,9 @@ points:
                 layers:
                   Qwerty: V
                   Sym1: $
-                  Num: $unset
+                  Num:
+                    legend: LED_SPDD
+                    size: 1
                   Nav: $unset
                   Fun: F12
         middle:
@@ -214,7 +220,9 @@ points:
                 layers:
                   Qwerty: E
                   Sym1: ^
-                  Num: $unset
+                  Num:
+                    legend: LED_BRIU
+                    size: 1
                   Nav: $unset
                   Fun: F3
             home:
@@ -242,7 +250,9 @@ points:
                 layers:
                   Qwerty: C
                   Sym1: '&'
-                  Num: $unset
+                  Num:
+                    legend: LED_BRID
+                    size: 1
                   Nav: $unset
                   Fun: F11
         ring:
@@ -288,7 +298,9 @@ points:
                 layers:
                   Qwerty: W
                   Sym1: '~'
-                  Num: $unset
+                  Num:
+                    legend: LED_NEXT
+                    size: 1
                   Nav: $unset
                   Fun: F2
             home:
@@ -321,7 +333,9 @@ points:
                 layers:
                   Qwerty: X
                   Sym1: $unset
-                  Num: $unset
+                  Num:
+                    legend: LED_PREV
+                    size: 1
                   Nav: $unset
                   Fun: F10
         pinky:
@@ -369,7 +383,9 @@ points:
                 layers:
                   Qwerty: Q
                   Sym1: '`'
-                  Num: $unset
+                  Num:
+                    legend: LED_ON
+                    size: 1
                   Nav: $unset
                   Fun: F1
               qmk:
@@ -386,7 +402,9 @@ points:
                 layers:
                   Qwerty: A
                   Sym1: <
-                  Num: $unset
+                  Num:
+                    legend: LED_TOGGLE
+                    size: 1
                   Nav: $unset
                   Fun: F5
               qmk:
@@ -405,7 +423,9 @@ points:
                 layers:
                   Qwerty: Z
                   Sym1: $unset
-                  Num: $unset
+                  Num:
+                    legend: LED_OFF
+                    size: 1
                   Nav: $unset
                   Fun: F9
               qmk:
@@ -877,8 +897,41 @@ qmk:
     features:
       bootmagic: true
       extrakey: true
-      mousekey: true
       nkro: true
+      unicode: true
+      led_matrix: true
+    bootmagic:
+      matrix:
+      - 4
+      - 5
+    led_matrix:
+      driver: is31fl3733
+      sleep: true
+      default:
+        'on': true
+        animation: band_spiral
+      animations:
+        solid: true
+        alphas_mods: true
+        breathing: true
+        band: true
+        band_pinwheel: true
+        band_spiral: true
+        cycle_left_right: true
+        cycle_up_down: true
+        cycle_out_in: true
+        dual_beacon: true
+        solid_reactive_simple: true
+        solid_reactive_wide: true
+        solid_reactive_multiwide: true
+        solid_reactive_cross: true
+        solid_reactive_multicross: true
+        solid_reactive_nexus: true
+        solid_reactive_multinexus: true
+        solid_splash: true
+        solid_multisplash: true
+        wave_left_right: true
+        wave_up_down: true
     diode_direction: ROW2COL
     matrix_pins:
       cols:
@@ -979,7 +1032,8 @@ qmk:
       - '   '
       - '   '
       - '   '
-    col_aliases:
+  aliases:
+    pin_aliases:
       C1: GP11
       C2: GP12
       C3: GP13
@@ -993,9 +1047,27 @@ qmk:
       C11: GP21
       C12: GP22
       C13: GP23
-    row_aliases:
       R1: GP6
       R2: GP7
       R3: GP8
       R4: GP9
       R5: GP10
+    led_aliases:
+      C1: CS11
+      C2: CS9
+      C3: CS12
+      C4: CS13
+      C5: CS2
+      C6: CS3
+      C7: CS1
+      C8: CS4
+      C9: CS5
+      C10: CS7
+      C11: CS6
+      C12: CS8
+      C13: CS10
+      R1: SW5
+      R2: SW3
+      R3: SW4
+      R4: SW2
+      R5: SW1

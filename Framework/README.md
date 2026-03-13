@@ -13,7 +13,7 @@
   - Pinky outer: -25 mm (from Handy)
 - 25 degrees angle for each hand
 - Splayed middle, ring, pinky and outer columns
-  - 5-10-15-20 in absolute angles,
+  - 5-10-15-25 in absolute angles,
   - or 5-5-5-5 in relative (ie. stacked) angles
 
 

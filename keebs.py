@@ -60,14 +60,43 @@ def gen_qmk_info_json(
     qmk_cli = QMK_CLI()
     qmk_info = QMKKeyboardInfo(qmk_cli.keyboard_path / 'keyboard.json')
     qmk_info.set_infos(keeb.qmk.get('keyboard', {}))
-    qmk_info.layout_meta = keeb.qmk['_layout']
+    qmk_info.layout_meta |= keeb.qmk['_layout']
+    qmk_info.layout_meta |= keeb.qmk.get('aliases', {})
     qmk_info.prepare_layout()
 
     for key in keeb.points.keys:
         qmk_info.add_key(**key)
 
+    qmk_info.generate_led_layout()
+
     print('writing')
     qmk_info.write()
+
+
+@cli.command()
+def gen_qmk_led_mapping(
+    ergogen_yaml: Path,
+    points_yaml: Annotated[Optional[Path], Option()] = None,
+    units_yaml: Annotated[Optional[Path], Option()] = None,
+) -> None:
+    from ergogen import Keyboard
+    from qmk import QMK_CLI
+    from qmk import KeyboardInfo as QMKKeyboardInfo
+
+    keeb = Keyboard(ergogen_yaml, points_yaml, units_yaml)
+    qmk_cli = QMK_CLI()
+    qmk_info = QMKKeyboardInfo(qmk_cli.keyboard_path / 'keyboard.json')
+    # qmk_info.set_infos(keeb.qmk.get('keyboard', {}))
+    qmk_info.layout_meta |= keeb.qmk['_layout']
+    qmk_info.layout_meta |= keeb.qmk.get('aliases', {})
+    # qmk_info.prepare_layout()
+
+    # for key in keeb.points.keys:
+    #     qmk_info.add_key(**key)
+
+    # qmk_info.generate_led_layout()
+    for line in qmk_info.led_mapping():
+        print(line)
 
 
 @cli.command()
@@ -86,7 +115,8 @@ def gen_qmk_keymap_json(
     qmk_cli = QMK_CLI()
     qmk_info = QMKKeyboardInfo(qmk_cli.keyboard_path / 'keyboard.json')
     qmk_info.set_infos(keeb.qmk.get('keyboard', {}))
-    qmk_info.layout_meta = keeb.qmk['_layout']
+    qmk_info.layout_meta |= keeb.qmk['_layout']
+    qmk_info.layout_meta |= keeb.qmk.get('aliases', {})
     qmk_info.prepare_layout()
 
     keymap = QMKKeymap(qmk_cli.keymap_path / 'keymap.json', qmk_info)

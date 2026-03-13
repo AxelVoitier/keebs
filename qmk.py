@@ -17,7 +17,7 @@ import logging
 import shlex
 import subprocess
 from copy import deepcopy
-from math import floor
+from math import floor, inf
 from operator import itemgetter
 from pathlib import Path
 from typing import TYPE_CHECKING, Annotated, Iterable, Optional, cast
@@ -36,7 +36,7 @@ except ImportError:
 
 _logger = logging.getLogger(__name__)
 
-
+# fmt: off
 KEYCODES = {
     '': 'KC_NO',
     'a': 'KC_A', 'A': 'KC_A',
@@ -165,7 +165,17 @@ KEYCODES = {
     'AS_ON': 'QK_AUTO_SHIFT_ON',
     'AS_OFF': 'QK_AUTO_SHIFT_OFF',
     'AS_TOGG': 'QK_AUTO_SHIFT_TOGGLE',
-
+    'LED_ON': 'QK_LED_MATRIX_ON',
+    'LED_OFF': 'QK_LED_MATRIX_OFF',
+    'LED_TOGGLE': 'QK_LED_MATRIX_TOGGLE',
+    'LED_NEXT': 'QK_LED_MATRIX_MODE_NEXT',
+    'LED_PREV': 'QK_LED_MATRIX_MODE_PREVIOUS',
+    'LED_BRIU': 'QK_LED_MATRIX_BRIGHTNESS_UP',
+    'LED_BRID': 'QK_LED_MATRIX_BRIGHTNESS_DOWN',
+    'LED_SPDU': 'QK_LED_MATRIX_SPEED_UP',
+    'LED_SPDD': 'QK_LED_MATRIX_SPEED_DOWN',
+    'LED_FLAGN': 'QK_LED_MATRIX_FLAG_NEXT',
+    'LED_FLAGP': 'QK_LED_MATRIX_FLAG_PREVIOUS',
     # '': 'KC_',
 }
 
@@ -240,9 +250,20 @@ SHORT_ALIASES = dict(
     QK_AUTO_SHIFT_ON='AS_ON',
     QK_AUTO_SHIFT_OFF='AS_OFF',
     QK_AUTO_SHIFT_TOGGLE='AS_TOGG',
-
+    QK_LED_MATRIX_ON='LM_ON',
+    QK_LED_MATRIX_OFF='LM_OFF',
+    QK_LED_MATRIX_TOGGLE='LM_TOGG',
+    QK_LED_MATRIX_MODE_NEXT='LM_NEXT',
+    QK_LED_MATRIX_MODE_PREVIOUS='LM_PREV',
+    QK_LED_MATRIX_BRIGHTNESS_UP='LM_BRIU',
+    QK_LED_MATRIX_BRIGHTNESS_DOWN='LM_BRID',
+    QK_LED_MATRIX_SPEED_UP='LM_SPDU',
+    QK_LED_MATRIX_SPEED_DOWN='LM_SPDD',
+    QK_LED_MATRIX_FLAG_NEXT='LM_FLGN',
+    QK_LED_MATRIX_FLAG_PREVIOUS='LM_FLGP',
     # ='',
 )
+# fmt: on
 
 
 def strip_last(line: str, old: str, new: str = '') -> str:
@@ -428,30 +449,30 @@ class KeyboardInfo:
         if (cols := matrix_pins.get('cols', None)) is None:
             cols = matrix_pins['cols'] = []
 
-        qmk_row = self.layout_meta.get('row_aliases', {}).get(qmk['row'], qmk['row'])
-        qmk_col = self.layout_meta.get('col_aliases', {}).get(qmk['col'], qmk['col'])
+        pin_row = self.layout_meta.get('pin_aliases', {}).get(qmk['row'], qmk['row'])
+        pin_col = self.layout_meta.get('pin_aliases', {}).get(qmk['col'], qmk['col'])
 
         try:
-            row_i = rows.index(qmk_row)
+            row_i = rows.index(pin_row)
         except KeyError:
             print(f'Skipping {name} as it lacks row info')
             return
         except ValueError:
             # Self-adding row pin
             row_i = len(rows)
-            print(f'Missing {qmk_row=}, adding {row_i}')
-            rows.append(qmk_row)
+            print(f'Missing {pin_row=}, adding {row_i}')
+            rows.append(pin_row)
 
         try:
-            col_i = cols.index(qmk_col)
+            col_i = cols.index(pin_col)
         except KeyError:
             print(f'Skipping {name} as it lacks col info')
             return
         except ValueError:
             # Self-adding column pin
             col_i = len(cols)
-            print(f'Missing {qmk_col=}, adding {col_i}')
-            cols.append(qmk_col)
+            print(f'Missing {pin_col=}, adding {col_i}')
+            cols.append(pin_col)
 
         label = self.layout_meta['labels'].format(
             side=side['name'],
@@ -486,6 +507,74 @@ class KeyboardInfo:
             self.layout.append(params)
 
         return params
+
+    def generate_led_layout(self) -> None:
+        min_x = inf
+        max_x = -inf
+        min_y = inf
+        max_y = -inf
+        for key in self.layout:
+            key_x = key['x'] * 19.05
+            min_x = min(min_x, key_x)
+            max_x = max(max_x, key_x)
+            key_y = key['y'] * 19.05
+            min_y = min(min_y, key_y)
+            max_y = max(max_y, key_y)
+
+        scale_x = 224 / max_x
+        offset_x = -min_x * scale_x
+        scale_y = 64 / max_y
+        offset_y = -min_y * scale_y
+
+        if ((target := 'rgb_matrix') in self.data) or ((target := 'led_matrix') in self.data):
+            led_layout = []
+            self.data[target]['layout'] = led_layout
+        else:
+            msg = 'No rgb_matrix or led_matrix in the info file'
+            raise ValueError(msg)
+
+        for key in self.layout:
+            key_x = key['x'] * 19.05
+            led_x = round((key_x * scale_x) + offset_x)
+            key_y = key['y'] * 19.05
+            led_y = round((key_y * scale_y) + offset_y)
+            key_led = dict(matrix=key['matrix'], x=led_x, y=led_y, flags=4)
+            led_layout.append(key_led)
+
+    def led_mapping(self) -> list[str]:
+        if (target := 'led_matrix') in self.data:
+            if (led_layout := self.data[target].get('layout', None)) is None:
+                msg = 'No LED layout defined in the info file'
+                raise ValueError(msg)
+        else:
+            msg = 'No led_matrix in the info file'
+            raise ValueError(msg)
+
+        if (matrix_pins := self.data.get('matrix_pins', None)) is None:
+            msg = 'No matrix_pins in the info file'
+            raise ValueError(msg)
+        row_pins = matrix_pins['rows']
+        col_pins = matrix_pins['cols']
+        pin_aliases = self.layout_meta.get('pin_aliases', {})
+        reverse_pin_aliases = {v: k for k, v in pin_aliases.items()}
+        led_aliases = self.layout_meta.get('led_aliases', {})
+
+        lines: list[str] = []
+        for led in led_layout:
+            if 'matrix' not in led:
+                continue
+            row_pin = row_pins[led['matrix'][0]]
+            qmk_row = reverse_pin_aliases.get(row_pin, row_pin)
+            col_pin = col_pins[led['matrix'][1]]
+            qmk_col = reverse_pin_aliases.get(col_pin, col_pin)
+
+            row_led = led_aliases[qmk_row]
+            col_led = led_aliases[qmk_col]
+            led_pins = f'{row_led}_{col_led}'
+
+            lines.append(f'    {{0, {led_pins}}},')
+
+        return lines
 
     def max_len(self, data: Iterable[str | Any], item: Any | None = None) -> int:
         if item is not None:
@@ -912,7 +1001,8 @@ def gen_layout_structure(ergogen_yaml: Path) -> None:
     keeb = Keyboard(ergogen_yaml, None, None)
     qmk_cli = QMK_CLI()
     qmk_info = KeyboardInfo(qmk_cli.keyboard_path / 'keyboard.json')
-    qmk_info.layout_meta = keeb.qmk['_layout']
+    qmk_info.layout_meta |= keeb.qmk['_layout']
+    qmk_info.layout_meta |= keeb.qmk.get('aliases', {})
 
     struct = qmk_info.generate_layout_structure()
     for row in struct:
@@ -926,7 +1016,8 @@ def gen_layout_h(ergogen_yaml: Path) -> None:
     keeb = Keyboard(ergogen_yaml, None, None)
     qmk_cli = QMK_CLI()
     qmk_info = KeyboardInfo(qmk_cli.keyboard_path / 'keyboard.json')
-    qmk_info.layout_meta = keeb.qmk['_layout']
+    qmk_info.layout_meta |= keeb.qmk['_layout']
+    qmk_info.layout_meta |= keeb.qmk.get('aliases', {})
     layout_h_lines = qmk_info.layout_h()
 
     layout_h_path = qmk_cli.keyboard_path / 'layout.h'
@@ -942,7 +1033,8 @@ def gen_keymap_c(
     keeb = Keyboard(ergogen_yaml, None, None)
     qmk_cli = QMK_CLI()
     qmk_info = KeyboardInfo(qmk_cli.keyboard_path / 'keyboard.json')
-    qmk_info.layout_meta = keeb.qmk['_layout']
+    qmk_info.layout_meta |= keeb.qmk['_layout']
+    qmk_info.layout_meta |= keeb.qmk.get('aliases', {})
 
     keymap = Keymap(qmk_cli.keymap_path / 'keymap.json', qmk_info)
     keymap.data['keyboard'] = qmk_cli.keyboard

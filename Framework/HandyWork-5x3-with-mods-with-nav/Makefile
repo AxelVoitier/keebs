@@ -36,6 +36,9 @@ gen-qmk-info: $(config_name).yaml $(ergogen_outputs)
 	../../keebs.py gen-qmk-info-json ${config_name}.yaml --points-yaml ergogen-output/points/points.yaml --units-yaml ergogen-output/points/units.yaml
 # 	../../keebs.py qmk gen-layout-h ${config_name}.yaml
 
+gen-qmk-led-mapping: $(config_name).yaml $(ergogen_outputs)
+	../../keebs.py gen-qmk-led-mapping ${config_name}.yaml --points-yaml ergogen-output/points/points.yaml --units-yaml ergogen-output/points/units.yaml
+
 gen-qmk-keymap: $(config_name).yaml $(ergogen_outputs)
 	../../keebs.py gen-qmk-keymap-json ${config_name}.yaml --points-yaml ergogen-output/points/points.yaml --units-yaml ergogen-output/points/units.yaml
 # 	../../keebs.py qmk gen-keymap-c ${config_name}.yaml

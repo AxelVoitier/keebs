@@ -24,10 +24,45 @@ qmk:
       # firmware_format:
       lto: true
     features:
-        bootmagic: true
-        extrakey: true
-        mousekey: true
-        nkro: true
+      bootmagic: true
+      extrakey: true
+      nkro: true
+      unicode: true
+      led_matrix: true
+    bootmagic:
+      matrix: [4, 5]  # R5C6, aka mirror_thumb_cluster_outer
+    led_matrix:
+      driver: is31fl3733
+      sleep: true
+      # max_brightness: 255
+      default:
+        "on": true
+        animation: band_spiral
+      animations:
+        solid: true
+        alphas_mods: true
+        breathing: true
+        band: true
+        band_pinwheel: true
+        band_spiral: true
+        cycle_left_right: true
+        cycle_up_down: true
+        cycle_out_in: true
+        dual_beacon: true
+        solid_reactive_simple: true
+        solid_reactive_wide: true
+        solid_reactive_multiwide: true
+        solid_reactive_cross: true
+        solid_reactive_multicross: true
+        solid_reactive_nexus: true
+        solid_reactive_multinexus: true
+        solid_splash: true
+        solid_multisplash: true
+        # splash: true
+        # multisplash: true
+        wave_left_right: true
+        wave_up_down: true
+
 
     # Matrix
     # debounce: 5
@@ -75,7 +110,8 @@ qmk:
       - [R5C1, R4C2, R4C3, '  ', '  ', '  ', '  ', '  ', '  ', '   ', R4C11, R4C12, R5C13]
       - ['  ', '  ', '  ', R5C4, R5C5, R5C6, '  ', R5C8, R5C9, R5C10, '   ', '   ', '   ']
 
-    col_aliases:
+  aliases:
+    pin_aliases:
       C1: GP11
       C2: GP12
       C3: GP13
@@ -89,12 +125,30 @@ qmk:
       C11: GP21
       C12: GP22
       C13: GP23
-    row_aliases:
       R1: GP6
       R2: GP7
       R3: GP8
       R4: GP9
       R5: GP10
+    led_aliases:
+      C1: CS11
+      C2: CS9
+      C3: CS12
+      C4: CS13
+      C5: CS2
+      C6: CS3
+      C7: CS1
+      C8: CS4
+      C9: CS5
+      C10: CS7
+      C11: CS6
+      C12: CS8
+      C13: CS10
+      R1: SW5
+      R2: SW3
+      R3: SW4
+      R4: SW2
+      R5: SW1
 
 points.zones:
   matrix:
