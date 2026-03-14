@@ -53,3 +53,7 @@ A typical A4 paper in landscape (297 mm * 210 mm) is enough to fit the Framework
 Those should be to scale, in theory. However, most printers introduce a small scaling variation. If you print on something else than A4 you might also end up with a very different scale.
 
 If you really care about getting the scaling right, print one, then measure the height of the inner frame on one of the side. It should be 105 mm. If not, take that measurement, and divide 105 by it, then multiply by 100. This will give you a scaling factor in percent that most application/printer driver allows you to input in their print settings.
+
+## Firmwares
+
+Firmware files for QMK are mostly generated. They can be found [there](https://github.com/AxelVoitier/qmk_firmware/tree/axel/handywork/keyboards/handywork).

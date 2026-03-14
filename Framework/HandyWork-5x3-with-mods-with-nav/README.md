@@ -30,3 +30,7 @@ Fits Framework 16 A1 design space.
 ## Ordering yourself for production
 
 The parameters and order flow are described on the [v1A tag](https://github.com/AxelVoitier/keebs/releases/tag/HandyWork-5x3-Mods-Nav-v1A) itself
+
+## Firmware
+
+The generated firmware currently lives [there](https://github.com/AxelVoitier/qmk_firmware/tree/axel/handywork/keyboards/handywork/5x3_mods_nav).
