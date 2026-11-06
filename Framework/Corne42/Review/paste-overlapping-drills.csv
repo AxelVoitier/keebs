@@ -1,0 +1,41 @@
+UUID,Reference,Pad,X_mm_absolute,Y_mm_Gerber,Drill_mm,Requested_finish
+54e28aac-2562-4d3b-a6dc-9e10929a65e4,board via,,18.35,-132.8,0.3,Epoxy filled and copper capped; review before production
+5a839ef1-8c3e-4ac5-8bc3-fdac5d873624,board via,,43.3,-143.924999,0.3,Epoxy filled and copper capped; review before production
+c4d4dbe4-95ee-4065-bd82-2edf310c0eb5,board via,,34.299997,-134.6875,0.3,Epoxy filled and copper capped; review before production
+f6b71f1e-e4f3-464d-b4bb-c01dd96947de,board via,,24.5,-138.4875,0.3,Epoxy filled and copper capped; review before production
+2ccaa329-2c4b-4ae8-8e4a-8a1d969db94a,board via,,41.890991,-139.798832,0.3,Epoxy filled and copper capped; review before production
+fa697244-2eef-418f-a27c-8a32b74881de,board via,,41.325305,-140.364518,0.3,Epoxy filled and copper capped; review before production
+21a52923-439b-4760-8efb-19a57a8a532c,board via,,39.271582,-140.361404,0.3,Epoxy filled and copper capped; review before production
+751015ef-b365-4358-a8ca-667fe96265d6,board via,,42.459789,-139.230033,0.3,Epoxy filled and copper capped; review before production
+d290eb82-911e-40c6-b4c6-6b684af374b2,board via,,39.840381,-140.930203,0.3,Epoxy filled and copper capped; review before production
+51de8970-7345-4d7e-b21e-6b2bc31a3702,board via,,40.75962,-140.930203,0.3,Epoxy filled and copper capped; review before production
+a302810d-401a-4ebc-9a56-cbe14dca6fd1,board via,,38.7,-139.807841,0.3,Epoxy filled and copper capped; review before production
+8b81bc11-a79c-4bf5-93b6-ab8c5ad285ef,board via,,27.799999,-136.849999,0.3,Epoxy filled and copper capped; review before production
+74433926-aedb-4d7f-a48c-0a527722cfbc,board via,,30.225,-145.825,0.3,Epoxy filled and copper capped; review before production
+d3abee68-eb6f-4f76-8bf8-3a5f17bbb567,board via,,27.8,-137.6,0.3,Epoxy filled and copper capped; review before production
+6a2f056b-4d11-4be7-86b8-a3afbb23cce3,board via,,12.857786,-137.299203,0.3,Epoxy filled and copper capped; review before production
+aae71b96-6d4a-407c-90ee-935b3c0cdc04,board via,,18.35,-133.875,0.3,Epoxy filled and copper capped; review before production
+c685960e-15ee-40d5-8324-2d25e171dd3f,board via,,35.05,-134.6875,0.3,Epoxy filled and copper capped; review before production
+cf3e33b8-7504-49a8-9b2d-2d31d9074c0f,board via,,23.6,-134.4,0.3,Epoxy filled and copper capped; review before production
+9f68797a-5c02-4899-8598-c0a0100bdd81,board via,,23.794678,-139.339787,0.3,Epoxy filled and copper capped; review before production
+c134c2bc-c7d6-4bf9-933d-f157d2faf552,board via,,23.8177,-136.125868,0.3,Epoxy filled and copper capped; review before production
+34666aa9-ff21-4eee-9976-16325a459d25,U1,57,17.55,-139.7875,0.3,Epoxy filled and copper capped; review before production
+a5694b58-6d96-4744-8c0d-2bb0ceffe712,U1,57,20.25,-139.7875,0.3,Epoxy filled and copper capped; review before production
+1b9d36c0-38b6-4e8b-a438-edd26bd62805,U1,57,17.55,-137.0875,0.3,Epoxy filled and copper capped; review before production
+984df5b3-a2e3-426d-90d9-75a8abcfee7d,U1,57,20.25,-137.0875,0.3,Epoxy filled and copper capped; review before production
+ff40e3f7-3255-4a78-96ac-c7f54ce56be8,U3,49,42.527386,-137.924999,0.3,Epoxy filled and copper capped; review before production
+2cb2944a-f52e-4fef-8847-7255b208068e,U3,49,41.784924,-137.182537,0.3,Epoxy filled and copper capped; review before production
+b27b68a4-2dc2-4332-ab87-96527d89ef37,U3,49,41.042462,-136.440075,0.3,Epoxy filled and copper capped; review before production
+d5a030b3-0fd3-449a-80a1-f8762ef6a06f,U3,49,40.3,-135.697613,0.3,Epoxy filled and copper capped; review before production
+ca220ff8-b2d2-4e11-af07-4f6347c549e2,U3,49,41.784924,-138.667461,0.3,Epoxy filled and copper capped; review before production
+1b3282be-310e-4c24-9248-f98a67a5bd0c,U3,49,41.042462,-137.924999,0.3,Epoxy filled and copper capped; review before production
+3aab03dd-31d2-460e-bb52-50d984191a38,U3,49,40.3,-137.182537,0.3,Epoxy filled and copper capped; review before production
+238ed7a2-c32c-490a-9f04-c8d91dc94cd3,U3,49,39.557538,-136.440075,0.3,Epoxy filled and copper capped; review before production
+a467e032-6a14-4d3c-a9f9-a50a620dd78a,U3,49,41.042462,-139.409923,0.3,Epoxy filled and copper capped; review before production
+77faa742-0ba2-4476-b3e2-6e8773ba14a5,U3,49,40.3,-138.667461,0.3,Epoxy filled and copper capped; review before production
+ebc455ba-001b-4724-85ec-3e33edd24c8e,U3,49,39.557538,-137.924999,0.3,Epoxy filled and copper capped; review before production
+a4e43516-ad95-486d-b889-b9b093cf0f04,U3,49,38.815076,-137.182537,0.3,Epoxy filled and copper capped; review before production
+f551c2c8-257f-41c4-8e84-929224d667cf,U3,49,40.3,-140.152385,0.3,Epoxy filled and copper capped; review before production
+92e17c6a-e509-410e-81e4-54f8e2e20966,U3,49,39.557538,-139.409923,0.3,Epoxy filled and copper capped; review before production
+16f0847c-d118-4f58-90ae-95c20095ef5e,U3,49,38.815076,-138.667461,0.3,Epoxy filled and copper capped; review before production
+7c0fccf4-0bb7-4ade-91e1-588fc08a1ec2,U3,49,38.072614,-137.924999,0.3,Epoxy filled and copper capped; review before production

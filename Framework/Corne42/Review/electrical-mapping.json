@@ -1,0 +1,544 @@
+{
+  "status": "SOURCE GENERATION CHECKS PASS; BUILD STATUS IN firmware/build/artifact-verification.json",
+  "keys": [
+    {
+      "reference": "SW_R1C1",
+      "matrix": [
+        0,
+        0
+      ],
+      "led_channel": "SW5_CS11"
+    },
+    {
+      "reference": "SW_R1C2",
+      "matrix": [
+        0,
+        1
+      ],
+      "led_channel": "SW5_CS9"
+    },
+    {
+      "reference": "SW_R1C3",
+      "matrix": [
+        0,
+        2
+      ],
+      "led_channel": "SW5_CS12"
+    },
+    {
+      "reference": "SW_R1C4",
+      "matrix": [
+        0,
+        3
+      ],
+      "led_channel": "SW5_CS13"
+    },
+    {
+      "reference": "SW_R1C5",
+      "matrix": [
+        0,
+        4
+      ],
+      "led_channel": "SW5_CS2"
+    },
+    {
+      "reference": "SW_R1C6",
+      "matrix": [
+        0,
+        5
+      ],
+      "led_channel": "SW5_CS3"
+    },
+    {
+      "reference": "SW_R1C8",
+      "matrix": [
+        0,
+        7
+      ],
+      "led_channel": "SW5_CS4"
+    },
+    {
+      "reference": "SW_R1C9",
+      "matrix": [
+        0,
+        8
+      ],
+      "led_channel": "SW5_CS5"
+    },
+    {
+      "reference": "SW_R1C10",
+      "matrix": [
+        0,
+        9
+      ],
+      "led_channel": "SW5_CS7"
+    },
+    {
+      "reference": "SW_R1C11",
+      "matrix": [
+        0,
+        10
+      ],
+      "led_channel": "SW5_CS6"
+    },
+    {
+      "reference": "SW_R1C12",
+      "matrix": [
+        0,
+        11
+      ],
+      "led_channel": "SW5_CS8"
+    },
+    {
+      "reference": "SW_R1C13",
+      "matrix": [
+        0,
+        12
+      ],
+      "led_channel": "SW5_CS10"
+    },
+    {
+      "reference": "SW_R2C1",
+      "matrix": [
+        1,
+        0
+      ],
+      "led_channel": "SW4_CS11"
+    },
+    {
+      "reference": "SW_R2C2",
+      "matrix": [
+        1,
+        1
+      ],
+      "led_channel": "SW4_CS9"
+    },
+    {
+      "reference": "SW_R2C3",
+      "matrix": [
+        1,
+        2
+      ],
+      "led_channel": "SW4_CS12"
+    },
+    {
+      "reference": "SW_R2C4",
+      "matrix": [
+        1,
+        3
+      ],
+      "led_channel": "SW4_CS13"
+    },
+    {
+      "reference": "SW_R2C5",
+      "matrix": [
+        1,
+        4
+      ],
+      "led_channel": "SW4_CS2"
+    },
+    {
+      "reference": "SW_R2C6",
+      "matrix": [
+        1,
+        5
+      ],
+      "led_channel": "SW4_CS3"
+    },
+    {
+      "reference": "SW_R2C8",
+      "matrix": [
+        1,
+        7
+      ],
+      "led_channel": "SW4_CS4"
+    },
+    {
+      "reference": "SW_R2C9",
+      "matrix": [
+        1,
+        8
+      ],
+      "led_channel": "SW4_CS5"
+    },
+    {
+      "reference": "SW_R2C10",
+      "matrix": [
+        1,
+        9
+      ],
+      "led_channel": "SW4_CS7"
+    },
+    {
+      "reference": "SW_R2C11",
+      "matrix": [
+        1,
+        10
+      ],
+      "led_channel": "SW4_CS6"
+    },
+    {
+      "reference": "SW_R2C12",
+      "matrix": [
+        1,
+        11
+      ],
+      "led_channel": "SW4_CS8"
+    },
+    {
+      "reference": "SW_R2C13",
+      "matrix": [
+        1,
+        12
+      ],
+      "led_channel": "SW4_CS10"
+    },
+    {
+      "reference": "SW_R3C1",
+      "matrix": [
+        2,
+        0
+      ],
+      "led_channel": "SW3_CS11"
+    },
+    {
+      "reference": "SW_R3C2",
+      "matrix": [
+        2,
+        1
+      ],
+      "led_channel": "SW3_CS9"
+    },
+    {
+      "reference": "SW_R3C3",
+      "matrix": [
+        2,
+        2
+      ],
+      "led_channel": "SW3_CS12"
+    },
+    {
+      "reference": "SW_R3C4",
+      "matrix": [
+        2,
+        3
+      ],
+      "led_channel": "SW3_CS13"
+    },
+    {
+      "reference": "SW_R3C5",
+      "matrix": [
+        2,
+        4
+      ],
+      "led_channel": "SW3_CS2"
+    },
+    {
+      "reference": "SW_R3C6",
+      "matrix": [
+        2,
+        5
+      ],
+      "led_channel": "SW3_CS3"
+    },
+    {
+      "reference": "SW_R3C8",
+      "matrix": [
+        2,
+        7
+      ],
+      "led_channel": "SW3_CS4"
+    },
+    {
+      "reference": "SW_R3C9",
+      "matrix": [
+        2,
+        8
+      ],
+      "led_channel": "SW3_CS5"
+    },
+    {
+      "reference": "SW_R3C10",
+      "matrix": [
+        2,
+        9
+      ],
+      "led_channel": "SW3_CS7"
+    },
+    {
+      "reference": "SW_R3C11",
+      "matrix": [
+        2,
+        10
+      ],
+      "led_channel": "SW3_CS6"
+    },
+    {
+      "reference": "SW_R3C12",
+      "matrix": [
+        2,
+        11
+      ],
+      "led_channel": "SW3_CS8"
+    },
+    {
+      "reference": "SW_R3C13",
+      "matrix": [
+        2,
+        12
+      ],
+      "led_channel": "SW3_CS10"
+    },
+    {
+      "reference": "SW_R5C4",
+      "matrix": [
+        4,
+        3
+      ],
+      "led_channel": "SW1_CS13"
+    },
+    {
+      "reference": "SW_R5C5",
+      "matrix": [
+        4,
+        4
+      ],
+      "led_channel": "SW1_CS2"
+    },
+    {
+      "reference": "SW_R5C6",
+      "matrix": [
+        4,
+        5
+      ],
+      "led_channel": "SW1_CS3"
+    },
+    {
+      "reference": "SW_R5C8",
+      "matrix": [
+        4,
+        7
+      ],
+      "led_channel": "SW1_CS4"
+    },
+    {
+      "reference": "SW_R5C9",
+      "matrix": [
+        4,
+        8
+      ],
+      "led_channel": "SW1_CS5"
+    },
+    {
+      "reference": "SW_R5C10",
+      "matrix": [
+        4,
+        9
+      ],
+      "led_channel": "SW1_CS7"
+    }
+  ],
+  "upstream_channel_differences": [
+    {
+      "reference": "SW_R2C1",
+      "matrix": [
+        1,
+        0
+      ],
+      "led_channel": "SW4_CS11",
+      "upstream_channel": "SW3_CS11"
+    },
+    {
+      "reference": "SW_R2C2",
+      "matrix": [
+        1,
+        1
+      ],
+      "led_channel": "SW4_CS9",
+      "upstream_channel": "SW3_CS9"
+    },
+    {
+      "reference": "SW_R2C3",
+      "matrix": [
+        1,
+        2
+      ],
+      "led_channel": "SW4_CS12",
+      "upstream_channel": "SW3_CS12"
+    },
+    {
+      "reference": "SW_R2C4",
+      "matrix": [
+        1,
+        3
+      ],
+      "led_channel": "SW4_CS13",
+      "upstream_channel": "SW3_CS13"
+    },
+    {
+      "reference": "SW_R2C5",
+      "matrix": [
+        1,
+        4
+      ],
+      "led_channel": "SW4_CS2",
+      "upstream_channel": "SW3_CS2"
+    },
+    {
+      "reference": "SW_R2C9",
+      "matrix": [
+        1,
+        8
+      ],
+      "led_channel": "SW4_CS5",
+      "upstream_channel": "SW3_CS5"
+    },
+    {
+      "reference": "SW_R2C10",
+      "matrix": [
+        1,
+        9
+      ],
+      "led_channel": "SW4_CS7",
+      "upstream_channel": "SW3_CS7"
+    },
+    {
+      "reference": "SW_R2C11",
+      "matrix": [
+        1,
+        10
+      ],
+      "led_channel": "SW4_CS6",
+      "upstream_channel": "SW3_CS6"
+    },
+    {
+      "reference": "SW_R2C12",
+      "matrix": [
+        1,
+        11
+      ],
+      "led_channel": "SW4_CS8",
+      "upstream_channel": "SW3_CS8"
+    },
+    {
+      "reference": "SW_R2C13",
+      "matrix": [
+        1,
+        12
+      ],
+      "led_channel": "SW4_CS10",
+      "upstream_channel": "SW3_CS10"
+    },
+    {
+      "reference": "SW_R3C1",
+      "matrix": [
+        2,
+        0
+      ],
+      "led_channel": "SW3_CS11",
+      "upstream_channel": "SW4_CS11"
+    },
+    {
+      "reference": "SW_R3C2",
+      "matrix": [
+        2,
+        1
+      ],
+      "led_channel": "SW3_CS9",
+      "upstream_channel": "SW4_CS9"
+    },
+    {
+      "reference": "SW_R3C3",
+      "matrix": [
+        2,
+        2
+      ],
+      "led_channel": "SW3_CS12",
+      "upstream_channel": "SW4_CS12"
+    },
+    {
+      "reference": "SW_R3C4",
+      "matrix": [
+        2,
+        3
+      ],
+      "led_channel": "SW3_CS13",
+      "upstream_channel": "SW4_CS13"
+    },
+    {
+      "reference": "SW_R3C5",
+      "matrix": [
+        2,
+        4
+      ],
+      "led_channel": "SW3_CS2",
+      "upstream_channel": "SW4_CS2"
+    },
+    {
+      "reference": "SW_R3C6",
+      "matrix": [
+        2,
+        5
+      ],
+      "led_channel": "SW3_CS3",
+      "upstream_channel": "SW4_CS3"
+    },
+    {
+      "reference": "SW_R3C8",
+      "matrix": [
+        2,
+        7
+      ],
+      "led_channel": "SW3_CS4",
+      "upstream_channel": "SW4_CS4"
+    },
+    {
+      "reference": "SW_R3C9",
+      "matrix": [
+        2,
+        8
+      ],
+      "led_channel": "SW3_CS5",
+      "upstream_channel": "SW4_CS5"
+    },
+    {
+      "reference": "SW_R3C10",
+      "matrix": [
+        2,
+        9
+      ],
+      "led_channel": "SW3_CS7",
+      "upstream_channel": "SW4_CS7"
+    },
+    {
+      "reference": "SW_R3C11",
+      "matrix": [
+        2,
+        10
+      ],
+      "led_channel": "SW3_CS6",
+      "upstream_channel": "SW4_CS6"
+    },
+    {
+      "reference": "SW_R3C12",
+      "matrix": [
+        2,
+        11
+      ],
+      "led_channel": "SW3_CS8",
+      "upstream_channel": "SW4_CS8"
+    },
+    {
+      "reference": "SW_R3C13",
+      "matrix": [
+        2,
+        12
+      ],
+      "led_channel": "SW3_CS10",
+      "upstream_channel": "SW4_CS10"
+    }
+  ],
+  "netlist_sha256": "8afe6304ee3ec5189afdfdb12c6a679eceadcc612c6bb76af9f14621a0be4b73",
+  "layout_status": "Approved 20.3 mm horizontal pitch; electrical indices independent of pitch",
+  "usb_identity": "Prototype retains upstream VID/PID, distinct product name; not a new USB allocation"
+}

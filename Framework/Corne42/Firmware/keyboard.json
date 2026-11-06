@@ -1,0 +1,864 @@
+{
+  "keyboard_name": "HandyWork Corne42 prototype",
+  "maintainer": "Axel Voitier",
+  "manufacturer": "Axel Voitier",
+  "url": "https://github.com/AxelVoitier/keebs/tree/main/Framework/HandyWork-5x3-with-mods-with-nav",
+  "usb": {
+    "vid": "0xA8E1",
+    "pid": "0x0003",
+    "device_version": "1.0.1"
+  },
+  "processor": "RP2040",
+  "bootloader": "rp2040",
+  "build": {
+    "lto": true
+  },
+  "features": {
+    "bootmagic": true,
+    "extrakey": true,
+    "nkro": true,
+    "unicode": true,
+    "led_matrix": true
+  },
+  "bootmagic": {
+    "matrix": [
+      0,
+      0
+    ]
+  },
+  "led_matrix": {
+    "driver": "is31fl3733",
+    "sleep": true,
+    "default": {
+      "on": true,
+      "animation": "wave_left_right",
+      "val": 255,
+      "speed": 75
+    },
+    "animations": {
+      "solid": true,
+      "alphas_mods": true,
+      "breathing": true,
+      "band": true,
+      "band_pinwheel": true,
+      "band_spiral": true,
+      "cycle_left_right": true,
+      "cycle_up_down": true,
+      "cycle_out_in": true,
+      "dual_beacon": true,
+      "solid_reactive_simple": true,
+      "solid_reactive_wide": true,
+      "solid_reactive_multiwide": true,
+      "solid_reactive_cross": true,
+      "solid_reactive_multicross": true,
+      "solid_reactive_nexus": true,
+      "solid_reactive_multinexus": true,
+      "solid_splash": true,
+      "solid_multisplash": true,
+      "wave_left_right": true,
+      "wave_up_down": true
+    },
+    "layout": [
+      {
+        "matrix": [
+          0,
+          0
+        ],
+        "x": 0,
+        "y": 7,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          0,
+          1
+        ],
+        "x": 18,
+        "y": 7,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          0,
+          2
+        ],
+        "x": 35,
+        "y": 2,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          0,
+          3
+        ],
+        "x": 53,
+        "y": 0,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          0,
+          4
+        ],
+        "x": 70,
+        "y": 2,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          0,
+          5
+        ],
+        "x": 88,
+        "y": 5,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          0,
+          7
+        ],
+        "x": 136,
+        "y": 5,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          0,
+          8
+        ],
+        "x": 154,
+        "y": 2,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          0,
+          9
+        ],
+        "x": 171,
+        "y": 0,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          0,
+          10
+        ],
+        "x": 189,
+        "y": 2,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          0,
+          11
+        ],
+        "x": 206,
+        "y": 7,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          0,
+          12
+        ],
+        "x": 224,
+        "y": 7,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          1,
+          0
+        ],
+        "x": 0,
+        "y": 25,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          1,
+          1
+        ],
+        "x": 18,
+        "y": 25,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          1,
+          2
+        ],
+        "x": 35,
+        "y": 21,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          1,
+          3
+        ],
+        "x": 53,
+        "y": 18,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          1,
+          4
+        ],
+        "x": 70,
+        "y": 21,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          1,
+          5
+        ],
+        "x": 88,
+        "y": 23,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          1,
+          7
+        ],
+        "x": 136,
+        "y": 23,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          1,
+          8
+        ],
+        "x": 154,
+        "y": 21,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          1,
+          9
+        ],
+        "x": 171,
+        "y": 18,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          1,
+          10
+        ],
+        "x": 189,
+        "y": 21,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          1,
+          11
+        ],
+        "x": 206,
+        "y": 25,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          1,
+          12
+        ],
+        "x": 224,
+        "y": 25,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          2,
+          0
+        ],
+        "x": 0,
+        "y": 44,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          2,
+          1
+        ],
+        "x": 18,
+        "y": 44,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          2,
+          2
+        ],
+        "x": 35,
+        "y": 39,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          2,
+          3
+        ],
+        "x": 53,
+        "y": 37,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          2,
+          4
+        ],
+        "x": 70,
+        "y": 39,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          2,
+          5
+        ],
+        "x": 88,
+        "y": 41,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          2,
+          7
+        ],
+        "x": 136,
+        "y": 41,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          2,
+          8
+        ],
+        "x": 154,
+        "y": 39,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          2,
+          9
+        ],
+        "x": 171,
+        "y": 37,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          2,
+          10
+        ],
+        "x": 189,
+        "y": 39,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          2,
+          11
+        ],
+        "x": 206,
+        "y": 44,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          2,
+          12
+        ],
+        "x": 224,
+        "y": 44,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          4,
+          3
+        ],
+        "x": 61,
+        "y": 60,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          4,
+          4
+        ],
+        "x": 80,
+        "y": 62,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          4,
+          5
+        ],
+        "x": 101,
+        "y": 64,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          4,
+          7
+        ],
+        "x": 123,
+        "y": 64,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          4,
+          8
+        ],
+        "x": 144,
+        "y": 62,
+        "flags": 4
+      },
+      {
+        "matrix": [
+          4,
+          9
+        ],
+        "x": 163,
+        "y": 60,
+        "flags": 4
+      }
+    ],
+    "max_brightness": 255
+  },
+  "diode_direction": "ROW2COL",
+  "matrix_pins": {
+    "cols": [
+      "GP11",
+      "GP12",
+      "GP13",
+      "GP14",
+      "GP15",
+      "GP16",
+      "GP17",
+      "GP18",
+      "GP19",
+      "GP20",
+      "GP21",
+      "GP22",
+      "GP23"
+    ],
+    "rows": [
+      "GP6",
+      "GP7",
+      "GP8",
+      "GP9",
+      "GP10"
+    ]
+  },
+  "layouts": {
+    "LAYOUT_corne42": {
+      "layout": [
+        {
+          "label": "SW_R1C1",
+          "matrix": [
+            0,
+            0
+          ],
+          "x": 0.0,
+          "y": 0.375
+        },
+        {
+          "label": "SW_R1C2",
+          "matrix": [
+            0,
+            1
+          ],
+          "x": 1.065617,
+          "y": 0.375
+        },
+        {
+          "label": "SW_R1C3",
+          "matrix": [
+            0,
+            2
+          ],
+          "x": 2.131234,
+          "y": 0.125
+        },
+        {
+          "label": "SW_R1C4",
+          "matrix": [
+            0,
+            3
+          ],
+          "x": 3.19685,
+          "y": 0.0
+        },
+        {
+          "label": "SW_R1C5",
+          "matrix": [
+            0,
+            4
+          ],
+          "x": 4.262467,
+          "y": 0.125
+        },
+        {
+          "label": "SW_R1C6",
+          "matrix": [
+            0,
+            5
+          ],
+          "x": 5.328084,
+          "y": 0.25
+        },
+        {
+          "label": "SW_R1C8",
+          "matrix": [
+            0,
+            7
+          ],
+          "x": 8.290026,
+          "y": 0.25
+        },
+        {
+          "label": "SW_R1C9",
+          "matrix": [
+            0,
+            8
+          ],
+          "x": 9.355643,
+          "y": 0.125
+        },
+        {
+          "label": "SW_R1C10",
+          "matrix": [
+            0,
+            9
+          ],
+          "x": 10.42126,
+          "y": 0.0
+        },
+        {
+          "label": "SW_R1C11",
+          "matrix": [
+            0,
+            10
+          ],
+          "x": 11.486877,
+          "y": 0.125
+        },
+        {
+          "label": "SW_R1C12",
+          "matrix": [
+            0,
+            11
+          ],
+          "x": 12.552493,
+          "y": 0.375
+        },
+        {
+          "label": "SW_R1C13",
+          "matrix": [
+            0,
+            12
+          ],
+          "x": 13.61811,
+          "y": 0.375
+        },
+        {
+          "label": "SW_R2C1",
+          "matrix": [
+            1,
+            0
+          ],
+          "x": 0.0,
+          "y": 1.375
+        },
+        {
+          "label": "SW_R2C2",
+          "matrix": [
+            1,
+            1
+          ],
+          "x": 1.065617,
+          "y": 1.375
+        },
+        {
+          "label": "SW_R2C3",
+          "matrix": [
+            1,
+            2
+          ],
+          "x": 2.131234,
+          "y": 1.125
+        },
+        {
+          "label": "SW_R2C4",
+          "matrix": [
+            1,
+            3
+          ],
+          "x": 3.19685,
+          "y": 1.0
+        },
+        {
+          "label": "SW_R2C5",
+          "matrix": [
+            1,
+            4
+          ],
+          "x": 4.262467,
+          "y": 1.125
+        },
+        {
+          "label": "SW_R2C6",
+          "matrix": [
+            1,
+            5
+          ],
+          "x": 5.328084,
+          "y": 1.25
+        },
+        {
+          "label": "SW_R2C8",
+          "matrix": [
+            1,
+            7
+          ],
+          "x": 8.290026,
+          "y": 1.25
+        },
+        {
+          "label": "SW_R2C9",
+          "matrix": [
+            1,
+            8
+          ],
+          "x": 9.355643,
+          "y": 1.125
+        },
+        {
+          "label": "SW_R2C10",
+          "matrix": [
+            1,
+            9
+          ],
+          "x": 10.42126,
+          "y": 1.0
+        },
+        {
+          "label": "SW_R2C11",
+          "matrix": [
+            1,
+            10
+          ],
+          "x": 11.486877,
+          "y": 1.125
+        },
+        {
+          "label": "SW_R2C12",
+          "matrix": [
+            1,
+            11
+          ],
+          "x": 12.552493,
+          "y": 1.375
+        },
+        {
+          "label": "SW_R2C13",
+          "matrix": [
+            1,
+            12
+          ],
+          "x": 13.61811,
+          "y": 1.375
+        },
+        {
+          "label": "SW_R3C1",
+          "matrix": [
+            2,
+            0
+          ],
+          "x": 0.0,
+          "y": 2.375
+        },
+        {
+          "label": "SW_R3C2",
+          "matrix": [
+            2,
+            1
+          ],
+          "x": 1.065617,
+          "y": 2.375
+        },
+        {
+          "label": "SW_R3C3",
+          "matrix": [
+            2,
+            2
+          ],
+          "x": 2.131234,
+          "y": 2.125
+        },
+        {
+          "label": "SW_R3C4",
+          "matrix": [
+            2,
+            3
+          ],
+          "x": 3.19685,
+          "y": 2.0
+        },
+        {
+          "label": "SW_R3C5",
+          "matrix": [
+            2,
+            4
+          ],
+          "x": 4.262467,
+          "y": 2.125
+        },
+        {
+          "label": "SW_R3C6",
+          "matrix": [
+            2,
+            5
+          ],
+          "x": 5.328084,
+          "y": 2.25
+        },
+        {
+          "label": "SW_R3C8",
+          "matrix": [
+            2,
+            7
+          ],
+          "x": 8.290026,
+          "y": 2.25
+        },
+        {
+          "label": "SW_R3C9",
+          "matrix": [
+            2,
+            8
+          ],
+          "x": 9.355643,
+          "y": 2.125
+        },
+        {
+          "label": "SW_R3C10",
+          "matrix": [
+            2,
+            9
+          ],
+          "x": 10.42126,
+          "y": 2.0
+        },
+        {
+          "label": "SW_R3C11",
+          "matrix": [
+            2,
+            10
+          ],
+          "x": 11.486877,
+          "y": 2.125
+        },
+        {
+          "label": "SW_R3C12",
+          "matrix": [
+            2,
+            11
+          ],
+          "x": 12.552493,
+          "y": 2.375
+        },
+        {
+          "label": "SW_R3C13",
+          "matrix": [
+            2,
+            12
+          ],
+          "x": 13.61811,
+          "y": 2.375
+        },
+        {
+          "label": "SW_R5C4",
+          "matrix": [
+            4,
+            3
+          ],
+          "x": 3.729659,
+          "y": 3.25
+        },
+        {
+          "label": "SW_R5C5",
+          "matrix": [
+            4,
+            4
+          ],
+          "x": 4.893979,
+          "y": 3.364261,
+          "r": 11.938999999999993,
+          "rx": 5.393979,
+          "ry": 3.864261
+        },
+        {
+          "label": "SW_R5C6",
+          "matrix": [
+            4,
+            5
+          ],
+          "x": 6.115766,
+          "y": 3.473502,
+          "r": 293.88,
+          "rx": 6.615766,
+          "ry": 3.973502
+        },
+        {
+          "label": "SW_R5C8",
+          "matrix": [
+            4,
+            7
+          ],
+          "x": 7.502344,
+          "y": 3.473502,
+          "r": 66.12,
+          "rx": 8.002344,
+          "ry": 3.973502
+        },
+        {
+          "label": "SW_R5C9",
+          "matrix": [
+            4,
+            8
+          ],
+          "x": 8.724131,
+          "y": 3.364261,
+          "r": 348.06,
+          "rx": 9.224131,
+          "ry": 3.864261
+        },
+        {
+          "label": "SW_R5C10",
+          "matrix": [
+            4,
+            9
+          ],
+          "x": 9.888451,
+          "y": 3.25
+        }
+      ]
+    }
+  }
+}

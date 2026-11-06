@@ -1,0 +1,10 @@
+{
+  "drc": {
+    "warning:footprint_type_mismatch": 42
+  },
+  "plate-drc": {},
+  "erc": {
+    "warning:lib_symbol_mismatch": 24
+  },
+  "status": "Rechecked KiCad 10.0.7 after isolating macOS AppleDouble sidecars from footprint libraries. No design geometry, rules or exclusions changed. Not physical validation."
+}

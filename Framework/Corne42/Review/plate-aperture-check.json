@@ -1,0 +1,19 @@
+{
+  "plate_sha256": "d6a3a7b0d626e86c300b75459d5cb854e0ef8071d36dce5748283f1038d9d137",
+  "status": "PASS: complete upper CAD surface fits actual aperture extrusion",
+  "identical_apertures_checked": 42,
+  "analysis_wire_join_adjustment_max_mm": 2.0000000000131024e-05,
+  "outside_surface_area_mm2": 0.0,
+  "minimum_aperture_wall_gap_mm": 0.37920613037381146,
+  "method": "Exact OCP boolean subtraction and surface-to-wall distance; actual eight-edge plate aperture",
+  "vertical_travel_implication": "Under pure vertical motion, the checked upper surface remains within the aperture for any downward travel; no assumed travel length needed.",
+  "plate_thicknesses_mm_covered": [
+    0.8,
+    1.0
+  ],
+  "limits": [
+    "Moving cap assumed purely vertical; lateral wobble and production tolerances unmeasured",
+    "Lower mechanism, adhesive and chassis clearance not certified",
+    "No physical press or lid test performed"
+  ]
+}
