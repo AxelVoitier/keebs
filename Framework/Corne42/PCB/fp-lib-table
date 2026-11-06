@@ -1,0 +1,1 @@
+(fp_lib_table (version 7) (lib (name "Framework")(type "KiCad")(uri "${KIPRJMOD}/../../Framework.pretty")(options "")(descr "")) (lib (name "Corne42")(type "KiCad")(uri "${KIPRJMOD}/../../Corne42.pretty")(options "")(descr "Reviewed Corne42 adaptations")))

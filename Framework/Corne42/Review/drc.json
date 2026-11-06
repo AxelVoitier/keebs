@@ -1,0 +1,647 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-06T06:05:52",
+    "ignored_checks": [],
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "10.0.7",
+    "schematic_parity": [],
+    "source": "Corne42-PCB.kicad_pcb",
+    "unconnected_items": [],
+    "violations": [
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R2C8",
+                    "pos": {
+                        "x": 176.7125,
+                        "y": 84.290913
+                    },
+                    "uuid": "00e259bc-d24e-43c0-a413-ba4600496222"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R5C8",
+                    "pos": {
+                        "x": 161.707161,
+                        "y": 126.648626
+                    },
+                    "uuid": "069c8655-b1c5-4fc5-8b08-9821b495eec5"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R2C9",
+                    "pos": {
+                        "x": 197.0125,
+                        "y": 81.909663
+                    },
+                    "uuid": "0af469d1-0554-4b3f-8ecc-cfea08ea236d"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R2C3",
+                    "pos": {
+                        "x": 59.3875,
+                        "y": 81.909663
+                    },
+                    "uuid": "0b4bafda-6bb2-4262-bf4c-3bba6fb95a5a"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R2C6",
+                    "pos": {
+                        "x": 120.2875,
+                        "y": 84.290913
+                    },
+                    "uuid": "171f98f1-7098-4d6f-b932-d2e3ee5ea94c"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R3C8",
+                    "pos": {
+                        "x": 176.7125,
+                        "y": 103.340913
+                    },
+                    "uuid": "174e48e8-68ea-4af8-b842-2ce012215f7d"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R3C1",
+                    "pos": {
+                        "x": 18.7875,
+                        "y": 105.722163
+                    },
+                    "uuid": "18b9934c-9f79-4095-8f83-18e3dac1d823"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R3C6",
+                    "pos": {
+                        "x": 120.2875,
+                        "y": 103.340913
+                    },
+                    "uuid": "1f39dab7-f74b-4e75-91bb-5ed29853d49c"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R1C11",
+                    "pos": {
+                        "x": 237.6125,
+                        "y": 62.859663
+                    },
+                    "uuid": "276343dd-b377-4972-baba-c895df617a0d"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R2C5",
+                    "pos": {
+                        "x": 99.9875,
+                        "y": 81.909663
+                    },
+                    "uuid": "27bd9655-78b6-424d-bb9d-72d090b87b86"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R1C3",
+                    "pos": {
+                        "x": 59.3875,
+                        "y": 62.859663
+                    },
+                    "uuid": "2a364a14-b428-411f-b3dd-9f5a732a0fce"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R3C13",
+                    "pos": {
+                        "x": 278.2125,
+                        "y": 105.722163
+                    },
+                    "uuid": "2a399bb1-b01b-4378-86c6-7c18747955b1"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R1C12",
+                    "pos": {
+                        "x": 257.9125,
+                        "y": 67.622163
+                    },
+                    "uuid": "3d4aa3de-4a7c-4eab-b4f5-b20d2486f824"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R3C10",
+                    "pos": {
+                        "x": 217.3125,
+                        "y": 98.578413
+                    },
+                    "uuid": "491886b7-f024-4cf6-af02-7a2f1a294e77"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R3C4",
+                    "pos": {
+                        "x": 79.6875,
+                        "y": 98.578413
+                    },
+                    "uuid": "4d96e438-54c2-441a-8cdf-eb838158ed4b"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R2C12",
+                    "pos": {
+                        "x": 257.9125,
+                        "y": 86.672163
+                    },
+                    "uuid": "4e13b1cd-8764-464b-8dec-26eb089b50c2"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R5C5",
+                    "pos": {
+                        "x": 112.017809,
+                        "y": 124.56759
+                    },
+                    "uuid": "4f15f994-9246-4e98-aa8a-45b236ecf5e8"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R5C10",
+                    "pos": {
+                        "x": 207.1625,
+                        "y": 122.390913
+                    },
+                    "uuid": "5907a22f-b4bb-441a-8f68-46be92660209"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R1C9",
+                    "pos": {
+                        "x": 197.0125,
+                        "y": 62.859663
+                    },
+                    "uuid": "5aac4ed8-1cb3-4091-958d-b3059ec2150c"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R1C8",
+                    "pos": {
+                        "x": 176.7125,
+                        "y": 65.240913
+                    },
+                    "uuid": "5e593ca0-2c06-403b-b34d-900ffc101d2a"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R2C11",
+                    "pos": {
+                        "x": 237.6125,
+                        "y": 81.909663
+                    },
+                    "uuid": "63c68d59-25bc-45b0-bf50-579b4ee6fc22"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R2C2",
+                    "pos": {
+                        "x": 39.0875,
+                        "y": 86.672163
+                    },
+                    "uuid": "69109aff-21e5-46de-9cb5-3154b5e20b84"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R1C1",
+                    "pos": {
+                        "x": 18.7875,
+                        "y": 67.622163
+                    },
+                    "uuid": "6d7371b7-5358-4f4b-8435-1b010998d28d"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R1C6",
+                    "pos": {
+                        "x": 120.2875,
+                        "y": 65.240913
+                    },
+                    "uuid": "75d37802-d2d9-495d-aed6-36f8dc0ab0e5"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R2C13",
+                    "pos": {
+                        "x": 278.2125,
+                        "y": 86.672163
+                    },
+                    "uuid": "8d97025c-788f-42f8-848f-246fbf07468a"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R1C2",
+                    "pos": {
+                        "x": 39.0875,
+                        "y": 67.622163
+                    },
+                    "uuid": "9433dbbd-876c-4335-9ed6-d45ba0f062c5"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R2C1",
+                    "pos": {
+                        "x": 18.7875,
+                        "y": 86.672163
+                    },
+                    "uuid": "95ac134a-7ff3-4a45-b8d9-051e65ef3882"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R3C11",
+                    "pos": {
+                        "x": 237.6125,
+                        "y": 100.959663
+                    },
+                    "uuid": "9e8d39ee-eca6-42d6-a461-4668385b39e7"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R5C6",
+                    "pos": {
+                        "x": 135.292839,
+                        "y": 126.648626
+                    },
+                    "uuid": "a566c77b-26e8-4e33-9b8a-f6a34f807aba"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R3C5",
+                    "pos": {
+                        "x": 99.9875,
+                        "y": 100.959663
+                    },
+                    "uuid": "a9acb4b4-396f-488f-a4a0-b67e0a00a604"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R1C5",
+                    "pos": {
+                        "x": 99.9875,
+                        "y": 62.859663
+                    },
+                    "uuid": "aa194339-4262-4ebf-88a0-1509e07093cb"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R1C13",
+                    "pos": {
+                        "x": 278.2125,
+                        "y": 67.622163
+                    },
+                    "uuid": "ab3cff2d-3e50-4a3f-ade9-27e4253bca23"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R2C10",
+                    "pos": {
+                        "x": 217.3125,
+                        "y": 79.528413
+                    },
+                    "uuid": "b73c5189-744a-4ed3-bdfa-8d6b949896fb"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R3C9",
+                    "pos": {
+                        "x": 197.0125,
+                        "y": 100.959663
+                    },
+                    "uuid": "b755620a-fb3d-4797-84c0-29be8e14844f"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R1C10",
+                    "pos": {
+                        "x": 217.3125,
+                        "y": 60.478413
+                    },
+                    "uuid": "c058c822-3d3d-44de-9168-ea9e24d7a050"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R5C9",
+                    "pos": {
+                        "x": 184.982191,
+                        "y": 124.56759
+                    },
+                    "uuid": "c52db0cd-889a-4454-9c4b-df3d9e8f0a6e"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R5C4",
+                    "pos": {
+                        "x": 89.8375,
+                        "y": 122.390913
+                    },
+                    "uuid": "cb2a6acb-c69b-4589-a9e6-af1308342cc1"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R3C2",
+                    "pos": {
+                        "x": 39.0875,
+                        "y": 105.722163
+                    },
+                    "uuid": "d6fa7b1b-bfef-4397-b580-99bf07bff027"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R1C4",
+                    "pos": {
+                        "x": 79.6875,
+                        "y": 60.478413
+                    },
+                    "uuid": "da08b292-530e-4af6-9de6-4ceb721a4f7d"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R2C4",
+                    "pos": {
+                        "x": 79.6875,
+                        "y": 79.528413
+                    },
+                    "uuid": "f0f37253-d254-4965-96c4-1020156e0185"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R3C3",
+                    "pos": {
+                        "x": 59.3875,
+                        "y": 100.959663
+                    },
+                    "uuid": "fb94f3ea-e269-4390-a232-7d19020c484b"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads (expected 'Through hole'; actual 'SMD')",
+            "items": [
+                {
+                    "description": "Footprint SW_R3C12",
+                    "pos": {
+                        "x": 257.9125,
+                        "y": 105.722163
+                    },
+                    "uuid": "fd6a6c44-6c76-4150-942f-8487b23b6d00"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_type_mismatch"
+        }
+    ]
+}

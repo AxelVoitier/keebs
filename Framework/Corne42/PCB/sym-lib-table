@@ -1,0 +1,1 @@
+(sym_lib_table (version 7) (lib (name "Framework")(type "KiCad")(uri "${KIPRJMOD}/../../Framework.kicad_sym")(options "")(descr "")) (lib (name "Corne42")(type "KiCad")(uri "${KIPRJMOD}/../../Corne42.kicad_sym")(options "")(descr "Project USON and Framework interface symbols")))

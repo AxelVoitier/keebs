@@ -1,0 +1,10 @@
+// TODO: License header
+
+#pragma once
+
+#define I2C_DRIVER I2CD1
+#define I2C1_SDA_PIN GP26
+#define I2C1_SCL_PIN GP27
+
+#define IS31FL3733_I2C_ADDRESS_1 IS31FL3733_I2C_ADDRESS_GND_GND
+#define IS31FL3733_SDB_PIN GP29

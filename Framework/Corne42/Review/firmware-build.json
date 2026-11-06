@@ -1,0 +1,26 @@
+{
+  "status": "COMPILED AND BINARY-CHECKED; NOT HARDWARE-VALIDATED",
+  "qmk_commit": "6c8852ebb00a7d3a02040e29363ce7779627125a",
+  "uf2_family": "RP2040 0xE48BFF56",
+  "uf2_blocks": 118,
+  "flash_image_bytes": 30100,
+  "flash_base_hex": "0x10000000",
+  "uf2_sha256": "4ab5d7e6dc190512fb70bdbe20175f395d175b75bbd34181d489d7e14fbde838",
+  "elf_sha256": "8329b33c0bb3c10bb667f8c1edb626a83520187a858e4be8d0a69366532cc89a",
+  "source_sha256": {
+    "power.inc": "783559416e386c3286275955f9721649e6ae979e81738fbfefd8656b8b6e06bd",
+    "config.h": "e81cd8f331717a115d543244f437c1e918842f9eb0c4dc4e9770495d6690b848",
+    "halconf.h": "508a83091eec6176f83ce59e4bc7256eee4e141766b8307dbf330c209e19fba4",
+    "keyboard.json": "dd550eed13cbed6ca9627391dd5c793dd855ad03b690bed141722ad5b94853a9",
+    "readme.md": "120bbc67f7691f77fb725feec75ba6fadccf0b3dab788a3831a97f83e5b4e3e4",
+    "mcuconf.h": "bee82738e4245d66860eae9f69c9a685eeaedf9bd9675e1971a2b878d10585cc",
+    "corne42.c": "6809010ce848437de7495ec4fcc1bc6da744e89446ebb096b20ba1172985da7e",
+    "keymaps/default/keymap.json": "149a7ae5b97dd0f8f02985a0d433f682bf193aa6f818e4efaaf4be83550a2d84"
+  },
+  "limits": [
+    "Not flashed",
+    "Full-board sleep current unmeasured",
+    "Electrical and mechanical PCB validations still pending",
+    "Starter keymap; not personal keymap"
+  ]
+}
