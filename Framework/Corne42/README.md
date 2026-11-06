@@ -10,6 +10,11 @@ Horizontal pitch is increased from 19.05 to 20.30 mm to avoid OKM pad/tab collis
 vertical pitch remains 19.05 mm, with each half shifted inward by 2 mm. This is
 not an exact reproduction of every Corne variant or of its keycap dimensions.
 
+![KiCad render of the Corne42 PCB and 42 One Key Modules](Review/keyboard-render.png)
+
+KiCad rendering of the actual PCB and embedded OKM models. The aluminium top
+plate and laptop chassis are not shown; this is not a photograph or a fit validation.
+
 ![Layout study](Review/layout-a4.svg)
 
 ## Review entry points
